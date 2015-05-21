@@ -1,0 +1,507 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>Discrete Optimization - Graph Coloring | Wenyu Wang</title>
+<meta name="author" content="Wenyu Wang">
+
+  <meta name="keywords" content="graph">
+
+
+<link rel="shortcut icon" href="/public/img/wenyu-icon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<link href="/pages/atom.xml" rel="alternate" title="Wenyu Wang" type="application/atom+xml">
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/img/wenyu-icon.png" class="img-ronuded avatar" style="border-width:0px; border-color:#000"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+         <li><a href="#tips" data-toggle="tab">tips</a></li>
+        
+         <li><a href="#read" data-toggle="tab">read</a></li>
+        
+         <li><a href="#recipes" data-toggle="tab">recipes</a></li>
+        
+         <li><a href="#travel" data-toggle="tab">travel</a></li>
+        
+         <li><a href="#research" data-toggle="tab">research</a></li>
+        
+        <br>
+        <li><a href="#tags" data-toggle="tab">Tags</a></li>
+        <li><a class="pjaxlink" href="/pages/archive.html">Archive</a></li>
+        <li><a class="pjaxlink" href="/pages/about.html">About</a></li>
+      </ul>
+      <div class="aside1_bottom">
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
+            <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+          
+            <div class="tab-pane" id="tips">
+              <div class="list-group">
+                <!-- <h2 class="center">tips</h2> -->
+                
+                  <a href="/2015/01/30/Git-Resources.html" class="list-group-item-lay pjaxlink">Git Cheat Sheet</a>
+                
+              </div>
+            </div>
+          
+            <div class="tab-pane" id="read">
+              <div class="list-group">
+                <!-- <h2 class="center">read</h2> -->
+                
+                  <a href="/2015/05/19/Book-List-2015.html" class="list-group-item-lay pjaxlink">2015 Reading List</a>
+                
+              </div>
+            </div>
+          
+            <div class="tab-pane" id="recipes">
+              <div class="list-group">
+                <!-- <h2 class="center">recipes</h2> -->
+                
+                  <a href="/2015/05/19/super-bowl-chicken.html" class="list-group-item-lay pjaxlink">大盘鸡</a>
+                
+              </div>
+            </div>
+          
+            <div class="tab-pane" id="travel">
+              <div class="list-group">
+                <!-- <h2 class="center">travel</h2> -->
+                
+                  <a href="/2015/05/19/template.html" class="list-group-item-lay pjaxlink">All I need is you</a>
+                
+              </div>
+            </div>
+          
+            <div class="tab-pane" id="research">
+              <div class="list-group">
+                <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <!-- <h2 class="center">Tags</h2> -->
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#tips">tips</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="tips" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/01/30/Git-Resources.html' class="list-group-item pjaxlink">
+                        Git Cheat Sheet
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#git">git</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="git" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/01/30/Git-Resources.html' class="list-group-item pjaxlink">
+                        Git Cheat Sheet
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#cheatsheet">cheatsheet</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="cheatsheet" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/01/30/Git-Resources.html' class="list-group-item pjaxlink">
+                        Git Cheat Sheet
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Life">Life</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="Life" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/19/super-bowl-chicken.html' class="list-group-item pjaxlink">
+                        大盘鸡
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Recipes">Recipes</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="Recipes" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/19/super-bowl-chicken.html' class="list-group-item pjaxlink">
+                        大盘鸡
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Travel">Travel</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="Travel" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/19/template.html' class="list-group-item pjaxlink">
+                        All I need is you
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
+                        Discrete Optimization - Graph Coloring
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#discrete">discrete</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="discrete" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
+                        Discrete Optimization - Graph Coloring
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#heuristic">heuristic</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="heuristic" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
+                        Discrete Optimization - Graph Coloring
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-13 col-lg-13 col-sm-13 col-xs-13 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-13 aside3-title">
+    <br>
+    <h2 id="#identifier">Discrete Optimization - Graph Coloring</h2>
+    2015-05-20
+  </div>
+  <div class="col-md-13 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>Problem</h2>
+
+<p>Given an undirected graph, graph coloring or vertex color problem is to assign minimum number of different colors to nodes such that no adjacent nodes share the same color.</p>
+
+<p>The problem comes from coloring a map such that no two neighbor regions have the same color. Here is a map of the United States colored with only 4 colors:</p>
+
+<p><img src="http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png" alt="US map with four colors"></p>
+
+<h2>Application</h2>
+
+<p><strong>Scheduling</strong> schedule final exams. College offers multiple courses and each student may take multiple courses. To resolve conflict, if a student takes two courses, then these two courses cannot be scheduled at the same time.</p>
+
+<p><strong>Register Allocation</strong> when compiling a program, the computer needs to allocate registers to the most frequently used values of the program, while putting the other ones in memory. This can be modeled as a graph coloring problem: the compiler constructs an interference graph, where vertices are symbolic registers and an edge connects two nodes if they are needed at the same time. If the graph can be colored with k colors then the variables can be stored in k registers.</p>
+
+<ul>
+<li>time tabling and scheduling</li>
+<li>frequency assignment</li>
+<li>register allocation</li>
+<li>printed circuit testing</li>
+<li>parallel numerical computation and optimization</li>
+</ul>
+
+<h2>Properties</h2>
+
+<ul>
+<li><p>A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(|S| = k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.</p></li>
+<li><p>The <strong>chromatic number</strong> \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.</p></li>
+<li><p>A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.</p></li>
+<li><p>The <strong>clique number</strong> \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.</p></li>
+<li><p>A <em>planar</em> graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, &quot;Every map is four colorable&quot;, Bulletin of the American Mathematical Society 82 (1976), 711–12).</p></li>
+<li><p>Complexity</p>
+
+<ul>
+<li>For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning &quot;red&quot; to the first layer, &quot;blue&quot; to the second layer, &quot;red&quot; to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.</li>
+<li>For \(k \geq 3\), \(k-colorability\) is <strong>NP-complete</strong>. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.</li>
+</ul></li>
+<li><p>Approximation boundaries</p>
+
+<ul>
+<li>Lower bound: \(\chi(G) \geq \omega(G)\)</li>
+<li>Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2|E(G)| \geq \chi(G) (\chi(G) - 1)\)</li>
+</ul></li>
+</ul>
+
+<h2>Algorithms</h2>
+
+<h4>Dynamic Programming algorithm</h4>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Find and list all sets that are \(1-colorable\).</li>
+<li>Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
+
+<ul>
+<li>For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{|S|} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)</li>
+</ul></li>
+</ol>
+
+<p>Time complexity: \(O(3^n)\)</p>
+
+<p>Space complexity: \(O(2^n)\)</p>
+
+<ul>
+<li>Remark
+
+<ul>
+<li>By considering only maximal independent sets, the dynamic
+programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).</li>
+<li>Dynamic programming is a method that avoids redoing computations
+over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.</li>
+</ul></li>
+</ul>
+
+<h4>Backtrack algorithm</h4>
+
+<p>Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.</p>
+
+<ol>
+<li>When a node is colored, keep track of the index of when that node is colored.</li>
+<li>For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.</li>
+<li>Find the maximum of all the minimums calculated in step 2.</li>
+<li>Backtrack up to the index found in step 3.</li>
+</ol>
+
+<h4>Greedy algorithm</h4>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Number the vertices \(V\).</li>
+<li>For \(i = 1, ..., n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
+
+<ul>
+<li>In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.</li>
+<li>This algorithm finds a reasonable coloring in time \(O(|V|+|E|)\).</li>
+<li>The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.</li>
+</ul></li>
+</ol>
+
+<ul>
+<li>Remark:
+
+<ul>
+<li><strong>For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.</strong></li>
+<li>For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.</li>
+<li>If the vertices of a graph \(G\) can be numbered \(v<em>1, ..., v</em>n\) such that for every \(i\) , \(|N(v<em>i)  \cap {v</em>1 , . . . , v_{i-1} }| \leq k\) , then \(\chi(G)\leq k+1\).</li>
+</ul></li>
+</ul>
+
+<h4>Welsh-Powell algorithm</h4>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Find the degree of every vertex.</li>
+<li>Sort the vertices in order of descending degrees.</li>
+<li>Color the first vertex in the list with color 1.</li>
+<li>Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.</li>
+<li>Repeat the process on the uncolored vertices with a new color.</li>
+</ol>
+
+<ul>
+<li>Remark:
+
+<ul>
+<li>Usually performs better than just coloring the vertices without a plan will.</li>
+</ul></li>
+</ul>
+
+<h4>Iterated Greedy algorithm</h4>
+
+<p>Algorithm:
+1. Run simple greedy algorithm.
+2. Permutate the solution such that nodes with the same label are grouped together.
+3. Iterate until the color count reach the optimal value.</p>
+
+<ul>
+<li>The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.</li>
+<li>Reorder the color labels randomly.</li>
+</ul>
+
+<h4>Tabu searching algorithm</h4>
+
+<p>The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.</p>
+
+<ol>
+<li>Take a valid graph coloring solution as input.</li>
+<li>Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.</li>
+<li>Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.</li>
+<li>Select the neighbor that contains the least amount of conflicts.</li>
+<li>Use the neighbor selected in step 4 as the new coloring.</li>
+<li>If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.</li>
+<li><p>If no solution has been found, increase the number of colors to use and go to step 3.</p>
+
+<p>Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.</p></li>
+</ol>
+
+<h4>Mixed Strategy</h4>
+
+<ol>
+<li>Execute the Iterative Greedy algorithm for X amount of iterations.</li>
+<li>Execute the TABU search algorithm on the best solution found thus far.</li>
+<li>Use Y amount of iterations for the search. Goto step 1 until the time is up.</li>
+</ol>
+
+<h4>Simulated Annealing algorithm</h4>
+
+<ol>
+<li>Start from a greedy solution</li>
+<li>Run iterated greedy on current solution</li>
+<li>Run simulated annealing on current solution and track the best solution so far</li>
+<li>Go back to step 2</li>
+</ol>
+
+<ul>
+<li>Cost function \[ sum[C<em>i^2] + sum[C</em>i * E<em>i] \] where \( C</em>i \) is the number of nodes with color \(i\), and \(E_i\) the number of conflict pairs for each color.</li>
+<li>Set the initial temperature at 10, the step size \(\alpha = 0.9999\).</li>
+</ul>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="wenyu" class="btn btn-default show-commend">
+  	<i class="fa fa-comment-o fa-lg" style="color: #16a095;"></i>
+  </button>
+</div>
+
+  </div>
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:15px;top:62px;">
+  <button id="content_btn" class="btn btn-primary" style="width:43px; height:34px;">
+    <i class="fa fa-lg fa-plus"></i>
+  </button>
+</div>
+<div style="position:fixed;right:15px;top:20px;">
+  <button id="nav_btn" class="btn btn-primary">
+    <i class="fa fa-lg fa-navicon"></i>
+  </button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script src="/public/js/base.js"></script>
+<script src="/public/js/jquery.scrollUp.js"></script>
+<script>
+    $('a[href="#读书"]').tab('show');
+</script>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '', '');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

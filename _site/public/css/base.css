@@ -1,0 +1,122 @@
+/* 页面配置 */
+.container {
+  width: 100%;
+  height: 100%;
+}
+body, html {
+  margin: 0px;
+  height: 100%;
+  overflow: hidden;
+  background-color: #afbdd4;
+}
+.row {
+  height: 100%;
+}
+
+/* 导航栏 + 目录栏 */
+.aside {
+  height: 100%;
+}
+
+/* 左侧导航栏 */
+.aside1 {
+  background-color: #6d84b4;
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: right;
+}
+.aside1 > .nav > li > a {
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 10px;
+  text-transform: capitalize;
+}
+
+.aside1 > .nav > li > a:hover {
+  color:#fff;
+  background-color: #afbdd4;
+}
+
+.aside1 > .nav-pills >li.active >a ,.nav-pills > li.active > a:hover,.nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #afbdd4;
+}
+
+.avatar {
+  width: 100px;
+  text-align: center;
+  border: 0px solid #fff;
+}
+.aside1_bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  text-align: center;
+}
+.aside1_bottom > .table {
+  margin-bottom: 0px;
+}
+
+/* 中部目录栏 */
+.aside2 {
+  /*background-image: url(/public/img/body_bg.jpg);*/
+  background-color: #afbdd4;
+  height: 100%;
+  /*border-right: 2px solid #303030;*/
+  overflow-y: auto;
+  font-color: #fff;
+  margin-top: 10px;
+}
+
+/* 右侧内容栏 */
+.aside3 {
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.aside3-title {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+  color: #303030;
+}
+
+.aside3-content {
+  padding: 0 5% 0 5%;
+  color: #656565;
+  line-height: 1.5;
+}
+
+#content {
+  font-size: 14px;
+}
+#content h2, h3 {
+  line-height: 1.8;
+}
+blockquote p {
+  font-size: 20px;
+}
+
+/* 其他配置 */
+.center {
+  text-align: center;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  color: #fff;
+  background-color: #afbdd4;
+}
+
+/* 显示评论按钮 */
+.show-commend {
+  width: 100%;
+  margin-bottom: 40px;
+}

@@ -1,0 +1,41 @@
+permalink: /:year/:month/:day/:title.html
+paginate: 10
+markdown: redcarpet
+
+author:
+  name: Wenyu Wang
+  email: peawinter@gmail.com
+  link: http://http://peawinter.github.io/
+  github: http://github.com/peawinter
+  # linkedin:
+
+title: Wenyu Wang
+description: My personal blog
+url: http://http://peawinter.github.io/
+
+# gavatar and Favicon
+gavatar: /public/img/wenyu-icon.png
+favicon: /public/img/wenyu-icon.png
+
+# google analytics
+# ga:
+#   id: UA-54262064-1
+#   url: painterlin.com
+
+disqus:
+  shortname: wenyu
+
+# active lable
+active: 读书
+
+# 首页除了最新文章外显示分类
+cates:
+  - Optimization
+  - LaTeX
+
+# 中文本地化
+locals:
+  tags: Tags
+  about: About
+  newest: Latest
+  archive: Archive

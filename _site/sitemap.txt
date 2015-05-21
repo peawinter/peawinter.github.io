@@ -1,0 +1,44 @@
+
+  /old/2014-07-25-matrix-completion.html
+
+  /old/2014-07-27-norms-of-vector-and-matrix.html
+
+  /old/2014-08-22-Average-Consensus.html
+
+  /old/2014-08-31-Papers-about-average-consensus.html
+
+  /old/2014-09-11-Matlab-tips.html
+
+  /old/2014-10-01-Alibaba-Big-Data.html
+
+  /old/2014-11-09-What-is-NP-Hard.html
+
+  /old/2014-11-10-Basic-Algorithms-of-Convex-Opt.html
+
+  /old/2014-11-26-Presentation-at-Chinese-Academy-of-Science.html
+
+  /old/2015-02-04-Group-Meeting.html
+
+  /old/2015-03-23-Newton-QuasiNewton-Method.html
+
+  /pages/about.html
+
+  /pages/archive.html
+
+  /pages/atom.xml
+
+  /index.html
+
+  /sitemap.txt
+
+
+
+  /2015/05/20/graph-coloring.html
+
+  /2015/05/19/template.html
+
+  /2015/05/19/super-bowl-chicken.html
+
+  /2015/05/19/Book-List-2015.html
+
+  /2015/01/30/Git-Resources.html

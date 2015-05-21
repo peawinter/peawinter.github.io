@@ -1,7 +1,37 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
-</html>
+---
+layout: page_title
+title: Wenyu's Site
+titlename: Wenyu's Site
+---
+<!--<br>-->
+<center><h3><font color="#6D84B4">竹杖芒鞋轻胜马，一蓑烟雨任平生。</font></h3></center>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{ site.locals.newest }}</div>
+      {% for post in paginator.posts %}
+        <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
+          {{post.title}}
+          <span class="badge">{{ post.date | date:"%Y-%m-%d" }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% for cate in site.cates %}
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">{{ cate }}</div>
+        {% for tag in site.tags %}
+          {% if tag[0] == cate %}
+            {% for post in tag[1] %}
+              <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
+                {{post.title}}
+                <span class="badge">{{ post.date | date:"%Y-%m-%d" }}</span>
+              </a>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
