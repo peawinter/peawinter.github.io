@@ -6,67 +6,167 @@
     <description>My personal blog</description>
     
       <item>
+        <title>Weekly Plan</title>
+        <link>http://http://peawinter.github.io//2015/05/21/research-plan.html</link>
+        <guid isPermaLink="true">http://http://peawinter.github.io//2015/05/21/research-plan.html</guid>
+        <pubDate>Thu, 21 May 2015 00:00:00 -0400</pubDate>
+        <description>&lt;h2 id=&quot;todo-list-520---527&quot;&gt;Todo List (5/20 - 5/27)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[ ] Research Meet&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;[ ] Contact Kuo-Hao Chang&lt;/li&gt;
+      &lt;li&gt;[x] Set up dropbox shared folder&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[ ] Update draft and slides&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;[ ] Literature review on block coordinate descent method&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;[ ] Theory part&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;[ ] Prove convergence&lt;/li&gt;
+          &lt;li&gt;[ ] Prove convergence rate&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;[ ] Experiment part&lt;/p&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;[ ] Implement in R&lt;/li&gt;
+          &lt;li&gt;[ ] Compare with CSB - STRONG&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[ ] Kaggle word2vec&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;[x] Part 1: build Random forest model&lt;/li&gt;
+      &lt;li&gt;[x] Part 2: build word2vec model&lt;/li&gt;
+      &lt;li&gt;[ ] Part 3: model prediction and evaluation&lt;/li&gt;
+      &lt;li&gt;[ ] Part 4: wrap up&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Optimization - Coordinate Descent</title>
+        <link>http://http://peawinter.github.io//2015/05/21/coordinate-descent.html</link>
+        <guid isPermaLink="true">http://http://peawinter.github.io//2015/05/21/coordinate-descent.html</guid>
+        <pubDate>Thu, 21 May 2015 00:00:00 -0400</pubDate>
+        <description>&lt;script type=&quot;math/tex; mode=display&quot;&gt;x^2 - y^2 = 2&lt;/script&gt;
+</description>
+      </item>
+    
+      <item>
         <title>Discrete Optimization - Graph Coloring</title>
         <link>http://http://peawinter.github.io//2015/05/20/graph-coloring.html</link>
         <guid isPermaLink="true">http://http://peawinter.github.io//2015/05/20/graph-coloring.html</guid>
         <pubDate>Wed, 20 May 2015 00:00:00 -0400</pubDate>
-        <description>&lt;h2&gt;Problem&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 
 &lt;p&gt;Given an undirected graph, graph coloring or vertex color problem is to assign minimum number of different colors to nodes such that no adjacent nodes share the same color.&lt;/p&gt;
 
 &lt;p&gt;The problem comes from coloring a map such that no two neighbor regions have the same color. Here is a map of the United States colored with only 4 colors:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png&quot; alt=&quot;US map with four colors&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png&quot; alt=&quot;US map with four colors&quot; /&gt;&lt;/p&gt;
 
-&lt;h2&gt;Application&lt;/h2&gt;
+&lt;h2 id=&quot;application&quot;&gt;Application&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Scheduling&lt;/strong&gt; schedule final exams. College offers multiple courses and each student may take multiple courses. To resolve conflict, if a student takes two courses, then these two courses cannot be scheduled at the same time.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Register Allocation&lt;/strong&gt; when compiling a program, the computer needs to allocate registers to the most frequently used values of the program, while putting the other ones in memory. This can be modeled as a graph coloring problem: the compiler constructs an interference graph, where vertices are symbolic registers and an edge connects two nodes if they are needed at the same time. If the graph can be colored with k colors then the variables can be stored in k registers.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;time tabling and scheduling&lt;/li&gt;
-&lt;li&gt;frequency assignment&lt;/li&gt;
-&lt;li&gt;register allocation&lt;/li&gt;
-&lt;li&gt;printed circuit testing&lt;/li&gt;
-&lt;li&gt;parallel numerical computation and optimization&lt;/li&gt;
+  &lt;li&gt;time tabling and scheduling&lt;/li&gt;
+  &lt;li&gt;frequency assignment&lt;/li&gt;
+  &lt;li&gt;register allocation&lt;/li&gt;
+  &lt;li&gt;printed circuit testing&lt;/li&gt;
+  &lt;li&gt;parallel numerical computation and optimization&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Properties&lt;/h2&gt;
+&lt;h2 id=&quot;properties&quot;&gt;Properties&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(|S| = k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;strong&gt;chromatic number&lt;/strong&gt; \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;strong&gt;clique number&lt;/strong&gt; \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A &lt;em&gt;planar&lt;/em&gt; graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, &amp;quot;Every map is four colorable&amp;quot;, Bulletin of the American Mathematical Society 82 (1976), 711–12).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Complexity&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning &amp;quot;red&amp;quot; to the first layer, &amp;quot;blue&amp;quot; to the second layer, &amp;quot;red&amp;quot; to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.&lt;/li&gt;
-&lt;li&gt;For \(k \geq 3\), \(k-colorability\) is &lt;strong&gt;NP-complete&lt;/strong&gt;. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Approximation boundaries&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Lower bound: \(\chi(G) \geq \omega(G)\)&lt;/li&gt;
-&lt;li&gt;Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2|E(G)| \geq \chi(G) (\chi(G) - 1)\)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(&lt;/td&gt;
+          &lt;td&gt;S&lt;/td&gt;
+          &lt;td&gt;= k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;chromatic number&lt;/strong&gt; \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;clique number&lt;/strong&gt; \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;em&gt;planar&lt;/em&gt; graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, “Every map is four colorable”, Bulletin of the American Mathematical Society 82 (1976), 711–12).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Complexity
+    &lt;ul&gt;
+      &lt;li&gt;For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning “red” to the first layer, “blue” to the second layer, “red” to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.&lt;/li&gt;
+      &lt;li&gt;For \(k \geq 3\), \(k-colorability\) is &lt;strong&gt;NP-complete&lt;/strong&gt;. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Approximation boundaries
+    &lt;ul&gt;
+      &lt;li&gt;Lower bound: \(\chi(G) \geq \omega(G)\)&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2&lt;/td&gt;
+              &lt;td&gt;E(G)&lt;/td&gt;
+              &lt;td&gt;\geq \chi(G) (\chi(G) - 1)\)&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Algorithms&lt;/h2&gt;
+&lt;h2 id=&quot;algorithms&quot;&gt;Algorithms&lt;/h2&gt;
 
-&lt;h4&gt;Dynamic Programming algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;dynamic-programming-algorithm&quot;&gt;Dynamic Programming algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Find and list all sets that are \(1-colorable\).&lt;/li&gt;
-&lt;li&gt;Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
-
-&lt;ul&gt;
-&lt;li&gt;For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{|S|} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Find and list all sets that are \(1-colorable\).&lt;/li&gt;
+  &lt;li&gt;Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{&lt;/td&gt;
+              &lt;td&gt;S&lt;/td&gt;
+              &lt;td&gt;} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Time complexity: \(O(3^n)\)&lt;/p&gt;
@@ -74,73 +174,95 @@
 &lt;p&gt;Space complexity: \(O(2^n)\)&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark
-
-&lt;ul&gt;
-&lt;li&gt;By considering only maximal independent sets, the dynamic
+  &lt;li&gt;Remark
+    &lt;ul&gt;
+      &lt;li&gt;By considering only maximal independent sets, the dynamic
 programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).&lt;/li&gt;
-&lt;li&gt;Dynamic programming is a method that avoids redoing computations
+      &lt;li&gt;Dynamic programming is a method that avoids redoing computations
 over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4&gt;Backtrack algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;backtrack-algorithm&quot;&gt;Backtrack algorithm&lt;/h3&gt;
 
 &lt;p&gt;Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;When a node is colored, keep track of the index of when that node is colored.&lt;/li&gt;
-&lt;li&gt;For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.&lt;/li&gt;
-&lt;li&gt;Find the maximum of all the minimums calculated in step 2.&lt;/li&gt;
-&lt;li&gt;Backtrack up to the index found in step 3.&lt;/li&gt;
+  &lt;li&gt;When a node is colored, keep track of the index of when that node is colored.&lt;/li&gt;
+  &lt;li&gt;For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.&lt;/li&gt;
+  &lt;li&gt;Find the maximum of all the minimums calculated in step 2.&lt;/li&gt;
+  &lt;li&gt;Backtrack up to the index found in step 3.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4&gt;Greedy algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;greedy-algorithm&quot;&gt;Greedy algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Number the vertices \(V\).&lt;/li&gt;
-&lt;li&gt;For \(i = 1, ..., n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
-
-&lt;ul&gt;
-&lt;li&gt;In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.&lt;/li&gt;
-&lt;li&gt;This algorithm finds a reasonable coloring in time \(O(|V|+|E|)\).&lt;/li&gt;
-&lt;li&gt;The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Number the vertices \(V\).&lt;/li&gt;
+  &lt;li&gt;For \(i = 1, …, n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
+    &lt;ul&gt;
+      &lt;li&gt;In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;This algorithm finds a reasonable coloring in time \(O(&lt;/td&gt;
+              &lt;td&gt;V&lt;/td&gt;
+              &lt;td&gt;+&lt;/td&gt;
+              &lt;td&gt;E&lt;/td&gt;
+              &lt;td&gt;)\).&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark:
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.&lt;/li&gt;
-&lt;li&gt;If the vertices of a graph \(G\) can be numbered \(v&lt;em&gt;1, ..., v&lt;/em&gt;n\) such that for every \(i\) , \(|N(v&lt;em&gt;i)  \cap {v&lt;/em&gt;1 , . . . , v_{i-1} }| \leq k\) , then \(\chi(G)\leq k+1\).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Remark:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;If the vertices of a graph \(G\) can be numbered \(v_1, …, v_n\) such that for every \(i\) , \(&lt;/td&gt;
+              &lt;td&gt;N(v_i)  \cap {v_1 , . . . , v_{i-1} }&lt;/td&gt;
+              &lt;td&gt;\leq k\) , then \(\chi(G)\leq k+1\).&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4&gt;Welsh-Powell algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;welsh-powell-algorithm&quot;&gt;Welsh-Powell algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Find the degree of every vertex.&lt;/li&gt;
-&lt;li&gt;Sort the vertices in order of descending degrees.&lt;/li&gt;
-&lt;li&gt;Color the first vertex in the list with color 1.&lt;/li&gt;
-&lt;li&gt;Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.&lt;/li&gt;
-&lt;li&gt;Repeat the process on the uncolored vertices with a new color.&lt;/li&gt;
+  &lt;li&gt;Find the degree of every vertex.&lt;/li&gt;
+  &lt;li&gt;Sort the vertices in order of descending degrees.&lt;/li&gt;
+  &lt;li&gt;Color the first vertex in the list with color 1.&lt;/li&gt;
+  &lt;li&gt;Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.&lt;/li&gt;
+  &lt;li&gt;Repeat the process on the uncolored vertices with a new color.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark:
-
-&lt;ul&gt;
-&lt;li&gt;Usually performs better than just coloring the vertices without a plan will.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Remark:
+    &lt;ul&gt;
+      &lt;li&gt;Usually performs better than just coloring the vertices without a plan will.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4&gt;Iterated Greedy algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;iterated-greedy-algorithm&quot;&gt;Iterated Greedy algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:
 1. Run simple greedy algorithm.
@@ -148,47 +270,58 @@ over and over again in exhaustive search. This leads to significant savings in r
 3. Iterate until the color count reach the optimal value.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.&lt;/li&gt;
-&lt;li&gt;Reorder the color labels randomly.&lt;/li&gt;
+  &lt;li&gt;The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.&lt;/li&gt;
+  &lt;li&gt;Reorder the color labels randomly.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4&gt;Tabu searching algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;tabu-searching-algorithm&quot;&gt;Tabu searching algorithm&lt;/h3&gt;
 
 &lt;p&gt;The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Take a valid graph coloring solution as input.&lt;/li&gt;
-&lt;li&gt;Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.&lt;/li&gt;
-&lt;li&gt;Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.&lt;/li&gt;
-&lt;li&gt;Select the neighbor that contains the least amount of conflicts.&lt;/li&gt;
-&lt;li&gt;Use the neighbor selected in step 4 as the new coloring.&lt;/li&gt;
-&lt;li&gt;If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If no solution has been found, increase the number of colors to use and go to step 3.&lt;/p&gt;
+  &lt;li&gt;Take a valid graph coloring solution as input.&lt;/li&gt;
+  &lt;li&gt;Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.&lt;/li&gt;
+  &lt;li&gt;Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.&lt;/li&gt;
+  &lt;li&gt;Select the neighbor that contains the least amount of conflicts.&lt;/li&gt;
+  &lt;li&gt;Use the neighbor selected in step 4 as the new coloring.&lt;/li&gt;
+  &lt;li&gt;If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If no solution has been found, increase the number of colors to use and go to step 3.&lt;/p&gt;
 
-&lt;p&gt;Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.&lt;/p&gt;&lt;/li&gt;
+    &lt;p&gt;Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4&gt;Mixed Strategy&lt;/h4&gt;
+&lt;h3 id=&quot;mixed-strategy&quot;&gt;Mixed Strategy&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Execute the Iterative Greedy algorithm for X amount of iterations.&lt;/li&gt;
-&lt;li&gt;Execute the TABU search algorithm on the best solution found thus far.&lt;/li&gt;
-&lt;li&gt;Use Y amount of iterations for the search. Goto step 1 until the time is up.&lt;/li&gt;
+  &lt;li&gt;Execute the Iterative Greedy algorithm for X amount of iterations.&lt;/li&gt;
+  &lt;li&gt;Execute the TABU search algorithm on the best solution found thus far.&lt;/li&gt;
+  &lt;li&gt;Use Y amount of iterations for the search. Goto step 1 until the time is up.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4&gt;Simulated Annealing algorithm&lt;/h4&gt;
+&lt;h3 id=&quot;simulated-annealing-algorithm&quot;&gt;Simulated Annealing algorithm&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Start from a greedy solution&lt;/li&gt;
-&lt;li&gt;Run iterated greedy on current solution&lt;/li&gt;
-&lt;li&gt;Run simulated annealing on current solution and track the best solution so far&lt;/li&gt;
-&lt;li&gt;Go back to step 2&lt;/li&gt;
+  &lt;li&gt;Start from a greedy solution&lt;/li&gt;
+  &lt;li&gt;Run iterated greedy on current solution&lt;/li&gt;
+  &lt;li&gt;Run simulated annealing on current solution and track the best solution so far&lt;/li&gt;
+  &lt;li&gt;Go back to step 2&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Cost function \[ sum[C&lt;em&gt;i^2] + sum[C&lt;/em&gt;i * E&lt;em&gt;i] \] where \( C&lt;/em&gt;i \) is the number of nodes with color \(i\), and \(E_i\) the number of conflict pairs for each color.&lt;/li&gt;
-&lt;li&gt;Set the initial temperature at 10, the step size \(\alpha = 0.9999\).&lt;/li&gt;
+  &lt;li&gt;Cost function
+  &lt;script type=&quot;math/tex&quot;&gt;\sum[Ci^2] + \sum[Ci * Ei]&lt;/script&gt;
+  where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.&lt;/li&gt;
+  &lt;li&gt;Set the initial temperature at 10, the step size \(\alpha = 0.9999\).&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Graph_coloring&quot;&gt;wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&quot;&gt;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf&quot;&gt;http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
       </item>
     
@@ -197,7 +330,7 @@ over and over again in exhaustive search. This leads to significant savings in r
         <link>http://http://peawinter.github.io//2015/05/19/template.html</link>
         <guid isPermaLink="true">http://http://peawinter.github.io//2015/05/19/template.html</guid>
         <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
-        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
 </description>
       </item>
     
@@ -215,7 +348,8 @@ over and over again in exhaustive search. This leads to significant savings in r
         <link>http://http://peawinter.github.io//2015/05/19/Book-List-2015.html</link>
         <guid isPermaLink="true">http://http://peawinter.github.io//2015/05/19/Book-List-2015.html</guid>
         <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
-        <description></description>
+        <description>
+</description>
       </item>
     
       <item>
@@ -223,158 +357,237 @@ over and over again in exhaustive search. This leads to significant savings in r
         <link>http://http://peawinter.github.io//2015/01/30/Git-Resources.html</link>
         <guid isPermaLink="true">http://http://peawinter.github.io//2015/01/30/Git-Resources.html</guid>
         <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
-        <description>&lt;h3&gt;Configure tooling&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;configure-tooling&quot;&gt;Configure tooling&lt;/h3&gt;
 
 &lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.name &amp;quot;[name]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global user.name &quot;[name]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Sets the name you want atached to your commit transactions&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.email &amp;quot;[email address]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global user.email &quot;[email address]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Sets the email you want atached to your commit transactions&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global color.ui auto
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global color.ui auto
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Enables helpful colorization of command line output&lt;/p&gt;
 
-&lt;h3&gt;Create repositories&lt;/h3&gt;
-
+&lt;h3 id=&quot;create-repositories&quot;&gt;Create repositories&lt;/h3&gt;
 &lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git init [project-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Creates a new local repository with the specified name&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone [url]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Downloads a project and its entire version history&lt;/p&gt;
 
-&lt;h3&gt;Make changes&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git init [project-name]
+&lt;/code&gt;
+Creates a new local repository with the specified name&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;
+$ git clone [url]
+&lt;/code&gt;
+Downloads a project and its entire version history&lt;/p&gt;
+
+&lt;h3 id=&quot;make-changes&quot;&gt;Make changes&lt;/h3&gt;
 &lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all new or modified files to be commited&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git add [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git status
+&lt;/code&gt;
+Lists all new or modified files to be commited&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git add [file]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Snapshots the file in preparation for versioning&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git reset [file]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Unstages the file, but preserve its contents&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Shows file differences not yet staged&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff --staged
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff --staged
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Shows file differences between staging and the last file version&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git commit -m &amp;quot;[descriptive message]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git commit -m &quot;[descriptive message]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Records file snapshots permanently in version history&lt;/p&gt;
 
-&lt;h3&gt;Group changes&lt;/h3&gt;
-
+&lt;h3 id=&quot;group-changes&quot;&gt;Group changes&lt;/h3&gt;
 &lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Lists all local branches in the current repository&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Creates a new branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git checkout [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git checkout [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Switches to the specified branch and updates the working directory&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git merge [branch]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Combines the specified branch’s history into the current branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch -d [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch -d [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Deletes the specified branch&lt;/p&gt;
 
-&lt;h3&gt;Refactor filenames&lt;/h3&gt;
-
+&lt;h3 id=&quot;refactor-filenames&quot;&gt;Refactor filenames&lt;/h3&gt;
 &lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Deletes the file from the working directory and stages the deletion&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm --cached [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Removes the file from version control but preserves the file locally&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git mv [file-original] [file-renamed]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Changes the file name and prepares it for commit&lt;/p&gt;
 
-&lt;h3&gt;Suppress tracking&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git rm [file]
+&lt;/code&gt;
+Deletes the file from the working directory and stages the deletion&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;
+$ git rm --cached [file]
+&lt;/code&gt;
+Removes the file from version control but preserves the file locally&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git mv [file-original] [file-renamed]
+&lt;/code&gt;
+Changes the file name and prepares it for commit&lt;/p&gt;
+
+&lt;h3 id=&quot;suppress-tracking&quot;&gt;Suppress tracking&lt;/h3&gt;
 &lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; *.log
+
+&lt;p&gt;&lt;code&gt;
+ *.log
  build/
  temp-*
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git ls-files --other --ignored --exclude-standard
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all ignored files in this project&lt;/p&gt;
 
-&lt;h3&gt;Save fragments&lt;/h3&gt;
+&lt;p&gt;```
+$ git ls-files –other –ignored –exclude-standard&lt;/p&gt;
 
+&lt;p&gt;```
+Lists all ignored files in this project&lt;/p&gt;
+
+&lt;h3 id=&quot;save-fragments&quot;&gt;Save fragments&lt;/h3&gt;
 &lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Temporarily stores all modified tracked files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash pop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restores the most recently stashed files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all stashed changesets&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash drop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Discards the most recently stashed changeset&lt;/p&gt;
 
-&lt;h3&gt;Review history&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git stash
+&lt;/code&gt;
+Temporarily stores all modified tracked files&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;
+$ git stash pop
+&lt;/code&gt;
+Restores the most recently stashed files&lt;/p&gt;
+
+&lt;p&gt;```
+$ git stash list&lt;/p&gt;
+
+&lt;p&gt;```
+Lists all stashed changesets&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git stash drop
+&lt;/code&gt;
+Discards the most recently stashed changeset&lt;/p&gt;
+
+&lt;h3 id=&quot;review-history&quot;&gt;Review history&lt;/h3&gt;
 &lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists version history for the current branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log --follow [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists version history for a file, including renames&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff [first-branch]...[second-branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Shows content differences between two branches&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git show [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Outputs metadata and content changes of the specified commit&lt;/p&gt;
 
-&lt;h3&gt;Redo commits&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git log
+&lt;/code&gt;
+Lists version history for the current branch&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;
+$ git log --follow [file]
+&lt;/code&gt;
+Lists version history for a file, including renames&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff [first-branch]...[second-branch]
+&lt;/code&gt;
+Shows content differences between two branches&lt;/p&gt;
+
+&lt;p&gt;```
+$ git show [commit]&lt;/p&gt;
+
+&lt;p&gt;```
+Outputs metadata and content changes of the specified commit&lt;/p&gt;
+
+&lt;h3 id=&quot;redo-commits&quot;&gt;Redo commits&lt;/h3&gt;
 &lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset --hard [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Discards all history and changes back to the specified commit&lt;/p&gt;
 
-&lt;h3&gt;Synchronize changes&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git reset [commit]
+&lt;/code&gt;
+Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;
+$ git reset --hard [commit]
+&lt;/code&gt;
+Discards all history and changes back to the specified commit&lt;/p&gt;
+
+&lt;h3 id=&quot;synchronize-changes&quot;&gt;Synchronize changes&lt;/h3&gt;
 &lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git fetch [bookmark]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git fetch [bookmark]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Downloads all history from the repository bookmark&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [bookmark]/[branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Combines bookmark’s branch into current local branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git push [alias] [branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git merge [bookmark]/[branch]
+&lt;/code&gt;
+Combines bookmark’s branch into current local branch&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git push [alias] [branch]
+&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;Uploads all local branch commits to GitHub&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git pull
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Downloads bookmark history and incorporates changes&lt;/p&gt;
 
-&lt;h3&gt;Reference&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+$ git pull
+&lt;/code&gt;
+Downloads bookmark history and incorporates changes&lt;/p&gt;
 
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
       </item>

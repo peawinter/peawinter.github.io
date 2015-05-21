@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>牛顿法与拟牛顿法（DFP BFGS LBFGS VLBFGS） | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -272,28 +364,25 @@
     <div id="content">
       <p>最近做LBFGS的并行，顺便把牛顿法、拟牛顿法顺理一下。</p>
 
-<p>$$a^2=b^2$$</p>
+<script type="math/tex; mode=display">a^2=b^2</script>
 
 <p>\[\min_x f(x)\]</p>
 
 <p>拟牛顿法是求解非线性优化问题最有效的方法之一。考虑无约束的极小化问题<a href="http://www.codecogs.com/eqnedit.php?latex=\min\limits_x&space;f(x)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?\min\limits_x&space;f(x)" title="\min\limits_x f(x)" /></a>，假设<a href="http://www.codecogs.com/eqnedit.php?latex=f(x)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?f(x)" title="f(x)" /></a>为凸函数，且二阶连续可导。</p>
 
-<h3>原始牛顿法</h3>
-
+<h3 id="section">原始牛顿法</h3>
 <p>基本思想：在现有极小点估计值的附近对f(x)进行二阶泰勒展开，进而找到下一个极小点的估计值</p>
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=x_{k&plus;1}=x_{k}-(H_k)^{-1}g_{k},&space;k=0,1,\cdots" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x_{k&plus;1}=x_{k}-(H_k)^{-1}g_{k},&space;k=0,1,\cdots" title="x_{k+1}=x_{k}-(H_k)^{-1}g_{k}, k=0,1,\cdots" /></a></p>
 
 <p>牛顿法具有二次收敛性，但当目标函数非二次型时，牛顿法不能保证函数稳定地下降（缺点）。</p>
 
-<h3>阻尼牛顿法</h3>
-
+<h3 id="section-1">阻尼牛顿法</h3>
 <p>每次迭代前需要沿迭代方向<a href="http://www.codecogs.com/eqnedit.php?latex=d_k=-(H_k)^{-1}g_k" target="_blank"><img src="http://latex.codecogs.com/gif.latex?d_k=-(H_k)^{-1}g_k" title="d_k=-(H_k)^{-1}g_k" /></a>做线搜索，寻求最优的步长因子<a href="http://www.codecogs.com/eqnedit.php?latex=\lambda_k" target="_blank"><img src="http://latex.codecogs.com/gif.latex?\lambda_k" title="\lambda_k" /></a>，即</p>
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=\lambda_k&space;=&space;\arg\min\limits_{\lambda}&space;f(x_k&plus;\lambda&space;d_k)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?\lambda_k&space;=&space;\arg\min\limits_{\lambda}&space;f(x_k&plus;\lambda&space;d_k)" title="\lambda_k = \arg\min\limits_{\lambda} f(x_k+\lambda d_k)" /></a></p>
 
-<h3>拟牛顿法</h3>
-
+<h3 id="section-2">拟牛顿法</h3>
 <p>基本思想：不使用二阶偏导数而构造出可以近似Hession或Hession的逆的正定对称阵，在“拟牛顿”的条件下优化目标函数。</p>
 
 <p>先推导拟牛顿条件：在<a href="http://www.codecogs.com/eqnedit.php?latex=x_{k&plus;1}" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x_{k&plus;1}" title="x_{k+1}" /></a>附近对<a href="http://www.codecogs.com/eqnedit.php?latex=f(x)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?f(x)" title="f(x)" /></a>做泰勒展开，取二阶近似项</p>
@@ -314,7 +403,7 @@
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=y_{k}=B_{k&plus;1}s_k" target="_blank"><img src="http://latex.codecogs.com/gif.latex?y_{k}=B_{k&plus;1}s_k" title="y_{k}=B_{k+1}s_k" /></a> 或 <a href="http://www.codecogs.com/eqnedit.php?latex=s_{k}=D_{k&plus;1}y_k" target="_blank"><img src="http://latex.codecogs.com/gif.latex?s_{k}=D_{k&plus;1}y_k" title="s_{k}=D_{k+1}y_k" /></a> 作为指导。</p>
 
-<h4>DFP算法（Davidon–Fletcher–Powell formula）</h4>
+<h4 id="dfpdavidonfletcherpowell-formula">DFP算法（Davidon–Fletcher–Powell formula）</h4>
 
 <p>核心：通过迭代的方法，对hession的逆做近似。迭代格式为</p>
 
@@ -338,17 +427,15 @@
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=\Rightarrow&space;\Delta&space;D_k=\frac{s_ks_k^{\mathrm{T}}}{s_k^{\mathrm{T}}y_k}-\frac{D_ky_ky_k^{\mathrm{T}}D_k}{y_k^{\mathrm{T}}D_ky_k}" target="_blank"><img src="http://latex.codecogs.com/gif.latex?\Rightarrow&space;\Delta&space;D_k=\frac{s_ks_k^{\mathrm{T}}}{s_k^{\mathrm{T}}y_k}-\frac{D_ky_ky_k^{\mathrm{T}}D_k}{y_k^{\mathrm{T}}D_ky_k}" title="\Rightarrow \Delta D_k=\frac{s_ks_k^{\mathrm{T}}}{s_k^{\mathrm{T}}y_k}-\frac{D_ky_ky_k^{\mathrm{T}}D_k}{y_k^{\mathrm{T}}D_ky_k}" /></a></p>
 
-<h4>BFGS算法（Broyden–Fletcher–Goldfarb–Shanno algorithm）</h4>
-
+<h4 id="bfgsbroydenfletchergoldfarbshanno-algorithm">BFGS算法（Broyden–Fletcher–Goldfarb–Shanno algorithm）</h4>
 <p>核心公式的推导过程与DFP完全类似，只是互换了其中s{k}和y{k}的位置。BFGS直接逼近Hession矩阵B_k。(公式敲起来太累了，请自行推导)</p>
 
-<h4>LBFGS算法(limited-memory BFGS)</h4>
-
-<p>不再存储完整的D<em>k，而是存储计算过程中的向量序列{s}，{y}。当需要矩阵D</em>k时，利用向量序列的计算来代替。并且，向量序列也不是全部存储，而是固定存最新的m个。</p>
+<h4 id="lbfgslimited-memory-bfgs">LBFGS算法(limited-memory BFGS)</h4>
+<p>不再存储完整的D_k，而是存储计算过程中的向量序列{s}，{y}。当需要矩阵D_k时，利用向量序列的计算来代替。并且，向量序列也不是全部存储，而是固定存最新的m个。</p>
 
 <p>若要实现并行，需要同时在x与梯度（影响y的计算）那儿求一致平均。</p>
 
-<h3>资料</h3>
+<h3 id="section-3">资料</h3>
 
 <p>【1】<a href="http://en.wikipedia.org/wiki/Davidon%E2%80%93Fletcher%E2%80%93Powell_formula">DFP算法</a></p>
 
@@ -374,10 +461,6 @@
   </div>
 </div>
 
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
           </div>
         </div>
       </div>
@@ -400,7 +483,7 @@
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>

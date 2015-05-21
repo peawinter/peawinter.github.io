@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>Discrete Optimization - Graph Coloring | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -270,63 +362,101 @@
   <div class="col-md-13 aside3-content">
     <hr>
     <div id="content">
-      <h2>Problem</h2>
+      <h2 id="problem">Problem</h2>
 
 <p>Given an undirected graph, graph coloring or vertex color problem is to assign minimum number of different colors to nodes such that no adjacent nodes share the same color.</p>
 
 <p>The problem comes from coloring a map such that no two neighbor regions have the same color. Here is a map of the United States colored with only 4 colors:</p>
 
-<p><img src="http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png" alt="US map with four colors"></p>
+<p><img src="http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png" alt="US map with four colors" /></p>
 
-<h2>Application</h2>
+<h2 id="application">Application</h2>
 
 <p><strong>Scheduling</strong> schedule final exams. College offers multiple courses and each student may take multiple courses. To resolve conflict, if a student takes two courses, then these two courses cannot be scheduled at the same time.</p>
 
 <p><strong>Register Allocation</strong> when compiling a program, the computer needs to allocate registers to the most frequently used values of the program, while putting the other ones in memory. This can be modeled as a graph coloring problem: the compiler constructs an interference graph, where vertices are symbolic registers and an edge connects two nodes if they are needed at the same time. If the graph can be colored with k colors then the variables can be stored in k registers.</p>
 
 <ul>
-<li>time tabling and scheduling</li>
-<li>frequency assignment</li>
-<li>register allocation</li>
-<li>printed circuit testing</li>
-<li>parallel numerical computation and optimization</li>
+  <li>time tabling and scheduling</li>
+  <li>frequency assignment</li>
+  <li>register allocation</li>
+  <li>printed circuit testing</li>
+  <li>parallel numerical computation and optimization</li>
 </ul>
 
-<h2>Properties</h2>
+<h2 id="properties">Properties</h2>
 
 <ul>
-<li><p>A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(|S| = k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.</p></li>
-<li><p>The <strong>chromatic number</strong> \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.</p></li>
-<li><p>A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.</p></li>
-<li><p>The <strong>clique number</strong> \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.</p></li>
-<li><p>A <em>planar</em> graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, &quot;Every map is four colorable&quot;, Bulletin of the American Mathematical Society 82 (1976), 711–12).</p></li>
-<li><p>Complexity</p>
-
-<ul>
-<li>For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning &quot;red&quot; to the first layer, &quot;blue&quot; to the second layer, &quot;red&quot; to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.</li>
-<li>For \(k \geq 3\), \(k-colorability\) is <strong>NP-complete</strong>. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.</li>
-</ul></li>
-<li><p>Approximation boundaries</p>
-
-<ul>
-<li>Lower bound: \(\chi(G) \geq \omega(G)\)</li>
-<li>Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2|E(G)| \geq \chi(G) (\chi(G) - 1)\)</li>
-</ul></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(</td>
+          <td>S</td>
+          <td>= k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>The <strong>chromatic number</strong> \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.</p>
+  </li>
+  <li>
+    <p>A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.</p>
+  </li>
+  <li>
+    <p>The <strong>clique number</strong> \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.</p>
+  </li>
+  <li>
+    <p>A <em>planar</em> graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, “Every map is four colorable”, Bulletin of the American Mathematical Society 82 (1976), 711–12).</p>
+  </li>
+  <li>Complexity
+    <ul>
+      <li>For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning “red” to the first layer, “blue” to the second layer, “red” to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.</li>
+      <li>For \(k \geq 3\), \(k-colorability\) is <strong>NP-complete</strong>. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.</li>
+    </ul>
+  </li>
+  <li>Approximation boundaries
+    <ul>
+      <li>Lower bound: \(\chi(G) \geq \omega(G)\)</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2</td>
+              <td>E(G)</td>
+              <td>\geq \chi(G) (\chi(G) - 1)\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Algorithms</h2>
+<h2 id="algorithms">Algorithms</h2>
 
-<h4>Dynamic Programming algorithm</h4>
+<h3 id="dynamic-programming-algorithm">Dynamic Programming algorithm</h3>
 
 <p>Algorithm:</p>
 
 <ol>
-<li>Find and list all sets that are \(1-colorable\).</li>
-<li>Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
-
-<ul>
-<li>For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{|S|} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)</li>
-</ul></li>
+  <li>Find and list all sets that are \(1-colorable\).</li>
+  <li>Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{</td>
+              <td>S</td>
+              <td>} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
 </ol>
 
 <p>Time complexity: \(O(3^n)\)</p>
@@ -334,73 +464,95 @@
 <p>Space complexity: \(O(2^n)\)</p>
 
 <ul>
-<li>Remark
-
-<ul>
-<li>By considering only maximal independent sets, the dynamic
+  <li>Remark
+    <ul>
+      <li>By considering only maximal independent sets, the dynamic
 programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).</li>
-<li>Dynamic programming is a method that avoids redoing computations
+      <li>Dynamic programming is a method that avoids redoing computations
 over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.</li>
-</ul></li>
+    </ul>
+  </li>
 </ul>
 
-<h4>Backtrack algorithm</h4>
+<h3 id="backtrack-algorithm">Backtrack algorithm</h3>
 
 <p>Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.</p>
 
 <ol>
-<li>When a node is colored, keep track of the index of when that node is colored.</li>
-<li>For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.</li>
-<li>Find the maximum of all the minimums calculated in step 2.</li>
-<li>Backtrack up to the index found in step 3.</li>
+  <li>When a node is colored, keep track of the index of when that node is colored.</li>
+  <li>For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.</li>
+  <li>Find the maximum of all the minimums calculated in step 2.</li>
+  <li>Backtrack up to the index found in step 3.</li>
 </ol>
 
-<h4>Greedy algorithm</h4>
+<h3 id="greedy-algorithm">Greedy algorithm</h3>
 
 <p>Algorithm:</p>
 
 <ol>
-<li>Number the vertices \(V\).</li>
-<li>For \(i = 1, ..., n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
-
-<ul>
-<li>In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.</li>
-<li>This algorithm finds a reasonable coloring in time \(O(|V|+|E|)\).</li>
-<li>The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.</li>
-</ul></li>
+  <li>Number the vertices \(V\).</li>
+  <li>For \(i = 1, …, n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
+    <ul>
+      <li>In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>This algorithm finds a reasonable coloring in time \(O(</td>
+              <td>V</td>
+              <td>+</td>
+              <td>E</td>
+              <td>)\).</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.</li>
+    </ul>
+  </li>
 </ol>
 
 <ul>
-<li>Remark:
-
-<ul>
-<li><strong>For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.</strong></li>
-<li>For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.</li>
-<li>If the vertices of a graph \(G\) can be numbered \(v<em>1, ..., v</em>n\) such that for every \(i\) , \(|N(v<em>i)  \cap {v</em>1 , . . . , v_{i-1} }| \leq k\) , then \(\chi(G)\leq k+1\).</li>
-</ul></li>
+  <li>Remark:
+    <ul>
+      <li><strong>For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.</strong></li>
+      <li>For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>If the vertices of a graph \(G\) can be numbered \(v_1, …, v_n\) such that for every \(i\) , \(</td>
+              <td>N(v_i)  \cap {v_1 , . . . , v_{i-1} }</td>
+              <td>\leq k\) , then \(\chi(G)\leq k+1\).</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h4>Welsh-Powell algorithm</h4>
+<h3 id="welsh-powell-algorithm">Welsh-Powell algorithm</h3>
 
 <p>Algorithm:</p>
 
 <ol>
-<li>Find the degree of every vertex.</li>
-<li>Sort the vertices in order of descending degrees.</li>
-<li>Color the first vertex in the list with color 1.</li>
-<li>Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.</li>
-<li>Repeat the process on the uncolored vertices with a new color.</li>
+  <li>Find the degree of every vertex.</li>
+  <li>Sort the vertices in order of descending degrees.</li>
+  <li>Color the first vertex in the list with color 1.</li>
+  <li>Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.</li>
+  <li>Repeat the process on the uncolored vertices with a new color.</li>
 </ol>
 
 <ul>
-<li>Remark:
-
-<ul>
-<li>Usually performs better than just coloring the vertices without a plan will.</li>
-</ul></li>
+  <li>Remark:
+    <ul>
+      <li>Usually performs better than just coloring the vertices without a plan will.</li>
+    </ul>
+  </li>
 </ul>
 
-<h4>Iterated Greedy algorithm</h4>
+<h3 id="iterated-greedy-algorithm">Iterated Greedy algorithm</h3>
 
 <p>Algorithm:
 1. Run simple greedy algorithm.
@@ -408,47 +560,58 @@ over and over again in exhaustive search. This leads to significant savings in r
 3. Iterate until the color count reach the optimal value.</p>
 
 <ul>
-<li>The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.</li>
-<li>Reorder the color labels randomly.</li>
+  <li>The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.</li>
+  <li>Reorder the color labels randomly.</li>
 </ul>
 
-<h4>Tabu searching algorithm</h4>
+<h3 id="tabu-searching-algorithm">Tabu searching algorithm</h3>
 
 <p>The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.</p>
 
 <ol>
-<li>Take a valid graph coloring solution as input.</li>
-<li>Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.</li>
-<li>Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.</li>
-<li>Select the neighbor that contains the least amount of conflicts.</li>
-<li>Use the neighbor selected in step 4 as the new coloring.</li>
-<li>If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.</li>
-<li><p>If no solution has been found, increase the number of colors to use and go to step 3.</p>
+  <li>Take a valid graph coloring solution as input.</li>
+  <li>Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.</li>
+  <li>Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.</li>
+  <li>Select the neighbor that contains the least amount of conflicts.</li>
+  <li>Use the neighbor selected in step 4 as the new coloring.</li>
+  <li>If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.</li>
+  <li>
+    <p>If no solution has been found, increase the number of colors to use and go to step 3.</p>
 
-<p>Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.</p></li>
+    <p>Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.</p>
+  </li>
 </ol>
 
-<h4>Mixed Strategy</h4>
+<h3 id="mixed-strategy">Mixed Strategy</h3>
 
 <ol>
-<li>Execute the Iterative Greedy algorithm for X amount of iterations.</li>
-<li>Execute the TABU search algorithm on the best solution found thus far.</li>
-<li>Use Y amount of iterations for the search. Goto step 1 until the time is up.</li>
+  <li>Execute the Iterative Greedy algorithm for X amount of iterations.</li>
+  <li>Execute the TABU search algorithm on the best solution found thus far.</li>
+  <li>Use Y amount of iterations for the search. Goto step 1 until the time is up.</li>
 </ol>
 
-<h4>Simulated Annealing algorithm</h4>
+<h3 id="simulated-annealing-algorithm">Simulated Annealing algorithm</h3>
 
 <ol>
-<li>Start from a greedy solution</li>
-<li>Run iterated greedy on current solution</li>
-<li>Run simulated annealing on current solution and track the best solution so far</li>
-<li>Go back to step 2</li>
+  <li>Start from a greedy solution</li>
+  <li>Run iterated greedy on current solution</li>
+  <li>Run simulated annealing on current solution and track the best solution so far</li>
+  <li>Go back to step 2</li>
 </ol>
 
 <ul>
-<li>Cost function \[ sum[C<em>i^2] + sum[C</em>i * E<em>i] \] where \( C</em>i \) is the number of nodes with color \(i\), and \(E_i\) the number of conflict pairs for each color.</li>
-<li>Set the initial temperature at 10, the step size \(\alpha = 0.9999\).</li>
+  <li>Cost function
+  <script type="math/tex">\sum[Ci^2] + \sum[Ci * Ei]</script>
+  where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.</li>
+  <li>Set the initial temperature at 10, the step size \(\alpha = 0.9999\).</li>
 </ul>
+
+<h2 id="reference">Reference</h2>
+<ol>
+  <li><a href="http://en.wikipedia.org/wiki/Graph_coloring">wikipedia</a></li>
+  <li><a href="http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf">http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf</a></li>
+  <li><a href="http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf">http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf</a></li>
+</ol>
 
     </div>
     <hr>
@@ -465,10 +628,6 @@ over and over again in exhaustive search. This leads to significant savings in r
     </div>
   </div>
 </div>
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
           </div>
         </div>
@@ -492,7 +651,7 @@ over and over again in exhaustive search. This leads to significant savings in r
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>

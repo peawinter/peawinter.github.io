@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>什么是 P, NP, NP-complete, NP-hard | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -270,55 +362,50 @@
   <div class="col-md-13 aside3-content">
     <hr>
     <div id="content">
-      <h3>相关概念</h3>
-
+      <h3 id="section">相关概念</h3>
 <p>NP-hard（non-deterministic polynomial-time hard）</p>
 
 <ol>
-<li>P：能在多项式时间内解决</li>
-<li>NP：不能在多项式时间内解决或不确定能不能在多项式时间内解决，但一旦你找到一个解，只需要多项式时间去验证这个解是正确的</li>
-<li>NP-hard：如果一个问题是NP-hard，意味着可以将任意NP问题化约到这个问题。如果可以解这个问题，那么可以轻松地解任意NP问题。</li>
-<li>NPC：NP完全问题，所有NP问题在多项式时间内都能化约（Reducibility）到某一NP问题，这一NP问题就是NPC问题，即解决了此NPC问题，所有NP问题也都解决了。</li>
+  <li>P：能在多项式时间内解决</li>
+  <li>NP：不能在多项式时间内解决或不确定能不能在多项式时间内解决，但一旦你找到一个解，只需要多项式时间去验证这个解是正确的</li>
+  <li>NP-hard：如果一个问题是NP-hard，意味着可以将任意NP问题化约到这个问题。如果可以解这个问题，那么可以轻松地解任意NP问题。</li>
+  <li>NPC：NP完全问题，所有NP问题在多项式时间内都能化约（Reducibility）到某一NP问题，这一NP问题就是NPC问题，即解决了此NPC问题，所有NP问题也都解决了。</li>
 </ol>
 
-<h3>资料原文</h3>
-
+<h3 id="section-1">资料原文</h3>
 <p>These refer to how long it takes a program to run.  Problems in class P can be solved with algorithms that run in <strong>polynomial time</strong>.</p>
 
-<p>Say you have an algorithm that finds the smallest integer in an array.  One way to do this is by iterating over all the integers of the array and keeping track of the smallest number you&#39;ve seen up to that point.  Every time you look at an element, you compare it to the current minimum, and if it&#39;s smaller, you update the minimum.</p>
+<p>Say you have an algorithm that finds the smallest integer in an array.  One way to do this is by iterating over all the integers of the array and keeping track of the smallest number you’ve seen up to that point.  Every time you look at an element, you compare it to the current minimum, and if it’s smaller, you update the minimum.</p>
 
-<p>How long does this take?  Let&#39;s say there are n elements in the array.  For every element the algorithm has to perform a constant number of operations.  Therefore we can say that the algorithm runs in O(n) time, or that the runtime is a linear function of how many elements are in the array.  So this algorithm runs in <strong>linear time</strong>.</p>
+<p>How long does this take?  Let’s say there are n elements in the array.  For every element the algorithm has to perform a constant number of operations.  Therefore we can say that the algorithm runs in O(n) time, or that the runtime is a linear function of how many elements are in the array.  So this algorithm runs in <strong>linear time</strong>.</p>
 
 <p>You can also have algorithms that run in <strong>quadratic time</strong> (O(n^2)), <strong>exponential time</strong> (O(2^n)), or even <strong>logarithmic time</strong> (O(log n)).  Binary search (on a balanced tree) runs in logarithmic time because the height of the binary search tree is a logarithmic function of the number of elements in the tree.</p>
 
 <p>If the running time is some polynomial function of the size of the input, for instance if the algorithm runs in linear time or quadratic time or cubic time, then we say the algorithm runs in <strong>polynomial time</strong> and the problem it solves is in class <strong>P</strong>.</p>
 
-<h3><strong>NP</strong></h3>
-
-<p>Now there are a lot of programs that don&#39;t (necessarily) run in polynomial time on a regular computer, but do run in polynomial time on a nondeterministic Turing machine.  These programs solve problems in <strong>NP</strong>, which stands for <strong>nondeterministic polynomial time</strong>.  A nondeterministic Turing machine can do everything a regular computer can and more. This means all problems in P are also in NP.</p>
+<h3 id="np"><strong>NP</strong></h3>
+<p>Now there are a lot of programs that don’t (necessarily) run in polynomial time on a regular computer, but do run in polynomial time on a nondeterministic Turing machine.  These programs solve problems in <strong>NP</strong>, which stands for <strong>nondeterministic polynomial time</strong>.  A nondeterministic Turing machine can do everything a regular computer can and more. This means all problems in P are also in NP.</p>
 
 <p>An equivalent way to define NP is by pointing to the problems that can be verified in polynomial time.  This means there is not necessarily a polynomial-time way to find a solution, but once you have a solution it only takes polynomial time to verify that it is correct.</p>
 
 <p>Some people think P = NP, which means any problem that can be verified in polynomial time can also be solved in polynomial time and vice versa.  If they could prove this, it would revolutionize computer science because people would be able to construct faster algorithms for a lot of important problems.</p>
 
-<h3><strong>NP-hard</strong></h3>
-
-<p>What does NP-hard mean?  A lot of times you can solve a problem by reducing it to a different problem.  I can reduce Problem B to Problem A if, given a solution to Problem A, I can easily construct a solution to Problem B.  (In this case, &quot;easily&quot; means &quot;in polynomial time.&quot;)</p>
+<h3 id="np-hard"><strong>NP-hard</strong></h3>
+<p>What does NP-hard mean?  A lot of times you can solve a problem by reducing it to a different problem.  I can reduce Problem B to Problem A if, given a solution to Problem A, I can easily construct a solution to Problem B.  (In this case, “easily” means “in polynomial time.”)</p>
 
 <p>If a problem is <strong>NP-hard</strong>, this means I can reduce any problem in NP to that problem.  This means if I can solve that problem, I can easily solve any problem in NP.  If we could solve an NP-hard problem in polynomial time, this would prove P = NP.</p>
 
-<h3><strong>NP-complete</strong></h3>
-
+<h3 id="np-complete"><strong>NP-complete</strong></h3>
 <p>A problem is <strong>NP-complete</strong> if the problem is both</p>
 
 <ul>
-<li>NP-hard, and</li>
-<li>in NP.</li>
+  <li>NP-hard, and</li>
+  <li>in NP.</li>
 </ul>
 
-<h3>参考资料</h3>
-
+<h3 id="section-2">参考资料</h3>
 <p>【1】<a href="http://www.quora.com/What-are-P-NP-NP-complete-and-NP-hard">What are P, NP, NP-complete, and NP-hard?</a></p>
+
 
     </div>
     <hr>
@@ -335,10 +422,6 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
           </div>
         </div>
@@ -362,7 +445,7 @@
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>

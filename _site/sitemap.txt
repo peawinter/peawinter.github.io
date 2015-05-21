@@ -33,6 +33,10 @@
 
 
 
+  /2015/05/21/research-plan.html
+
+  /2015/05/21/coordinate-descent.html
+
   /2015/05/20/graph-coloring.html
 
   /2015/05/19/template.html

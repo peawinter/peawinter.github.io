@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>Git Cheat Sheet | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -270,158 +362,237 @@
   <div class="col-md-13 aside3-content">
     <hr>
     <div id="content">
-      <h3>Configure tooling</h3>
+      <h3 id="configure-tooling">Configure tooling</h3>
 
 <p>Configure user information for all local repositories</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.name &quot;[name]&quot;
-</code></pre></div>
+
+<p><code>
+$ git config --global user.name "[name]"
+</code></p>
+
 <p>Sets the name you want atached to your commit transactions</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.email &quot;[email address]&quot;
-</code></pre></div>
+
+<p><code>
+$ git config --global user.email "[email address]"
+</code></p>
+
 <p>Sets the email you want atached to your commit transactions</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global color.ui auto
-</code></pre></div>
+
+<p><code>
+$ git config --global color.ui auto
+</code></p>
+
 <p>Enables helpful colorization of command line output</p>
 
-<h3>Create repositories</h3>
-
+<h3 id="create-repositories">Create repositories</h3>
 <p>Start a new repository or obtain one from an existing URL</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git init [project-name]
-</code></pre></div>
-<p>Creates a new local repository with the specified name</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone [url]
-</code></pre></div>
-<p>Downloads a project and its entire version history</p>
 
-<h3>Make changes</h3>
+<p><code>
+$ git init [project-name]
+</code>
+Creates a new local repository with the specified name</p>
 
+<p><code>
+$ git clone [url]
+</code>
+Downloads a project and its entire version history</p>
+
+<h3 id="make-changes">Make changes</h3>
 <p>Review edits and craf a commit transaction</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git status
-</code></pre></div>
-<p>Lists all new or modified files to be commited</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git add [file]
-</code></pre></div>
+
+<p><code>
+$ git status
+</code>
+Lists all new or modified files to be commited</p>
+
+<p><code>
+$ git add [file]
+</code></p>
+
 <p>Snapshots the file in preparation for versioning</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [file]
-</code></pre></div>
+
+<p><code>
+$ git reset [file]
+</code></p>
+
 <p>Unstages the file, but preserve its contents</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff
-</code></pre></div>
+
+<p><code>
+$ git diff
+</code></p>
+
 <p>Shows file differences not yet staged</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff --staged
-</code></pre></div>
+
+<p><code>
+$ git diff --staged
+</code></p>
+
 <p>Shows file differences between staging and the last file version</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git commit -m &quot;[descriptive message]&quot;
-</code></pre></div>
+
+<p><code>
+$ git commit -m "[descriptive message]"
+</code></p>
+
 <p>Records file snapshots permanently in version history</p>
 
-<h3>Group changes</h3>
-
+<h3 id="group-changes">Group changes</h3>
 <p>Name a series of commits and combine completed efforts</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch
-</code></pre></div>
+
+<p><code>
+$ git branch
+</code></p>
+
 <p>Lists all local branches in the current repository</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch [branch-name]
-</code></pre></div>
+
+<p><code>
+$ git branch [branch-name]
+</code></p>
+
 <p>Creates a new branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git checkout [branch-name]
-</code></pre></div>
+
+<p><code>
+$ git checkout [branch-name]
+</code></p>
+
 <p>Switches to the specified branch and updates the working directory</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [branch]
-</code></pre></div>
+
+<p><code>
+$ git merge [branch]
+</code></p>
+
 <p>Combines the specified branch’s history into the current branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch -d [branch-name]
-</code></pre></div>
+
+<p><code>
+$ git branch -d [branch-name]
+</code></p>
+
 <p>Deletes the specified branch</p>
 
-<h3>Refactor filenames</h3>
-
+<h3 id="refactor-filenames">Refactor filenames</h3>
 <p>Relocate and remove versioned files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm [file]
-</code></pre></div>
-<p>Deletes the file from the working directory and stages the deletion</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm --cached [file]
-</code></pre></div>
-<p>Removes the file from version control but preserves the file locally</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git mv [file-original] [file-renamed]
-</code></pre></div>
-<p>Changes the file name and prepares it for commit</p>
 
-<h3>Suppress tracking</h3>
+<p><code>
+$ git rm [file]
+</code>
+Deletes the file from the working directory and stages the deletion</p>
 
+<p><code>
+$ git rm --cached [file]
+</code>
+Removes the file from version control but preserves the file locally</p>
+
+<p><code>
+$ git mv [file-original] [file-renamed]
+</code>
+Changes the file name and prepares it for commit</p>
+
+<h3 id="suppress-tracking">Suppress tracking</h3>
 <p>Exclude temporary files and paths</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"> *.log
+
+<p><code>
+ *.log
  build/
  temp-*
-</code></pre></div>
+</code></p>
+
 <p>A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git ls-files --other --ignored --exclude-standard
-</code></pre></div>
-<p>Lists all ignored files in this project</p>
 
-<h3>Save fragments</h3>
+<p>```
+$ git ls-files –other –ignored –exclude-standard</p>
 
+<p>```
+Lists all ignored files in this project</p>
+
+<h3 id="save-fragments">Save fragments</h3>
 <p>Shelve and restore incomplete changes</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash
-</code></pre></div>
-<p>Temporarily stores all modified tracked files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash pop
-</code></pre></div>
-<p>Restores the most recently stashed files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash list
-</code></pre></div>
-<p>Lists all stashed changesets</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash drop
-</code></pre></div>
-<p>Discards the most recently stashed changeset</p>
 
-<h3>Review history</h3>
+<p><code>
+$ git stash
+</code>
+Temporarily stores all modified tracked files</p>
 
+<p><code>
+$ git stash pop
+</code>
+Restores the most recently stashed files</p>
+
+<p>```
+$ git stash list</p>
+
+<p>```
+Lists all stashed changesets</p>
+
+<p><code>
+$ git stash drop
+</code>
+Discards the most recently stashed changeset</p>
+
+<h3 id="review-history">Review history</h3>
 <p>Browse and inspect the evolution of project files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log
-</code></pre></div>
-<p>Lists version history for the current branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log --follow [file]
-</code></pre></div>
-<p>Lists version history for a file, including renames</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff [first-branch]...[second-branch]
-</code></pre></div>
-<p>Shows content differences between two branches</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git show [commit]
-</code></pre></div>
-<p>Outputs metadata and content changes of the specified commit</p>
 
-<h3>Redo commits</h3>
+<p><code>
+$ git log
+</code>
+Lists version history for the current branch</p>
 
+<p><code>
+$ git log --follow [file]
+</code>
+Lists version history for a file, including renames</p>
+
+<p><code>
+$ git diff [first-branch]...[second-branch]
+</code>
+Shows content differences between two branches</p>
+
+<p>```
+$ git show [commit]</p>
+
+<p>```
+Outputs metadata and content changes of the specified commit</p>
+
+<h3 id="redo-commits">Redo commits</h3>
 <p>Erase mistakes and craft replacement history</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [commit]
-</code></pre></div>
-<p>Undoes all commits after [commit], preserving changes locally</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset --hard [commit]
-</code></pre></div>
-<p>Discards all history and changes back to the specified commit</p>
 
-<h3>Synchronize changes</h3>
+<p><code>
+$ git reset [commit]
+</code>
+Undoes all commits after [commit], preserving changes locally</p>
 
+<p><code>
+$ git reset --hard [commit]
+</code>
+Discards all history and changes back to the specified commit</p>
+
+<h3 id="synchronize-changes">Synchronize changes</h3>
 <p>Register a repository bookmark and exchange version history</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git fetch [bookmark]
-</code></pre></div>
+
+<p><code>
+$ git fetch [bookmark]
+</code></p>
+
 <p>Downloads all history from the repository bookmark</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [bookmark]/[branch]
-</code></pre></div>
-<p>Combines bookmark’s branch into current local branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git push [alias] [branch]
-</code></pre></div>
+
+<p><code>
+$ git merge [bookmark]/[branch]
+</code>
+Combines bookmark’s branch into current local branch</p>
+
+<p><code>
+$ git push [alias] [branch]
+</code></p>
+
 <p>Uploads all local branch commits to GitHub</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git pull
-</code></pre></div>
-<p>Downloads bookmark history and incorporates changes</p>
 
-<h3>Reference</h3>
+<p><code>
+$ git pull
+</code>
+Downloads bookmark history and incorporates changes</p>
 
+<h3 id="reference">Reference</h3>
 <ol>
-<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
-<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
+  <li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+  <li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
 </ol>
 
     </div>
@@ -439,10 +610,6 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
           </div>
         </div>
@@ -466,7 +633,7 @@
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>

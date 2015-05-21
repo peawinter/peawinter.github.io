@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>动态一致平均问题算法-EXTRA和DAC | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -270,16 +362,15 @@
   <div class="col-md-13 aside3-content">
     <hr>
     <div id="content">
-      <h3>EXTRA</h3>
+      <h3 id="extra">EXTRA</h3>
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=x_{(i)}^1=\sum_{j&space;=&space;1}^Nw_{ij}x_{(j)}^0-\alpha&space;\nabla&space;f_i(x_{(i)}^0)\\&space;\\&space;\\&space;x_{(i)}^{k&plus;2}=x_{(i)}^{k&plus;1}&plus;\sum_{j=1}^Nw_{ij}x_{(j)}^{k&plus;1}-\sum_{j=1}^N\tilde{w}_{ij}x_{(j)}^k-\alpha[\nabla&space;f_i(x_{(i)}^{k&plus;1})-\nabla&space;f_i(x_{(i)}^{k})]" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x_{(i)}^1=\sum_{j&space;=&space;1}^Nw_{ij}x_{(j)}^0-\alpha&space;\nabla&space;f_i(x_{(i)}^0)\\&space;\\&space;\\&space;x_{(i)}^{k&plus;2}=x_{(i)}^{k&plus;1}&plus;\sum_{j=1}^Nw_{ij}x_{(j)}^{k&plus;1}-\sum_{j=1}^N\tilde{w}_{ij}x_{(j)}^k-\alpha[\nabla&space;f_i(x_{(i)}^{k&plus;1})-\nabla&space;f_i(x_{(i)}^{k})]" title="x_{(i)}^1=\sum_{j = 1}^Nw_{ij}x_{(j)}^0-\alpha \nabla f_i(x_{(i)}^0)\\ \\ \\ x_{(i)}^{k+2}=x_{(i)}^{k+1}+\sum_{j=1}^Nw_{ij}x_{(j)}^{k+1}-\sum_{j=1}^N\tilde{w}_{ij}x_{(j)}^k-\alpha[\nabla f_i(x_{(i)}^{k+1})-\nabla f_i(x_{(i)}^{k})]" /></a></p>
 
-<h3>DAC</h3>
+<h3 id="dac">DAC</h3>
 
 <p><a href="http://www.codecogs.com/eqnedit.php?latex=x_i(t&plus;1)=x_i(t)&plus;\sum_{j&space;\neq&space;i}a_{ij}(t)(x_i(t)-x_i(t))&plus;r_i(t)-r_i(t-1)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x_i(t&plus;1)=x_i(t)&plus;\sum_{j&space;\neq&space;i}a_{ij}(t)(x_j(t)-x_i(t))&plus;r_i(t)-r_i(t-1)" title="x_i(t+1)=x_i(t)+\sum_{j \neq i}a_{ij}(t)(x_i(t)-x_i(t))+r_i(t)-r_i(t-1)" /></a></p>
 
-<h3>优缺点比较</h3>
-
+<h3 id="section">优缺点比较</h3>
 <p>其中，DAC最大的缺点在于第一次迭代时对于r(-1)时刻的依赖，在实际仿真中，如果需要对动态输入求一致平均，往往并不能获取输入在-1时刻的值。导致在矩阵补全问题中，DAC做不精确的动态一致平均的子问题效果并不好。</p>
 
 <p>而EXTRA却有很好的效果。</p>
@@ -299,10 +390,6 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
           </div>
         </div>
@@ -326,7 +413,7 @@
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>

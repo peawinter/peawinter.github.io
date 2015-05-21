@@ -1,6 +1,6 @@
 permalink: /:year/:month/:day/:title.html
 paginate: 10
-markdown: redcarpet
+markdown: kramdown
 
 author:
   name: Wenyu Wang
@@ -26,12 +26,13 @@ disqus:
   shortname: wenyu
 
 # active lable
-active: 读书
+active: read
 
 # 首页除了最新文章外显示分类
 cates:
   - Optimization
-  - LaTeX
+  - Statistics
+  - Read
 
 # 中文本地化
 locals:

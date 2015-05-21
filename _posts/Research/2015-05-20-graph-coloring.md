@@ -49,7 +49,7 @@ The problem comes from coloring a map such that no two neighbor regions have the
 
 ## Algorithms
 
-#### Dynamic Programming algorithm
+### Dynamic Programming algorithm
 
 Algorithm:
 
@@ -67,7 +67,7 @@ programming based algorithm can be modified to have an improved running time of 
 	- Dynamic programming is a method that avoids redoing computations
 over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.
 
-#### Backtrack algorithm
+### Backtrack algorithm
 
 Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.
 
@@ -76,7 +76,7 @@ Suppose we have an upper bound for our graph coloring. During the brute force al
 3. Find the maximum of all the minimums calculated in step 2.
 4. Backtrack up to the index found in step 3.
 
-#### Greedy algorithm
+### Greedy algorithm
 
 Algorithm:
 
@@ -91,7 +91,7 @@ Algorithm:
 	- For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.
 	- If the vertices of a graph \\(G\\) can be numbered \\(v_1, ..., v_n\\) such that for every \\(i\\) , \\(|N(v_i)  \cap \{v_1 , . . . , v_{i-1} \}| \leq k\\) , then \\(\chi(G)\leq k+1\\).
 
-#### Welsh-Powell algorithm
+### Welsh-Powell algorithm
 
 Algorithm:
 
@@ -104,7 +104,7 @@ Algorithm:
 - Remark:
 	- Usually performs better than just coloring the vertices without a plan will.
 
-#### Iterated Greedy algorithm
+### Iterated Greedy algorithm
 
 Algorithm:
 1. Run simple greedy algorithm.
@@ -114,7 +114,7 @@ Algorithm:
 - The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.
 - Reorder the color labels randomly.
 
-#### Tabu searching algorithm
+### Tabu searching algorithm
 
 The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.
 
@@ -128,18 +128,25 @@ The basic idea behind TABU search is to take a graph coloring that contains conf
 
 	Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.
 
-#### Mixed Strategy
+### Mixed Strategy
 
 1. Execute the Iterative Greedy algorithm for X amount of iterations.
 2. Execute the TABU search algorithm on the best solution found thus far.
 3. Use Y amount of iterations for the search. Goto step 1 until the time is up.
 
-#### Simulated Annealing algorithm
+### Simulated Annealing algorithm
 
 1. Start from a greedy solution
 2. Run iterated greedy on current solution
 3. Run simulated annealing on current solution and track the best solution so far
 4. Go back to step 2
 
-- Cost function \\[ sum[C_i^2] + sum[C_i * E_i] \\] where \\( C_i \\) is the number of nodes with color \\(i\\), and \\(E_i\\) the number of conflict pairs for each color.
+- Cost function
+	$$\sum[Ci^2] + \sum[Ci * Ei]$$
+	where \\(Ci\\) is the number of nodes with color \\(i\\) and \\(Ei\\) the number of conflict pairs for each color.
 - Set the initial temperature at 10, the step size \\(\alpha = 0.9999\\).
+
+## Reference
+1. [wikipedia](http://en.wikipedia.org/wiki/Graph_coloring)
+2.  [http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf](http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf)
+3. [http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf](http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf)

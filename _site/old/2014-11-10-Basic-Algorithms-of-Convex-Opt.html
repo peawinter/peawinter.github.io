@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript"
+          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
   <meta charset="utf-8">
 <title>凸优化的一些基础算法 | Wenyu Wang</title>
 <meta name="author" content="Wenyu Wang">
@@ -46,7 +50,7 @@
       <div class="aside1_bottom">
         <table class="table table-condensed">
           <tr>
-            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td>
+            <!-- <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x" style="color:#fff;"></i></a></td> -->
             <td><a href="https://github.com/peawinter" target="_blank"><i class="fa fa-github fa-2x" style="color:#fff;"></i></a></td>
             <td><a href="mailto:peawinter@gmail.com"><i class="fa fa-envelope-o fa-2x" style="color:#fff;"></i></a></td>
           </tr>
@@ -96,6 +100,10 @@
             <div class="tab-pane" id="research">
               <div class="list-group">
                 <!-- <h2 class="center">research</h2> -->
+                
+                  <a href="/2015/05/21/research-plan.html" class="list-group-item-lay pjaxlink">Weekly Plan</a>
+                
+                  <a href="/2015/05/21/coordinate-descent.html" class="list-group-item-lay pjaxlink">Optimization - Coordinate Descent</a>
                 
                   <a href="/2015/05/20/graph-coloring.html" class="list-group-item-lay pjaxlink">Discrete Optimization - Graph Coloring</a>
                 
@@ -206,10 +214,14 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#optimization">optimization</a>
-                      <span class="badge pull-right">1</span>
+                      <span class="badge pull-right">2</span>
                     </h4>
                   </div>
                   <div id="optimization" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
                     
                       <a  href='/2015/05/20/graph-coloring.html' class="list-group-item pjaxlink">
                         Discrete Optimization - Graph Coloring
@@ -250,6 +262,86 @@
                   </div>
                 </div>
               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#gradient">gradient</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="gradient" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#coordinate">coordinate</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="coordinate" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#descent">descent</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="descent" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#blackbox">blackbox</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="blackbox" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/coordinate-descent.html' class="list-group-item pjaxlink">
+                        Optimization - Coordinate Descent
+                      </a>
+                    
+                  </div>
+                </div>
+              
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#plan">plan</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="plan" class="panel-collapse collapse">
+                    
+                      <a  href='/2015/05/21/research-plan.html' class="list-group-item pjaxlink">
+                        Weekly Plan
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
           </div>
         </div>
@@ -276,24 +368,17 @@
 
 <p>其中，f，g，h都是凸函数，g是光滑项，h是非光滑项。</p>
 
-<h3>Gradient Descent</h3>
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p><a href="http://www.codecogs.com/eqnedit.php?latex=x^&plus;=x-\alpha\nabla&space;f(x)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x^&plus;=x-\alpha\nabla&space;f(x)" title="x^+=x-\alpha\nabla f(x)" /></a>
+###Proximal Gradient
+<a href="http://www.codecogs.com/eqnedit.php?latex=x^&plus;=prox_{\alpha&space;h}(x-\alpha&space;\nabla&space;g(x))=&space;\arg\min_u&space;h(u)&plus;\frac{1}{2\alpha}||u-x&plus;\alpha&space;\nabla&space;g(x)||" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x^&plus;=prox_{\alpha&space;h}(x-\alpha&space;\nabla&space;g(x))=&space;\arg\min_u&space;h(u)&plus;\frac{1}{2\alpha}||u-x&plus;\alpha&space;\nabla&space;g(x)||" title="x^+=prox_{\alpha h}(x-\alpha \nabla g(x))= \arg\min_u h(u)+\frac{1}{2\alpha}||u-x+\alpha \nabla g(x)||" /></a>
+###Conjugate Gradient
+是介于最速下降法和牛顿法之间的一个方法，它仅需要利用一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hession并求逆的缺点。它是解决大型线性方程组最有用的方法之一，也是解决大型非线性最优化最有效的算法之一。</p>
 
-<p><a href="http://www.codecogs.com/eqnedit.php?latex=x^&plus;=x-\alpha\nabla&space;f(x)" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x^&plus;=x-\alpha\nabla&space;f(x)" title="x^+=x-\alpha\nabla f(x)" /></a></p>
-
-<h3>Proximal Gradient</h3>
-
-<p><a href="http://www.codecogs.com/eqnedit.php?latex=x^&plus;=prox_{\alpha&space;h}(x-\alpha&space;\nabla&space;g(x))=&space;\arg\min_u&space;h(u)&plus;\frac{1}{2\alpha}||u-x&plus;\alpha&space;\nabla&space;g(x)||" target="_blank"><img src="http://latex.codecogs.com/gif.latex?x^&plus;=prox_{\alpha&space;h}(x-\alpha&space;\nabla&space;g(x))=&space;\arg\min_u&space;h(u)&plus;\frac{1}{2\alpha}||u-x&plus;\alpha&space;\nabla&space;g(x)||" title="x^+=prox_{\alpha h}(x-\alpha \nabla g(x))= \arg\min_u h(u)+\frac{1}{2\alpha}||u-x+\alpha \nabla g(x)||" /></a></p>
-
-<h3>Conjugate Gradient</h3>
-
-<p>是介于最速下降法和牛顿法之间的一个方法，它仅需要利用一阶导数信息，但克服了最速下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hession并求逆的缺点。它是解决大型线性方程组最有用的方法之一，也是解决大型非线性最优化最有效的算法之一。</p>
-
-<h3>Newton</h3>
-
+<h3 id="newton">Newton</h3>
 <p>见<a href="http://painterlin.com/2015/03/23/Newton-QuasiNewton-Method.html">牛顿法与拟牛顿法（DFP BFGS LBFGS VLBFGS）</a></p>
 
-<h3>Quasi Newton</h3>
-
+<h3 id="quasi-newton">Quasi Newton</h3>
 <p>见<a href="http://painterlin.com/2015/03/23/Newton-QuasiNewton-Method.html">牛顿法与拟牛顿法（DFP BFGS LBFGS VLBFGS）</a></p>
 
     </div>
@@ -311,10 +396,6 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
           </div>
         </div>
@@ -338,7 +419,7 @@
 <script src="/public/js/base.js"></script>
 <script src="/public/js/jquery.scrollUp.js"></script>
 <script>
-    $('a[href="#读书"]').tab('show');
+    $('a[href="#read"]').tab('show');
 </script>
 
   <script>
