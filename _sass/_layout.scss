@@ -33,7 +33,7 @@
 }
 
 .site-nav {
-  float: inherit;
+  /*float: right;*/
   line-height: 56px;
   border-top: 1px solid $grey-color-light;
   border-bottom: 1px solid $grey-color-light;
@@ -58,7 +58,7 @@
     &:hover {
       color: $text-color;
       text-decoration: none;
-      font-weight: bold;
+      //font-weight: bold;
     }
   }
 
@@ -306,17 +306,18 @@ time{
 }
 
 
+
 /**
  * New style for quotation.
  */
 
 q:before {
-  content: '\"';
+  content: '『';
   color: #DD1144;
   font-weight:bold;
 }
 q:after {
-  content:'\"';
+  content:'』';
   color: #DD1144;
   font-weight:bold;
 }
