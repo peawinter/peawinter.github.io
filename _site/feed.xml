@@ -2,12 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apprantice</title>
-    <description></description>
+    <description>Hi, I&#39;m an operational researcher and statistician.
+</description>
     <link>/</link>
     <atom:link href="/zfeed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Jun 2015 17:00:38 -0400</pubDate>
-    <lastBuildDate>Thu, 04 Jun 2015 17:00:38 -0400</lastBuildDate>
+    <pubDate>Thu, 04 Jun 2015 23:40:58 -0400</pubDate>
+    <lastBuildDate>Thu, 04 Jun 2015 23:40:58 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Four Line Motto</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Learn from Everyone&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Follow No One&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Work Like Hell&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0400</pubDate>
+        <link>/life/2015/05/22/four-line-motto/</link>
+        <guid isPermaLink="true">/life/2015/05/22/four-line-motto/</guid>
+        
+        <category>lift</category>
+        
+        <category>motto</category>
+        
+        
+        <category>life</category>
+        
+      </item>
+    
+      <item>
+        <title>All I need is you</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
+        <link>/travel/2015/05/19/template/</link>
+        <guid isPermaLink="true">/travel/2015/05/19/template/</guid>
+        
+        <category>Travel</category>
+        
+        
+        <category>travel</category>
+        
+      </item>
     
       <item>
         <title>2.0 version</title>
@@ -62,6 +111,256 @@
         
         
         <category>news</category>
+        
+      </item>
+    
+      <item>
+        <title>Git Cheat Sheet</title>
+        <description>&lt;h3 id=&quot;configure-tooling&quot;&gt;Configure tooling&lt;/h3&gt;
+
+&lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global user.name &quot;[name]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Sets the name you want atached to your commit transactions&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global user.email &quot;[email address]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Sets the email you want atached to your commit transactions&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git config --global color.ui auto
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Enables helpful colorization of command line output&lt;/p&gt;
+
+&lt;h3 id=&quot;create-repositories&quot;&gt;Create repositories&lt;/h3&gt;
+&lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git init [project-name]
+&lt;/code&gt;
+Creates a new local repository with the specified name&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git clone [url]
+&lt;/code&gt;
+Downloads a project and its entire version history&lt;/p&gt;
+
+&lt;h3 id=&quot;make-changes&quot;&gt;Make changes&lt;/h3&gt;
+&lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git status
+&lt;/code&gt;
+Lists all new or modified files to be commited&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git add [file]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Snapshots the file in preparation for versioning&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git reset [file]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Unstages the file, but preserve its contents&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Shows file differences not yet staged&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff --staged
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Shows file differences between staging and the last file version&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git commit -m &quot;[descriptive message]&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Records file snapshots permanently in version history&lt;/p&gt;
+
+&lt;h3 id=&quot;group-changes&quot;&gt;Group changes&lt;/h3&gt;
+&lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lists all local branches in the current repository&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Creates a new branch&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git checkout [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Switches to the specified branch and updates the working directory&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git merge [branch]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Combines the specified branch’s history into the current branch&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git branch -d [branch-name]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Deletes the specified branch&lt;/p&gt;
+
+&lt;h3 id=&quot;refactor-filenames&quot;&gt;Refactor filenames&lt;/h3&gt;
+&lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git rm [file]
+&lt;/code&gt;
+Deletes the file from the working directory and stages the deletion&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git rm --cached [file]
+&lt;/code&gt;
+Removes the file from version control but preserves the file locally&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git mv [file-original] [file-renamed]
+&lt;/code&gt;
+Changes the file name and prepares it for commit&lt;/p&gt;
+
+&lt;h3 id=&quot;suppress-tracking&quot;&gt;Suppress tracking&lt;/h3&gt;
+&lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+ *.log
+ build/
+ temp-*
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns&lt;/p&gt;
+
+&lt;p&gt;```
+$ git ls-files –other –ignored –exclude-standard&lt;/p&gt;
+
+&lt;p&gt;```
+Lists all ignored files in this project&lt;/p&gt;
+
+&lt;h3 id=&quot;save-fragments&quot;&gt;Save fragments&lt;/h3&gt;
+&lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git stash
+&lt;/code&gt;
+Temporarily stores all modified tracked files&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git stash pop
+&lt;/code&gt;
+Restores the most recently stashed files&lt;/p&gt;
+
+&lt;p&gt;```
+$ git stash list&lt;/p&gt;
+
+&lt;p&gt;```
+Lists all stashed changesets&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git stash drop
+&lt;/code&gt;
+Discards the most recently stashed changeset&lt;/p&gt;
+
+&lt;h3 id=&quot;review-history&quot;&gt;Review history&lt;/h3&gt;
+&lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git log
+&lt;/code&gt;
+Lists version history for the current branch&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git log --follow [file]
+&lt;/code&gt;
+Lists version history for a file, including renames&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git diff [first-branch]...[second-branch]
+&lt;/code&gt;
+Shows content differences between two branches&lt;/p&gt;
+
+&lt;p&gt;```
+$ git show [commit]&lt;/p&gt;
+
+&lt;p&gt;```
+Outputs metadata and content changes of the specified commit&lt;/p&gt;
+
+&lt;h3 id=&quot;redo-commits&quot;&gt;Redo commits&lt;/h3&gt;
+&lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git reset [commit]
+&lt;/code&gt;
+Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git reset --hard [commit]
+&lt;/code&gt;
+Discards all history and changes back to the specified commit&lt;/p&gt;
+
+&lt;h3 id=&quot;synchronize-changes&quot;&gt;Synchronize changes&lt;/h3&gt;
+&lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git fetch [bookmark]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Downloads all history from the repository bookmark&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git merge [bookmark]/[branch]
+&lt;/code&gt;
+Combines bookmark’s branch into current local branch&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git push [alias] [branch]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Uploads all local branch commits to GitHub&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git pull
+&lt;/code&gt;
+Downloads bookmark history and incorporates changes&lt;/p&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
+        <link>/tips/2015/01/30/Git-Resources/</link>
+        <guid isPermaLink="true">/tips/2015/01/30/Git-Resources/</guid>
+        
+        <category>tips</category>
+        
+        <category>git</category>
+        
+        <category>cheatsheet</category>
+        
+        
+        <category>tips</category>
         
       </item>
     

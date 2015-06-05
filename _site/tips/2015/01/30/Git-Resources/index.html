@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width initial-scale=1">
+
+<meta property="og:title" content="Git Cheat Sheet">
+<title>Git Cheat Sheet</title>
+<meta property="og:description" content="Configure tooling">
+<meta property="og:url" content="/tips/2015/01/30/Git-Resources/">
+<meta property="og:site_name" content="Apprantice">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@">
+<meta name="twitter:title" content="Git Cheat Sheet">
+<meta name="twitter:description" content="Configure tooling">
+<meta name="twitter:url" content="/tips/2015/01/30/Git-Resources/">
+
+<meta name="keywords" content="">
+
+<link rel="icon" href="/images/avatar.png">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="/tips/2015/01/30/Git-Resources/">
+<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</head>
+
+
+
+
+<body>
+
+<div class="container">
+
+  <header class="site-header">
+
+  <div class="wrapper">
+
+    <h1 class="site-title"><a href="/">Apprantice</a> <font size="5">Learn the hard way</font> </h1> 
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        
+        <a class="page-link" href="/">Home</a>
+        
+        
+        
+        <a class="page-link" href="/about/">About</a>
+        
+        
+        
+        <a class="page-link" href="/archives/">Archives</a>
+        
+        
+        
+        <a class="page-link" href="/categories/">Categories</a>
+        
+        
+        
+        <a class="page-link" href="/tags/">Tags</a>
+        
+        
+        
+        <a class="page-link" href="/guestbook/">Guestbook</a>
+        
+        
+        
+        <a class="page-link" href="/feed.xml">Subscribe</a>
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+  
+
+  <div class="page-content">
+    <div class="wrapper">
+      <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 itemprop="name" class="post-title">Git Cheat Sheet</h1>
+    <meta itemprop="keywords" content="tips,git,cheatsheet" />
+    <p class="post-meta">
+    <!-- Posted in
+    
+    <a href="/categories/#tips">tips</a>&nbsp;
+    
+    
+    and tagged
+    
+    <a href="/tags/#tips" title="tips">tips </a>, 
+    
+    <a href="/tags/#git" title="git">git </a>, 
+    
+    <a href="/tags/#cheatsheet" title="cheatsheet">cheatsheet </a>
+    
+     -->
+    <time itemprop="datePublished" datetime="2015-01-30">
+    <!-- on  -->
+    Jan 30, 2015
+    </time>
+    </p>
+  </header>
+
+  <article class="post-content" itemprop="articleBody">
+    <h3 id="configure-tooling">Configure tooling</h3>
+
+<p>Configure user information for all local repositories</p>
+
+<p><code>
+$ git config --global user.name "[name]"
+</code></p>
+
+<p>Sets the name you want atached to your commit transactions</p>
+
+<p><code>
+$ git config --global user.email "[email address]"
+</code></p>
+
+<p>Sets the email you want atached to your commit transactions</p>
+
+<p><code>
+$ git config --global color.ui auto
+</code></p>
+
+<p>Enables helpful colorization of command line output</p>
+
+<h3 id="create-repositories">Create repositories</h3>
+<p>Start a new repository or obtain one from an existing URL</p>
+
+<p><code>
+$ git init [project-name]
+</code>
+Creates a new local repository with the specified name</p>
+
+<p><code>
+$ git clone [url]
+</code>
+Downloads a project and its entire version history</p>
+
+<h3 id="make-changes">Make changes</h3>
+<p>Review edits and craf a commit transaction</p>
+
+<p><code>
+$ git status
+</code>
+Lists all new or modified files to be commited</p>
+
+<p><code>
+$ git add [file]
+</code></p>
+
+<p>Snapshots the file in preparation for versioning</p>
+
+<p><code>
+$ git reset [file]
+</code></p>
+
+<p>Unstages the file, but preserve its contents</p>
+
+<p><code>
+$ git diff
+</code></p>
+
+<p>Shows file differences not yet staged</p>
+
+<p><code>
+$ git diff --staged
+</code></p>
+
+<p>Shows file differences between staging and the last file version</p>
+
+<p><code>
+$ git commit -m "[descriptive message]"
+</code></p>
+
+<p>Records file snapshots permanently in version history</p>
+
+<h3 id="group-changes">Group changes</h3>
+<p>Name a series of commits and combine completed efforts</p>
+
+<p><code>
+$ git branch
+</code></p>
+
+<p>Lists all local branches in the current repository</p>
+
+<p><code>
+$ git branch [branch-name]
+</code></p>
+
+<p>Creates a new branch</p>
+
+<p><code>
+$ git checkout [branch-name]
+</code></p>
+
+<p>Switches to the specified branch and updates the working directory</p>
+
+<p><code>
+$ git merge [branch]
+</code></p>
+
+<p>Combines the specified branch’s history into the current branch</p>
+
+<p><code>
+$ git branch -d [branch-name]
+</code></p>
+
+<p>Deletes the specified branch</p>
+
+<h3 id="refactor-filenames">Refactor filenames</h3>
+<p>Relocate and remove versioned files</p>
+
+<p><code>
+$ git rm [file]
+</code>
+Deletes the file from the working directory and stages the deletion</p>
+
+<p><code>
+$ git rm --cached [file]
+</code>
+Removes the file from version control but preserves the file locally</p>
+
+<p><code>
+$ git mv [file-original] [file-renamed]
+</code>
+Changes the file name and prepares it for commit</p>
+
+<h3 id="suppress-tracking">Suppress tracking</h3>
+<p>Exclude temporary files and paths</p>
+
+<p><code>
+ *.log
+ build/
+ temp-*
+</code></p>
+
+<p>A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</p>
+
+<p>```
+$ git ls-files –other –ignored –exclude-standard</p>
+
+<p>```
+Lists all ignored files in this project</p>
+
+<h3 id="save-fragments">Save fragments</h3>
+<p>Shelve and restore incomplete changes</p>
+
+<p><code>
+$ git stash
+</code>
+Temporarily stores all modified tracked files</p>
+
+<p><code>
+$ git stash pop
+</code>
+Restores the most recently stashed files</p>
+
+<p>```
+$ git stash list</p>
+
+<p>```
+Lists all stashed changesets</p>
+
+<p><code>
+$ git stash drop
+</code>
+Discards the most recently stashed changeset</p>
+
+<h3 id="review-history">Review history</h3>
+<p>Browse and inspect the evolution of project files</p>
+
+<p><code>
+$ git log
+</code>
+Lists version history for the current branch</p>
+
+<p><code>
+$ git log --follow [file]
+</code>
+Lists version history for a file, including renames</p>
+
+<p><code>
+$ git diff [first-branch]...[second-branch]
+</code>
+Shows content differences between two branches</p>
+
+<p>```
+$ git show [commit]</p>
+
+<p>```
+Outputs metadata and content changes of the specified commit</p>
+
+<h3 id="redo-commits">Redo commits</h3>
+<p>Erase mistakes and craft replacement history</p>
+
+<p><code>
+$ git reset [commit]
+</code>
+Undoes all commits after [commit], preserving changes locally</p>
+
+<p><code>
+$ git reset --hard [commit]
+</code>
+Discards all history and changes back to the specified commit</p>
+
+<h3 id="synchronize-changes">Synchronize changes</h3>
+<p>Register a repository bookmark and exchange version history</p>
+
+<p><code>
+$ git fetch [bookmark]
+</code></p>
+
+<p>Downloads all history from the repository bookmark</p>
+
+<p><code>
+$ git merge [bookmark]/[branch]
+</code>
+Combines bookmark’s branch into current local branch</p>
+
+<p><code>
+$ git push [alias] [branch]
+</code></p>
+
+<p>Uploads all local branch commits to GitHub</p>
+
+<p><code>
+$ git pull
+</code>
+Downloads bookmark history and incorporates changes</p>
+
+<h3 id="reference">Reference</h3>
+<ol>
+  <li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+  <li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
+</ol>
+
+  </article>
+  <hr />
+</div>
+
+
+<section class="pager">
+  <ul>
+    
+    <li class="previous"><a href="/articles/howto/2014/12/19/how-to-set-the-config-file/" title="How to set the config.yml file">&larr; Older</a></li>
+    
+    
+    <li class="next"><a href="/news/2015/03/31/2.0version/" title="2.0 version">Newer &rarr;</a></li>
+    
+  </ul>
+</section>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+
+  var disqus_developer = 1;
+
+var disqus_shortname ='peawinter';
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+  </div>
+  <section class="pager">
+  
+  
+</section>
+
+
+  
+
+  <footer class="site-footer">
+
+  <!-- <p>Copyright &copy; <a href="/">Apprantice</a></p>
+  <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  on
+  
+  <a href="https://github.com/">Github</a>
+  
+  | Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>   -->
+
+</footer>
+
+
+</div>
+
+</body>
+
+</html>
