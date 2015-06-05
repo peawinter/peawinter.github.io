@@ -108,7 +108,7 @@ a {
     color: #0f3344; }
   a:hover {
     color: #669900;
-    text-decoration: underline; }
+    text-decoration: none; }
 
 .post-content a {
   color: #2a7ae2;
