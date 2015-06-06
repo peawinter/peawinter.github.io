@@ -125,46 +125,31 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <ul id="markdown-toc">
-  <li><a href="#heading">Heading</a></li>
-  <li><a href="#body-text">Body text</a></li>
-  <li><a href="#blockquotes">Blockquotes</a></li>
-  <li><a href="#list-types">List Types</a>    <ul>
-      <li><a href="#ordered-lists">Ordered Lists</a></li>
-      <li><a href="#unordered-lists">Unordered Lists</a></li>
-    </ul>
-  </li>
-  <li><a href="#tables">Tables</a></li>
-  <li><a href="#code-snippets">Code Snippets</a>    <ul>
-      <li><a href="#highlight-with-line-number">highlight with line number.</a></li>
-    </ul>
-  </li>
-  <li><a href="#latex"><script type="math/tex">\LaTeX</script></a></li>
-  <li><a href="#q-tag">&lt;q&gt; tag</a></li>
+    <ul>
+<li>Table of Contents
+{:toc}</li>
 </ul>
 
 <p>This is a sample post.</p>
 
-<p>Below is just about everything you’ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.</p>
+<p>Below is just about everything you&#39;ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.</p>
 
-<h2 id="heading">Heading</h2>
-
-<pre><code># Heading 1
+<h2>Heading</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># Heading 1
 
 ## Heading 2
 
 ### Heading 3
 
 #### Heading 4
-</code></pre>
-
-<h2 id="body-text">Body text</h2>
+</code></pre></div>
+<h2>Body text</h2>
 
 <p><strong>This is strong</strong>.</p>
 
 <p>This is figure</p>
 
-<p><img src="https://i.imgur.com/Mdc4szJl.jpg" alt="Elaphurus davidianus" title="Père David's deer" /></p>
+<p><img src="https://i.imgur.com/Mdc4szJl.jpg" alt="Elaphurus davidianus" title="Père David&#39;s deer"></p>
 
 <p><em>This is emphasized</em>.</p>
 
@@ -176,92 +161,52 @@
 
 <p><del>HTML and CSS are our tools</del>. </p>
 
-<h2 id="blockquotes">Blockquotes</h2>
+<h2>Blockquotes</h2>
 
 <blockquote>
-  <p>Justification:
+<p>Justification:
 This species is listed as Extinct in the Wild, as all populations are still under captive management. The captive population in China has increased in recent years, and the possibility remains that free-ranging populations can be established some time in the near future. When that happens, its Red List status will need to be reassessed. </p>
+
+<p>I follow up the quest. Despite of day and night and death and hell.
+<center> -- Idylls of the King, Tennyson </center></p>
 </blockquote>
 
-<blockquote>
-  <p>I follow up the quest. Despite of day and night and death and hell.</p>
-  <center> -- Idylls of the King, Tennyson </center>
-</blockquote>
+<h2>List Types</h2>
 
-<h2 id="list-types">List Types</h2>
-
-<h3 id="ordered-lists">Ordered Lists</h3>
+<h3>Ordered Lists</h3>
 
 <ol>
-  <li>Item one
-    <ol>
-      <li>sub item one</li>
-      <li>sub item two</li>
-      <li>sub item three</li>
-    </ol>
-  </li>
-  <li>Item two</li>
+<li>Item one
+
+<ol>
+<li>sub item one</li>
+<li>sub item two</li>
+<li>sub item three</li>
+</ol></li>
+<li>Item two</li>
 </ol>
 
-<h3 id="unordered-lists">Unordered Lists</h3>
+<h3>Unordered Lists</h3>
 
 <ul>
-  <li>Item one</li>
-  <li>Item two</li>
-  <li>Item three</li>
+<li>Item one</li>
+<li>Item two</li>
+<li>Item three</li>
 </ul>
 
-<h2 id="tables">Tables</h2>
+<h2>Tables</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Header1</th>
-      <th style="text-align: center">Header2</th>
-      <th style="text-align: right">Header3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">cell1</td>
-      <td style="text-align: center">cell2</td>
-      <td style="text-align: right">cell3</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">cell4</td>
-      <td style="text-align: center">cell5</td>
-      <td style="text-align: right">cell6</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">cell7</td>
-      <td style="text-align: center">cell8</td>
-      <td style="text-align: right">cell9</td>
-    </tr>
-  </tbody>
-</table>
+<p>| Header1 | Header2 | Header3 |
+|:--------|:-------:|--------:|
+| cell1   | cell2   | cell3   |
+| cell4   | cell5   | cell6   |
+| cell7   | cell8   | cell9   |</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Kingdom</th>
-      <th style="text-align: center">Phylum</th>
-      <th style="text-align: center">Class</th>
-      <th style="text-align: center">Order</th>
-      <th style="text-align: center">Family</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">ANIMALIA</td>
-      <td style="text-align: center">CHORDATA</td>
-      <td style="text-align: center">MAMMALIA</td>
-      <td style="text-align: center">CETARTIODACTYLA</td>
-      <td style="text-align: center">CERVIDAE</td>
-    </tr>
-  </tbody>
-</table>
+<p>| Kingdom | Phylum  | Class | Order | Family |
+|:------:|:------:|:------:|:------:|:------:| 
+|ANIMALIA|CHORDATA|MAMMALIA|CETARTIODACTYLA|CERVIDAE|</p>
 
-<h2 id="code-snippets">Code Snippets</h2>
+<h2>Code Snippets</h2>
 
 <p>Syntax highlighting via Pygments</p>
 
@@ -271,19 +216,19 @@ This species is listed as Extinct in the Wild, as all populations are still unde
   <span class="k">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 
-<h4 id="highlight-with-line-number">highlight with line number.</h4>
+<h4>highlight with line number.</h4>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="k">def</span> <span class="nf">foo</span>
 <span class="lineno">2</span>   <span class="nb">puts</span> <span class="s1">&#39;foo&#39;</span>
 <span class="lineno">3</span> <span class="k">end</span></code></pre></div>
 
-<h2 id="latex"><script type="math/tex">\LaTeX</script></h2>
+<h2>$$\LaTeX$$</h2>
 
 <p>you can use latex with <q>double $$ </q></p>
 
-<script type="math/tex; mode=display">e^{i\pi}+1=0</script>
+<p>$$e^{i\pi}+1=0$$</p>
 
-<h2 id="q-tag">&lt;q&gt; tag</h2>
+<h2>&lt;q&gt; tag</h2>
 
 <p>here is a &lt;q&gt; q tag &lt;/q&gt;</p>
 

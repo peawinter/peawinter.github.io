@@ -129,237 +129,158 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <h3 id="configure-tooling">Configure tooling</h3>
+    <h3>Configure tooling</h3>
 
 <p>Configure user information for all local repositories</p>
-
-<p><code>
-$ git config --global user.name "[name]"
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.name &quot;[name]&quot;
+</code></pre></div>
 <p>Sets the name you want atached to your commit transactions</p>
-
-<p><code>
-$ git config --global user.email "[email address]"
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.email &quot;[email address]&quot;
+</code></pre></div>
 <p>Sets the email you want atached to your commit transactions</p>
-
-<p><code>
-$ git config --global color.ui auto
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global color.ui auto
+</code></pre></div>
 <p>Enables helpful colorization of command line output</p>
 
-<h3 id="create-repositories">Create repositories</h3>
+<h3>Create repositories</h3>
+
 <p>Start a new repository or obtain one from an existing URL</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git init [project-name]
+</code></pre></div>
+<p>Creates a new local repository with the specified name</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone [url]
+</code></pre></div>
+<p>Downloads a project and its entire version history</p>
 
-<p><code>
-$ git init [project-name]
-</code>
-Creates a new local repository with the specified name</p>
+<h3>Make changes</h3>
 
-<p><code>
-$ git clone [url]
-</code>
-Downloads a project and its entire version history</p>
-
-<h3 id="make-changes">Make changes</h3>
 <p>Review edits and craf a commit transaction</p>
-
-<p><code>
-$ git status
-</code>
-Lists all new or modified files to be commited</p>
-
-<p><code>
-$ git add [file]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git status
+</code></pre></div>
+<p>Lists all new or modified files to be commited</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git add [file]
+</code></pre></div>
 <p>Snapshots the file in preparation for versioning</p>
-
-<p><code>
-$ git reset [file]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [file]
+</code></pre></div>
 <p>Unstages the file, but preserve its contents</p>
-
-<p><code>
-$ git diff
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff
+</code></pre></div>
 <p>Shows file differences not yet staged</p>
-
-<p><code>
-$ git diff --staged
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff --staged
+</code></pre></div>
 <p>Shows file differences between staging and the last file version</p>
-
-<p><code>
-$ git commit -m "[descriptive message]"
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git commit -m &quot;[descriptive message]&quot;
+</code></pre></div>
 <p>Records file snapshots permanently in version history</p>
 
-<h3 id="group-changes">Group changes</h3>
+<h3>Group changes</h3>
+
 <p>Name a series of commits and combine completed efforts</p>
-
-<p><code>
-$ git branch
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch
+</code></pre></div>
 <p>Lists all local branches in the current repository</p>
-
-<p><code>
-$ git branch [branch-name]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch [branch-name]
+</code></pre></div>
 <p>Creates a new branch</p>
-
-<p><code>
-$ git checkout [branch-name]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git checkout [branch-name]
+</code></pre></div>
 <p>Switches to the specified branch and updates the working directory</p>
-
-<p><code>
-$ git merge [branch]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [branch]
+</code></pre></div>
 <p>Combines the specified branch’s history into the current branch</p>
-
-<p><code>
-$ git branch -d [branch-name]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch -d [branch-name]
+</code></pre></div>
 <p>Deletes the specified branch</p>
 
-<h3 id="refactor-filenames">Refactor filenames</h3>
+<h3>Refactor filenames</h3>
+
 <p>Relocate and remove versioned files</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm [file]
+</code></pre></div>
+<p>Deletes the file from the working directory and stages the deletion</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm --cached [file]
+</code></pre></div>
+<p>Removes the file from version control but preserves the file locally</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git mv [file-original] [file-renamed]
+</code></pre></div>
+<p>Changes the file name and prepares it for commit</p>
 
-<p><code>
-$ git rm [file]
-</code>
-Deletes the file from the working directory and stages the deletion</p>
+<h3>Suppress tracking</h3>
 
-<p><code>
-$ git rm --cached [file]
-</code>
-Removes the file from version control but preserves the file locally</p>
-
-<p><code>
-$ git mv [file-original] [file-renamed]
-</code>
-Changes the file name and prepares it for commit</p>
-
-<h3 id="suppress-tracking">Suppress tracking</h3>
 <p>Exclude temporary files and paths</p>
-
-<p><code>
- *.log
+<div class="highlight"><pre><code class="language-text" data-lang="text"> *.log
  build/
  temp-*
-</code></p>
-
+</code></pre></div>
 <p>A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git ls-files --other --ignored --exclude-standard
+</code></pre></div>
+<p>Lists all ignored files in this project</p>
 
-<p>```
-$ git ls-files –other –ignored –exclude-standard</p>
+<h3>Save fragments</h3>
 
-<p>```
-Lists all ignored files in this project</p>
-
-<h3 id="save-fragments">Save fragments</h3>
 <p>Shelve and restore incomplete changes</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash
+</code></pre></div>
+<p>Temporarily stores all modified tracked files</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash pop
+</code></pre></div>
+<p>Restores the most recently stashed files</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash list
+</code></pre></div>
+<p>Lists all stashed changesets</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash drop
+</code></pre></div>
+<p>Discards the most recently stashed changeset</p>
 
-<p><code>
-$ git stash
-</code>
-Temporarily stores all modified tracked files</p>
+<h3>Review history</h3>
 
-<p><code>
-$ git stash pop
-</code>
-Restores the most recently stashed files</p>
-
-<p>```
-$ git stash list</p>
-
-<p>```
-Lists all stashed changesets</p>
-
-<p><code>
-$ git stash drop
-</code>
-Discards the most recently stashed changeset</p>
-
-<h3 id="review-history">Review history</h3>
 <p>Browse and inspect the evolution of project files</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log
+</code></pre></div>
+<p>Lists version history for the current branch</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log --follow [file]
+</code></pre></div>
+<p>Lists version history for a file, including renames</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff [first-branch]...[second-branch]
+</code></pre></div>
+<p>Shows content differences between two branches</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git show [commit]
+</code></pre></div>
+<p>Outputs metadata and content changes of the specified commit</p>
 
-<p><code>
-$ git log
-</code>
-Lists version history for the current branch</p>
+<h3>Redo commits</h3>
 
-<p><code>
-$ git log --follow [file]
-</code>
-Lists version history for a file, including renames</p>
-
-<p><code>
-$ git diff [first-branch]...[second-branch]
-</code>
-Shows content differences between two branches</p>
-
-<p>```
-$ git show [commit]</p>
-
-<p>```
-Outputs metadata and content changes of the specified commit</p>
-
-<h3 id="redo-commits">Redo commits</h3>
 <p>Erase mistakes and craft replacement history</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [commit]
+</code></pre></div>
+<p>Undoes all commits after [commit], preserving changes locally</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset --hard [commit]
+</code></pre></div>
+<p>Discards all history and changes back to the specified commit</p>
 
-<p><code>
-$ git reset [commit]
-</code>
-Undoes all commits after [commit], preserving changes locally</p>
+<h3>Synchronize changes</h3>
 
-<p><code>
-$ git reset --hard [commit]
-</code>
-Discards all history and changes back to the specified commit</p>
-
-<h3 id="synchronize-changes">Synchronize changes</h3>
 <p>Register a repository bookmark and exchange version history</p>
-
-<p><code>
-$ git fetch [bookmark]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git fetch [bookmark]
+</code></pre></div>
 <p>Downloads all history from the repository bookmark</p>
-
-<p><code>
-$ git merge [bookmark]/[branch]
-</code>
-Combines bookmark’s branch into current local branch</p>
-
-<p><code>
-$ git push [alias] [branch]
-</code></p>
-
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [bookmark]/[branch]
+</code></pre></div>
+<p>Combines bookmark’s branch into current local branch</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git push [alias] [branch]
+</code></pre></div>
 <p>Uploads all local branch commits to GitHub</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git pull
+</code></pre></div>
+<p>Downloads bookmark history and incorporates changes</p>
 
-<p><code>
-$ git pull
-</code>
-Downloads bookmark history and incorporates changes</p>
+<h3>Reference</h3>
 
-<h3 id="reference">Reference</h3>
 <ol>
-  <li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
-  <li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
+<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
 </ol>
 
   </article>

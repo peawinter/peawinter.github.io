@@ -127,11 +127,11 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <h2 id="the-structure-of-freshman21-theme">1.The structure of freshman21 theme</h2>
+    <h2>1.The structure of freshman21 theme</h2>
 
 <p>You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.</p>
 
-<p>All sidebar boxes html files are in the <code>_include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code>_includes</code> directory. </p>
+<p>All sidebar boxes html files are in the <code><em>include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code></em>includes</code> directory. </p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">.
 <span class="p">|</span>-- a_home.md                 <span class="c"># home page link at navigation bar</span>
@@ -181,7 +181,7 @@
     <span class="p">|</span>-- _syntax-highlighting-native.scss
     <span class="sb">`</span>-- _syntax-highlighting.scss</code></pre></div>
 
-<h2 id="structure-with-named-folders-containing-index-html-files">2.Structure with Named folders containing index HTML files</h2>
+<h2>2.Structure with Named folders containing index HTML files</h2>
 
 <p>There is nothing wrong with the above method, however some people like to keep their URLs free from things like filename extensions. To achieve clean URLs for pages using Jekyll, you simply need to create a folder for each top-level page you want, and then place an index.html file in each page’s folder. You can find the more detail at <a href="http://jekyllrb.com/docs/pages/" title="Creating pages">Jekyll documentation</a>. Here is my own blog structure with page-folders to contain each pages.</p>
 
@@ -238,21 +238,21 @@
 └── tags
     └── index.md</code></pre></div>
 
-<h2 id="how-to-change-the-highlight-style">3. How to change the highlight style?</h2>
+<h2>3. How to change the highlight style?</h2>
 
-<p>This theme’s default highlighter is pygments.</p>
+<p>This theme&#39;s default highlighter is pygments.</p>
 
 <p>To change the highlight style, you should install <strong>pygments</strong>, and generate the css style which you wanted with code </p>
 
-<p><code>pygmentize -S default -f html &gt; freshman/_sass/_syntax-highlighting.scss</code></p>
+<p><code>pygmentize -S default -f html &gt; freshman/<em>sass/</em>syntax-highlighting.scss</code></p>
 
 <p>Please make sure, add <code>.highlight {</code> at the head  and <code>}</code> at the end of file <q>_syntax-highlighting.scss</q>.</p>
 
 <p>See more,</p>
 
 <ol>
-  <li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
-  <li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
+<li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
+<li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
 </ol>
 
   </article>

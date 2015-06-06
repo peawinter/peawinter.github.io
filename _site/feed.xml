@@ -6,26 +6,234 @@
 </description>
     <link>/</link>
     <atom:link href="/zfeed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Jun 2015 23:40:58 -0400</pubDate>
-    <lastBuildDate>Thu, 04 Jun 2015 23:40:58 -0400</lastBuildDate>
+    <pubDate>Fri, 05 Jun 2015 22:26:21 -0400</pubDate>
+    <lastBuildDate>Fri, 05 Jun 2015 22:26:21 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Running R on cluster</title>
+        <description>&lt;p&gt;I&amp;#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckly, I have the &amp;#39;Radon&amp;#39; and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.&lt;/p&gt;
+
+&lt;p&gt;I mainly follow the &lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;instruction&lt;/a&gt; by Doug.&lt;/p&gt;
+
+&lt;h3&gt;Load R&lt;/h3&gt;
+
+&lt;p&gt;Radon doesn&amp;#39;t come up with R for granted. To load R, we need to type &lt;code&gt;model load r&lt;/code&gt;. The &lt;code&gt;module&lt;/code&gt; command is used to “load” software
+packages for use by the current login session.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R --version
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; -bash: r: &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;not found
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;module load r
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R --version
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; R version 3.1.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2014-04-10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; -- &lt;span class=&quot;s2&quot;&gt;&amp;quot;Spring Dance&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;C&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2014&lt;/span&gt; The R Foundation &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; Statistical Computing
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; Platform: x86_64-unknown-linux-gnu &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;64-bit&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; R is free software and comes with ABSOLUTELY NO WARRANTY.
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt; You are welcome to redistribute it under the terms of the
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; GNU General Public License versions &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; or 3.
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; For more information about these matters see
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; http://www.gnu.org/licenses/.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.&lt;/p&gt;
+
+&lt;h3&gt;BATCH mode&lt;/h3&gt;
+
+&lt;p&gt;R script vs R batch&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;R CMD BATCH&lt;/code&gt; (see &lt;code&gt;help(BATCH)&lt;/code&gt;) has default options &lt;code&gt;--restore --save --no-readline&lt;/code&gt;, while &lt;code&gt;Rscript&lt;/code&gt; (see &lt;code&gt;help(Rscript)&lt;/code&gt;) has &lt;code&gt;--slave --no-restore&lt;/code&gt;. Furthermore, the output of &lt;code&gt;R CMD BATCH&lt;/code&gt; always goes to a file, taken from the command line if given, or else built from the input filename by appending &amp;quot;out&amp;quot;, whereas the output of &lt;code&gt;Rscript&lt;/code&gt; goes to stdout. Finally, &lt;code&gt;Rscript&lt;/code&gt; accepts user level command-line arguments, after the script name &amp;quot;as usual&amp;quot; (&lt;code&gt;Rscript foo.R 1 2&lt;/code&gt;), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by &lt;code&gt;--args&lt;/code&gt; (&lt;code&gt;R CMD BATCH &amp;quot;--args 1 2&amp;quot; foo.R&lt;/code&gt;). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). &lt;a href=&quot;http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; executes quietly in the background and generates output to &amp;#39;stdout&amp;#39;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; R CMD BATCH t.R &amp;gt; t.out
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; Rscript t.R &amp;gt; t.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run in background&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; nohup Rscript t.R &amp;gt; t.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run in background, even if logout&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Although we can launch several jobs simultaneously (by concatenating with &amp;#39;&amp;amp;&amp;#39;), but invoking manually doesn&amp;#39;t scale well. To run tasks seriesly, we can create a file like &amp;quot;run.sh&amp;quot; that contains several &amp;#39;Rscript&amp;#39; invocations. It will run the jobs one at a time.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# run.sh&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;003&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;004&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;005&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;006&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;007&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A life-saving tips for creating the “run.sh” script using R&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;sprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.%03d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.001&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.002&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.003&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.004&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.005&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.006&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.007&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.008&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;sprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.%03d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;run.sh&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then we can run &amp;quot;run.sh&amp;quot; in command line.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh run.sh &lt;span class=&quot;c&quot;&gt;# run every job in run.sh one at a time&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup sh run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh one at a time, and keep running even if logout&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup xargs -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; -n1 -P4 sh -c &amp;lt; run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Submit jobs through qsub&lt;/h3&gt;
+
+&lt;p&gt;On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through &lt;code&gt;qsub&lt;/code&gt;. A typical job description will look like this one.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Give your job a name&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -N ovs&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## Needed if you want to use environmental variables&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -V&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Specify running time and memory&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -l walltime=00:15:00,vmem=4GB&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Specify number of nodes and cores&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -l nodes=1:ppn=8&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Specify output and error (no need to include these two lines)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -o &amp;#39;qsub.out&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -e &amp;#39;qsub.err&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# set the temporary file location&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TMPDIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$WORKDIR&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# go to the job submission directory; you can change this to your project directory&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_O_WORKDIR&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# load the R module; change the version if needed&lt;/span&gt;
+module load r
+
+
+&lt;span class=&quot;c&quot;&gt;## Export the job number. This is unique to a job and can be used to set the seed&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## and as an identifier for the output file&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;job_number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_JOBID&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F. &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# run R&lt;/span&gt;
+Rscript --vanilla foo.r &amp;gt; foo.Rout
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then the file is ready to submit.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qsub foo.pbs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Other useful command includes&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qstat        &lt;span class=&quot;c&quot;&gt;# See list of jobs in the queue&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qstat –u usr &lt;span class=&quot;c&quot;&gt;# See list of jobs in the queue submitted by usr&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qdel JOBID   &lt;span class=&quot;c&quot;&gt;# delete a previously submitted job from the queue&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that &lt;code&gt;#!/bin/bash&lt;/code&gt; should be put in the first line.&lt;/p&gt;
+
+&lt;p&gt;Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh -l&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -l nodes=1:ppn=8&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#PBS -l walltime=00:30:00&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_O_WORKDIR&lt;/span&gt;
+module add r
+Rscript t3.R &amp;gt;out1 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out2 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out3 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out4 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out5 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out6 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out7 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Pass arguments&lt;/h3&gt;
+
+&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from &lt;a href=&quot;http://www.stat.purdue.edu/%7Ebhadra/&quot;&gt;Dr. Anindya Bhadra&lt;/a&gt;.)&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;## HOWTO: chmod ugo+rx cluster; ./cluster&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Make sure you are using the bash shell&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Grid of starting values for parameters&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;19&lt;/span&gt; 20&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt; 150&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## To be read in inside of R as environmental variables&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LENA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LENB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LENL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;## Submit jobs via qsub with each starting value of &amp;quot;a&amp;quot; exported to the environment.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## Sleep 1 second between submitting two jobs&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; k in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENL&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENA&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; j in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENB&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$k&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+            qsub -V NumExp.pbs
+            sleep 1
+        &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Download packages&lt;/h3&gt;
+
+&lt;p&gt;An annoying bug is that R cannot import and load packages properly.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; Calls: install.packages -&amp;gt; grep -&amp;gt; contrib.url
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; In addition: Warning message:
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; In library&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;package, lib.loc &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; lib.loc, character.only &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; TRUE, logical.return &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; TRUE,  :
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt;   there is no package called ‘***’
+&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt; Execution halted&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A remedy is found on &lt;a href=&quot;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&quot;&gt;stackoverflow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;For example, if you want to use RStudio&amp;#39;s package repository, set repos=&amp;quot;http://cran.rstudio.com/&amp;quot; inside the install.packages call.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://cran.rstudio.com/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Reference&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;http://www.stat.purdue.edu/~dgc/cluster.pdf&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html&quot;&gt;http://biostat.jhsph.edu/~hjaffee/R_tasks.html&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&quot;&gt;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&quot;&gt;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/05/run-r-on-cluster/</link>
+        <guid isPermaLink="true">/tips/2015/06/05/run-r-on-cluster/</guid>
+        
+        <category>R</category>
+        
+        <category>Linux</category>
+        
+        <category>PBS</category>
+        
+        <category>Terminal</category>
+        
+        <category>cluster</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
     
       <item>
         <title>Four Line Motto</title>
         <description>&lt;blockquote&gt;
-  &lt;p&gt;Learn from Everyone&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Learn from Everyone&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Follow No One&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Follow No One&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Work Like Hell&lt;/p&gt;
+&lt;p&gt;Work Like Hell&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
@@ -45,7 +253,7 @@
     
       <item>
         <title>All I need is you</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
         <link>/travel/2015/05/19/template/</link>
@@ -65,20 +273,20 @@
 &lt;p&gt;&lt;strong&gt;gh-pages branch new features&lt;/strong&gt; :&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Google  search&lt;/li&gt;
-  &lt;li&gt;Google analytics&lt;/li&gt;
-  &lt;li&gt;Read more mode&lt;/li&gt;
-  &lt;li&gt;Open Graph META Tags&lt;/li&gt;
-  &lt;li&gt;Microdata(schema.org)&lt;/li&gt;
-  &lt;li&gt;back to top button&lt;/li&gt;
-  &lt;li&gt;font awesome icon&lt;/li&gt;
+&lt;li&gt;Google  search&lt;/li&gt;
+&lt;li&gt;Google analytics&lt;/li&gt;
+&lt;li&gt;Read more mode&lt;/li&gt;
+&lt;li&gt;Open Graph META Tags&lt;/li&gt;
+&lt;li&gt;Microdata(schema.org)&lt;/li&gt;
+&lt;li&gt;back to top button&lt;/li&gt;
+&lt;li&gt;font awesome icon&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;master branch new features&lt;/strong&gt; :&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Open Graph META Tags  &lt;/li&gt;
-  &lt;li&gt;Microdata(schema.org)&lt;/li&gt;
+&lt;li&gt;Open Graph META Tags&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Microdata(schema.org)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;The main difference between master and gh-pages: only one Javascript (Mathjax) be included in master branch. &lt;/p&gt;
@@ -87,7 +295,7 @@
 
 &lt;p&gt;Clone master branch: &lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt; git clone https://github.com/yulijia/freshman21.git -b master --single-branch&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone https://github.com/yulijia/freshman21.git -b master --single-branch&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Clone gh-pages branch: &lt;/p&gt;
 
@@ -116,237 +324,158 @@
     
       <item>
         <title>Git Cheat Sheet</title>
-        <description>&lt;h3 id=&quot;configure-tooling&quot;&gt;Configure tooling&lt;/h3&gt;
+        <description>&lt;h3&gt;Configure tooling&lt;/h3&gt;
 
 &lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git config --global user.name &quot;[name]&quot;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.name &amp;quot;[name]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sets the name you want atached to your commit transactions&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git config --global user.email &quot;[email address]&quot;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.email &amp;quot;[email address]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sets the email you want atached to your commit transactions&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git config --global color.ui auto
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global color.ui auto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Enables helpful colorization of command line output&lt;/p&gt;
 
-&lt;h3 id=&quot;create-repositories&quot;&gt;Create repositories&lt;/h3&gt;
+&lt;h3&gt;Create repositories&lt;/h3&gt;
+
 &lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git init [project-name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Creates a new local repository with the specified name&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone [url]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Downloads a project and its entire version history&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git init [project-name]
-&lt;/code&gt;
-Creates a new local repository with the specified name&lt;/p&gt;
+&lt;h3&gt;Make changes&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git clone [url]
-&lt;/code&gt;
-Downloads a project and its entire version history&lt;/p&gt;
-
-&lt;h3 id=&quot;make-changes&quot;&gt;Make changes&lt;/h3&gt;
 &lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git status
-&lt;/code&gt;
-Lists all new or modified files to be commited&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git add [file]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lists all new or modified files to be commited&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git add [file]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Snapshots the file in preparation for versioning&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git reset [file]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [file]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Unstages the file, but preserve its contents&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git diff
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Shows file differences not yet staged&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git diff --staged
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff --staged
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Shows file differences between staging and the last file version&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git commit -m &quot;[descriptive message]&quot;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git commit -m &amp;quot;[descriptive message]&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Records file snapshots permanently in version history&lt;/p&gt;
 
-&lt;h3 id=&quot;group-changes&quot;&gt;Group changes&lt;/h3&gt;
+&lt;h3&gt;Group changes&lt;/h3&gt;
+
 &lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git branch
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lists all local branches in the current repository&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git branch [branch-name]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch [branch-name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Creates a new branch&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git checkout [branch-name]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git checkout [branch-name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Switches to the specified branch and updates the working directory&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git merge [branch]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [branch]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Combines the specified branch’s history into the current branch&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git branch -d [branch-name]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch -d [branch-name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Deletes the specified branch&lt;/p&gt;
 
-&lt;h3 id=&quot;refactor-filenames&quot;&gt;Refactor filenames&lt;/h3&gt;
+&lt;h3&gt;Refactor filenames&lt;/h3&gt;
+
 &lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm [file]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Deletes the file from the working directory and stages the deletion&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm --cached [file]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Removes the file from version control but preserves the file locally&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git mv [file-original] [file-renamed]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Changes the file name and prepares it for commit&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git rm [file]
-&lt;/code&gt;
-Deletes the file from the working directory and stages the deletion&lt;/p&gt;
+&lt;h3&gt;Suppress tracking&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git rm --cached [file]
-&lt;/code&gt;
-Removes the file from version control but preserves the file locally&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git mv [file-original] [file-renamed]
-&lt;/code&gt;
-Changes the file name and prepares it for commit&lt;/p&gt;
-
-&lt;h3 id=&quot;suppress-tracking&quot;&gt;Suppress tracking&lt;/h3&gt;
 &lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
- *.log
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; *.log
  build/
  temp-*
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git ls-files --other --ignored --exclude-standard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lists all ignored files in this project&lt;/p&gt;
 
-&lt;p&gt;```
-$ git ls-files –other –ignored –exclude-standard&lt;/p&gt;
+&lt;h3&gt;Save fragments&lt;/h3&gt;
 
-&lt;p&gt;```
-Lists all ignored files in this project&lt;/p&gt;
-
-&lt;h3 id=&quot;save-fragments&quot;&gt;Save fragments&lt;/h3&gt;
 &lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Temporarily stores all modified tracked files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash pop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restores the most recently stashed files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lists all stashed changesets&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash drop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Discards the most recently stashed changeset&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git stash
-&lt;/code&gt;
-Temporarily stores all modified tracked files&lt;/p&gt;
+&lt;h3&gt;Review history&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git stash pop
-&lt;/code&gt;
-Restores the most recently stashed files&lt;/p&gt;
-
-&lt;p&gt;```
-$ git stash list&lt;/p&gt;
-
-&lt;p&gt;```
-Lists all stashed changesets&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git stash drop
-&lt;/code&gt;
-Discards the most recently stashed changeset&lt;/p&gt;
-
-&lt;h3 id=&quot;review-history&quot;&gt;Review history&lt;/h3&gt;
 &lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lists version history for the current branch&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log --follow [file]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lists version history for a file, including renames&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff [first-branch]...[second-branch]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Shows content differences between two branches&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git show [commit]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Outputs metadata and content changes of the specified commit&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git log
-&lt;/code&gt;
-Lists version history for the current branch&lt;/p&gt;
+&lt;h3&gt;Redo commits&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git log --follow [file]
-&lt;/code&gt;
-Lists version history for a file, including renames&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git diff [first-branch]...[second-branch]
-&lt;/code&gt;
-Shows content differences between two branches&lt;/p&gt;
-
-&lt;p&gt;```
-$ git show [commit]&lt;/p&gt;
-
-&lt;p&gt;```
-Outputs metadata and content changes of the specified commit&lt;/p&gt;
-
-&lt;h3 id=&quot;redo-commits&quot;&gt;Redo commits&lt;/h3&gt;
 &lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [commit]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset --hard [commit]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Discards all history and changes back to the specified commit&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git reset [commit]
-&lt;/code&gt;
-Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
+&lt;h3&gt;Synchronize changes&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git reset --hard [commit]
-&lt;/code&gt;
-Discards all history and changes back to the specified commit&lt;/p&gt;
-
-&lt;h3 id=&quot;synchronize-changes&quot;&gt;Synchronize changes&lt;/h3&gt;
 &lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git fetch [bookmark]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git fetch [bookmark]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Downloads all history from the repository bookmark&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git merge [bookmark]/[branch]
-&lt;/code&gt;
-Combines bookmark’s branch into current local branch&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-$ git push [alias] [branch]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [bookmark]/[branch]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Combines bookmark’s branch into current local branch&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git push [alias] [branch]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Uploads all local branch commits to GitHub&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git pull
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Downloads bookmark history and incorporates changes&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ git pull
-&lt;/code&gt;
-Downloads bookmark history and incorporates changes&lt;/p&gt;
+&lt;h3&gt;Reference&lt;/h3&gt;
 
-&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
@@ -380,7 +509,7 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
 &lt;span class=&quot;l-Scalar-Plain&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the subpath of your site, e.g. /blog&lt;/span&gt;
 &lt;span class=&quot;l-Scalar-Plain&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;http://yulijia.net/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the base hostname &amp;amp; protocol for your site&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can &lt;q&gt;Hide&lt;/q&gt; in two ways &lt;sup&gt;&lt;a href=&quot;#[1]&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can &lt;q&gt;Hide&lt;/q&gt; in two ways &lt;sup&gt;&lt;a href=&quot;#%5B1%5D&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#your twitter handle  &lt;/span&gt;
 &lt;span class=&quot;l-Scalar-Plain&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#your github account&lt;/span&gt;
@@ -411,9 +540,9 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
 &lt;span class=&quot;l-Scalar-Plain&quot;&gt;highlighter&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;pygments&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# highlight&lt;/span&gt;
 &lt;span class=&quot;l-Scalar-Plain&quot;&gt;paginate&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# how many post can seen in the main page&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;=====&lt;/p&gt;
+&lt;h1&gt;&lt;/h1&gt;
 
-&lt;ul style=&quot;list-style-type:none;&quot;&gt; 
+&lt;ul style=&#39;list-style-type:none;&#39;&gt; 
 &lt;li id=&quot;[1]&quot;&gt; [1], you can set those info at &lt;strong&gt;Part3&lt;/strong&gt; or just delete the &lt;q&gt;aboutme.html&lt;/q&gt; at &lt;q&gt;sidebar.html&lt;/q&gt; in &lt;code&gt;_include&lt;/code&gt; folder. &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -426,7 +555,7 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
    { % include Blogroll.html % }
    { % include Archives.html % }
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+ 
 </description>
         <pubDate>Fri, 19 Dec 2014 00:00:00 -0500</pubDate>
         <link>/articles/howto/2014/12/19/how-to-set-the-config-file/</link>
@@ -443,11 +572,11 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
     
       <item>
         <title>Theme structure</title>
-        <description>&lt;h2 id=&quot;the-structure-of-freshman21-theme&quot;&gt;1.The structure of freshman21 theme&lt;/h2&gt;
+        <description>&lt;h2&gt;1.The structure of freshman21 theme&lt;/h2&gt;
 
 &lt;p&gt;You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.&lt;/p&gt;
 
-&lt;p&gt;All sidebar boxes html files are in the &lt;code&gt;_include&lt;/code&gt; directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the &lt;q&gt;sidebar.html&lt;/q&gt; in the &lt;code&gt;_includes&lt;/code&gt; directory. &lt;/p&gt;
+&lt;p&gt;All sidebar boxes html files are in the &lt;code&gt;&lt;em&gt;include&lt;/code&gt; directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the &lt;q&gt;sidebar.html&lt;/q&gt; in the &lt;code&gt;&lt;/em&gt;includes&lt;/code&gt; directory. &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- a_home.md                 &lt;span class=&quot;c&quot;&gt;# home page link at navigation bar&lt;/span&gt;
@@ -497,7 +626,7 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
     &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _syntax-highlighting-native.scss
     &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- _syntax-highlighting.scss&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;structure-with-named-folders-containing-index-html-files&quot;&gt;2.Structure with Named folders containing index HTML files&lt;/h2&gt;
+&lt;h2&gt;2.Structure with Named folders containing index HTML files&lt;/h2&gt;
 
 &lt;p&gt;There is nothing wrong with the above method, however some people like to keep their URLs free from things like filename extensions. To achieve clean URLs for pages using Jekyll, you simply need to create a folder for each top-level page you want, and then place an index.html file in each page’s folder. You can find the more detail at &lt;a href=&quot;http://jekyllrb.com/docs/pages/&quot; title=&quot;Creating pages&quot;&gt;Jekyll documentation&lt;/a&gt;. Here is my own blog structure with page-folders to contain each pages.&lt;/p&gt;
 
@@ -554,21 +683,21 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
 └── tags
     └── index.md&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;how-to-change-the-highlight-style&quot;&gt;3. How to change the highlight style?&lt;/h2&gt;
+&lt;h2&gt;3. How to change the highlight style?&lt;/h2&gt;
 
-&lt;p&gt;This theme’s default highlighter is pygments.&lt;/p&gt;
+&lt;p&gt;This theme&amp;#39;s default highlighter is pygments.&lt;/p&gt;
 
 &lt;p&gt;To change the highlight style, you should install &lt;strong&gt;pygments&lt;/strong&gt;, and generate the css style which you wanted with code &lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;pygmentize -S default -f html &amp;gt; freshman/_sass/_syntax-highlighting.scss&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pygmentize -S default -f html &amp;gt; freshman/&lt;em&gt;sass/&lt;/em&gt;syntax-highlighting.scss&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Please make sure, add &lt;code&gt;.highlight {&lt;/code&gt; at the head  and &lt;code&gt;}&lt;/code&gt; at the end of file &lt;q&gt;_syntax-highlighting.scss&lt;/q&gt;.&lt;/p&gt;
 
 &lt;p&gt;See more,&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://pygments.org/languages/&quot;&gt;Pygments Supported languages&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col&quot;&gt;Pygments online deme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://pygments.org/languages/&quot;&gt;Pygments Supported languages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col&quot;&gt;Pygments online deme&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 19 Dec 2014 00:00:00 -0500</pubDate>
@@ -586,7 +715,7 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
     
       <item>
         <title>How to install this theme</title>
-        <description>&lt;h2 id=&quot;how-to-install-freshman-theme&quot;&gt;How to install Freshman theme?&lt;/h2&gt;
+        <description>&lt;h2&gt;How to install Freshman theme?&lt;/h2&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# please make sure you have already installed git tools and ruby tools(gem)&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install sass
@@ -596,7 +725,7 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
 &lt;p&gt;Then, change the folder name to you own github page name, forexample&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv freshman thisisyouname.github.io&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+ 
 </description>
         <pubDate>Thu, 18 Dec 2014 00:00:00 -0500</pubDate>
         <link>/articles/2014/12/18/how-to-install/</link>
@@ -611,46 +740,31 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
     
       <item>
         <title>Sample Post</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#heading&quot;&gt;Heading&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#body-text&quot;&gt;Body text&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#blockquotes&quot;&gt;Blockquotes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#list-types&quot;&gt;List Types&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#ordered-lists&quot;&gt;Ordered Lists&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#unordered-lists&quot;&gt;Unordered Lists&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#tables&quot;&gt;Tables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#code-snippets&quot;&gt;Code Snippets&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#highlight-with-line-number&quot;&gt;highlight with line number.&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#latex&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;\LaTeX&lt;/script&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#q-tag&quot;&gt;&amp;lt;q&amp;gt; tag&lt;/a&gt;&lt;/li&gt;
+        <description>&lt;ul&gt;
+&lt;li&gt;Table of Contents
+{:toc}&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;This is a sample post.&lt;/p&gt;
 
-&lt;p&gt;Below is just about everything you’ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.&lt;/p&gt;
+&lt;p&gt;Below is just about everything you&amp;#39;ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.&lt;/p&gt;
 
-&lt;h2 id=&quot;heading&quot;&gt;Heading&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;# Heading 1
+&lt;h2&gt;Heading&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# Heading 1
 
 ## Heading 2
 
 ### Heading 3
 
 #### Heading 4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;body-text&quot;&gt;Body text&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Body text&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;This is strong&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;This is figure&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Mdc4szJl.jpg&quot; alt=&quot;Elaphurus davidianus&quot; title=&quot;Père David&#39;s deer&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Mdc4szJl.jpg&quot; alt=&quot;Elaphurus davidianus&quot; title=&quot;Père David&amp;#39;s deer&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;This is emphasized&lt;/em&gt;.&lt;/p&gt;
 
@@ -662,92 +776,52 @@ Downloads bookmark history and incorporates changes&lt;/p&gt;
 
 &lt;p&gt;&lt;del&gt;HTML and CSS are our tools&lt;/del&gt;. &lt;/p&gt;
 
-&lt;h2 id=&quot;blockquotes&quot;&gt;Blockquotes&lt;/h2&gt;
+&lt;h2&gt;Blockquotes&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Justification:
+&lt;p&gt;Justification:
 This species is listed as Extinct in the Wild, as all populations are still under captive management. The captive population in China has increased in recent years, and the possibility remains that free-ranging populations can be established some time in the near future. When that happens, its Red List status will need to be reassessed. &lt;/p&gt;
+
+&lt;p&gt;I follow up the quest. Despite of day and night and death and hell.
+&lt;center&gt; -- Idylls of the King, Tennyson &lt;/center&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;I follow up the quest. Despite of day and night and death and hell.&lt;/p&gt;
-  &lt;center&gt; -- Idylls of the King, Tennyson &lt;/center&gt;
-&lt;/blockquote&gt;
+&lt;h2&gt;List Types&lt;/h2&gt;
 
-&lt;h2 id=&quot;list-types&quot;&gt;List Types&lt;/h2&gt;
-
-&lt;h3 id=&quot;ordered-lists&quot;&gt;Ordered Lists&lt;/h3&gt;
+&lt;h3&gt;Ordered Lists&lt;/h3&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Item one
-    &lt;ol&gt;
-      &lt;li&gt;sub item one&lt;/li&gt;
-      &lt;li&gt;sub item two&lt;/li&gt;
-      &lt;li&gt;sub item three&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Item two&lt;/li&gt;
+&lt;li&gt;Item one
+
+&lt;ol&gt;
+&lt;li&gt;sub item one&lt;/li&gt;
+&lt;li&gt;sub item two&lt;/li&gt;
+&lt;li&gt;sub item three&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Item two&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;unordered-lists&quot;&gt;Unordered Lists&lt;/h3&gt;
+&lt;h3&gt;Unordered Lists&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Item one&lt;/li&gt;
-  &lt;li&gt;Item two&lt;/li&gt;
-  &lt;li&gt;Item three&lt;/li&gt;
+&lt;li&gt;Item one&lt;/li&gt;
+&lt;li&gt;Item two&lt;/li&gt;
+&lt;li&gt;Item three&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;tables&quot;&gt;Tables&lt;/h2&gt;
+&lt;h2&gt;Tables&lt;/h2&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Header1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Header2&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Header3&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell5&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell6&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;cell7&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;cell8&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cell9&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;| Header1 | Header2 | Header3 |
+|:--------|:-------:|--------:|
+| cell1   | cell2   | cell3   |
+| cell4   | cell5   | cell6   |
+| cell7   | cell8   | cell9   |&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Kingdom&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Phylum&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Class&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Order&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Family&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;ANIMALIA&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;CHORDATA&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;MAMMALIA&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;CETARTIODACTYLA&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;CERVIDAE&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;| Kingdom | Phylum  | Class | Order | Family |
+|:------:|:------:|:------:|:------:|:------:| 
+|ANIMALIA|CHORDATA|MAMMALIA|CETARTIODACTYLA|CERVIDAE|&lt;/p&gt;
 
-&lt;h2 id=&quot;code-snippets&quot;&gt;Code Snippets&lt;/h2&gt;
+&lt;h2&gt;Code Snippets&lt;/h2&gt;
 
 &lt;p&gt;Syntax highlighting via Pygments&lt;/p&gt;
 
@@ -757,19 +831,19 @@ This species is listed as Extinct in the Wild, as all populations are still unde
   &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;highlight-with-line-number&quot;&gt;highlight with line number.&lt;/h4&gt;
+&lt;h4&gt;highlight with line number.&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;latex&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;\LaTeX&lt;/script&gt;&lt;/h2&gt;
+&lt;h2&gt;$$\LaTeX$$&lt;/h2&gt;
 
 &lt;p&gt;you can use latex with &lt;q&gt;double $$ &lt;/q&gt;&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{i\pi}+1=0&lt;/script&gt;
+&lt;p&gt;$$e^{i\pi}+1=0$$&lt;/p&gt;
 
-&lt;h2 id=&quot;q-tag&quot;&gt;&amp;lt;q&amp;gt; tag&lt;/h2&gt;
+&lt;h2&gt;&amp;lt;q&amp;gt; tag&lt;/h2&gt;
 
 &lt;p&gt;here is a &amp;lt;q&amp;gt; q tag &amp;lt;/q&amp;gt;&lt;/p&gt;
 
