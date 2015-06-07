@@ -13,7 +13,7 @@ keywords: R
 description:
 ---
 
-I've now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckly, I have the 'Radon' and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.
+I've now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the 'Radon' and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.
 
 I mainly follow the [instruction](http://www.stat.purdue.edu/~dgc/cluster.pdf) by Doug.
 
