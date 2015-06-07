@@ -245,7 +245,7 @@ cite {
   position: relative; }
 
 .site-title {
-  font-size: 28px;
+  font-size: 40px;
   line-height: 36px;
   letter-spacing: -1px;
   margin-bottom: 0;
@@ -261,7 +261,7 @@ cite {
   line-height: 56px;
   letter-spacing: -1px;
   margin-bottom: 0;
-  text-align: center;
+  text-align: left;
   color: #828282; }
 
 .site-nav {

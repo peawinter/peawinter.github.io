@@ -45,7 +45,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a> <font size="5">Learn the hard way</font> </h1> 
+    <h1 class="site-title"><a href="/">Apprantice</a></h1>
+    <h3 class="site-meta">Learn the hard way</h3> 
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -83,8 +84,6 @@
         
         
         <a class="page-link" href="/feed.xml">Subscribe</a>
-        
-        
         
         
         
@@ -144,7 +143,7 @@
 
 <p>I mainly follow the <a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">instruction</a> by Doug.</p>
 
-<h3>Load R</h3>
+<h2>Load R</h2>
 
 <p>Radon doesn&#39;t come up with R for granted. To load R, we need to type <code>model load r</code>. The <code>module</code> command is used to “load” software
 packages for use by the current login session.</p>
@@ -165,7 +164,7 @@ packages for use by the current login session.</p>
 
 <p>Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.</p>
 
-<h3>BATCH mode</h3>
+<h2>BATCH mode</h2>
 
 <p>R script vs R batch</p>
 
@@ -203,7 +202,7 @@ packages for use by the current login session.</p>
 <span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>nohup sh run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh one at a time, and keep running even if logout</span>
 <span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>nohup xargs -d <span class="s1">&#39;\n&#39;</span> -n1 -P4 sh -c &lt; run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout</span></code></pre></div>
 
-<h3>Submit jobs through qsub</h3>
+<h2>Submit jobs through qsub</h2>
 
 <p>On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through <code>qsub</code>. A typical job description will look like this one.</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
@@ -237,9 +236,11 @@ module load r
 <span class="c">## and as an identifier for the output file</span>
 <span class="nb">export </span><span class="nv">job_number</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$PBS_JOBID</span> <span class="p">|</span> awk -F. <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
 
-<span class="c"># run R</span>
-Rscript --vanilla foo.r &gt; foo.Rout
+<span class="c"># run R in batch mode</span>
+R CMD BATCH foo.R &gt; foo.Rout
 </code></pre></div>
+<p>Note that <code>#!/bin/bash</code> should be put in the first line. Also, I use &#39;BATCH&#39; here since it is compatible with the following section &#39;pass arguments&#39;. I haven&#39;t tested the otherwise.</p>
+
 <p>Then the file is ready to submit.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qsub foo.pbs</code></pre></div>
@@ -249,8 +250,6 @@ Rscript --vanilla foo.r &gt; foo.Rout
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qstat        <span class="c"># See list of jobs in the queue</span>
 <span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>qstat –u usr <span class="c"># See list of jobs in the queue submitted by usr</span>
 <span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>qdel JOBID   <span class="c"># delete a previously submitted job from the queue</span></code></pre></div>
-
-<p>Note that <code>#!/bin/bash</code> should be put in the first line.</p>
 
 <p>Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh -l</span>
@@ -268,7 +267,7 @@ Rscript t3.R &gt;out7 <span class="p">&amp;</span>
 Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <span class="nb">wait</span>
 </code></pre></div>
-<h3>Pass arguments</h3>
+<h2>Pass arguments</h2>
 
 <p>Like said, <code>Rscript</code> takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from <a href="http://www.stat.purdue.edu/%7Ebhadra/">Dr. Anindya Bhadra</a>.)</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## HOWTO: chmod ugo+rx cluster; ./cluster</span>
@@ -304,9 +303,11 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
     <span class="k">done</span>
 <span class="k">done</span>
 </code></pre></div>
-<h3>Download packages</h3>
+<p>Read this <a href="http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch">post</a> for passing argument for Rscript command.</p>
 
-<p>An annoying bug is that R cannot import and load packages properly.</p>
+<h2>Download packages</h2>
+
+<p>An annoying thing is that R may not import and load packages properly.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> Calls: install.packages -&gt; grep -&gt; contrib.url
 <span class="lineno">2</span> In addition: Warning message:
@@ -319,18 +320,166 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <blockquote>
 <p>For example, if you want to use RStudio&#39;s package repository, set repos=&quot;http://cran.rstudio.com/&quot; inside the install.packages call.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">))</span> <span class="p">{</span>
-  install.packages<span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://cran.rstudio.com/&quot;</span><span class="p">)</span>
-  <span class="kn">library</span><span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://cran.rstudio.com/&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;***&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3>Reference</h3>
+<h2>Reference</h2>
 
 <ol>
 <li><p><a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">http://www.stat.purdue.edu/~dgc/cluster.pdf</a></p></li>
 <li><p><a href="http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html">http://biostat.jhsph.edu/~hjaffee/R_tasks.html</a></p></li>
 <li><p><a href="https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster">https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster</a></p></li>
 <li><p><a href="http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line">http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line</a></p></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/news/2015/06/05/Site-ABC/">Site-ABC</a>
+      </h1>
+      <meta itemprop="keywords" content="" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#news">news</a>&nbsp;
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <!-- on  -->
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>All of following is from Lijia&#39;s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
+
+<h2>Install</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="c"># please make sure you have already installed git tools and ruby tools(gem)</span>
+<span class="lineno">2</span> <span class="nv">$ </span>gem install sass
+<span class="lineno">3</span> <span class="nv">$ </span>gem install jekyll
+<span class="lineno">4</span> <span class="nv">$ </span>git clone https://github.com/yulijia/freshman21.git</code></pre></div>
+
+<h2>Structure of freshman21 theme</h2>
+
+<p>You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.</p>
+
+<p>All sidebar boxes html files are in the <code><em>include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code></em>includes</code> directory.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">.
+<span class="p">|</span>-- a_home.md                 <span class="c"># home page link at navigation bar</span>
+<span class="p">|</span>-- b_about.md                <span class="c"># about link at navigation bar</span>
+<span class="p">|</span>-- c_archives.md             <span class="c"># archives link at navigation bar</span>
+<span class="p">|</span>-- _config.yml
+<span class="p">|</span>-- css
+<span class="p">|</span>   <span class="sb">`</span>-- main.scss
+<span class="p">|</span>-- d_categories.md           <span class="c"># categories link at navigation bar</span>
+<span class="p">|</span>-- e_tags.md                 <span class="c"># tags at main navigation bar</span>
+<span class="p">|</span>-- feed.xml                  <span class="c"># RSS at main navigation bar</span>
+<span class="p">|</span>-- f_guestbook.md            <span class="c"># guest book like at navigation bar</span>
+<span class="p">|</span>-- images
+<span class="p">|</span>   <span class="sb">`</span>-- favicon.ico           <span class="c"># here is your website favicon</span>
+<span class="p">|</span>-- _includes
+<span class="p">|</span>   <span class="p">|</span>-- Aboutme.html          <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- Archives.html         <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- Blogroll.html         <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- Categories.html       <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- comments.html         <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- Copyright_Notice.html <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- footer.html
+<span class="p">|</span>   <span class="p">|</span>-- header.html
+<span class="p">|</span>   <span class="p">|</span>-- head.html
+<span class="p">|</span>   <span class="p">|</span>-- page_pagination.html
+<span class="p">|</span>   <span class="p">|</span>-- post_pagination.html
+<span class="p">|</span>   <span class="p">|</span>-- Recent_Posts.html     <span class="c"># right column sidebar content</span>
+<span class="p">|</span>   <span class="p">|</span>-- sidebar.html          <span class="c"># you can set you own sidebar content in here</span>
+<span class="p">|</span>   <span class="sb">`</span>-- Tags.html             <span class="c"># right column sidebar content</span>
+<span class="p">|</span>-- index.html
+<span class="p">|</span>-- _layouts
+<span class="p">|</span>   <span class="p">|</span>-- default.html
+<span class="p">|</span>   <span class="p">|</span>-- page.html
+<span class="p">|</span>   <span class="sb">`</span>-- post.html
+<span class="p">|</span>-- LICENSE
+<span class="p">|</span>-- _posts
+<span class="p">|</span>   <span class="p">|</span>-- 2013-10-10-milu.md
+<span class="p">|</span>   <span class="p">|</span>-- 2014-12-13-simple-post.md
+<span class="p">|</span>   <span class="p">|</span>-- 2014-12-18-how-to-install.md
+<span class="p">|</span>   <span class="p">|</span>-- 2014-12-19-freshman21-structure.md
+<span class="p">|</span>   <span class="p">|</span>-- 2014-12-19-how-to-set-the-config-file.md
+<span class="p">|</span>   <span class="sb">`</span>-- 2015-03-31-readme.md
+<span class="p">|</span>-- README.md
+<span class="sb">`</span>-- _sass
+    <span class="p">|</span>-- _base.scss
+    <span class="p">|</span>-- _layout.scss
+    <span class="p">|</span>-- _syntax-highlighting-native.scss
+    <span class="sb">`</span>-- _syntax-highlighting.scss</code></pre></div>
+
+<h2>Configuration</h2>
+
+<p>The <a href="https://github.com/yulijia/freshman21/blob/master/_config.yml">config.yml file</a> in the Freshman21 theme includes five parts.</p>
+
+<p><strong>First part</strong> is the site info.</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Freshman21</span> <span class="c1"># blog title</span>
+<span class="l-Scalar-Plain">tagline</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Another Jekyll theme, Freshman twenty-first</span> <span class="c1"># blog sub-titile</span>
+<span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lijia YU</span> <span class="c1"># author name</span>
+<span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yu@lijiayu.net</span> <span class="c1"># author email</span>
+<span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="s">&quot;Freshman21</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">Jekyll</span><span class="nv"> </span><span class="s">blog</span><span class="nv"> </span><span class="s">theme.&quot;</span> <span class="c1"># You can edit this line in _config.yml. It will appear in your document head meta and in</span>
+<span class="l-Scalar-Plain">your feed.xml site description</span>
+<span class="l-Scalar-Plain">keywords</span><span class="p-Indicator">:</span> <span class="s">&quot;Jekyll,</span><span class="nv"> </span><span class="s">theme,</span><span class="nv"> </span><span class="s">Freshman21&quot;</span> <span class="c1"># html meta keywords</span>
+<span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;/freshman21&quot;</span> <span class="c1"># the subpath of your site, e.g. /blog</span>
+<span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="s">&quot;http://yulijia.net/freshman21&quot;</span> <span class="c1"># the base hostname &amp; protocol for your site</span></code></pre></div>
+
+<p><strong>Part 2</strong>, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can <q>Hide</q> in two ways <sup><a href="#%5B1%5D">[1]</a></sup>:</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">twitter_username</span><span class="p-Indicator">:</span> <span class="c1">#your twitter handle  </span>
+<span class="l-Scalar-Plain">github_username</span><span class="p-Indicator">:</span>  <span class="c1">#your github account</span>
+<span class="l-Scalar-Plain">disqus_shortname</span><span class="p-Indicator">:</span> <span class="c1">#disqus shortname</span>
+<span class="l-Scalar-Plain">favicon</span><span class="p-Indicator">:</span>     <span class="s">&quot;images/favicon.ico&quot;</span>
+<span class="l-Scalar-Plain">aboutme</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it.</span> <span class="c1"># these are shown on aboutme-box(sidebar).</span>
+<span class="l-Scalar-Plain">aboutme_photo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://i.imgur.com/15BT1.jpg</span> <span class="c1"># your personal photo.</span></code></pre></div>
+
+<p><strong>Part3</strong>, Site setting:</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">ShowContactInfo</span><span class="p-Indicator">:</span> <span class="s">&quot;True&quot;</span> <span class="c1"># Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True</span>
+<span class="l-Scalar-Plain">default_column</span><span class="p-Indicator">:</span> <span class="s">&quot;two&quot;</span> <span class="c1"># blog style: two columns, if default_column != &quot;two&quot;, you will see a one column blog.</span>
+<span class="l-Scalar-Plain">default_locale</span><span class="p-Indicator">:</span> <span class="s">&quot;en&quot;</span> <span class="c1"># blog sidebar language set, only include: English(en) and Chinese (cn)</span></code></pre></div>
+
+<p><strong>Part4</strong>, Blogroll info, only <em>name</em> tags can shown on the page.</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">Blogroll</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Freshman</span>
+        <span class="l-Scalar-Plain">href</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://yulijia.net/freshman</span>
+        <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Another Jekyll blog theme</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">author&#39;s website</span>
+        <span class="l-Scalar-Plain">href</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://yulijia.net/</span>
+        <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lijia Yu&#39;s website</span></code></pre></div>
+
+<p><strong>Part5</strong>, Build settings</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">kramdown</span>
+<span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pygments</span> <span class="c1"># highlight</span>
+<span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>  <span class="c1"># how many post can seen in the main page</span></code></pre></div>
+
+<h2>Highlight style</h2>
+
+<p>This theme&#39;s default highlighter is pygments.</p>
+
+<p>To change the highlight style, you should install <strong>pygments</strong>, and generate the css style which you wanted with code</p>
+
+<p><code>pygmentize -S default -f html &gt; freshman/<em>sass/</em>syntax-highlighting.scss</code></p>
+
+<p>Please make sure, add <code>.highlight {</code> at the head  and <code>}</code> at the end of file <q>_syntax-highlighting.scss</q>.</p>
+
+<p>See more,</p>
+
+<ol>
+<li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
+<li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
 </ol>
 
     </article> <hr />
@@ -403,78 +552,7 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p><img src="/public/img/sweet_penguin.jpg" alt="1"></p>
-
-    </article> <hr />
-
-    
-
-    <header class="post-header">
-      <h1 itemprop="name" class="post-title">
-        <a itemprop="url" class="post-link" href="/news/2015/03/31/2.0version/">2.0 version</a>
-      </h1>
-      <meta itemprop="keywords" content="version,new features,google analytics,google search,back to top,read more" />
-      <p class="post-meta">
-      <!-- Posted in
-      
-      <a href="/categories/#news">news</a>&nbsp;
-      
-      
-      and tagged
-      
-      <a href="/tags/#version" title="version">version </a>, 
-      
-      <a href="/tags/#new features" title="new features">new features </a>, 
-      
-      <a href="/tags/#google analytics" title="google analytics">google analytics </a>, 
-      
-      <a href="/tags/#google search" title="google search">google search </a>, 
-      
-      <a href="/tags/#back to top" title="back to top">back to top </a>, 
-      
-      <a href="/tags/#read more" title="read more">read more </a>
-      
-       -->
-      <time itemprop="datePublished" datetime="2015-03-31">
-      <!-- on  -->
-      Mar 31, 2015
-      </time>
-      </p>
-    </header>
-
-    <article class="post-content" itemprop="articleBody">
-      <p>Today, I update the theme with some new features. Welcome to use freshman21 2.0 version(gh-pages branch).</p>
-
-<p><strong>gh-pages branch new features</strong> :</p>
-
-<ul>
-<li>Google  search</li>
-<li>Google analytics</li>
-<li>Read more mode</li>
-<li>Open Graph META Tags</li>
-<li>Microdata(schema.org)</li>
-<li>back to top button</li>
-<li>font awesome icon</li>
-</ul>
-
-<p><strong>master branch new features</strong> :</p>
-
-<ul>
-<li>Open Graph META Tags<br></li>
-<li>Microdata(schema.org)</li>
-</ul>
-
-<p>The main difference between master and gh-pages: only one Javascript (Mathjax) be included in master branch. </p>
-
-<p>Master branch is a more purified html+css framework than gh-pages branch.</p>
-
-<p>Clone master branch: </p>
-
-<p><code>git clone https://github.com/yulijia/freshman21.git -b master --single-branch</code></p>
-
-<p>Clone gh-pages branch: </p>
-
-<p><code>git clone https://github.com/yulijia/freshman21.git -b gh-pages --single-branch</code></p>
+      <p><img src="/images/sweet_penguin.jpg" alt="1"></p>
 
     </article> <hr />
 
@@ -511,150 +589,82 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
       <h3>Configure tooling</h3>
 
 <p>Configure user information for all local repositories</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.name &quot;[name]&quot;
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;[name]&quot;</span>           <span class="c"># Sets the name you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global user.email <span class="s2">&quot;[email address]&quot;</span> <span class="c"># Sets the email you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global color.ui auto                <span class="c"># Enables helpful colorization of command line output</span>
 </code></pre></div>
-<p>Sets the name you want atached to your commit transactions</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global user.email &quot;[email address]&quot;
-</code></pre></div>
-<p>Sets the email you want atached to your commit transactions</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git config --global color.ui auto
-</code></pre></div>
-<p>Enables helpful colorization of command line output</p>
-
 <h3>Create repositories</h3>
 
 <p>Start a new repository or obtain one from an existing URL</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git init [project-name]
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git init <span class="o">[</span>project-name<span class="o">]</span> <span class="c"># Creates a new local repository with the specified name</span>
+<span class="nv">$ </span>git clone <span class="o">[</span>url<span class="o">]</span>         <span class="c"># Downloads a project and its entire version history</span>
 </code></pre></div>
-<p>Creates a new local repository with the specified name</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone [url]
-</code></pre></div>
-<p>Downloads a project and its entire version history</p>
-
 <h3>Make changes</h3>
 
 <p>Review edits and craf a commit transaction</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git status
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git status                            <span class="c"># Lists all new or modified files to be commited</span>
+<span class="nv">$ </span>git add <span class="o">[</span>file<span class="o">]</span>                        <span class="c"># Snapshots the file in preparation for versioning</span>
+<span class="nv">$ </span>git reset <span class="o">[</span>file<span class="o">]</span>                      <span class="c"># Unstages the file, but preserve its contents</span>
+<span class="nv">$ </span>git diff                              <span class="c"># Shows file differences not yet staged</span>
+<span class="nv">$ </span>git diff --staged                     <span class="c"># Shows file differences between staging and the last file version</span>
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;[descriptive message]&quot;</span> <span class="c"># Records file snapshots permanently in version history</span>
 </code></pre></div>
-<p>Lists all new or modified files to be commited</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git add [file]
-</code></pre></div>
-<p>Snapshots the file in preparation for versioning</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [file]
-</code></pre></div>
-<p>Unstages the file, but preserve its contents</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff
-</code></pre></div>
-<p>Shows file differences not yet staged</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff --staged
-</code></pre></div>
-<p>Shows file differences between staging and the last file version</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git commit -m &quot;[descriptive message]&quot;
-</code></pre></div>
-<p>Records file snapshots permanently in version history</p>
-
 <h3>Group changes</h3>
 
 <p>Name a series of commits and combine completed efforts</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git branch                  <span class="c"># Lists all local branches in the current repository</span>
+<span class="nv">$ </span>git branch <span class="o">[</span>branch-name<span class="o">]</span>    <span class="c"># Creates a new branch</span>
+<span class="nv">$ </span>git checkout <span class="o">[</span>branch-name<span class="o">]</span>  <span class="c"># Switches to the specified branch and updates the working directory</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>branch<span class="o">]</span>          <span class="c"># Combines the specified branch’s history into the current branch</span>
+<span class="nv">$ </span>git branch -d <span class="o">[</span>branch-name<span class="o">]</span> <span class="c"># Deletes the specified branch</span>
 </code></pre></div>
-<p>Lists all local branches in the current repository</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch [branch-name]
-</code></pre></div>
-<p>Creates a new branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git checkout [branch-name]
-</code></pre></div>
-<p>Switches to the specified branch and updates the working directory</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [branch]
-</code></pre></div>
-<p>Combines the specified branch’s history into the current branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git branch -d [branch-name]
-</code></pre></div>
-<p>Deletes the specified branch</p>
-
 <h3>Refactor filenames</h3>
 
 <p>Relocate and remove versioned files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm [file]
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git rm <span class="o">[</span>file<span class="o">]</span>                         <span class="c"># Deletes the file from the working directory and stages the deletion</span>
+<span class="nv">$ </span>git rm --cached <span class="o">[</span>file<span class="o">]</span>                <span class="c"># Removes the file from version control but preserves the file locally</span>
+<span class="nv">$ </span>git mv <span class="o">[</span>file-original<span class="o">]</span> <span class="o">[</span>file-renamed<span class="o">]</span> <span class="c"># Changes the file name and prepares it for commit</span>
 </code></pre></div>
-<p>Deletes the file from the working directory and stages the deletion</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git rm --cached [file]
-</code></pre></div>
-<p>Removes the file from version control but preserves the file locally</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git mv [file-original] [file-renamed]
-</code></pre></div>
-<p>Changes the file name and prepares it for commit</p>
-
 <h3>Suppress tracking</h3>
 
 <p>Exclude temporary files and paths</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"> *.log
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> *.log
  build/
  temp-*
+<span class="c"># A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</span>
+<span class="nv">$ </span>git ls-files --other --ignored --exclude-standard
+<span class="c"># Lists all ignored files in this project</span>
 </code></pre></div>
-<p>A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git ls-files --other --ignored --exclude-standard
-</code></pre></div>
-<p>Lists all ignored files in this project</p>
-
 <h3>Save fragments</h3>
 
 <p>Shelve and restore incomplete changes</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash      <span class="c"># Temporarily stores all modified tracked files</span>
+<span class="nv">$ </span>git stash pop  <span class="c"># Restores the most recently stashed files</span>
+<span class="nv">$ </span>git stash list <span class="c"># Lists all stashed changesets</span>
+<span class="nv">$ </span>git stash drop <span class="c"># Discards the most recently stashed changeset</span>
 </code></pre></div>
-<p>Temporarily stores all modified tracked files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash pop
-</code></pre></div>
-<p>Restores the most recently stashed files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash list
-</code></pre></div>
-<p>Lists all stashed changesets</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git stash drop
-</code></pre></div>
-<p>Discards the most recently stashed changeset</p>
-
 <h3>Review history</h3>
 
 <p>Browse and inspect the evolution of project files</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git log                                   <span class="c"># Lists version history for the current branch</span>
+<span class="nv">$ </span>git log --follow <span class="o">[</span>file<span class="o">]</span>                   <span class="c"># Lists version history for a file, including renames</span>
+<span class="nv">$ </span>git diff <span class="o">[</span>first-branch<span class="o">]</span>...<span class="o">[</span>second-branch<span class="o">]</span> <span class="c"># Shows content differences between two branches</span>
+<span class="nv">$ </span>git show <span class="o">[</span>commit<span class="o">]</span>                         <span class="c"># Outputs metadata and content changes of the specified commit</span>
 </code></pre></div>
-<p>Lists version history for the current branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git log --follow [file]
-</code></pre></div>
-<p>Lists version history for a file, including renames</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git diff [first-branch]...[second-branch]
-</code></pre></div>
-<p>Shows content differences between two branches</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git show [commit]
-</code></pre></div>
-<p>Outputs metadata and content changes of the specified commit</p>
-
 <h3>Redo commits</h3>
 
 <p>Erase mistakes and craft replacement history</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset [commit]
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset <span class="o">[</span>commit<span class="o">]</span>        <span class="c"># Undoes all commits after [commit], preserving changes locally</span>
+<span class="nv">$ </span>git reset --hard <span class="o">[</span>commit<span class="o">]</span> <span class="c"># Discards all history and changes back to the specified commit</span>
 </code></pre></div>
-<p>Undoes all commits after [commit], preserving changes locally</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git reset --hard [commit]
-</code></pre></div>
-<p>Discards all history and changes back to the specified commit</p>
-
 <h3>Synchronize changes</h3>
 
 <p>Register a repository bookmark and exchange version history</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git fetch [bookmark]
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git fetch <span class="o">[</span>bookmark<span class="o">]</span>          <span class="c"># Downloads all history from the repository bookmark</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>bookmark<span class="o">]</span>/<span class="o">[</span>branch<span class="o">]</span> <span class="c"># Combines bookmark’s branch into current local branch</span>
+<span class="nv">$ </span>git push <span class="o">[</span><span class="nb">alias</span><span class="o">]</span> <span class="o">[</span>branch<span class="o">]</span>     <span class="c"># Uploads all local branch commits to GitHub</span>
+<span class="nv">$ </span>git pull                      <span class="c"># Downloads bookmark history and incorporates changes</span>
 </code></pre></div>
-<p>Downloads all history from the repository bookmark</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git merge [bookmark]/[branch]
-</code></pre></div>
-<p>Combines bookmark’s branch into current local branch</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git push [alias] [branch]
-</code></pre></div>
-<p>Uploads all local branch commits to GitHub</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$ git pull
-</code></pre></div>
-<p>Downloads bookmark history and incorporates changes</p>
-
 <h3>Reference</h3>
 
 <ol>
@@ -673,8 +683,6 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
   </div>
   <section class="pager">
   
-  
-  <li class="next"><a href="/page2/" title="Older">Older &rarr;</a></li>
   
 </section>
 

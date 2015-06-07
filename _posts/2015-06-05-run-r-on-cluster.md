@@ -17,7 +17,7 @@ I've now started a new research on high dimension black box optimization. That m
 
 I mainly follow the [instruction](http://www.stat.purdue.edu/~dgc/cluster.pdf) by Doug.
 
-### Load R
+## Load R
 
 Radon doesn't come up with R for granted. To load R, we need to type `model load r`. The `module` command is used to “load” software
 packages for use by the current login session.
@@ -40,7 +40,7 @@ http://www.gnu.org/licenses/.
 
 Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.
 
-### BATCH mode
+## BATCH mode
 
 R script vs R batch
 
@@ -86,7 +86,7 @@ Then we can run "run.sh" in command line.
 -bash-4.1$ nohup xargs -d '\n' -n1 -P4 sh -c < run.sh & # run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout
 {% endhighlight%}
 
-### Submit jobs through qsub
+## Submit jobs through qsub
 
 On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through `qsub`. A typical job description will look like this one.
 
@@ -122,9 +122,11 @@ module load r
 ## and as an identifier for the output file
 export job_number=`echo $PBS_JOBID | awk -F. '{print $1}'`
 
-# run R
-Rscript --vanilla foo.r > foo.Rout
+# run R in batch mode
+R CMD BATCH foo.R > foo.Rout
 ```
+
+Note that `#!/bin/bash` should be put in the first line. Also, I use 'BATCH' here since it is compatible with the following section 'pass arguments'. I haven't tested the otherwise.
 
 Then the file is ready to submit.
 
@@ -139,8 +141,6 @@ Other useful command includes
 -bash-4.1$ qstat –u usr # See list of jobs in the queue submitted by usr
 -bash-4.1$ qdel JOBID   # delete a previously submitted job from the queue
 {% endhighlight%}
-
-Note that `#!/bin/bash` should be put in the first line.
 
 Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.
 
@@ -161,7 +161,7 @@ Rscript t3.R >out8 &
 wait
 ```
 
-### Pass arguments
+## Pass arguments
 
 Like said, `Rscript` takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from [Dr. Anindya Bhadra](http://www.stat.purdue.edu/~bhadra/).)
 
@@ -200,9 +200,11 @@ do
 done
 ```
 
-### Download packages
+Read this [post](http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch) for passing argument for Rscript command.
 
-An annoying bug is that R cannot import and load packages properly.
+## Download packages
+
+An annoying thing is that R may not import and load packages properly.
 
 {% highlight Bash shell scripts linenos%}
 Calls: install.packages -> grep -> contrib.url
@@ -217,13 +219,11 @@ A remedy is found on [stackoverflow](http://stackoverflow.com/questions/17705133
 > For example, if you want to use RStudio's package repository, set repos="http://cran.rstudio.com/" inside the install.packages call.
 
 ```r
-if (!require("yaml")) {
-  install.packages("yaml", repos="http://cran.rstudio.com/")
-  library("yaml")
-}
+install.packages("yaml", repos="http://cran.rstudio.com/")
+library("***")
 ```
 
-### Reference
+## Reference
 
 1. [http://www.stat.purdue.edu/~dgc/cluster.pdf](http://www.stat.purdue.edu/~dgc/cluster.pdf)
 

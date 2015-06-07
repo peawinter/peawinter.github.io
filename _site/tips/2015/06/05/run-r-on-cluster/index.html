@@ -43,7 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a> <font size="5">Learn the hard way</font> </h1> 
+    <h1 class="site-title"><a href="/">Apprantice</a></h1>
+    <h3 class="site-meta">Learn the hard way</h3> 
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -81,8 +82,6 @@
         
         
         <a class="page-link" href="/feed.xml">Subscribe</a>
-        
-        
         
         
         
@@ -137,7 +136,7 @@
 
 <p>I mainly follow the <a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">instruction</a> by Doug.</p>
 
-<h3>Load R</h3>
+<h2>Load R</h2>
 
 <p>Radon doesn&#39;t come up with R for granted. To load R, we need to type <code>model load r</code>. The <code>module</code> command is used to “load” software
 packages for use by the current login session.</p>
@@ -158,7 +157,7 @@ packages for use by the current login session.</p>
 
 <p>Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.</p>
 
-<h3>BATCH mode</h3>
+<h2>BATCH mode</h2>
 
 <p>R script vs R batch</p>
 
@@ -196,7 +195,7 @@ packages for use by the current login session.</p>
 <span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>nohup sh run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh one at a time, and keep running even if logout</span>
 <span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>nohup xargs -d <span class="s1">&#39;\n&#39;</span> -n1 -P4 sh -c &lt; run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout</span></code></pre></div>
 
-<h3>Submit jobs through qsub</h3>
+<h2>Submit jobs through qsub</h2>
 
 <p>On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through <code>qsub</code>. A typical job description will look like this one.</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
@@ -230,9 +229,11 @@ module load r
 <span class="c">## and as an identifier for the output file</span>
 <span class="nb">export </span><span class="nv">job_number</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$PBS_JOBID</span> <span class="p">|</span> awk -F. <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
 
-<span class="c"># run R</span>
-Rscript --vanilla foo.r &gt; foo.Rout
+<span class="c"># run R in batch mode</span>
+R CMD BATCH foo.R &gt; foo.Rout
 </code></pre></div>
+<p>Note that <code>#!/bin/bash</code> should be put in the first line. Also, I use &#39;BATCH&#39; here since it is compatible with the following section &#39;pass arguments&#39;. I haven&#39;t tested the otherwise.</p>
+
 <p>Then the file is ready to submit.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qsub foo.pbs</code></pre></div>
@@ -242,8 +243,6 @@ Rscript --vanilla foo.r &gt; foo.Rout
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qstat        <span class="c"># See list of jobs in the queue</span>
 <span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>qstat –u usr <span class="c"># See list of jobs in the queue submitted by usr</span>
 <span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>qdel JOBID   <span class="c"># delete a previously submitted job from the queue</span></code></pre></div>
-
-<p>Note that <code>#!/bin/bash</code> should be put in the first line.</p>
 
 <p>Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh -l</span>
@@ -261,7 +260,7 @@ Rscript t3.R &gt;out7 <span class="p">&amp;</span>
 Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <span class="nb">wait</span>
 </code></pre></div>
-<h3>Pass arguments</h3>
+<h2>Pass arguments</h2>
 
 <p>Like said, <code>Rscript</code> takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from <a href="http://www.stat.purdue.edu/%7Ebhadra/">Dr. Anindya Bhadra</a>.)</p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## HOWTO: chmod ugo+rx cluster; ./cluster</span>
@@ -297,9 +296,11 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
     <span class="k">done</span>
 <span class="k">done</span>
 </code></pre></div>
-<h3>Download packages</h3>
+<p>Read this <a href="http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch">post</a> for passing argument for Rscript command.</p>
 
-<p>An annoying bug is that R cannot import and load packages properly.</p>
+<h2>Download packages</h2>
+
+<p>An annoying thing is that R may not import and load packages properly.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> Calls: install.packages -&gt; grep -&gt; contrib.url
 <span class="lineno">2</span> In addition: Warning message:
@@ -312,12 +313,10 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <blockquote>
 <p>For example, if you want to use RStudio&#39;s package repository, set repos=&quot;http://cran.rstudio.com/&quot; inside the install.packages call.</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">))</span> <span class="p">{</span>
-  install.packages<span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://cran.rstudio.com/&quot;</span><span class="p">)</span>
-  <span class="kn">library</span><span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://cran.rstudio.com/&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;***&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3>Reference</h3>
+<h2>Reference</h2>
 
 <ol>
 <li><p><a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">http://www.stat.purdue.edu/~dgc/cluster.pdf</a></p></li>
@@ -334,7 +333,7 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <section class="pager">
   <ul>
     
-    <li class="previous"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">&larr; Older</a></li>
+    <li class="previous"><a href="/news/2015/06/05/Site-ABC/" title="Site-ABC">&larr; Older</a></li>
     
     
     <li class="disabled"><a>Newer &rarr;</a>

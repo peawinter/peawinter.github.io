@@ -6,8 +6,8 @@
 </description>
     <link>/</link>
     <atom:link href="/zfeed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Jun 2015 22:26:21 -0400</pubDate>
-    <lastBuildDate>Fri, 05 Jun 2015 22:26:21 -0400</lastBuildDate>
+    <pubDate>Sat, 06 Jun 2015 19:52:14 -0400</pubDate>
+    <lastBuildDate>Sat, 06 Jun 2015 19:52:14 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -16,7 +16,7 @@
 
 &lt;p&gt;I mainly follow the &lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;instruction&lt;/a&gt; by Doug.&lt;/p&gt;
 
-&lt;h3&gt;Load R&lt;/h3&gt;
+&lt;h2&gt;Load R&lt;/h2&gt;
 
 &lt;p&gt;Radon doesn&amp;#39;t come up with R for granted. To load R, we need to type &lt;code&gt;model load r&lt;/code&gt;. The &lt;code&gt;module&lt;/code&gt; command is used to “load” software
 packages for use by the current login session.&lt;/p&gt;
@@ -37,7 +37,7 @@ packages for use by the current login session.&lt;/p&gt;
 
 &lt;p&gt;Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.&lt;/p&gt;
 
-&lt;h3&gt;BATCH mode&lt;/h3&gt;
+&lt;h2&gt;BATCH mode&lt;/h2&gt;
 
 &lt;p&gt;R script vs R batch&lt;/p&gt;
 
@@ -75,7 +75,7 @@ packages for use by the current login session.&lt;/p&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup sh run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh one at a time, and keep running even if logout&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup xargs -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; -n1 -P4 sh -c &amp;lt; run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Submit jobs through qsub&lt;/h3&gt;
+&lt;h2&gt;Submit jobs through qsub&lt;/h2&gt;
 
 &lt;p&gt;On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through &lt;code&gt;qsub&lt;/code&gt;. A typical job description will look like this one.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
@@ -109,9 +109,11 @@ module load r
 &lt;span class=&quot;c&quot;&gt;## and as an identifier for the output file&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;job_number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_JOBID&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F. &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# run R&lt;/span&gt;
-Rscript --vanilla foo.r &amp;gt; foo.Rout
+&lt;span class=&quot;c&quot;&gt;# run R in batch mode&lt;/span&gt;
+R CMD BATCH foo.R &amp;gt; foo.Rout
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that &lt;code&gt;#!/bin/bash&lt;/code&gt; should be put in the first line. Also, I use &amp;#39;BATCH&amp;#39; here since it is compatible with the following section &amp;#39;pass arguments&amp;#39;. I haven&amp;#39;t tested the otherwise.&lt;/p&gt;
+
 &lt;p&gt;Then the file is ready to submit.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qsub foo.pbs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -121,8 +123,6 @@ Rscript --vanilla foo.r &amp;gt; foo.Rout
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qstat        &lt;span class=&quot;c&quot;&gt;# See list of jobs in the queue&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qstat –u usr &lt;span class=&quot;c&quot;&gt;# See list of jobs in the queue submitted by usr&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qdel JOBID   &lt;span class=&quot;c&quot;&gt;# delete a previously submitted job from the queue&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Note that &lt;code&gt;#!/bin/bash&lt;/code&gt; should be put in the first line.&lt;/p&gt;
 
 &lt;p&gt;Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh -l&lt;/span&gt;
@@ -140,7 +140,7 @@ Rscript t3.R &amp;gt;out7 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Pass arguments&lt;/h3&gt;
+&lt;h2&gt;Pass arguments&lt;/h2&gt;
 
 &lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from &lt;a href=&quot;http://www.stat.purdue.edu/%7Ebhadra/&quot;&gt;Dr. Anindya Bhadra&lt;/a&gt;.)&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;## HOWTO: chmod ugo+rx cluster; ./cluster&lt;/span&gt;
@@ -176,9 +176,11 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Download packages&lt;/h3&gt;
+&lt;p&gt;Read this &lt;a href=&quot;http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch&quot;&gt;post&lt;/a&gt; for passing argument for Rscript command.&lt;/p&gt;
 
-&lt;p&gt;An annoying bug is that R cannot import and load packages properly.&lt;/p&gt;
+&lt;h2&gt;Download packages&lt;/h2&gt;
+
+&lt;p&gt;An annoying thing is that R may not import and load packages properly.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; Calls: install.packages -&amp;gt; grep -&amp;gt; contrib.url
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; In addition: Warning message:
@@ -191,12 +193,10 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 &lt;blockquote&gt;
 &lt;p&gt;For example, if you want to use RStudio&amp;#39;s package repository, set repos=&amp;quot;http://cran.rstudio.com/&amp;quot; inside the install.packages call.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kr&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://cran.rstudio.com/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://cran.rstudio.com/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;***&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Reference&lt;/h3&gt;
+&lt;h2&gt;Reference&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;http://www.stat.purdue.edu/~dgc/cluster.pdf&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
@@ -225,358 +225,21 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
       </item>
     
       <item>
-        <title>Four Line Motto</title>
-        <description>&lt;blockquote&gt;
-&lt;p&gt;Learn from Everyone&lt;/p&gt;
+        <title>Site-ABC</title>
+        <description>&lt;p&gt;All of following is from Lijia&amp;#39;s &lt;a href=&quot;http://yulijia.net/freshman21/&quot;&gt;posts&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Follow No One&lt;/p&gt;
+&lt;h2&gt;Install&lt;/h2&gt;
 
-&lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# please make sure you have already installed git tools and ruby tools(gem)&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install sass
+&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install jekyll
+&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/yulijia/freshman21.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Work Like Hell&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 May 2015 00:00:00 -0400</pubDate>
-        <link>/life/2015/05/22/four-line-motto/</link>
-        <guid isPermaLink="true">/life/2015/05/22/four-line-motto/</guid>
-        
-        <category>lift</category>
-        
-        <category>motto</category>
-        
-        
-        <category>life</category>
-        
-      </item>
-    
-      <item>
-        <title>All I need is you</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/public/img/sweet_penguin.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
-        <link>/travel/2015/05/19/template/</link>
-        <guid isPermaLink="true">/travel/2015/05/19/template/</guid>
-        
-        <category>Travel</category>
-        
-        
-        <category>travel</category>
-        
-      </item>
-    
-      <item>
-        <title>2.0 version</title>
-        <description>&lt;p&gt;Today, I update the theme with some new features. Welcome to use freshman21 2.0 version(gh-pages branch).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;gh-pages branch new features&lt;/strong&gt; :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Google  search&lt;/li&gt;
-&lt;li&gt;Google analytics&lt;/li&gt;
-&lt;li&gt;Read more mode&lt;/li&gt;
-&lt;li&gt;Open Graph META Tags&lt;/li&gt;
-&lt;li&gt;Microdata(schema.org)&lt;/li&gt;
-&lt;li&gt;back to top button&lt;/li&gt;
-&lt;li&gt;font awesome icon&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;master branch new features&lt;/strong&gt; :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Open Graph META Tags&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Microdata(schema.org)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The main difference between master and gh-pages: only one Javascript (Mathjax) be included in master branch. &lt;/p&gt;
-
-&lt;p&gt;Master branch is a more purified html+css framework than gh-pages branch.&lt;/p&gt;
-
-&lt;p&gt;Clone master branch: &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;git clone https://github.com/yulijia/freshman21.git -b master --single-branch&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Clone gh-pages branch: &lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;git clone https://github.com/yulijia/freshman21.git -b gh-pages --single-branch&lt;/code&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 31 Mar 2015 00:00:00 -0400</pubDate>
-        <link>/news/2015/03/31/2.0version/</link>
-        <guid isPermaLink="true">/news/2015/03/31/2.0version/</guid>
-        
-        <category>version</category>
-        
-        <category>new features</category>
-        
-        <category>google analytics</category>
-        
-        <category>google search</category>
-        
-        <category>back to top</category>
-        
-        <category>read more</category>
-        
-        
-        <category>news</category>
-        
-      </item>
-    
-      <item>
-        <title>Git Cheat Sheet</title>
-        <description>&lt;h3&gt;Configure tooling&lt;/h3&gt;
-
-&lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.name &amp;quot;[name]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sets the name you want atached to your commit transactions&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global user.email &amp;quot;[email address]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sets the email you want atached to your commit transactions&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git config --global color.ui auto
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Enables helpful colorization of command line output&lt;/p&gt;
-
-&lt;h3&gt;Create repositories&lt;/h3&gt;
-
-&lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git init [project-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Creates a new local repository with the specified name&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git clone [url]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Downloads a project and its entire version history&lt;/p&gt;
-
-&lt;h3&gt;Make changes&lt;/h3&gt;
-
-&lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all new or modified files to be commited&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git add [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Snapshots the file in preparation for versioning&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Unstages the file, but preserve its contents&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Shows file differences not yet staged&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff --staged
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Shows file differences between staging and the last file version&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git commit -m &amp;quot;[descriptive message]&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Records file snapshots permanently in version history&lt;/p&gt;
-
-&lt;h3&gt;Group changes&lt;/h3&gt;
-
-&lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all local branches in the current repository&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Creates a new branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git checkout [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Switches to the specified branch and updates the working directory&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Combines the specified branch’s history into the current branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git branch -d [branch-name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Deletes the specified branch&lt;/p&gt;
-
-&lt;h3&gt;Refactor filenames&lt;/h3&gt;
-
-&lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Deletes the file from the working directory and stages the deletion&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git rm --cached [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Removes the file from version control but preserves the file locally&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git mv [file-original] [file-renamed]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Changes the file name and prepares it for commit&lt;/p&gt;
-
-&lt;h3&gt;Suppress tracking&lt;/h3&gt;
-
-&lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; *.log
- build/
- temp-*
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git ls-files --other --ignored --exclude-standard
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all ignored files in this project&lt;/p&gt;
-
-&lt;h3&gt;Save fragments&lt;/h3&gt;
-
-&lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Temporarily stores all modified tracked files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash pop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Restores the most recently stashed files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists all stashed changesets&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git stash drop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Discards the most recently stashed changeset&lt;/p&gt;
-
-&lt;h3&gt;Review history&lt;/h3&gt;
-
-&lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists version history for the current branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git log --follow [file]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lists version history for a file, including renames&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git diff [first-branch]...[second-branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Shows content differences between two branches&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git show [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Outputs metadata and content changes of the specified commit&lt;/p&gt;
-
-&lt;h3&gt;Redo commits&lt;/h3&gt;
-
-&lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Undoes all commits after [commit], preserving changes locally&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git reset --hard [commit]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Discards all history and changes back to the specified commit&lt;/p&gt;
-
-&lt;h3&gt;Synchronize changes&lt;/h3&gt;
-
-&lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git fetch [bookmark]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Downloads all history from the repository bookmark&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git merge [bookmark]/[branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Combines bookmark’s branch into current local branch&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git push [alias] [branch]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Uploads all local branch commits to GitHub&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ git pull
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Downloads bookmark history and incorporates changes&lt;/p&gt;
-
-&lt;h3&gt;Reference&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
-        <link>/tips/2015/01/30/Git-Resources/</link>
-        <guid isPermaLink="true">/tips/2015/01/30/Git-Resources/</guid>
-        
-        <category>tips</category>
-        
-        <category>git</category>
-        
-        <category>cheatsheet</category>
-        
-        
-        <category>tips</category>
-        
-      </item>
-    
-      <item>
-        <title>How to set the config.yml file</title>
-        <description>&lt;p&gt;The &lt;a href=&quot;https://github.com/yulijia/freshman21/blob/master/_config.yml&quot;&gt;config.yml file&lt;/a&gt; in the Freshman21 theme includes five parts. &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;First part&lt;/strong&gt; is the site info.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman21&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog title&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;tagline&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll theme, Freshman twenty-first&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sub-titile&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia YU&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author name&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;yu@lijiayu.net&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author email&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Freshman21&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme.&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# You can edit this line in _config.yml. It will appear in your document head meta and in &lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;your feed.xml site description&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;keywords&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Jekyll,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# html meta keywords&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the subpath of your site, e.g. /blog&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;http://yulijia.net/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the base hostname &amp;amp; protocol for your site&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can &lt;q&gt;Hide&lt;/q&gt; in two ways &lt;sup&gt;&lt;a href=&quot;#%5B1%5D&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#your twitter handle  &lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#your github account&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;disqus_shortname&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#disqus shortname&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;favicon&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;images/favicon.ico&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it.&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# these are shown on aboutme-box(sidebar).&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme_photo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;https://i.imgur.com/15BT1.jpg&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# your personal photo.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part3&lt;/strong&gt;, Site setting:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;ShowContactInfo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;True&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_column&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;two&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog style: two columns, if default_column != &amp;quot;two&amp;quot;, you will see a one column blog.&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_locale&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;en&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sidebar language set, only include: English(en) and Chinese (cn)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part4&lt;/strong&gt;, Blogroll info, only &lt;em&gt;name&lt;/em&gt; tags can shown on the page.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;Blogroll&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/freshman&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll blog theme&lt;/span&gt;
-      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&amp;#39;s website&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia Yu&amp;#39;s website&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part5&lt;/strong&gt;, Build settings&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;kramdown&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;highlighter&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;pygments&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# highlight&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;paginate&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# how many post can seen in the main page&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h1&gt;&lt;/h1&gt;
-
-&lt;ul style=&#39;list-style-type:none;&#39;&gt; 
-&lt;li id=&quot;[1]&quot;&gt; [1], you can set those info at &lt;strong&gt;Part3&lt;/strong&gt; or just delete the &lt;q&gt;aboutme.html&lt;/q&gt; at &lt;q&gt;sidebar.html&lt;/q&gt; in &lt;code&gt;_include&lt;/code&gt; folder. &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-sm-2&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;c&quot;&gt;&amp;lt;!--{ % include Aboutme.html % }--&amp;gt;&lt;/span&gt;
-   { % include Copyright_Notice.html % }
-   { % include Recent_Posts.html % }
-   { % include Categories.html % }
-   { % include Tags.html % }
-   { % include Blogroll.html % }
-   { % include Archives.html % }
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
- 
-</description>
-        <pubDate>Fri, 19 Dec 2014 00:00:00 -0500</pubDate>
-        <link>/articles/howto/2014/12/19/how-to-set-the-config-file/</link>
-        <guid isPermaLink="true">/articles/howto/2014/12/19/how-to-set-the-config-file/</guid>
-        
-        <category>configure</category>
-        
-        
-        <category>articles</category>
-        
-        <category>howto</category>
-        
-      </item>
-    
-      <item>
-        <title>Theme structure</title>
-        <description>&lt;h2&gt;1.The structure of freshman21 theme&lt;/h2&gt;
+&lt;h2&gt;Structure of freshman21 theme&lt;/h2&gt;
 
 &lt;p&gt;You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.&lt;/p&gt;
 
-&lt;p&gt;All sidebar boxes html files are in the &lt;code&gt;&lt;em&gt;include&lt;/code&gt; directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the &lt;q&gt;sidebar.html&lt;/q&gt; in the &lt;code&gt;&lt;/em&gt;includes&lt;/code&gt; directory. &lt;/p&gt;
+&lt;p&gt;All sidebar boxes html files are in the &lt;code&gt;&lt;em&gt;include&lt;/code&gt; directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the &lt;q&gt;sidebar.html&lt;/q&gt; in the &lt;code&gt;&lt;/em&gt;includes&lt;/code&gt; directory.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- a_home.md                 &lt;span class=&quot;c&quot;&gt;# home page link at navigation bar&lt;/span&gt;
@@ -585,7 +248,7 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _config.yml
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- css
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- main.scss
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- d_categories.md           &lt;span class=&quot;c&quot;&gt;# categories link at navigation bar &lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- d_categories.md           &lt;span class=&quot;c&quot;&gt;# categories link at navigation bar&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- e_tags.md                 &lt;span class=&quot;c&quot;&gt;# tags at main navigation bar&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- feed.xml                  &lt;span class=&quot;c&quot;&gt;# RSS at main navigation bar&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- f_guestbook.md            &lt;span class=&quot;c&quot;&gt;# guest book like at navigation bar&lt;/span&gt;
@@ -626,68 +289,58 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _syntax-highlighting-native.scss
     &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- _syntax-highlighting.scss&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;2.Structure with Named folders containing index HTML files&lt;/h2&gt;
+&lt;h2&gt;Configuration&lt;/h2&gt;
 
-&lt;p&gt;There is nothing wrong with the above method, however some people like to keep their URLs free from things like filename extensions. To achieve clean URLs for pages using Jekyll, you simply need to create a folder for each top-level page you want, and then place an index.html file in each page’s folder. You can find the more detail at &lt;a href=&quot;http://jekyllrb.com/docs/pages/&quot; title=&quot;Creating pages&quot;&gt;Jekyll documentation&lt;/a&gt;. Here is my own blog structure with page-folders to contain each pages.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/yulijia/freshman21/blob/master/_config.yml&quot;&gt;config.yml file&lt;/a&gt; in the Freshman21 theme includes five parts.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.
-├── _backup
-│   ├── en.tar.gz
-│   └── style.css
-├── categories                              &lt;span class=&quot;c&quot;&gt;# =&amp;gt; http://yulijia.net/en/categories/ &lt;/span&gt;
-│   └── index.md
-├── _config.yml
-├── css
-│   └── main.scss
-├── feed                                    &lt;span class=&quot;c&quot;&gt;# =&amp;gt; http://yulijia.net/en/feed/index.xml&lt;/span&gt;
-│   └── index.xml
-├── guestbook                               &lt;span class=&quot;c&quot;&gt;# =&amp;gt; http://yulijia.net/en/guestbook/&lt;/span&gt;
-│   └── index.md
-├── home.md
-├── _includes
-│   ├── Aboutme.html
-│   ├── Archives.html
-│   ├── Blogroll.html
-│   ├── Categories.html
-│   ├── comments.html
-│   ├── Copyright_Notice.html
-│   ├── footer.html
-│   ├── header.html
-│   ├── head.html
-│   ├── page_pagination.html
-│   ├── post_pagination.html
-│   ├── Recent_Posts.html
-│   ├── sidebar.html
-│   └── Tags.html
-├── index.html
-├── _layouts
-│   ├── default.html
-│   ├── page.html
-│   └── post.html
-├── _posts
-│   ├── 2011-07-22-hello-world.md
-│   ├── 2011-08-06-how-to-calculate-word-frequencies-with-r.md
-│   ├── 2011-08-18-should-draco-be-effective-against-virtually-all-viruses.md
-│   ├── 2011-10-21-why-viruses-produce-long-dsrna-but-not-endogenous-ones.md
-│   ├── 2012-03-22-100-things-bioinformatics-students-should-do-before-graduating.md
-│   ├── 2012-10-08-a-new-site.md
-│   ├── 2012-10-09-github-pages.md
-│   ├── 2012-10-22-a-conference-of-Genomics-and-Epigenomics.md
-│   ├── 2012-10-23-CSHL-Asia-interesting-talks-on-genomics-and-epigenomics.md
-│   └── 2013-01-30-how-to-get-RefSeq-gene-annotations-from-UCSCdatabase.md
-├── README.md
-├── _sass
-│   ├── _base.scss
-│   ├── _layout.scss
-│   └── _syntax-highlighting.scss
-└── tags
-    └── index.md&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;First part&lt;/strong&gt; is the site info.&lt;/p&gt;
 
-&lt;h2&gt;3. How to change the highlight style?&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman21&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog title&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;tagline&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll theme, Freshman twenty-first&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sub-titile&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia YU&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author name&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;yu@lijiayu.net&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author email&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Freshman21&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme.&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# You can edit this line in _config.yml. It will appear in your document head meta and in&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;your feed.xml site description&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;keywords&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Jekyll,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# html meta keywords&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the subpath of your site, e.g. /blog&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;http://yulijia.net/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the base hostname &amp;amp; protocol for your site&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can &lt;q&gt;Hide&lt;/q&gt; in two ways &lt;sup&gt;&lt;a href=&quot;#%5B1%5D&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#your twitter handle  &lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#your github account&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;disqus_shortname&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#disqus shortname&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;favicon&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;images/favicon.ico&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it.&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# these are shown on aboutme-box(sidebar).&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme_photo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;https://i.imgur.com/15BT1.jpg&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# your personal photo.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Part3&lt;/strong&gt;, Site setting:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;ShowContactInfo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;True&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_column&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;two&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog style: two columns, if default_column != &amp;quot;two&amp;quot;, you will see a one column blog.&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_locale&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;en&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sidebar language set, only include: English(en) and Chinese (cn)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Part4&lt;/strong&gt;, Blogroll info, only &lt;em&gt;name&lt;/em&gt; tags can shown on the page.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;Blogroll&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman&lt;/span&gt;
+        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/freshman&lt;/span&gt;
+        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll blog theme&lt;/span&gt;
+      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&amp;#39;s website&lt;/span&gt;
+        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/&lt;/span&gt;
+        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia Yu&amp;#39;s website&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Part5&lt;/strong&gt;, Build settings&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;kramdown&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;highlighter&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;pygments&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# highlight&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;paginate&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# how many post can seen in the main page&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Highlight style&lt;/h2&gt;
 
 &lt;p&gt;This theme&amp;#39;s default highlighter is pygments.&lt;/p&gt;
 
-&lt;p&gt;To change the highlight style, you should install &lt;strong&gt;pygments&lt;/strong&gt;, and generate the css style which you wanted with code &lt;/p&gt;
+&lt;p&gt;To change the highlight style, you should install &lt;strong&gt;pygments&lt;/strong&gt;, and generate the css style which you wanted with code&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;pygmentize -S default -f html &amp;gt; freshman/&lt;em&gt;sass/&lt;/em&gt;syntax-highlighting.scss&lt;/code&gt;&lt;/p&gt;
 
@@ -700,163 +353,157 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col&quot;&gt;Pygments online deme&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Fri, 19 Dec 2014 00:00:00 -0500</pubDate>
-        <link>/articles/howto/2014/12/19/freshman21-structure/</link>
-        <guid isPermaLink="true">/articles/howto/2014/12/19/freshman21-structure/</guid>
-        
-        <category>structure</category>
+        <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/news/2015/06/05/Site-ABC/</link>
+        <guid isPermaLink="true">/news/2015/06/05/Site-ABC/</guid>
         
         
-        <category>articles</category>
-        
-        <category>howto</category>
+        <category>news</category>
         
       </item>
     
       <item>
-        <title>How to install this theme</title>
-        <description>&lt;h2&gt;How to install Freshman theme?&lt;/h2&gt;
+        <title>Four Line Motto</title>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;Learn from Everyone&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# please make sure you have already installed git tools and ruby tools(gem)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install sass
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install jekyll
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/yulijia/freshman21.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Follow No One&lt;/p&gt;
 
-&lt;p&gt;Then, change the folder name to you own github page name, forexample&lt;/p&gt;
+&lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv freshman thisisyouname.github.io&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
- 
-</description>
-        <pubDate>Thu, 18 Dec 2014 00:00:00 -0500</pubDate>
-        <link>/articles/2014/12/18/how-to-install/</link>
-        <guid isPermaLink="true">/articles/2014/12/18/how-to-install/</guid>
-        
-        <category>sample-post</category>
-        
-        
-        <category>articles</category>
-        
-      </item>
-    
-      <item>
-        <title>Sample Post</title>
-        <description>&lt;ul&gt;
-&lt;li&gt;Table of Contents
-{:toc}&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This is a sample post.&lt;/p&gt;
-
-&lt;p&gt;Below is just about everything you&amp;#39;ll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.&lt;/p&gt;
-
-&lt;h2&gt;Heading&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# Heading 1
-
-## Heading 2
-
-### Heading 3
-
-#### Heading 4
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Body text&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;This is strong&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;This is figure&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Mdc4szJl.jpg&quot; alt=&quot;Elaphurus davidianus&quot; title=&quot;Père David&amp;#39;s deer&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;This is emphasized&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;53 = 125. Water is H&lt;sub&gt;2&lt;/sub&gt;O. &lt;/p&gt;
-
-&lt;p&gt;The New York Times &lt;cite&gt;(That’s a citation)&lt;/cite&gt;. &lt;/p&gt;
-
-&lt;p&gt;&lt;u&gt;Underline&lt;/u&gt;. &lt;/p&gt;
-
-&lt;p&gt;&lt;del&gt;HTML and CSS are our tools&lt;/del&gt;. &lt;/p&gt;
-
-&lt;h2&gt;Blockquotes&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Justification:
-This species is listed as Extinct in the Wild, as all populations are still under captive management. The captive population in China has increased in recent years, and the possibility remains that free-ranging populations can be established some time in the near future. When that happens, its Red List status will need to be reassessed. &lt;/p&gt;
-
-&lt;p&gt;I follow up the quest. Despite of day and night and death and hell.
-&lt;center&gt; -- Idylls of the King, Tennyson &lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;Work Like Hell&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2&gt;List Types&lt;/h2&gt;
-
-&lt;h3&gt;Ordered Lists&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Item one
-
-&lt;ol&gt;
-&lt;li&gt;sub item one&lt;/li&gt;
-&lt;li&gt;sub item two&lt;/li&gt;
-&lt;li&gt;sub item three&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;Item two&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3&gt;Unordered Lists&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Item one&lt;/li&gt;
-&lt;li&gt;Item two&lt;/li&gt;
-&lt;li&gt;Item three&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Tables&lt;/h2&gt;
-
-&lt;p&gt;| Header1 | Header2 | Header3 |
-|:--------|:-------:|--------:|
-| cell1   | cell2   | cell3   |
-| cell4   | cell5   | cell6   |
-| cell7   | cell8   | cell9   |&lt;/p&gt;
-
-&lt;p&gt;| Kingdom | Phylum  | Class | Order | Family |
-|:------:|:------:|:------:|:------:|:------:| 
-|ANIMALIA|CHORDATA|MAMMALIA|CETARTIODACTYLA|CERVIDAE|&lt;/p&gt;
-
-&lt;h2&gt;Code Snippets&lt;/h2&gt;
-
-&lt;p&gt;Syntax highlighting via Pygments&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nf&quot;&gt;#container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-240px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h4&gt;highlight with line number.&lt;/h4&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;$$\LaTeX$$&lt;/h2&gt;
-
-&lt;p&gt;you can use latex with &lt;q&gt;double $$ &lt;/q&gt;&lt;/p&gt;
-
-&lt;p&gt;$$e^{i\pi}+1=0$$&lt;/p&gt;
-
-&lt;h2&gt;&amp;lt;q&amp;gt; tag&lt;/h2&gt;
-
-&lt;p&gt;here is a &amp;lt;q&amp;gt; q tag &amp;lt;/q&amp;gt;&lt;/p&gt;
-
-&lt;p&gt;here is a &lt;q&gt; q tag &lt;/q&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 13 Dec 2014 00:00:00 -0500</pubDate>
-        <link>/articles/2014/12/13/simple-post/</link>
-        <guid isPermaLink="true">/articles/2014/12/13/simple-post/</guid>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0400</pubDate>
+        <link>/life/2015/05/22/four-line-motto/</link>
+        <guid isPermaLink="true">/life/2015/05/22/four-line-motto/</guid>
         
-        <category>sample-post</category>
+        <category>lift</category>
+        
+        <category>motto</category>
         
         
-        <category>articles</category>
+        <category>life</category>
+        
+      </item>
+    
+      <item>
+        <title>All I need is you</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/images/sweet_penguin.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
+        <link>/travel/2015/05/19/template/</link>
+        <guid isPermaLink="true">/travel/2015/05/19/template/</guid>
+        
+        <category>Travel</category>
+        
+        
+        <category>travel</category>
+        
+      </item>
+    
+      <item>
+        <title>Git Cheat Sheet</title>
+        <description>&lt;h3&gt;Configure tooling&lt;/h3&gt;
+
+&lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config --global user.name &lt;span class=&quot;s2&quot;&gt;&amp;quot;[name]&amp;quot;&lt;/span&gt;           &lt;span class=&quot;c&quot;&gt;# Sets the name you want atached to your commit transactions&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config --global user.email &lt;span class=&quot;s2&quot;&gt;&amp;quot;[email address]&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Sets the email you want atached to your commit transactions&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config --global color.ui auto                &lt;span class=&quot;c&quot;&gt;# Enables helpful colorization of command line output&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Create repositories&lt;/h3&gt;
+
+&lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git init &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;project-name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Creates a new local repository with the specified name&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;url&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;         &lt;span class=&quot;c&quot;&gt;# Downloads a project and its entire version history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Make changes&lt;/h3&gt;
+
+&lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status                            &lt;span class=&quot;c&quot;&gt;# Lists all new or modified files to be commited&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                        &lt;span class=&quot;c&quot;&gt;# Snapshots the file in preparation for versioning&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git reset &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                      &lt;span class=&quot;c&quot;&gt;# Unstages the file, but preserve its contents&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git diff                              &lt;span class=&quot;c&quot;&gt;# Shows file differences not yet staged&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git diff --staged                     &lt;span class=&quot;c&quot;&gt;# Shows file differences between staging and the last file version&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;[descriptive message]&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Records file snapshots permanently in version history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Group changes&lt;/h3&gt;
+
+&lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch                  &lt;span class=&quot;c&quot;&gt;# Lists all local branches in the current repository&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch-name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;    &lt;span class=&quot;c&quot;&gt;# Creates a new branch&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch-name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# Switches to the specified branch and updates the working directory&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;          &lt;span class=&quot;c&quot;&gt;# Combines the specified branch’s history into the current branch&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch -d &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch-name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Deletes the specified branch&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Refactor filenames&lt;/h3&gt;
+
+&lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rm &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                         &lt;span class=&quot;c&quot;&gt;# Deletes the file from the working directory and stages the deletion&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rm --cached &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                &lt;span class=&quot;c&quot;&gt;# Removes the file from version control but preserves the file locally&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git mv &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file-original&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file-renamed&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Changes the file name and prepares it for commit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Suppress tracking&lt;/h3&gt;
+
+&lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt; *.log
+ build/
+ temp-*
+&lt;span class=&quot;c&quot;&gt;# A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git ls-files --other --ignored --exclude-standard
+&lt;span class=&quot;c&quot;&gt;# Lists all ignored files in this project&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Save fragments&lt;/h3&gt;
+
+&lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git stash      &lt;span class=&quot;c&quot;&gt;# Temporarily stores all modified tracked files&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git stash pop  &lt;span class=&quot;c&quot;&gt;# Restores the most recently stashed files&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git stash list &lt;span class=&quot;c&quot;&gt;# Lists all stashed changesets&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git stash drop &lt;span class=&quot;c&quot;&gt;# Discards the most recently stashed changeset&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Review history&lt;/h3&gt;
+
+&lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log                                   &lt;span class=&quot;c&quot;&gt;# Lists version history for the current branch&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log --follow &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;file&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                   &lt;span class=&quot;c&quot;&gt;# Lists version history for a file, including renames&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git diff &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;first-branch&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;...&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;second-branch&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Shows content differences between two branches&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git show &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;commit&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;                         &lt;span class=&quot;c&quot;&gt;# Outputs metadata and content changes of the specified commit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Redo commits&lt;/h3&gt;
+
+&lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git reset &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;commit&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;        &lt;span class=&quot;c&quot;&gt;# Undoes all commits after [commit], preserving changes locally&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git reset --hard &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;commit&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Discards all history and changes back to the specified commit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Synchronize changes&lt;/h3&gt;
+
+&lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git fetch &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;bookmark&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;          &lt;span class=&quot;c&quot;&gt;# Downloads all history from the repository bookmark&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;bookmark&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Combines bookmark’s branch into current local branch&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;branch&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# Uploads all local branch commits to GitHub&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull                      &lt;span class=&quot;c&quot;&gt;# Downloads bookmark history and incorporates changes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Reference&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
+        <link>/tips/2015/01/30/Git-Resources/</link>
+        <guid isPermaLink="true">/tips/2015/01/30/Git-Resources/</guid>
+        
+        <category>tips</category>
+        
+        <category>git</category>
+        
+        <category>cheatsheet</category>
+        
+        
+        <category>tips</category>
         
       </item>
     
