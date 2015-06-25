@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: R download file from web
 layout: post
 author: Wenyu
