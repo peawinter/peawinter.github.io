@@ -7,24 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1">
 
-<meta property="og:title" content="Site-ABC">
-<title>Site-ABC</title>
-<meta property="og:description" content="All of following are from Lijia&#39;s posts.">
-<meta property="og:url" content="/news/2015/06/05/Site-ABC/">
+<meta property="og:title" content="Apprantice">
+<title>Apprantice</title>
+<meta property="og:description" content="Hi, I'm an operational researcher and statistician.
+">
+<meta property="og:url" content="/page2/">
 <meta property="og:site_name" content="Apprantice">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="Site-ABC">
-<meta name="twitter:description" content="All of following are from Lijia&#39;s posts.">
-<meta name="twitter:url" content="/news/2015/06/05/Site-ABC/">
+<meta name="twitter:title" content="Apprantice">
+<meta name="twitter:description" content="Hi, I'm an operational researcher and statistician.
+">
+<meta name="twitter:url" content="/page2/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/news/2015/06/05/Site-ABC/">
+<link rel="canonical" href="/page2/">
 <link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -102,26 +104,92 @@
 
   <div class="page-content">
     <div class="wrapper">
-      <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <div class="home">
+  <div class="post" itemscope itemtype="http://schema.org/BlogPosting" >
 
-  <header class="post-header">
-    <h1 itemprop="name" class="post-title">Site-ABC</h1>
-    <meta itemprop="keywords" content="" />
-    <p class="post-meta">
-    <!-- Posted in
     
-    <a href="/categories/#news">news</a>&nbsp;
-    
-     -->
-    <time itemprop="datePublished" datetime="2015-06-05">
-    <!-- on  -->
-    Jun 5, 2015
-    </time>
-    </p>
-  </header>
 
-  <article class="post-content" itemprop="articleBody">
-    <p>All of following are from Lijia&#39;s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/05/from-function-to-name/">R from function to its name</a>
+      </h1>
+      <meta itemprop="keywords" content="R,function" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#function" title="function">function </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <!-- on  -->
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myTestFun1 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
+
+myTestFun2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
+
+myMain <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFun<span class="p">)</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>R works greatly since it passes function as variable (so-called functional programming?)</p>
+
+<p>In <code>myMain</code> function, I want to generate output looks like</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">test function: myTestFun1
+
+        value: ....
+</code></pre></div>
+<p>Here I got a problem, since R passes the function to <code>testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code>match.fun</code> to extract the desired function object.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myMainNew <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFunName<span class="p">)</span> <span class="p">{</span>
+  testFun <span class="o">&lt;-</span> <span class="kp">match.fun</span><span class="p">(</span>testFunName<span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>Reference</h3>
+
+<ol>
+<li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/news/2015/06/05/Site-ABC/">Site-ABC</a>
+      </h1>
+      <meta itemprop="keywords" content="" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#news">news</a>&nbsp;
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <!-- on  -->
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>All of following are from Lijia&#39;s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
 
 <h2>Install</h2>
 
@@ -248,43 +316,210 @@
 <li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
 </ol>
 
-  </article>
-  <hr />
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/life/2015/05/22/four-line-motto/">Four Line Motto</a>
+      </h1>
+      <meta itemprop="keywords" content="lift,motto" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#life">life</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#lift" title="lift">lift </a>, 
+      
+      <a href="/tags/#motto" title="motto">motto </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-05-22">
+      <!-- on  -->
+      May 22, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <blockquote>
+<p>Learn from Everyone</p>
+
+<p>Follow No One</p>
+
+<p>Watch for Patterns (a.k.a. Think)</p>
+
+<p>Work Like Hell</p>
+</blockquote>
+
+<p><a href="http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html">source</a></p>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/travel/2015/05/19/template/">All I need is you</a>
+      </h1>
+      <meta itemprop="keywords" content="Travel" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#travel">travel</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#Travel" title="Travel">Travel </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-05-19">
+      <!-- on  -->
+      May 19, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p><img src="/images/sweet_penguin.jpg" alt="1"></p>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/01/30/Git-Resources/">Git Cheat Sheet</a>
+      </h1>
+      <meta itemprop="keywords" content="tips,git,cheatsheet" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#tips" title="tips">tips </a>, 
+      
+      <a href="/tags/#git" title="git">git </a>, 
+      
+      <a href="/tags/#cheatsheet" title="cheatsheet">cheatsheet </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-01-30">
+      <!-- on  -->
+      Jan 30, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <h3>Configure tooling</h3>
+
+<p>Configure user information for all local repositories</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;[name]&quot;</span>           <span class="c"># Sets the name you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global user.email <span class="s2">&quot;[email address]&quot;</span> <span class="c"># Sets the email you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global color.ui auto                <span class="c"># Enables helpful colorization of command line output</span>
+</code></pre></div>
+<h3>Create repositories</h3>
+
+<p>Start a new repository or obtain one from an existing URL</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git init <span class="o">[</span>project-name<span class="o">]</span> <span class="c"># Creates a new local repository with the specified name</span>
+<span class="nv">$ </span>git clone <span class="o">[</span>url<span class="o">]</span>         <span class="c"># Downloads a project and its entire version history</span>
+</code></pre></div>
+<h3>Make changes</h3>
+
+<p>Review edits and craf a commit transaction</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git status                            <span class="c"># Lists all new or modified files to be commited</span>
+<span class="nv">$ </span>git add <span class="o">[</span>file<span class="o">]</span>                        <span class="c"># Snapshots the file in preparation for versioning</span>
+<span class="nv">$ </span>git reset <span class="o">[</span>file<span class="o">]</span>                      <span class="c"># Unstages the file, but preserve its contents</span>
+<span class="nv">$ </span>git diff                              <span class="c"># Shows file differences not yet staged</span>
+<span class="nv">$ </span>git diff --staged                     <span class="c"># Shows file differences between staging and the last file version</span>
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;[descriptive message]&quot;</span> <span class="c"># Records file snapshots permanently in version history</span>
+</code></pre></div>
+<h3>Group changes</h3>
+
+<p>Name a series of commits and combine completed efforts</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git branch                  <span class="c"># Lists all local branches in the current repository</span>
+<span class="nv">$ </span>git branch <span class="o">[</span>branch-name<span class="o">]</span>    <span class="c"># Creates a new branch</span>
+<span class="nv">$ </span>git checkout <span class="o">[</span>branch-name<span class="o">]</span>  <span class="c"># Switches to the specified branch and updates the working directory</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>branch<span class="o">]</span>          <span class="c"># Combines the specified branch’s history into the current branch</span>
+<span class="nv">$ </span>git branch -d <span class="o">[</span>branch-name<span class="o">]</span> <span class="c"># Deletes the specified branch</span>
+</code></pre></div>
+<h3>Refactor filenames</h3>
+
+<p>Relocate and remove versioned files</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git rm <span class="o">[</span>file<span class="o">]</span>                         <span class="c"># Deletes the file from the working directory and stages the deletion</span>
+<span class="nv">$ </span>git rm --cached <span class="o">[</span>file<span class="o">]</span>                <span class="c"># Removes the file from version control but preserves the file locally</span>
+<span class="nv">$ </span>git mv <span class="o">[</span>file-original<span class="o">]</span> <span class="o">[</span>file-renamed<span class="o">]</span> <span class="c"># Changes the file name and prepares it for commit</span>
+</code></pre></div>
+<h3>Suppress tracking</h3>
+
+<p>Exclude temporary files and paths</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> *.log
+ build/
+ temp-*
+<span class="c"># A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</span>
+<span class="nv">$ </span>git ls-files --other --ignored --exclude-standard
+<span class="c"># Lists all ignored files in this project</span>
+</code></pre></div>
+<h3>Save fragments</h3>
+
+<p>Shelve and restore incomplete changes</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash      <span class="c"># Temporarily stores all modified tracked files</span>
+<span class="nv">$ </span>git stash pop  <span class="c"># Restores the most recently stashed files</span>
+<span class="nv">$ </span>git stash list <span class="c"># Lists all stashed changesets</span>
+<span class="nv">$ </span>git stash drop <span class="c"># Discards the most recently stashed changeset</span>
+</code></pre></div>
+<h3>Review history</h3>
+
+<p>Browse and inspect the evolution of project files</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git log                                   <span class="c"># Lists version history for the current branch</span>
+<span class="nv">$ </span>git log --follow <span class="o">[</span>file<span class="o">]</span>                   <span class="c"># Lists version history for a file, including renames</span>
+<span class="nv">$ </span>git diff <span class="o">[</span>first-branch<span class="o">]</span>...<span class="o">[</span>second-branch<span class="o">]</span> <span class="c"># Shows content differences between two branches</span>
+<span class="nv">$ </span>git show <span class="o">[</span>commit<span class="o">]</span>                         <span class="c"># Outputs metadata and content changes of the specified commit</span>
+</code></pre></div>
+<h3>Redo commits</h3>
+
+<p>Erase mistakes and craft replacement history</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset <span class="o">[</span>commit<span class="o">]</span>        <span class="c"># Undoes all commits after [commit], preserving changes locally</span>
+<span class="nv">$ </span>git reset --hard <span class="o">[</span>commit<span class="o">]</span> <span class="c"># Discards all history and changes back to the specified commit</span>
+</code></pre></div>
+<h3>Synchronize changes</h3>
+
+<p>Register a repository bookmark and exchange version history</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git fetch <span class="o">[</span>bookmark<span class="o">]</span>          <span class="c"># Downloads all history from the repository bookmark</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>bookmark<span class="o">]</span>/<span class="o">[</span>branch<span class="o">]</span> <span class="c"># Combines bookmark’s branch into current local branch</span>
+<span class="nv">$ </span>git push <span class="o">[</span><span class="nb">alias</span><span class="o">]</span> <span class="o">[</span>branch<span class="o">]</span>     <span class="c"># Uploads all local branch commits to GitHub</span>
+<span class="nv">$ </span>git pull                      <span class="c"># Downloads bookmark history and incorporates changes</span>
+</code></pre></div>
+<h3>Reference</h3>
+
+<ol>
+<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+  </div>
 </div>
-
-
-<section class="pager">
-  <ul>
-    
-    <li class="previous"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">&larr; Older</a></li>
-    
-    
-    <li class="next"><a href="/tips/2015/06/05/from-function-to-name/" title="R from function to its name">Newer &rarr;</a></li>
-    
-  </ul>
-</section>
-
-<div id="disqus_thread"></div>
-
-<script type="text/javascript">
-
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function() {
-  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
 
     </div>
   </div>
   <section class="pager">
+  
+  
+  <li class="previous"><a href="/" title="Newer">&larr; Newer</a></li>
+  
   
   
 </section>

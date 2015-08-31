@@ -7,24 +7,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1">
 
-<meta property="og:title" content="All I need is you">
-<title>All I need is you</title>
-<meta property="og:description" content="">
-<meta property="og:url" content="/travel/2015/05/19/template/">
+<meta property="og:title" content="Install Rmpi on Mac and Redhat server">
+<title>Install Rmpi on Mac and Redhat server</title>
+<meta property="og:description" content="To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed Rmpi for the first time.">
+<meta property="og:url" content="/tips/2015/06/23/install-Rmpi/">
 <meta property="og:site_name" content="Apprantice">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="All I need is you">
-<meta name="twitter:description" content="">
-<meta name="twitter:url" content="/travel/2015/05/19/template/">
+<meta name="twitter:title" content="Install Rmpi on Mac and Redhat server">
+<meta name="twitter:description" content="To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed Rmpi for the first time.">
+<meta name="twitter:url" content="/tips/2015/06/23/install-Rmpi/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/travel/2015/05/19/template/">
+<link rel="canonical" href="/tips/2015/06/23/install-Rmpi/">
 <link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -105,28 +105,62 @@
       <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 itemprop="name" class="post-title">All I need is you</h1>
-    <meta itemprop="keywords" content="Travel" />
+    <h1 itemprop="name" class="post-title">Install Rmpi on Mac and Redhat server</h1>
+    <meta itemprop="keywords" content="R,parallel computing" />
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#travel">travel</a>&nbsp;
+    <a href="/categories/#tips">tips</a>&nbsp;
     
     
     and tagged
     
-    <a href="/tags/#Travel" title="Travel">Travel </a>
+    <a href="/tags/#R" title="R">R </a>, 
+    
+    <a href="/tags/#parallel computing" title="parallel computing">parallel computing </a>
     
      -->
-    <time itemprop="datePublished" datetime="2015-05-19">
+    <time itemprop="datePublished" datetime="2015-06-23">
     <!-- on  -->
-    May 19, 2015
+    Jun 23, 2015
     </time>
     </p>
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <p><img src="/images/sweet_penguin.jpg" alt="1"></p>
+    <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
+
+<h2>Installation</h2>
+
+<p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
+</code></pre></div>
+<p>Then in <code>R</code>, install the package from source.</p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<p>Although this line can do the job, but it is not straight forward to get here.</p>
+
+<ol>
+<li>Download Rmpi_version.gz</li>
+<li>Add module</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">module add r
+module add openmpi
+</code></pre></div>
+<ol>
+<li>Check the directory of the openmpi via</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ompi_info
+</code></pre></div>
+<ol>
+<li>Final step to install <code>Rmpi</code></li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<h2>Examples</h2>
 
   </article>
   <hr />
@@ -136,10 +170,10 @@
 <section class="pager">
   <ul>
     
-    <li class="previous"><a href="/tips/2015/01/30/Git-Resources/" title="Git Cheat Sheet">&larr; Older</a></li>
+    <li class="previous"><a href="/tips/2015/06/11/python-punctuation/" title="Python punctuation">&larr; Older</a></li>
     
     
-    <li class="next"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">Newer &rarr;</a></li>
+    <li class="next"><a href="/tips/2015/06/25/ipython-notebook-from-hathi/" title="Access remote ipython notebook">Newer &rarr;</a></li>
     
   </ul>
 </section>
