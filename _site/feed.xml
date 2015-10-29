@@ -6,9 +6,196 @@
 </description>
     <link>/</link>
     <atom:link href="/zfeed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Jun 2015 13:56:28 -0400</pubDate>
-    <lastBuildDate>Sun, 07 Jun 2015 13:56:28 -0400</lastBuildDate>
+    <pubDate>Sun, 30 Aug 2015 14:46:48 -0400</pubDate>
+    <lastBuildDate>Sun, 30 Aug 2015 14:46:48 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Access remote ipython notebook</title>
+        <description>&lt;p&gt;Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&amp;#39;&amp;#39;ve had the access to the Purdue server &lt;code&gt;Hathi&lt;/code&gt;, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the &lt;code&gt;Rmpi&lt;/code&gt; package.) The inspiration to use ipython hosted by Hathi hits me immediately.&lt;/p&gt;
+
+&lt;p&gt;The steps are straightforward,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Make sure your can login without password. This can be done by following &lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;reference 2&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Start ipython on Hathi.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;% on server
+module add anaconda
+ipython notebook --no-browser --port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;7777
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup the ssh tunnel from the local machine to the remote machine.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;% on &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;machine
+ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Access remotely hosted ipython notebook through your favorite brower at &lt;a href=&quot;localhost:7777&quot;&gt;localhost:7777&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As Joe Hamman said,&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;Reference&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/&quot;&gt;http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;http://www.linuxproblem.org/art_9.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 25 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/25/ipython-notebook-from-hathi/</link>
+        <guid isPermaLink="true">/tips/2015/06/25/ipython-notebook-from-hathi/</guid>
+        
+        <category>python</category>
+        
+        <category>notebook</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
+    
+      <item>
+        <title>Install Rmpi on Mac and Redhat server</title>
+        <description>&lt;p&gt;To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed &lt;code&gt;Rmpi&lt;/code&gt; for the first time.&lt;/p&gt;
+
+&lt;h2&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;It turns out &lt;code&gt;Rmpi&lt;/code&gt; depends on &lt;code&gt;open MPI&lt;/code&gt;, which should be installed by&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew install open-mpi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then in &lt;code&gt;R&lt;/code&gt;, install the package from source.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rmpi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; type&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;source&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As to install &lt;code&gt;Rmpi&lt;/code&gt; on server, we need some specification. This line works on &lt;code&gt;radon&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;--with-mpi&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Although this line can do the job, but it is not straight forward to get here.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Download Rmpi_version.gz&lt;/li&gt;
+&lt;li&gt;Add module&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;module add r
+module add openmpi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Check the directory of the openmpi via&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ompi_info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Final step to install &lt;code&gt;Rmpi&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;--with-mpi&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Examples&lt;/h2&gt;
+</description>
+        <pubDate>Tue, 23 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/23/install-Rmpi/</link>
+        <guid isPermaLink="true">/tips/2015/06/23/install-Rmpi/</guid>
+        
+        <category>R</category>
+        
+        <category>parallel computing</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
+    
+      <item>
+        <title>Python punctuation</title>
+        <description>&lt;p&gt;Here is a regex to match a string of characters that are not a letters or numbers:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Za&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here is the Python command to do a regex substitution:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;[^A-Za-z0-9]+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mystring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello world! how are you? 0&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Short version&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isalpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Faster version for long ASCII strings:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tostrip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isalpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;translate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tostrip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Using regular expressions&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;[^A-Za-z]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&quot;&gt;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/11/python-punctuation/</link>
+        <guid isPermaLink="true">/tips/2015/06/11/python-punctuation/</guid>
+        
+        <category>Python</category>
+        
+        <category>re</category>
+        
+        <category>Snippet</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
+    
+      <item>
+        <title>R download file from web</title>
+        <description>&lt;p&gt;When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;ls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;mood.data&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mood.data&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     group mood
+&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Another useful package is &lt;code&gt;RCurl&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;RCurl&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; myURL &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;some_url&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; myData &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; getURLContent&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;URLencode&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;myURL&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;getURL&lt;/code&gt; may issue an error when the file is not text. &lt;code&gt;getURLContent&lt;/code&gt; will determine the type of the content automatically.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;URLencode&lt;/code&gt; is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &amp;#39;URLencode&amp;#39; to process the link at first.&lt;/p&gt;
+
+&lt;p&gt;Reference&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&quot;&gt;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&lt;/a&gt;
+2.
+&lt;a href=&quot;http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html&quot;&gt;http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 10 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/10/r-download-using-curl/</link>
+        <guid isPermaLink="true">/tips/2015/06/10/r-download-using-curl/</guid>
+        
+        <category>R</category>
+        
+        <category>Download</category>
+        
+        <category>Snippet</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
     
       <item>
         <title>Running R on cluster</title>
@@ -218,6 +405,52 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
         <category>Terminal</category>
         
         <category>cluster</category>
+        
+        
+        <category>tips</category>
+        
+      </item>
+    
+      <item>
+        <title>R from function to its name</title>
+        <description>&lt;p&gt;In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;myTestFun1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+myTestFun2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+myMain &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFun&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;R works greatly since it passes function as variable (so-called functional programming?)&lt;/p&gt;
+
+&lt;p&gt;In &lt;code&gt;myMain&lt;/code&gt; function, I want to generate output looks like&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;test function: myTestFun1
+
+        value: ....
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here I got a problem, since R passes the function to &lt;code&gt;testFun&lt;/code&gt;, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use &lt;code&gt;match.fun&lt;/code&gt; to extract the desired function object.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;myMainNew &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFunName&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  testFun &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;match.fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFunName&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Reference&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&quot;&gt;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
+        <link>/tips/2015/06/05/from-function-to-name/</link>
+        <guid isPermaLink="true">/tips/2015/06/05/from-function-to-name/</guid>
+        
+        <category>R</category>
+        
+        <category>function</category>
         
         
         <category>tips</category>

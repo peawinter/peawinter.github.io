@@ -90,6 +90,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -104,6 +106,253 @@
     <div class="wrapper">
       <div class="home">
   <div class="post" itemscope itemtype="http://schema.org/BlogPosting" >
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/25/ipython-notebook-from-hathi/">Access remote ipython notebook</a>
+      </h1>
+      <meta itemprop="keywords" content="python,notebook" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#python" title="python">python </a>, 
+      
+      <a href="/tags/#notebook" title="notebook">notebook </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-25">
+      <!-- on  -->
+      Jun 25, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&#39;&#39;ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
+
+<p>The steps are straightforward,</p>
+
+<ol>
+<li><p>Make sure your can login without password. This can be done by following <a href="http://www.linuxproblem.org/art_9.html">reference 2</a>.</p></li>
+<li><p>Start ipython on Hathi.</p></li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on server
+module add anaconda
+ipython notebook --no-browser --port<span class="o">=</span>7777
+</code></pre></div>
+<ol>
+<li>Setup the ssh tunnel from the local machine to the remote machine.</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on <span class="nb">local </span>machine
+ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
+</code></pre></div>
+<ol>
+<li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
+</ol>
+
+<p>As Joe Hamman said,</p>
+
+<blockquote>
+<p>the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.</p>
+</blockquote>
+
+<h2>Reference</h2>
+
+<ol>
+<li><a href="http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/">http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/</a></li>
+<li><a href="http://www.linuxproblem.org/art_9.html">http://www.linuxproblem.org/art_9.html</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/23/install-Rmpi/">Install Rmpi on Mac and Redhat server</a>
+      </h1>
+      <meta itemprop="keywords" content="R,parallel computing" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#parallel computing" title="parallel computing">parallel computing </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-23">
+      <!-- on  -->
+      Jun 23, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
+
+<h2>Installation</h2>
+
+<p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
+</code></pre></div>
+<p>Then in <code>R</code>, install the package from source.</p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<p>Although this line can do the job, but it is not straight forward to get here.</p>
+
+<ol>
+<li>Download Rmpi_version.gz</li>
+<li>Add module</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">module add r
+module add openmpi
+</code></pre></div>
+<ol>
+<li>Check the directory of the openmpi via</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ompi_info
+</code></pre></div>
+<ol>
+<li>Final step to install <code>Rmpi</code></li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<h2>Examples</h2>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/11/python-punctuation/">Python punctuation</a>
+      </h1>
+      <meta itemprop="keywords" content="Python,re,Snippet" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#Python" title="Python">Python </a>, 
+      
+      <a href="/tags/#re" title="re">re </a>, 
+      
+      <a href="/tags/#Snippet" title="Snippet">Snippet </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-11">
+      <!-- on  -->
+      Jun 11, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
+</code></pre></div>
+<p>Here is the Python command to do a regex substitution:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;hello world! how are you? 0&quot;</span>
+
+<span class="c"># Short version</span>
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="c"># Faster version for long ASCII strings:</span>
+<span class="n">id_tab</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
+<span class="n">tostrip</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
+
+<span class="c"># Using regular expressions</span>
+<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+<p>Reference</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/10/r-download-using-curl/">R download file from web</a>
+      </h1>
+      <meta itemprop="keywords" content="R,Download,Snippet" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#Download" title="Download">Download </a>, 
+      
+      <a href="/tags/#Snippet" title="Snippet">Snippet </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-10">
+      <!-- on  -->
+      Jun 10, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kp">load</span><span class="p">(</span><span class="kp">url</span><span class="p">(</span><span class="s">&quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&quot;</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="kp">ls</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;mood.data&quot;</span>
+<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>mood.data<span class="p">)</span>
+     group mood
+<span class="m">1</span> pleasant    <span class="m">6</span>
+<span class="m">2</span> pleasant    <span class="m">5</span>
+<span class="m">3</span> pleasant    <span class="m">4</span>
+<span class="m">4</span> pleasant    <span class="m">7</span>
+<span class="m">5</span> pleasant    <span class="m">7</span>
+<span class="m">6</span> pleasant    <span class="m">5</span>
+</code></pre></div>
+<p>Another useful package is <code>RCurl</code>.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>RCurl<span class="p">)</span>
+<span class="o">&gt;</span> myURL <span class="o">&lt;-</span> <span class="s">&#39;some_url&#39;</span>
+<span class="o">&gt;</span> myData <span class="o">&lt;-</span> getURLContent<span class="p">(</span>URLencode<span class="p">(</span>myURL<span class="p">))</span>
+</code></pre></div>
+<p><code>getURL</code> may issue an error when the file is not text. <code>getURLContent</code> will determine the type of the content automatically.</p>
+
+<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &#39;URLencode&#39; to process the link at first.</p>
+
+<p>Reference</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a>
+2.
+<a href="http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html">http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html</a></li>
+</ol>
+
+    </article> <hr />
 
     
 
@@ -336,346 +585,6 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 
     
 
-    <header class="post-header">
-      <h1 itemprop="name" class="post-title">
-        <a itemprop="url" class="post-link" href="/news/2015/06/05/Site-ABC/">Site-ABC</a>
-      </h1>
-      <meta itemprop="keywords" content="" />
-      <p class="post-meta">
-      <!-- Posted in
-      
-      <a href="/categories/#news">news</a>&nbsp;
-      
-       -->
-      <time itemprop="datePublished" datetime="2015-06-05">
-      <!-- on  -->
-      Jun 5, 2015
-      </time>
-      </p>
-    </header>
-
-    <article class="post-content" itemprop="articleBody">
-      <p>All of following are from Lijia&#39;s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
-
-<h2>Install</h2>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="c"># please make sure you have already installed git tools and ruby tools(gem)</span>
-<span class="lineno">2</span> <span class="nv">$ </span>gem install sass
-<span class="lineno">3</span> <span class="nv">$ </span>gem install jekyll
-<span class="lineno">4</span> <span class="nv">$ </span>git clone https://github.com/yulijia/freshman21.git</code></pre></div>
-
-<h2>Structure of freshman21 theme</h2>
-
-<p>You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.</p>
-
-<p>All sidebar boxes html files are in the <code><em>include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code></em>includes</code> directory.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">.
-<span class="p">|</span>-- a_home.md                 <span class="c"># home page link at navigation bar</span>
-<span class="p">|</span>-- b_about.md                <span class="c"># about link at navigation bar</span>
-<span class="p">|</span>-- c_archives.md             <span class="c"># archives link at navigation bar</span>
-<span class="p">|</span>-- _config.yml
-<span class="p">|</span>-- css
-<span class="p">|</span>   <span class="sb">`</span>-- main.scss
-<span class="p">|</span>-- d_categories.md           <span class="c"># categories link at navigation bar</span>
-<span class="p">|</span>-- e_tags.md                 <span class="c"># tags at main navigation bar</span>
-<span class="p">|</span>-- feed.xml                  <span class="c"># RSS at main navigation bar</span>
-<span class="p">|</span>-- f_guestbook.md            <span class="c"># guest book like at navigation bar</span>
-<span class="p">|</span>-- images
-<span class="p">|</span>   <span class="sb">`</span>-- favicon.ico           <span class="c"># here is your website favicon</span>
-<span class="p">|</span>-- _includes
-<span class="p">|</span>   <span class="p">|</span>-- Aboutme.html          <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- Archives.html         <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- Blogroll.html         <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- Categories.html       <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- comments.html         <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- Copyright_Notice.html <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- footer.html
-<span class="p">|</span>   <span class="p">|</span>-- header.html
-<span class="p">|</span>   <span class="p">|</span>-- head.html
-<span class="p">|</span>   <span class="p">|</span>-- page_pagination.html
-<span class="p">|</span>   <span class="p">|</span>-- post_pagination.html
-<span class="p">|</span>   <span class="p">|</span>-- Recent_Posts.html     <span class="c"># right column sidebar content</span>
-<span class="p">|</span>   <span class="p">|</span>-- sidebar.html          <span class="c"># you can set you own sidebar content in here</span>
-<span class="p">|</span>   <span class="sb">`</span>-- Tags.html             <span class="c"># right column sidebar content</span>
-<span class="p">|</span>-- index.html
-<span class="p">|</span>-- _layouts
-<span class="p">|</span>   <span class="p">|</span>-- default.html
-<span class="p">|</span>   <span class="p">|</span>-- page.html
-<span class="p">|</span>   <span class="sb">`</span>-- post.html
-<span class="p">|</span>-- LICENSE
-<span class="p">|</span>-- _posts
-<span class="p">|</span>   <span class="p">|</span>-- 2013-10-10-milu.md
-<span class="p">|</span>   <span class="p">|</span>-- 2014-12-13-simple-post.md
-<span class="p">|</span>   <span class="p">|</span>-- 2014-12-18-how-to-install.md
-<span class="p">|</span>   <span class="p">|</span>-- 2014-12-19-freshman21-structure.md
-<span class="p">|</span>   <span class="p">|</span>-- 2014-12-19-how-to-set-the-config-file.md
-<span class="p">|</span>   <span class="sb">`</span>-- 2015-03-31-readme.md
-<span class="p">|</span>-- README.md
-<span class="sb">`</span>-- _sass
-    <span class="p">|</span>-- _base.scss
-    <span class="p">|</span>-- _layout.scss
-    <span class="p">|</span>-- _syntax-highlighting-native.scss
-    <span class="sb">`</span>-- _syntax-highlighting.scss</code></pre></div>
-
-<h2>Configuration</h2>
-
-<p>The <a href="https://github.com/yulijia/freshman21/blob/master/_config.yml">config.yml file</a> in the Freshman21 theme includes five parts.</p>
-
-<p><strong>First part</strong> is the site info.</p>
-
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Freshman21</span> <span class="c1"># blog title</span>
-<span class="l-Scalar-Plain">tagline</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Another Jekyll theme, Freshman twenty-first</span> <span class="c1"># blog sub-titile</span>
-<span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lijia YU</span> <span class="c1"># author name</span>
-<span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">yu@lijiayu.net</span> <span class="c1"># author email</span>
-<span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="s">&quot;Freshman21</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">Jekyll</span><span class="nv"> </span><span class="s">blog</span><span class="nv"> </span><span class="s">theme.&quot;</span> <span class="c1"># You can edit this line in _config.yml. It will appear in your document head meta and in</span>
-<span class="l-Scalar-Plain">your feed.xml site description</span>
-<span class="l-Scalar-Plain">keywords</span><span class="p-Indicator">:</span> <span class="s">&quot;Jekyll,</span><span class="nv"> </span><span class="s">theme,</span><span class="nv"> </span><span class="s">Freshman21&quot;</span> <span class="c1"># html meta keywords</span>
-<span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;/freshman21&quot;</span> <span class="c1"># the subpath of your site, e.g. /blog</span>
-<span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="s">&quot;http://yulijia.net/freshman21&quot;</span> <span class="c1"># the base hostname &amp; protocol for your site</span></code></pre></div>
-
-<p><strong>Part 2</strong>, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can <q>Hide</q> in two ways <sup><a href="#%5B1%5D">[1]</a></sup>:</p>
-
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">twitter_username</span><span class="p-Indicator">:</span> <span class="c1">#your twitter handle  </span>
-<span class="l-Scalar-Plain">github_username</span><span class="p-Indicator">:</span>  <span class="c1">#your github account</span>
-<span class="l-Scalar-Plain">disqus_shortname</span><span class="p-Indicator">:</span> <span class="c1">#disqus shortname</span>
-<span class="l-Scalar-Plain">favicon</span><span class="p-Indicator">:</span>     <span class="s">&quot;images/favicon.ico&quot;</span>
-<span class="l-Scalar-Plain">aboutme</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it.</span> <span class="c1"># these are shown on aboutme-box(sidebar).</span>
-<span class="l-Scalar-Plain">aboutme_photo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">https://i.imgur.com/15BT1.jpg</span> <span class="c1"># your personal photo.</span></code></pre></div>
-
-<p><strong>Part3</strong>, Site setting:</p>
-
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">ShowContactInfo</span><span class="p-Indicator">:</span> <span class="s">&quot;True&quot;</span> <span class="c1"># Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True</span>
-<span class="l-Scalar-Plain">default_column</span><span class="p-Indicator">:</span> <span class="s">&quot;two&quot;</span> <span class="c1"># blog style: two columns, if default_column != &quot;two&quot;, you will see a one column blog.</span>
-<span class="l-Scalar-Plain">default_locale</span><span class="p-Indicator">:</span> <span class="s">&quot;en&quot;</span> <span class="c1"># blog sidebar language set, only include: English(en) and Chinese (cn)</span></code></pre></div>
-
-<p><strong>Part4</strong>, Blogroll info, only <em>name</em> tags can shown on the page.</p>
-
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">Blogroll</span><span class="p-Indicator">:</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Freshman</span>
-        <span class="l-Scalar-Plain">href</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://yulijia.net/freshman</span>
-        <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Another Jekyll blog theme</span>
-      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">author&#39;s website</span>
-        <span class="l-Scalar-Plain">href</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://yulijia.net/</span>
-        <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lijia Yu&#39;s website</span></code></pre></div>
-
-<p><strong>Part5</strong>, Build settings</p>
-
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">kramdown</span>
-<span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pygments</span> <span class="c1"># highlight</span>
-<span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>  <span class="c1"># how many post can seen in the main page</span></code></pre></div>
-
-<h2>Highlight style</h2>
-
-<p>This theme&#39;s default highlighter is pygments.</p>
-
-<p>To change the highlight style, you should install <strong>pygments</strong>, and generate the css style which you wanted with code</p>
-
-<p><code>pygmentize -S default -f html &gt; freshman/<em>sass/</em>syntax-highlighting.scss</code></p>
-
-<p>Please make sure, add <code>.highlight {</code> at the head  and <code>}</code> at the end of file <q>_syntax-highlighting.scss</q>.</p>
-
-<p>See more,</p>
-
-<ol>
-<li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
-<li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
-</ol>
-
-    </article> <hr />
-
-    
-
-    <header class="post-header">
-      <h1 itemprop="name" class="post-title">
-        <a itemprop="url" class="post-link" href="/life/2015/05/22/four-line-motto/">Four Line Motto</a>
-      </h1>
-      <meta itemprop="keywords" content="lift,motto" />
-      <p class="post-meta">
-      <!-- Posted in
-      
-      <a href="/categories/#life">life</a>&nbsp;
-      
-      
-      and tagged
-      
-      <a href="/tags/#lift" title="lift">lift </a>, 
-      
-      <a href="/tags/#motto" title="motto">motto </a>
-      
-       -->
-      <time itemprop="datePublished" datetime="2015-05-22">
-      <!-- on  -->
-      May 22, 2015
-      </time>
-      </p>
-    </header>
-
-    <article class="post-content" itemprop="articleBody">
-      <blockquote>
-<p>Learn from Everyone</p>
-
-<p>Follow No One</p>
-
-<p>Watch for Patterns (a.k.a. Think)</p>
-
-<p>Work Like Hell</p>
-</blockquote>
-
-<p><a href="http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html">source</a></p>
-
-    </article> <hr />
-
-    
-
-    <header class="post-header">
-      <h1 itemprop="name" class="post-title">
-        <a itemprop="url" class="post-link" href="/travel/2015/05/19/template/">All I need is you</a>
-      </h1>
-      <meta itemprop="keywords" content="Travel" />
-      <p class="post-meta">
-      <!-- Posted in
-      
-      <a href="/categories/#travel">travel</a>&nbsp;
-      
-      
-      and tagged
-      
-      <a href="/tags/#Travel" title="Travel">Travel </a>
-      
-       -->
-      <time itemprop="datePublished" datetime="2015-05-19">
-      <!-- on  -->
-      May 19, 2015
-      </time>
-      </p>
-    </header>
-
-    <article class="post-content" itemprop="articleBody">
-      <p><img src="/images/sweet_penguin.jpg" alt="1"></p>
-
-    </article> <hr />
-
-    
-
-    <header class="post-header">
-      <h1 itemprop="name" class="post-title">
-        <a itemprop="url" class="post-link" href="/tips/2015/01/30/Git-Resources/">Git Cheat Sheet</a>
-      </h1>
-      <meta itemprop="keywords" content="tips,git,cheatsheet" />
-      <p class="post-meta">
-      <!-- Posted in
-      
-      <a href="/categories/#tips">tips</a>&nbsp;
-      
-      
-      and tagged
-      
-      <a href="/tags/#tips" title="tips">tips </a>, 
-      
-      <a href="/tags/#git" title="git">git </a>, 
-      
-      <a href="/tags/#cheatsheet" title="cheatsheet">cheatsheet </a>
-      
-       -->
-      <time itemprop="datePublished" datetime="2015-01-30">
-      <!-- on  -->
-      Jan 30, 2015
-      </time>
-      </p>
-    </header>
-
-    <article class="post-content" itemprop="articleBody">
-      <h3>Configure tooling</h3>
-
-<p>Configure user information for all local repositories</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;[name]&quot;</span>           <span class="c"># Sets the name you want atached to your commit transactions</span>
-<span class="nv">$ </span>git config --global user.email <span class="s2">&quot;[email address]&quot;</span> <span class="c"># Sets the email you want atached to your commit transactions</span>
-<span class="nv">$ </span>git config --global color.ui auto                <span class="c"># Enables helpful colorization of command line output</span>
-</code></pre></div>
-<h3>Create repositories</h3>
-
-<p>Start a new repository or obtain one from an existing URL</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git init <span class="o">[</span>project-name<span class="o">]</span> <span class="c"># Creates a new local repository with the specified name</span>
-<span class="nv">$ </span>git clone <span class="o">[</span>url<span class="o">]</span>         <span class="c"># Downloads a project and its entire version history</span>
-</code></pre></div>
-<h3>Make changes</h3>
-
-<p>Review edits and craf a commit transaction</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git status                            <span class="c"># Lists all new or modified files to be commited</span>
-<span class="nv">$ </span>git add <span class="o">[</span>file<span class="o">]</span>                        <span class="c"># Snapshots the file in preparation for versioning</span>
-<span class="nv">$ </span>git reset <span class="o">[</span>file<span class="o">]</span>                      <span class="c"># Unstages the file, but preserve its contents</span>
-<span class="nv">$ </span>git diff                              <span class="c"># Shows file differences not yet staged</span>
-<span class="nv">$ </span>git diff --staged                     <span class="c"># Shows file differences between staging and the last file version</span>
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;[descriptive message]&quot;</span> <span class="c"># Records file snapshots permanently in version history</span>
-</code></pre></div>
-<h3>Group changes</h3>
-
-<p>Name a series of commits and combine completed efforts</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git branch                  <span class="c"># Lists all local branches in the current repository</span>
-<span class="nv">$ </span>git branch <span class="o">[</span>branch-name<span class="o">]</span>    <span class="c"># Creates a new branch</span>
-<span class="nv">$ </span>git checkout <span class="o">[</span>branch-name<span class="o">]</span>  <span class="c"># Switches to the specified branch and updates the working directory</span>
-<span class="nv">$ </span>git merge <span class="o">[</span>branch<span class="o">]</span>          <span class="c"># Combines the specified branch’s history into the current branch</span>
-<span class="nv">$ </span>git branch -d <span class="o">[</span>branch-name<span class="o">]</span> <span class="c"># Deletes the specified branch</span>
-</code></pre></div>
-<h3>Refactor filenames</h3>
-
-<p>Relocate and remove versioned files</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git rm <span class="o">[</span>file<span class="o">]</span>                         <span class="c"># Deletes the file from the working directory and stages the deletion</span>
-<span class="nv">$ </span>git rm --cached <span class="o">[</span>file<span class="o">]</span>                <span class="c"># Removes the file from version control but preserves the file locally</span>
-<span class="nv">$ </span>git mv <span class="o">[</span>file-original<span class="o">]</span> <span class="o">[</span>file-renamed<span class="o">]</span> <span class="c"># Changes the file name and prepares it for commit</span>
-</code></pre></div>
-<h3>Suppress tracking</h3>
-
-<p>Exclude temporary files and paths</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"> *.log
- build/
- temp-*
-<span class="c"># A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</span>
-<span class="nv">$ </span>git ls-files --other --ignored --exclude-standard
-<span class="c"># Lists all ignored files in this project</span>
-</code></pre></div>
-<h3>Save fragments</h3>
-
-<p>Shelve and restore incomplete changes</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash      <span class="c"># Temporarily stores all modified tracked files</span>
-<span class="nv">$ </span>git stash pop  <span class="c"># Restores the most recently stashed files</span>
-<span class="nv">$ </span>git stash list <span class="c"># Lists all stashed changesets</span>
-<span class="nv">$ </span>git stash drop <span class="c"># Discards the most recently stashed changeset</span>
-</code></pre></div>
-<h3>Review history</h3>
-
-<p>Browse and inspect the evolution of project files</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git log                                   <span class="c"># Lists version history for the current branch</span>
-<span class="nv">$ </span>git log --follow <span class="o">[</span>file<span class="o">]</span>                   <span class="c"># Lists version history for a file, including renames</span>
-<span class="nv">$ </span>git diff <span class="o">[</span>first-branch<span class="o">]</span>...<span class="o">[</span>second-branch<span class="o">]</span> <span class="c"># Shows content differences between two branches</span>
-<span class="nv">$ </span>git show <span class="o">[</span>commit<span class="o">]</span>                         <span class="c"># Outputs metadata and content changes of the specified commit</span>
-</code></pre></div>
-<h3>Redo commits</h3>
-
-<p>Erase mistakes and craft replacement history</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset <span class="o">[</span>commit<span class="o">]</span>        <span class="c"># Undoes all commits after [commit], preserving changes locally</span>
-<span class="nv">$ </span>git reset --hard <span class="o">[</span>commit<span class="o">]</span> <span class="c"># Discards all history and changes back to the specified commit</span>
-</code></pre></div>
-<h3>Synchronize changes</h3>
-
-<p>Register a repository bookmark and exchange version history</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git fetch <span class="o">[</span>bookmark<span class="o">]</span>          <span class="c"># Downloads all history from the repository bookmark</span>
-<span class="nv">$ </span>git merge <span class="o">[</span>bookmark<span class="o">]</span>/<span class="o">[</span>branch<span class="o">]</span> <span class="c"># Combines bookmark’s branch into current local branch</span>
-<span class="nv">$ </span>git push <span class="o">[</span><span class="nb">alias</span><span class="o">]</span> <span class="o">[</span>branch<span class="o">]</span>     <span class="c"># Uploads all local branch commits to GitHub</span>
-<span class="nv">$ </span>git pull                      <span class="c"># Downloads bookmark history and incorporates changes</span>
-</code></pre></div>
-<h3>Reference</h3>
-
-<ol>
-<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
-<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
-</ol>
-
-    </article> <hr />
-
-    
-
   </div>
 </div>
 
@@ -683,6 +592,8 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
   </div>
   <section class="pager">
   
+  
+  <li class="next"><a href="/page2/" title="Older">Older &rarr;</a></li>
   
 </section>
 
