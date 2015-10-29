@@ -7,24 +7,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1">
 
-<meta property="og:title" content="Four Line Motto">
-<title>Four Line Motto</title>
-<meta property="og:description" content="Learn from Everyone">
-<meta property="og:url" content="/life/2015/05/22/four-line-motto/">
+<meta property="og:title" content="R from function to its name">
+<title>R from function to its name</title>
+<meta property="og:description" content="In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as...">
+<meta property="og:url" content="/tips/2015/06/05/from-function-to-name/">
 <meta property="og:site_name" content="Apprantice">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="Four Line Motto">
-<meta name="twitter:description" content="Learn from Everyone">
-<meta name="twitter:url" content="/life/2015/05/22/four-line-motto/">
+<meta name="twitter:title" content="R from function to its name">
+<meta name="twitter:description" content="In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as...">
+<meta name="twitter:url" content="/tips/2015/06/05/from-function-to-name/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/life/2015/05/22/four-line-motto/">
+<link rel="canonical" href="/tips/2015/06/05/from-function-to-name/">
 <link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -88,6 +88,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -103,40 +105,59 @@
       <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 itemprop="name" class="post-title">Four Line Motto</h1>
-    <meta itemprop="keywords" content="lift,motto" />
+    <h1 itemprop="name" class="post-title">R from function to its name</h1>
+    <meta itemprop="keywords" content="R,function" />
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#life">life</a>&nbsp;
+    <a href="/categories/#tips">tips</a>&nbsp;
     
     
     and tagged
     
-    <a href="/tags/#lift" title="lift">lift </a>, 
+    <a href="/tags/#R" title="R">R </a>, 
     
-    <a href="/tags/#motto" title="motto">motto </a>
+    <a href="/tags/#function" title="function">function </a>
     
      -->
-    <time itemprop="datePublished" datetime="2015-05-22">
+    <time itemprop="datePublished" datetime="2015-06-05">
     <!-- on  -->
-    May 22, 2015
+    Jun 5, 2015
     </time>
     </p>
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <blockquote>
-<p>Learn from Everyone</p>
+    <p>In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myTestFun1 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
 
-<p>Follow No One</p>
+myTestFun2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
 
-<p>Watch for Patterns (a.k.a. Think)</p>
+myMain <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFun<span class="p">)</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>R works greatly since it passes function as variable (so-called functional programming?)</p>
 
-<p>Work Like Hell</p>
-</blockquote>
+<p>In <code>myMain</code> function, I want to generate output looks like</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">test function: myTestFun1
 
-<p><a href="http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html">source</a></p>
+        value: ....
+</code></pre></div>
+<p>Here I got a problem, since R passes the function to <code>testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code>match.fun</code> to extract the desired function object.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myMainNew <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFunName<span class="p">)</span> <span class="p">{</span>
+  testFun <span class="o">&lt;-</span> <span class="kp">match.fun</span><span class="p">(</span>testFunName<span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>Reference</h3>
+
+<ol>
+<li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
+</ol>
 
   </article>
   <hr />
@@ -146,10 +167,10 @@
 <section class="pager">
   <ul>
     
-    <li class="previous"><a href="/travel/2015/05/19/template/" title="All I need is you">&larr; Older</a></li>
+    <li class="previous"><a href="/news/2015/06/05/Site-ABC/" title="Site-ABC">&larr; Older</a></li>
     
     
-    <li class="next"><a href="/news/2015/06/05/Site-ABC/" title="Site-ABC">Newer &rarr;</a></li>
+    <li class="next"><a href="/tips/2015/06/05/run-r-on-cluster/" title="Running R on cluster">Newer &rarr;</a></li>
     
   </ul>
 </section>

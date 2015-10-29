@@ -7,24 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1">
 
-<meta property="og:title" content="Running R on cluster">
-<title>Running R on cluster</title>
-<meta property="og:description" content="I&#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart ...">
-<meta property="og:url" content="/tips/2015/06/05/run-r-on-cluster/">
+<meta property="og:title" content="Apprantice">
+<title>Apprantice</title>
+<meta property="og:description" content="Hi, I'm an operational researcher and statistician.
+">
+<meta property="og:url" content="/">
 <meta property="og:site_name" content="Apprantice">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="Running R on cluster">
-<meta name="twitter:description" content="I&#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart ...">
-<meta name="twitter:url" content="/tips/2015/06/05/run-r-on-cluster/">
+<meta name="twitter:title" content="Apprantice">
+<meta name="twitter:description" content="Hi, I'm an operational researcher and statistician.
+">
+<meta name="twitter:url" content="/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/05/run-r-on-cluster/">
+<link rel="canonical" href="/">
 <link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -88,6 +90,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -100,39 +104,291 @@
 
   <div class="page-content">
     <div class="wrapper">
-      <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <div class="home">
+  <div class="post" itemscope itemtype="http://schema.org/BlogPosting" >
 
-  <header class="post-header">
-    <h1 itemprop="name" class="post-title">Running R on cluster</h1>
-    <meta itemprop="keywords" content="R,Linux,PBS,Terminal,cluster" />
-    <p class="post-meta">
-    <!-- Posted in
     
-    <a href="/categories/#tips">tips</a>&nbsp;
-    
-    
-    and tagged
-    
-    <a href="/tags/#R" title="R">R </a>, 
-    
-    <a href="/tags/#Linux" title="Linux">Linux </a>, 
-    
-    <a href="/tags/#PBS" title="PBS">PBS </a>, 
-    
-    <a href="/tags/#Terminal" title="Terminal">Terminal </a>, 
-    
-    <a href="/tags/#cluster" title="cluster">cluster </a>
-    
-     -->
-    <time itemprop="datePublished" datetime="2015-06-05">
-    <!-- on  -->
-    Jun 5, 2015
-    </time>
-    </p>
-  </header>
 
-  <article class="post-content" itemprop="articleBody">
-    <p>I&#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the &#39;Radon&#39; and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.</p>
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/25/ipython-notebook-from-hathi/">Access remote ipython notebook</a>
+      </h1>
+      <meta itemprop="keywords" content="python,notebook" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#python" title="python">python </a>, 
+      
+      <a href="/tags/#notebook" title="notebook">notebook </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-25">
+      <!-- on  -->
+      Jun 25, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&#39;&#39;ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
+
+<p>The steps are straightforward,</p>
+
+<ol>
+<li><p>Make sure your can login without password. This can be done by following <a href="http://www.linuxproblem.org/art_9.html">reference 2</a>.</p></li>
+<li><p>Start ipython on Hathi.</p></li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on server
+module add anaconda
+ipython notebook --no-browser --port<span class="o">=</span>7777
+</code></pre></div>
+<ol>
+<li>Setup the ssh tunnel from the local machine to the remote machine.</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on <span class="nb">local </span>machine
+ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
+</code></pre></div>
+<ol>
+<li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
+</ol>
+
+<p>As Joe Hamman said,</p>
+
+<blockquote>
+<p>the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.</p>
+</blockquote>
+
+<h2>Reference</h2>
+
+<ol>
+<li><a href="http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/">http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/</a></li>
+<li><a href="http://www.linuxproblem.org/art_9.html">http://www.linuxproblem.org/art_9.html</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/23/install-Rmpi/">Install Rmpi on Mac and Redhat server</a>
+      </h1>
+      <meta itemprop="keywords" content="R,parallel computing" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#parallel computing" title="parallel computing">parallel computing </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-23">
+      <!-- on  -->
+      Jun 23, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
+
+<h2>Installation</h2>
+
+<p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
+</code></pre></div>
+<p>Then in <code>R</code>, install the package from source.</p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<p>Although this line can do the job, but it is not straight forward to get here.</p>
+
+<ol>
+<li>Download Rmpi_version.gz</li>
+<li>Add module</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">module add r
+module add openmpi
+</code></pre></div>
+<ol>
+<li>Check the directory of the openmpi via</li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ompi_info
+</code></pre></div>
+<ol>
+<li>Final step to install <code>Rmpi</code></li>
+</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<h2>Examples</h2>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/11/python-punctuation/">Python punctuation</a>
+      </h1>
+      <meta itemprop="keywords" content="Python,re,Snippet" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#Python" title="Python">Python </a>, 
+      
+      <a href="/tags/#re" title="re">re </a>, 
+      
+      <a href="/tags/#Snippet" title="Snippet">Snippet </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-11">
+      <!-- on  -->
+      Jun 11, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
+</code></pre></div>
+<p>Here is the Python command to do a regex substitution:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;hello world! how are you? 0&quot;</span>
+
+<span class="c"># Short version</span>
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="c"># Faster version for long ASCII strings:</span>
+<span class="n">id_tab</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
+<span class="n">tostrip</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
+
+<span class="c"># Using regular expressions</span>
+<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+<p>Reference</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/10/r-download-using-curl/">R download file from web</a>
+      </h1>
+      <meta itemprop="keywords" content="R,Download,Snippet" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#Download" title="Download">Download </a>, 
+      
+      <a href="/tags/#Snippet" title="Snippet">Snippet </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-10">
+      <!-- on  -->
+      Jun 10, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kp">load</span><span class="p">(</span><span class="kp">url</span><span class="p">(</span><span class="s">&quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&quot;</span><span class="p">))</span>
+<span class="o">&gt;</span> <span class="kp">ls</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;mood.data&quot;</span>
+<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>mood.data<span class="p">)</span>
+     group mood
+<span class="m">1</span> pleasant    <span class="m">6</span>
+<span class="m">2</span> pleasant    <span class="m">5</span>
+<span class="m">3</span> pleasant    <span class="m">4</span>
+<span class="m">4</span> pleasant    <span class="m">7</span>
+<span class="m">5</span> pleasant    <span class="m">7</span>
+<span class="m">6</span> pleasant    <span class="m">5</span>
+</code></pre></div>
+<p>Another useful package is <code>RCurl</code>.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>RCurl<span class="p">)</span>
+<span class="o">&gt;</span> myURL <span class="o">&lt;-</span> <span class="s">&#39;some_url&#39;</span>
+<span class="o">&gt;</span> myData <span class="o">&lt;-</span> getURLContent<span class="p">(</span>URLencode<span class="p">(</span>myURL<span class="p">))</span>
+</code></pre></div>
+<p><code>getURL</code> may issue an error when the file is not text. <code>getURLContent</code> will determine the type of the content automatically.</p>
+
+<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &#39;URLencode&#39; to process the link at first.</p>
+
+<p>Reference</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a>
+2.
+<a href="http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html">http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html</a></li>
+</ol>
+
+    </article> <hr />
+
+    
+
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/05/run-r-on-cluster/">Running R on cluster</a>
+      </h1>
+      <meta itemprop="keywords" content="R,Linux,PBS,Terminal,cluster" />
+      <p class="post-meta">
+      <!-- Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#Linux" title="Linux">Linux </a>, 
+      
+      <a href="/tags/#PBS" title="PBS">PBS </a>, 
+      
+      <a href="/tags/#Terminal" title="Terminal">Terminal </a>, 
+      
+      <a href="/tags/#cluster" title="cluster">cluster </a>
+      
+       -->
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <!-- on  -->
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      <p>I&#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the &#39;Radon&#39; and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.</p>
 
 <p>I mainly follow the <a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">instruction</a> by Doug.</p>
 
@@ -325,44 +581,19 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 <li><p><a href="http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line">http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line</a></p></li>
 </ol>
 
-  </article>
-  <hr />
+    </article> <hr />
+
+    
+
+  </div>
 </div>
-
-
-<section class="pager">
-  <ul>
-    
-    <li class="previous"><a href="/news/2015/06/05/Site-ABC/" title="Site-ABC">&larr; Older</a></li>
-    
-    
-    <li class="disabled"><a>Newer &rarr;</a>
-    
-  </ul>
-</section>
-
-<div id="disqus_thread"></div>
-
-<script type="text/javascript">
-
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function() {
-  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
 
     </div>
   </div>
   <section class="pager">
   
+  
+  <li class="next"><a href="/page2/" title="Older">Older &rarr;</a></li>
   
 </section>
 
