@@ -3,7 +3,7 @@
   <div class="wrapper">
 
     <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
-    <h3 class="site-meta">{{ site.tagline }}</h3> 
+    <h3 class="site-meta">{{ site.tagline }}</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -15,7 +15,7 @@
       </a>
       <div class="trigger">
         {% for page in site.pages %}
-        {% if page.title %}
+        {% if page.title != "Home" %}
         <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
         {% endif %}
         {% endfor %}

@@ -44,7 +44,7 @@
   <div class="wrapper">
 
     <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3> 
+    <h3 class="site-meta">Learn the hard way</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -55,10 +55,6 @@
         </svg>
       </a>
       <div class="trigger">
-        
-        
-        <a class="page-link" href="/">Home</a>
-        
         
         
         <a class="page-link" href="/about/">About</a>
@@ -77,15 +73,13 @@
         
         
         
-        <a class="page-link" href="/guestbook/">Guestbook</a>
-        
-        
-        
         <a class="page-link" href="/feed.xml">Subscribe</a>
         
         
         
         
+        
+        <a class="page-link" href="/css/main.css"></a>
         
         
         
@@ -131,27 +125,36 @@
 
   <article class="post-content" itemprop="articleBody">
     <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
-</code></pre></div>
+
+<p><code>python
+[^A-Za-z0-9]+
+</code></p>
+
 <p>Here is the Python command to do a regex substitution:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;hello world! how are you? 0&quot;</span>
 
-<span class="c"># Short version</span>
-<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
+<p><code>python
+re.sub('[^A-Za-z0-9]+', '', mystring)
+</code></p>
 
-<span class="c"># Faster version for long ASCII strings:</span>
-<span class="n">id_tab</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
-<span class="n">tostrip</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
-<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
+<p>```python
+s = “hello world! how are you? 0”</p>
 
-<span class="c"># Using regular expressions</span>
-<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-</code></pre></div>
+<h1 id="short-version">Short version</h1>
+<p>print filter(lambda c: c.isalpha(), s)</p>
+
+<h1 id="faster-version-for-long-ascii-strings">Faster version for long ASCII strings:</h1>
+<p>id_tab = ““.join(map(chr, xrange(256)))
+tostrip = ““.join(c for c in id_tab if c.isalpha())
+print s.translate(id_tab, tostrip)</p>
+
+<h1 id="using-regular-expressions">Using regular expressions</h1>
+<p>print re.sub(“[^A-Za-z]”, “”, s)
+```</p>
+
 <p>Reference</p>
 
 <ol>
-<li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
+  <li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
 </ol>
 
   </article>
@@ -200,13 +203,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <!-- <p>Copyright &copy; <a href="/">Apprantice</a></p>
+  <p>&copy; <a href="/">Apprantice</a></p>
   <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>   -->
+  | With Love and Coffee Hello :wink:
 
 </footer>
 

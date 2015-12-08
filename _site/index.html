@@ -7,8 +7,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width initial-scale=1">
 
-<meta property="og:title" content="Apprantice">
-<title>Apprantice</title>
+<meta property="og:title" content="Home">
+<title>Home</title>
 <meta property="og:description" content="Hi, I'm an operational researcher and statistician.
 ">
 <meta property="og:url" content="/">
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
-<meta name="twitter:title" content="Apprantice">
+<meta name="twitter:title" content="Home">
 <meta name="twitter:description" content="Hi, I'm an operational researcher and statistician.
 ">
 <meta name="twitter:url" content="/">
@@ -46,7 +46,7 @@
   <div class="wrapper">
 
     <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3> 
+    <h3 class="site-meta">Learn the hard way</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -57,10 +57,6 @@
         </svg>
       </a>
       <div class="trigger">
-        
-        
-        <a class="page-link" href="/">Home</a>
-        
         
         
         <a class="page-link" href="/about/">About</a>
@@ -79,15 +75,13 @@
         
         
         
-        <a class="page-link" href="/guestbook/">Guestbook</a>
-        
-        
-        
         <a class="page-link" href="/feed.xml">Subscribe</a>
         
         
         
         
+        
+        <a class="page-link" href="/css/main.css"></a>
         
         
         
@@ -105,17 +99,18 @@
   <div class="page-content">
     <div class="wrapper">
       <div class="home">
-  <div class="post" itemscope itemtype="http://schema.org/BlogPosting" >
+  <div class="post" itemscope itemtype = "http://schema.org/BlogPosting" >
 
     
 
     <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-25">
       <h1 itemprop="name" class="post-title">
         <a itemprop="url" class="post-link" href="/tips/2015/06/25/ipython-notebook-from-hathi/">Access remote ipython notebook</a>
       </h1>
       <meta itemprop="keywords" content="python,notebook" />
       <p class="post-meta">
-      <!-- Posted in
+      Posted in
       
       <a href="/categories/#tips">tips</a>&nbsp;
       
@@ -126,61 +121,27 @@
       
       <a href="/tags/#notebook" title="notebook">notebook </a>
       
-       -->
-      <time itemprop="datePublished" datetime="2015-06-25">
-      <!-- on  -->
+      
+      on 
       Jun 25, 2015
       </time>
       </p>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&#39;&#39;ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
-
-<p>The steps are straightforward,</p>
-
-<ol>
-<li><p>Make sure your can login without password. This can be done by following <a href="http://www.linuxproblem.org/art_9.html">reference 2</a>.</p></li>
-<li><p>Start ipython on Hathi.</p></li>
-</ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on server
-module add anaconda
-ipython notebook --no-browser --port<span class="o">=</span>7777
-</code></pre></div>
-<ol>
-<li>Setup the ssh tunnel from the local machine to the remote machine.</li>
-</ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on <span class="nb">local </span>machine
-ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
-</code></pre></div>
-<ol>
-<li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
-</ol>
-
-<p>As Joe Hamman said,</p>
-
-<blockquote>
-<p>the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.</p>
-</blockquote>
-
-<h2>Reference</h2>
-
-<ol>
-<li><a href="http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/">http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/</a></li>
-<li><a href="http://www.linuxproblem.org/art_9.html">http://www.linuxproblem.org/art_9.html</a></li>
-</ol>
-
+      
     </article> <hr />
 
     
 
     <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-23">
       <h1 itemprop="name" class="post-title">
         <a itemprop="url" class="post-link" href="/tips/2015/06/23/install-Rmpi/">Install Rmpi on Mac and Redhat server</a>
       </h1>
       <meta itemprop="keywords" content="R,parallel computing" />
       <p class="post-meta">
-      <!-- Posted in
+      Posted in
       
       <a href="/categories/#tips">tips</a>&nbsp;
       
@@ -191,60 +152,27 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
       
       <a href="/tags/#parallel computing" title="parallel computing">parallel computing </a>
       
-       -->
-      <time itemprop="datePublished" datetime="2015-06-23">
-      <!-- on  -->
+      
+      on 
       Jun 23, 2015
       </time>
       </p>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
-
-<h2>Installation</h2>
-
-<p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
-</code></pre></div>
-<p>Then in <code>R</code>, install the package from source.</p>
-<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></pre></div>
-<p>Although this line can do the job, but it is not straight forward to get here.</p>
-
-<ol>
-<li>Download Rmpi_version.gz</li>
-<li>Add module</li>
-</ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">module add r
-module add openmpi
-</code></pre></div>
-<ol>
-<li>Check the directory of the openmpi via</li>
-</ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">ompi_info
-</code></pre></div>
-<ol>
-<li>Final step to install <code>Rmpi</code></li>
-</ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></pre></div>
-<h2>Examples</h2>
-
+      
     </article> <hr />
 
     
 
     <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-11">
       <h1 itemprop="name" class="post-title">
         <a itemprop="url" class="post-link" href="/tips/2015/06/11/python-punctuation/">Python punctuation</a>
       </h1>
       <meta itemprop="keywords" content="Python,re,Snippet" />
       <p class="post-meta">
-      <!-- Posted in
+      Posted in
       
       <a href="/categories/#tips">tips</a>&nbsp;
       
@@ -257,50 +185,27 @@ module add openmpi
       
       <a href="/tags/#Snippet" title="Snippet">Snippet </a>
       
-       -->
-      <time itemprop="datePublished" datetime="2015-06-11">
-      <!-- on  -->
+      
+      on 
       Jun 11, 2015
       </time>
       </p>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
-</code></pre></div>
-<p>Here is the Python command to do a regex substitution:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;hello world! how are you? 0&quot;</span>
-
-<span class="c"># Short version</span>
-<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
-
-<span class="c"># Faster version for long ASCII strings:</span>
-<span class="n">id_tab</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
-<span class="n">tostrip</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
-<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
-
-<span class="c"># Using regular expressions</span>
-<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-</code></pre></div>
-<p>Reference</p>
-
-<ol>
-<li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
-</ol>
-
+      
     </article> <hr />
 
     
 
     <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-10">
       <h1 itemprop="name" class="post-title">
         <a itemprop="url" class="post-link" href="/tips/2015/06/10/r-download-using-curl/">R download file from web</a>
       </h1>
       <meta itemprop="keywords" content="R,Download,Snippet" />
       <p class="post-meta">
-      <!-- Posted in
+      Posted in
       
       <a href="/categories/#tips">tips</a>&nbsp;
       
@@ -313,56 +218,27 @@ module add openmpi
       
       <a href="/tags/#Snippet" title="Snippet">Snippet </a>
       
-       -->
-      <time itemprop="datePublished" datetime="2015-06-10">
-      <!-- on  -->
+      
+      on 
       Jun 10, 2015
       </time>
       </p>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p>When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kp">load</span><span class="p">(</span><span class="kp">url</span><span class="p">(</span><span class="s">&quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&quot;</span><span class="p">))</span>
-<span class="o">&gt;</span> <span class="kp">ls</span><span class="p">()</span>
-<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;mood.data&quot;</span>
-<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>mood.data<span class="p">)</span>
-     group mood
-<span class="m">1</span> pleasant    <span class="m">6</span>
-<span class="m">2</span> pleasant    <span class="m">5</span>
-<span class="m">3</span> pleasant    <span class="m">4</span>
-<span class="m">4</span> pleasant    <span class="m">7</span>
-<span class="m">5</span> pleasant    <span class="m">7</span>
-<span class="m">6</span> pleasant    <span class="m">5</span>
-</code></pre></div>
-<p>Another useful package is <code>RCurl</code>.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>RCurl<span class="p">)</span>
-<span class="o">&gt;</span> myURL <span class="o">&lt;-</span> <span class="s">&#39;some_url&#39;</span>
-<span class="o">&gt;</span> myData <span class="o">&lt;-</span> getURLContent<span class="p">(</span>URLencode<span class="p">(</span>myURL<span class="p">))</span>
-</code></pre></div>
-<p><code>getURL</code> may issue an error when the file is not text. <code>getURLContent</code> will determine the type of the content automatically.</p>
-
-<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &#39;URLencode&#39; to process the link at first.</p>
-
-<p>Reference</p>
-
-<ol>
-<li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a>
-2.
-<a href="http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html">http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html</a></li>
-</ol>
-
+      
     </article> <hr />
 
     
 
     <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-05">
       <h1 itemprop="name" class="post-title">
         <a itemprop="url" class="post-link" href="/tips/2015/06/05/run-r-on-cluster/">Running R on cluster</a>
       </h1>
       <meta itemprop="keywords" content="R,Linux,PBS,Terminal,cluster" />
       <p class="post-meta">
-      <!-- Posted in
+      Posted in
       
       <a href="/categories/#tips">tips</a>&nbsp;
       
@@ -379,208 +255,101 @@ module add openmpi
       
       <a href="/tags/#cluster" title="cluster">cluster </a>
       
-       -->
-      <time itemprop="datePublished" datetime="2015-06-05">
-      <!-- on  -->
+      
+      on 
       Jun 5, 2015
       </time>
       </p>
     </header>
 
     <article class="post-content" itemprop="articleBody">
-      <p>I&#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the &#39;Radon&#39; and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.</p>
+      
+    </article> <hr />
 
-<p>I mainly follow the <a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">instruction</a> by Doug.</p>
+    
 
-<h2>Load R</h2>
+    <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/tips/2015/06/05/from-function-to-name/">R from function to its name</a>
+      </h1>
+      <meta itemprop="keywords" content="R,function" />
+      <p class="post-meta">
+      Posted in
+      
+      <a href="/categories/#tips">tips</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#R" title="R">R </a>, 
+      
+      <a href="/tags/#function" title="function">function </a>
+      
+      
+      on 
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
 
-<p>Radon doesn&#39;t come up with R for granted. To load R, we need to type <code>model load r</code>. The <code>module</code> command is used to “load” software
-packages for use by the current login session.</p>
+    <article class="post-content" itemprop="articleBody">
+      
+    </article> <hr />
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> -bash-4.1<span class="nv">$ </span>R --version
-<span class="lineno"> 2</span> -bash: r: <span class="nb">command </span>not found
-<span class="lineno"> 3</span> -bash-4.1<span class="nv">$ </span>module load r
-<span class="lineno"> 4</span> -bash-4.1<span class="nv">$ </span>R --version
-<span class="lineno"> 5</span> R version 3.1.0 <span class="o">(</span>2014-04-10<span class="o">)</span> -- <span class="s2">&quot;Spring Dance&quot;</span>
-<span class="lineno"> 6</span> Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">2014</span> The R Foundation <span class="k">for</span> Statistical Computing
-<span class="lineno"> 7</span> Platform: x86_64-unknown-linux-gnu <span class="o">(</span>64-bit<span class="o">)</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span> R is free software and comes with ABSOLUTELY NO WARRANTY.
-<span class="lineno">10</span> You are welcome to redistribute it under the terms of the
-<span class="lineno">11</span> GNU General Public License versions <span class="m">2</span> or 3.
-<span class="lineno">12</span> For more information about these matters see
-<span class="lineno">13</span> http://www.gnu.org/licenses/.</code></pre></div>
+    
 
-<p>Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.</p>
+    <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-06-05">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/news/2015/06/05/Site-ABC/">Site-ABC</a>
+      </h1>
+      <meta itemprop="keywords" content="" />
+      <p class="post-meta">
+      Posted in
+      
+      <a href="/categories/#news">news</a>&nbsp;
+      
+      
+      on 
+      Jun 5, 2015
+      </time>
+      </p>
+    </header>
 
-<h2>BATCH mode</h2>
+    <article class="post-content" itemprop="articleBody">
+      
+    </article> <hr />
 
-<p>R script vs R batch</p>
+    
 
-<blockquote>
-<p><code>R CMD BATCH</code> (see <code>help(BATCH)</code>) has default options <code>--restore --save --no-readline</code>, while <code>Rscript</code> (see <code>help(Rscript)</code>) has <code>--slave --no-restore</code>. Furthermore, the output of <code>R CMD BATCH</code> always goes to a file, taken from the command line if given, or else built from the input filename by appending &quot;out&quot;, whereas the output of <code>Rscript</code> goes to stdout. Finally, <code>Rscript</code> accepts user level command-line arguments, after the script name &quot;as usual&quot; (<code>Rscript foo.R 1 2</code>), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by <code>--args</code> (<code>R CMD BATCH &quot;--args 1 2&quot; foo.R</code>). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). <a href="http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html">link</a></p>
-</blockquote>
+    <header class="post-header">
+      <time itemprop="datePublished" datetime="2015-05-22">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="/life/2015/05/22/four-line-motto/">Four Line Motto</a>
+      </h1>
+      <meta itemprop="keywords" content="lift,motto" />
+      <p class="post-meta">
+      Posted in
+      
+      <a href="/categories/#life">life</a>&nbsp;
+      
+      
+      and tagged
+      
+      <a href="/tags/#lift" title="lift">lift </a>, 
+      
+      <a href="/tags/#motto" title="motto">motto </a>
+      
+      
+      on 
+      May 22, 2015
+      </time>
+      </p>
+    </header>
 
-<p>Like said, <code>Rscript</code> executes quietly in the background and generates output to &#39;stdout&#39;.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> R CMD BATCH t.R &gt; t.out
-<span class="lineno">2</span> Rscript t.R &gt; t.out <span class="p">&amp;</span> <span class="c"># run in background</span>
-<span class="lineno">3</span> nohup Rscript t.R &gt; t.out <span class="p">&amp;</span> <span class="c"># run in background, even if logout</span></code></pre></div>
-
-<p>Although we can launch several jobs simultaneously (by concatenating with &#39;&amp;&#39;), but invoking manually doesn&#39;t scale well. To run tasks seriesly, we can create a file like &quot;run.sh&quot; that contains several &#39;Rscript&#39; invocations. It will run the jobs one at a time.</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># run.sh</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">001</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">002</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">003</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">004</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">005</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">006</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">007</span>
-<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="n">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">00</span><span class="mi">8</span>
-</code></pre></div>
-<p>A life-saving tips for creating the “run.sh” script using R</p>
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Rscript t.R &gt; tout.%03d&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span>
-<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;Rscript t.R &gt; tout.001&quot;</span> <span class="s">&quot;Rscript t.R &gt; tout.002&quot;</span> <span class="s">&quot;Rscript t.R &gt; tout.003&quot;</span>
-<span class="p">[</span><span class="m">4</span><span class="p">]</span> <span class="s">&quot;Rscript t.R &gt; tout.004&quot;</span> <span class="s">&quot;Rscript t.R &gt; tout.005&quot;</span> <span class="s">&quot;Rscript t.R &gt; tout.006&quot;</span>
-<span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="s">&quot;Rscript t.R &gt; tout.007&quot;</span> <span class="s">&quot;Rscript t.R &gt; tout.008&quot;</span>
-<span class="o">&gt;</span> <span class="kp">write</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;Rscript t.R &gt; tout.%03d&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">),</span> <span class="s">&quot;run.sh&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Then we can run &quot;run.sh&quot; in command line.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>sh run.sh <span class="c"># run every job in run.sh one at a time</span>
-<span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>nohup sh run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh one at a time, and keep running even if logout</span>
-<span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>nohup xargs -d <span class="s1">&#39;\n&#39;</span> -n1 -P4 sh -c &lt; run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout</span></code></pre></div>
-
-<h2>Submit jobs through qsub</h2>
-
-<p>On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through <code>qsub</code>. A typical job description will look like this one.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
-
-<span class="c">## Give your job a name</span>
-<span class="c">#PBS -N ovs</span>
-<span class="c">## Needed if you want to use environmental variables</span>
-<span class="c">#PBS -V</span>
-
-<span class="c">## Specify running time and memory</span>
-<span class="c">#PBS -l walltime=00:15:00,vmem=4GB</span>
-
-<span class="c">## Specify number of nodes and cores</span>
-<span class="c">#PBS -l nodes=1:ppn=8</span>
-
-<span class="c">## Specify output and error (no need to include these two lines)</span>
-<span class="c">#PBS -o &#39;qsub.out&#39;</span>
-<span class="c">#PBS -e &#39;qsub.err&#39;</span>
-
-<span class="c"># set the temporary file location</span>
-<span class="nb">export </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="nv">$WORKDIR</span>
-
-<span class="c"># go to the job submission directory; you can change this to your project directory</span>
-<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
-
-<span class="c"># load the R module; change the version if needed</span>
-module load r
-
-
-<span class="c">## Export the job number. This is unique to a job and can be used to set the seed</span>
-<span class="c">## and as an identifier for the output file</span>
-<span class="nb">export </span><span class="nv">job_number</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$PBS_JOBID</span> <span class="p">|</span> awk -F. <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
-
-<span class="c"># run R in batch mode</span>
-R CMD BATCH foo.R &gt; foo.Rout
-</code></pre></div>
-<p>Note that <code>#!/bin/bash</code> should be put in the first line. Also, I use &#39;BATCH&#39; here since it is compatible with the following section &#39;pass arguments&#39;. I haven&#39;t tested the otherwise.</p>
-
-<p>Then the file is ready to submit.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qsub foo.pbs</code></pre></div>
-
-<p>Other useful command includes</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qstat        <span class="c"># See list of jobs in the queue</span>
-<span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>qstat –u usr <span class="c"># See list of jobs in the queue submitted by usr</span>
-<span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>qdel JOBID   <span class="c"># delete a previously submitted job from the queue</span></code></pre></div>
-
-<p>Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh -l</span>
-<span class="c">#PBS -l nodes=1:ppn=8</span>
-<span class="c">#PBS -l walltime=00:30:00</span>
-<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
-module add r
-Rscript t3.R &gt;out1 <span class="p">&amp;</span>
-Rscript t3.R &gt;out2 <span class="p">&amp;</span>
-Rscript t3.R &gt;out3 <span class="p">&amp;</span>
-Rscript t3.R &gt;out4 <span class="p">&amp;</span>
-Rscript t3.R &gt;out5 <span class="p">&amp;</span>
-Rscript t3.R &gt;out6 <span class="p">&amp;</span>
-Rscript t3.R &gt;out7 <span class="p">&amp;</span>
-Rscript t3.R &gt;out8 <span class="p">&amp;</span>
-<span class="nb">wait</span>
-</code></pre></div>
-<h2>Pass arguments</h2>
-
-<p>Like said, <code>Rscript</code> takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from <a href="http://www.stat.purdue.edu/%7Ebhadra/">Dr. Anindya Bhadra</a>.)</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## HOWTO: chmod ugo+rx cluster; ./cluster</span>
-
-<span class="c">## Make sure you are using the bash shell</span>
-<span class="c">#!/bin/bash</span>
-
-<span class="c">## Grid of starting values for parameters</span>
-<span class="nv">STARTAs</span><span class="o">=(</span><span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">8</span> <span class="m">9</span> <span class="m">10</span> <span class="m">11</span> <span class="m">12</span> <span class="m">13</span> <span class="m">14</span> <span class="m">15</span> <span class="m">16</span> <span class="m">17</span> <span class="m">18</span> <span class="m">19</span> 20<span class="o">)</span>
-<span class="nv">STARTBs</span><span class="o">=(</span><span class="m">0</span> <span class="m">1</span> 4<span class="o">)</span>
-<span class="nv">STARTLs</span><span class="o">=(</span><span class="m">50</span> <span class="m">100</span> 150<span class="o">)</span>
-
-<span class="c">## To be read in inside of R as environmental variables</span>
-<span class="nv">LENA</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTAs</span><span class="p">[*]</span><span class="k">}</span>
-<span class="nv">LENB</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTBs</span><span class="p">[*]</span><span class="k">}</span>
-<span class="nv">LENL</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTLs</span><span class="p">[*]</span><span class="k">}</span>
-
-<span class="c">## Submit jobs via qsub with each starting value of &quot;a&quot; exported to the environment.</span>
-<span class="c">## Sleep 1 second between submitting two jobs</span>
-
-<span class="k">for</span> k in <span class="sb">`</span>seq <span class="m">1</span> <span class="nv">$LENL</span><span class="sb">`</span>
-<span class="k">do</span>
-    <span class="k">for</span> i in <span class="sb">`</span>seq <span class="m">1</span> <span class="nv">$LENA</span><span class="sb">`</span>
-    <span class="k">do</span>
-        <span class="k">for</span> j in <span class="sb">`</span>seq <span class="m">1</span> <span class="nv">$LENB</span><span class="sb">`</span>
-        <span class="k">do</span>
-            <span class="nb">export </span><span class="nv">STARTA</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTAs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$i</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
-            <span class="nb">export </span><span class="nv">STARTB</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTBs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$j</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
-            <span class="nb">export </span><span class="nv">STARTL</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTLs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$k</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
-            qsub -V NumExp.pbs
-            sleep 1
-        <span class="k">done</span>
-    <span class="k">done</span>
-<span class="k">done</span>
-</code></pre></div>
-<p>Read this <a href="http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch">post</a> for passing argument for Rscript command.</p>
-
-<h2>Download packages</h2>
-
-<p>An annoying thing is that R may not import and load packages properly.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> Calls: install.packages -&gt; grep -&gt; contrib.url
-<span class="lineno">2</span> In addition: Warning message:
-<span class="lineno">3</span> In library<span class="o">(</span>package, lib.loc <span class="o">=</span> lib.loc, character.only <span class="o">=</span> TRUE, logical.return <span class="o">=</span> TRUE,  :
-<span class="lineno">4</span>   there is no package called ‘***’
-<span class="lineno">5</span> Execution halted</code></pre></div>
-
-<p>A remedy is found on <a href="http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line">stackoverflow</a>.</p>
-
-<blockquote>
-<p>For example, if you want to use RStudio&#39;s package repository, set repos=&quot;http://cran.rstudio.com/&quot; inside the install.packages call.</p>
-</blockquote>
-<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;yaml&quot;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&quot;http://cran.rstudio.com/&quot;</span><span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span><span class="s">&quot;***&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h2>Reference</h2>
-
-<ol>
-<li><p><a href="http://www.stat.purdue.edu/%7Edgc/cluster.pdf">http://www.stat.purdue.edu/~dgc/cluster.pdf</a></p></li>
-<li><p><a href="http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html">http://biostat.jhsph.edu/~hjaffee/R_tasks.html</a></p></li>
-<li><p><a href="https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster">https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster</a></p></li>
-<li><p><a href="http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line">http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line</a></p></li>
-</ol>
-
+    <article class="post-content" itemprop="articleBody">
+      
     </article> <hr />
 
     
@@ -602,13 +371,13 @@ Rscript t3.R &gt;out8 <span class="p">&amp;</span>
 
   <footer class="site-footer">
 
-  <!-- <p>Copyright &copy; <a href="/">Apprantice</a></p>
+  <p>&copy; <a href="/">Apprantice</a></p>
   <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>   -->
+  | With Love and Coffee Hello :wink:
 
 </footer>
 

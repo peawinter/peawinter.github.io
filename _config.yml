@@ -16,7 +16,7 @@ linkedin_username: peawinter
 github_username: peawinter
 disqus_shortname: peawinter
 favicon: "/images/avatar.png"
-aboutme: Hi, Im Wenyu Wang, a operational researcher and data scientist. # these are shown on aboutme-sidebar.
+aboutme: Hi, Im Wenyu Wang, an operational researcher and data scientist. # these are shown on aboutme-sidebar.
 aboutme_photo: "/images/avatar.png" # your photo.
 
 ### Site setting:
@@ -52,17 +52,12 @@ locales:
       Taggedwith: "| 标签:"
       PostDate: "| 发表时间: "
 
-
-### your Blogroll info, only name can shown on the page.
-
-Blogroll:
-    - name: Freshman21
-      href: http://yulijia.net/freshman21
-      title: Another Jekyll blog theme
-
-
 ### Build settings
-markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
 highlighter: pygments
-paginate: 5
+paginate: 8
 permalink: pretty
+
+gems:
+  - jemoji

@@ -44,7 +44,7 @@
   <div class="wrapper">
 
     <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3> 
+    <h3 class="site-meta">Learn the hard way</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -55,10 +55,6 @@
         </svg>
       </a>
       <div class="trigger">
-        
-        
-        <a class="page-link" href="/">Home</a>
-        
         
         
         <a class="page-link" href="/about/">About</a>
@@ -77,15 +73,13 @@
         
         
         
-        <a class="page-link" href="/guestbook/">Guestbook</a>
-        
-        
-        
         <a class="page-link" href="/feed.xml">Subscribe</a>
         
         
         
         
+        
+        <a class="page-link" href="/css/main.css"></a>
         
         
         
@@ -130,37 +124,55 @@
   <article class="post-content" itemprop="articleBody">
     <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
 
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
-</code></pre></div>
+
+<p><code>bash
+$ brew install open-mpi
+</code></p>
+
 <p>Then in <code>R</code>, install the package from source.</p>
-<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
-</code></pre></div>
+
+<p><code>r
+install.packages("Rmpi", type="source")
+</code></p>
+
 <p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></pre></div>
+
+<p><code>bash
+R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></p>
+
 <p>Although this line can do the job, but it is not straight forward to get here.</p>
 
 <ol>
-<li>Download Rmpi_version.gz</li>
-<li>Add module</li>
+  <li>Download Rmpi_version.gz</li>
+  <li>Add module</li>
 </ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">module add r
+
+<p><code>bash
+module add r
 module add openmpi
-</code></pre></div>
+</code></p>
+
 <ol>
-<li>Check the directory of the openmpi via</li>
+  <li>Check the directory of the openmpi via</li>
 </ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">ompi_info
-</code></pre></div>
+
+<p><code>bash
+ompi_info
+</code></p>
+
 <ol>
-<li>Final step to install <code>Rmpi</code></li>
+  <li>Final step to install <code>Rmpi</code></li>
 </ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></pre></div>
-<h2>Examples</h2>
+
+<p><code>bash
+R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></p>
+
+<h2 id="examples">Examples</h2>
 
   </article>
   <hr />
@@ -208,13 +220,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <!-- <p>Copyright &copy; <a href="/">Apprantice</a></p>
+  <p>&copy; <a href="/">Apprantice</a></p>
   <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>   -->
+  | With Love and Coffee Hello :wink:
 
 </footer>
 

@@ -9,7 +9,7 @@
 
 <meta property="og:title" content="Site-ABC">
 <title>Site-ABC</title>
-<meta property="og:description" content="All of following are from Lijia&#39;s posts.">
+<meta property="og:description" content="All of following are from Lijia’s posts.">
 <meta property="og:url" content="/news/2015/06/05/Site-ABC/">
 <meta property="og:site_name" content="Apprantice">
 <meta property="og:locale" content="en_US">
@@ -17,7 +17,7 @@
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Site-ABC">
-<meta name="twitter:description" content="All of following are from Lijia&#39;s posts.">
+<meta name="twitter:description" content="All of following are from Lijia’s posts.">
 <meta name="twitter:url" content="/news/2015/06/05/Site-ABC/">
 
 <meta name="keywords" content="">
@@ -44,7 +44,7 @@
   <div class="wrapper">
 
     <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3> 
+    <h3 class="site-meta">Learn the hard way</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -55,10 +55,6 @@
         </svg>
       </a>
       <div class="trigger">
-        
-        
-        <a class="page-link" href="/">Home</a>
-        
         
         
         <a class="page-link" href="/about/">About</a>
@@ -77,13 +73,13 @@
         
         
         
-        <a class="page-link" href="/guestbook/">Guestbook</a>
-        
-        
-        
         <a class="page-link" href="/feed.xml">Subscribe</a>
         
         
+        
+        
+        
+        <a class="page-link" href="/css/main.css"></a>
         
         
         
@@ -119,20 +115,20 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <p>All of following are from Lijia&#39;s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
+    <p>All of following are from Lijia’s <a href="http://yulijia.net/freshman21/">posts</a>.</p>
 
-<h2>Install</h2>
+<h2 id="install">Install</h2>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="c"># please make sure you have already installed git tools and ruby tools(gem)</span>
 <span class="lineno">2</span> <span class="nv">$ </span>gem install sass
 <span class="lineno">3</span> <span class="nv">$ </span>gem install jekyll
 <span class="lineno">4</span> <span class="nv">$ </span>git clone https://github.com/yulijia/freshman21.git</code></pre></div>
 
-<h2>Structure of freshman21 theme</h2>
+<h2 id="structure-of-freshman21-theme">Structure of freshman21 theme</h2>
 
 <p>You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.</p>
 
-<p>All sidebar boxes html files are in the <code><em>include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code></em>includes</code> directory.</p>
+<p>All sidebar boxes html files are in the <code>_include</code> directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the <q>sidebar.html</q> in the <code>_includes</code> directory.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">.
 <span class="p">|</span>-- a_home.md                 <span class="c"># home page link at navigation bar</span>
@@ -182,7 +178,7 @@
     <span class="p">|</span>-- _syntax-highlighting-native.scss
     <span class="sb">`</span>-- _syntax-highlighting.scss</code></pre></div>
 
-<h2>Configuration</h2>
+<h2 id="configuration">Configuration</h2>
 
 <p>The <a href="https://github.com/yulijia/freshman21/blob/master/_config.yml">config.yml file</a> in the Freshman21 theme includes five parts.</p>
 
@@ -198,7 +194,7 @@
 <span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;/freshman21&quot;</span> <span class="c1"># the subpath of your site, e.g. /blog</span>
 <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="s">&quot;http://yulijia.net/freshman21&quot;</span> <span class="c1"># the base hostname &amp; protocol for your site</span></code></pre></div>
 
-<p><strong>Part 2</strong>, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can <q>Hide</q> in two ways <sup><a href="#%5B1%5D">[1]</a></sup>:</p>
+<p><strong>Part 2</strong>, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can <q>Hide</q> in two ways <sup><a href="#[1]">[1]</a></sup>:</p>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">twitter_username</span><span class="p-Indicator">:</span> <span class="c1">#your twitter handle  </span>
 <span class="l-Scalar-Plain">github_username</span><span class="p-Indicator">:</span>  <span class="c1">#your github account</span>
@@ -229,21 +225,21 @@
 <span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pygments</span> <span class="c1"># highlight</span>
 <span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span>  <span class="c1"># how many post can seen in the main page</span></code></pre></div>
 
-<h2>Highlight style</h2>
+<h2 id="highlight-style">Highlight style</h2>
 
-<p>This theme&#39;s default highlighter is pygments.</p>
+<p>This theme’s default highlighter is pygments.</p>
 
 <p>To change the highlight style, you should install <strong>pygments</strong>, and generate the css style which you wanted with code</p>
 
-<p><code>pygmentize -S default -f html &gt; freshman/<em>sass/</em>syntax-highlighting.scss</code></p>
+<p><code>pygmentize -S default -f html &gt; freshman/_sass/_syntax-highlighting.scss</code></p>
 
 <p>Please make sure, add <code>.highlight {</code> at the head  and <code>}</code> at the end of file <q>_syntax-highlighting.scss</q>.</p>
 
 <p>See more,</p>
 
 <ol>
-<li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
-<li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
+  <li><a href="http://pygments.org/languages/">Pygments Supported languages</a></li>
+  <li><a href="http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col">Pygments online deme</a></li>
 </ol>
 
   </article>
@@ -257,7 +253,7 @@
     <li class="previous"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">&larr; Older</a></li>
     
     
-    <li class="next"><a href="/tips/2015/06/05/run-r-on-cluster/" title="Running R on cluster">Newer &rarr;</a></li>
+    <li class="next"><a href="/tips/2015/06/05/from-function-to-name/" title="R from function to its name">Newer &rarr;</a></li>
     
   </ul>
 </section>
@@ -292,13 +288,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <!-- <p>Copyright &copy; <a href="/">Apprantice</a></p>
+  <p>&copy; <a href="/">Apprantice</a></p>
   <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>   -->
+  | With Love and Coffee Hello :wink:
 
 </footer>
 
