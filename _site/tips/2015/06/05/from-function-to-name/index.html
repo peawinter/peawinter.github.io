@@ -12,7 +12,7 @@
 <meta property="og:description" content="In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as...">
 <meta property="og:url" content="/tips/2015/06/05/from-function-to-name/">
 <meta property="og:site_name" content="Apprantice">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
@@ -84,6 +84,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -123,43 +125,34 @@
 
   <article class="post-content" itemprop="articleBody">
     <p>In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.</p>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myTestFun1 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
 
-<p>```R
-myTestFun1 &lt;- function() {
-  …
-}</p>
+myTestFun2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
 
-<p>myTestFun2 &lt;- function() {
-  …
-}</p>
-
-<p>myMain &lt;- function(testFun) {
-  …
-}
-```</p>
-
+myMain <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFun<span class="p">)</span> <span class="p">{</span>
+  <span class="kc">...</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>R works greatly since it passes function as variable (so-called functional programming?)</p>
 
 <p>In <code>myMain</code> function, I want to generate output looks like</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">test function: myTestFun1
 
-<p>```
-test function: myTestFun1</p>
-
-<pre><code>    value: .... ```
-</code></pre>
-
+        value: ....
+</code></pre></div>
 <p>Here I got a problem, since R passes the function to <code>testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code>match.fun</code> to extract the desired function object.</p>
-
-<p><code>R
-myMainNew &lt;- function(testFunName) {
-  testFun &lt;- match.fun(testFunName)
-}
-</code></p>
-
-<h3 id="reference">Reference</h3>
+<div class="highlight"><pre><code class="language-R" data-lang="R">myMainNew <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFunName<span class="p">)</span> <span class="p">{</span>
+  testFun <span class="o">&lt;-</span> <span class="kp">match.fun</span><span class="p">(</span>testFunName<span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>Reference</h3>
 
 <ol>
-  <li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
+<li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
 </ol>
 
   </article>
@@ -208,13 +201,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <p>&copy; <a href="/">Apprantice</a></p>
-  <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+
+  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | With Love and Coffee Hello :wink:
+  | With 🍎 and ☕
 
 </footer>
 

@@ -12,7 +12,7 @@
 <meta property="og:description" content="To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed Rmpi for the first time.">
 <meta property="og:url" content="/tips/2015/06/23/install-Rmpi/">
 <meta property="og:site_name" content="Apprantice">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
@@ -84,6 +84,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -124,55 +126,37 @@
   <article class="post-content" itemprop="articleBody">
     <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
 
-<h2 id="installation">Installation</h2>
+<h2>Installation</h2>
 
 <p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
-
-<p><code>bash
-$ brew install open-mpi
-</code></p>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>brew install open-mpi
+</code></pre></div>
 <p>Then in <code>R</code>, install the package from source.</p>
-
-<p><code>r
-install.packages("Rmpi", type="source")
-</code></p>
-
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rmpi&quot;</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
-
-<p><code>bash
-R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></p>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
 <p>Although this line can do the job, but it is not straight forward to get here.</p>
 
 <ol>
-  <li>Download Rmpi_version.gz</li>
-  <li>Add module</li>
+<li>Download Rmpi_version.gz</li>
+<li>Add module</li>
 </ol>
-
-<p><code>bash
-module add r
-module add openmpi
-</code></p>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">  module add r
+  module add openmpi
+</code></pre></div>
 <ol>
-  <li>Check the directory of the openmpi via</li>
+<li>Check the directory of the openmpi via</li>
 </ol>
-
-<p><code>bash
-ompi_info
-</code></p>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">  ompi_info
+</code></pre></div>
 <ol>
-  <li>Final step to install <code>Rmpi</code></li>
+<li>Final step to install <code>Rmpi</code></li>
 </ol>
-
-<p><code>bash
-R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></p>
-
-<h2 id="examples">Examples</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">  R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre></div>
+<h2>Examples</h2>
 
   </article>
   <hr />
@@ -220,13 +204,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <p>&copy; <a href="/">Apprantice</a></p>
-  <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+
+  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | With Love and Coffee Hello :wink:
+  | With 🍎 and ☕
 
 </footer>
 

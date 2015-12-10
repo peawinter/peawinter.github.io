@@ -1,8 +1,21 @@
 /**
  * Syntax highlighting styles
  */
+
+ .highlight {
+   /* white-space: pre; */
+   /* overflow: auto; */
+   word-wrap: normal; /* horizontal scrolling */
+   /* -moz-border-radius: 3px;
+   -webkit-border-radius: 3px; */
+   /* border-radius: 3px;
+   padding: 5px; */
+   background: #ffc;
+   color: #ffc;
+ }
+
 .highlight {
-    background: #fff;
+    background: #ffc;
     @extend %vertical-rhythm;
 
     .c     { color: #998; font-style: italic } // Comment
@@ -66,4 +79,3 @@
     .il    { color: #099 } // Literal.Number.Integer.Long
 
   }
-

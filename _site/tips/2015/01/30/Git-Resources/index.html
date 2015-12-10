@@ -12,7 +12,7 @@
 <meta property="og:description" content="Configure tooling">
 <meta property="og:url" content="/tips/2015/01/30/Git-Resources/">
 <meta property="og:site_name" content="Apprantice">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
@@ -84,6 +84,8 @@
         
         
         
+        
+        
       </div>
     </nav>
 
@@ -124,119 +126,90 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <h3 id="configure-tooling">Configure tooling</h3>
+    <h3>Configure tooling</h3>
 
 <p>Configure user information for all local repositories</p>
-
-<p><code>bash
-$ git config --global user.name "[name]"           # Sets the name you want atached to your commit transactions
-$ git config --global user.email "[email address]" # Sets the email you want atached to your commit transactions
-$ git config --global color.ui auto                # Enables helpful colorization of command line output
-</code></p>
-
-<h3 id="create-repositories">Create repositories</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;[name]&quot;</span>           <span class="c"># Sets the name you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global user.email <span class="s2">&quot;[email address]&quot;</span> <span class="c"># Sets the email you want atached to your commit transactions</span>
+<span class="nv">$ </span>git config --global color.ui auto                <span class="c"># Enables helpful colorization of command line output</span>
+</code></pre></div>
+<h3>Create repositories</h3>
 
 <p>Start a new repository or obtain one from an existing URL</p>
-
-<p><code>bash
-$ git init [project-name] # Creates a new local repository with the specified name
-$ git clone [url]         # Downloads a project and its entire version history
-</code></p>
-
-<h3 id="make-changes">Make changes</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git init <span class="o">[</span>project-name<span class="o">]</span> <span class="c"># Creates a new local repository with the specified name</span>
+<span class="nv">$ </span>git clone <span class="o">[</span>url<span class="o">]</span>         <span class="c"># Downloads a project and its entire version history</span>
+</code></pre></div>
+<h3>Make changes</h3>
 
 <p>Review edits and craf a commit transaction</p>
-
-<p><code>bash
-$ git status                            # Lists all new or modified files to be commited
-$ git add [file]                        # Snapshots the file in preparation for versioning
-$ git reset [file]                      # Unstages the file, but preserve its contents
-$ git diff                              # Shows file differences not yet staged
-$ git diff --staged                     # Shows file differences between staging and the last file version
-$ git commit -m "[descriptive message]" # Records file snapshots permanently in version history
-</code></p>
-
-<h3 id="group-changes">Group changes</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git status                            <span class="c"># Lists all new or modified files to be commited</span>
+<span class="nv">$ </span>git add <span class="o">[</span>file<span class="o">]</span>                        <span class="c"># Snapshots the file in preparation for versioning</span>
+<span class="nv">$ </span>git reset <span class="o">[</span>file<span class="o">]</span>                      <span class="c"># Unstages the file, but preserve its contents</span>
+<span class="nv">$ </span>git diff                              <span class="c"># Shows file differences not yet staged</span>
+<span class="nv">$ </span>git diff --staged                     <span class="c"># Shows file differences between staging and the last file version</span>
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;[descriptive message]&quot;</span> <span class="c"># Records file snapshots permanently in version history</span>
+</code></pre></div>
+<h3>Group changes</h3>
 
 <p>Name a series of commits and combine completed efforts</p>
-
-<p><code>bash
-$ git branch                  # Lists all local branches in the current repository
-$ git branch [branch-name]    # Creates a new branch
-$ git checkout [branch-name]  # Switches to the specified branch and updates the working directory
-$ git merge [branch]          # Combines the specified branch’s history into the current branch
-$ git branch -d [branch-name] # Deletes the specified branch
-</code></p>
-
-<h3 id="refactor-filenames">Refactor filenames</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git branch                  <span class="c"># Lists all local branches in the current repository</span>
+<span class="nv">$ </span>git branch <span class="o">[</span>branch-name<span class="o">]</span>    <span class="c"># Creates a new branch</span>
+<span class="nv">$ </span>git checkout <span class="o">[</span>branch-name<span class="o">]</span>  <span class="c"># Switches to the specified branch and updates the working directory</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>branch<span class="o">]</span>          <span class="c"># Combines the specified branch’s history into the current branch</span>
+<span class="nv">$ </span>git branch -d <span class="o">[</span>branch-name<span class="o">]</span> <span class="c"># Deletes the specified branch</span>
+</code></pre></div>
+<h3>Refactor filenames</h3>
 
 <p>Relocate and remove versioned files</p>
-
-<p><code>bash
-$ git rm [file]                         # Deletes the file from the working directory and stages the deletion
-$ git rm --cached [file]                # Removes the file from version control but preserves the file locally
-$ git mv [file-original] [file-renamed] # Changes the file name and prepares it for commit
-</code></p>
-
-<h3 id="suppress-tracking">Suppress tracking</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git rm <span class="o">[</span>file<span class="o">]</span>                         <span class="c"># Deletes the file from the working directory and stages the deletion</span>
+<span class="nv">$ </span>git rm --cached <span class="o">[</span>file<span class="o">]</span>                <span class="c"># Removes the file from version control but preserves the file locally</span>
+<span class="nv">$ </span>git mv <span class="o">[</span>file-original<span class="o">]</span> <span class="o">[</span>file-renamed<span class="o">]</span> <span class="c"># Changes the file name and prepares it for commit</span>
+</code></pre></div>
+<h3>Suppress tracking</h3>
 
 <p>Exclude temporary files and paths</p>
-
-<p><code>bash
- *.log
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> *.log
  build/
  temp-*
-# A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns
-$ git ls-files --other --ignored --exclude-standard
-# Lists all ignored files in this project
-</code></p>
-
-<h3 id="save-fragments">Save fragments</h3>
+<span class="c"># A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns</span>
+<span class="nv">$ </span>git ls-files --other --ignored --exclude-standard
+<span class="c"># Lists all ignored files in this project</span>
+</code></pre></div>
+<h3>Save fragments</h3>
 
 <p>Shelve and restore incomplete changes</p>
-
-<p><code>bash
-$ git stash      # Temporarily stores all modified tracked files
-$ git stash pop  # Restores the most recently stashed files
-$ git stash list # Lists all stashed changesets
-$ git stash drop # Discards the most recently stashed changeset
-</code></p>
-
-<h3 id="review-history">Review history</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git stash      <span class="c"># Temporarily stores all modified tracked files</span>
+<span class="nv">$ </span>git stash pop  <span class="c"># Restores the most recently stashed files</span>
+<span class="nv">$ </span>git stash list <span class="c"># Lists all stashed changesets</span>
+<span class="nv">$ </span>git stash drop <span class="c"># Discards the most recently stashed changeset</span>
+</code></pre></div>
+<h3>Review history</h3>
 
 <p>Browse and inspect the evolution of project files</p>
-
-<p><code>bash
-$ git log                                   # Lists version history for the current branch
-$ git log --follow [file]                   # Lists version history for a file, including renames
-$ git diff [first-branch]...[second-branch] # Shows content differences between two branches
-$ git show [commit]                         # Outputs metadata and content changes of the specified commit
-</code></p>
-
-<h3 id="redo-commits">Redo commits</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git log                                   <span class="c"># Lists version history for the current branch</span>
+<span class="nv">$ </span>git log --follow <span class="o">[</span>file<span class="o">]</span>                   <span class="c"># Lists version history for a file, including renames</span>
+<span class="nv">$ </span>git diff <span class="o">[</span>first-branch<span class="o">]</span>...<span class="o">[</span>second-branch<span class="o">]</span> <span class="c"># Shows content differences between two branches</span>
+<span class="nv">$ </span>git show <span class="o">[</span>commit<span class="o">]</span>                         <span class="c"># Outputs metadata and content changes of the specified commit</span>
+</code></pre></div>
+<h3>Redo commits</h3>
 
 <p>Erase mistakes and craft replacement history</p>
-
-<p><code>bash
-$ git reset [commit]        # Undoes all commits after [commit], preserving changes locally
-$ git reset --hard [commit] # Discards all history and changes back to the specified commit
-</code></p>
-
-<h3 id="synchronize-changes">Synchronize changes</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git reset <span class="o">[</span>commit<span class="o">]</span>        <span class="c"># Undoes all commits after [commit], preserving changes locally</span>
+<span class="nv">$ </span>git reset --hard <span class="o">[</span>commit<span class="o">]</span> <span class="c"># Discards all history and changes back to the specified commit</span>
+</code></pre></div>
+<h3>Synchronize changes</h3>
 
 <p>Register a repository bookmark and exchange version history</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git fetch <span class="o">[</span>bookmark<span class="o">]</span>          <span class="c"># Downloads all history from the repository bookmark</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>bookmark<span class="o">]</span>/<span class="o">[</span>branch<span class="o">]</span> <span class="c"># Combines bookmark’s branch into current local branch</span>
+<span class="nv">$ </span>git push <span class="o">[</span><span class="nb">alias</span><span class="o">]</span> <span class="o">[</span>branch<span class="o">]</span>     <span class="c"># Uploads all local branch commits to GitHub</span>
+<span class="nv">$ </span>git pull                      <span class="c"># Downloads bookmark history and incorporates changes</span>
+</code></pre></div>
+<h3>Reference</h3>
 
-<p><code>bash
-$ git fetch [bookmark]          # Downloads all history from the repository bookmark
-$ git merge [bookmark]/[branch] # Combines bookmark’s branch into current local branch
-$ git push [alias] [branch]     # Uploads all local branch commits to GitHub
-$ git pull                      # Downloads bookmark history and incorporates changes
-</code></p>
-
-<h3 id="reference">Reference</h3>
 <ol>
-  <li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
-  <li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
+<li><a href="https://try.github.io/levels/1/challenges/1">Try Git</a></li>
+<li><a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">github-git-cheat-sheet</a></li>
 </ol>
 
   </article>
@@ -285,13 +258,13 @@ var disqus_shortname ='peawinter';
 
   <footer class="site-footer">
 
-  <p>&copy; <a href="/">Apprantice</a></p>
-  <p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+
+  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
   
-  | With Love and Coffee Hello :wink:
+  | With 🍎 and ☕
 
 </footer>
 

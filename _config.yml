@@ -5,13 +5,19 @@ author: Wenyu Wang
 email: peawinter@gmail.com
 description: > #
   Hi, I'm an operational researcher and statistician.
-# keywords: "Jekyll, theme, Freshman21"
 # baseurl: "/blog" # the subpath of your site, e.g. /blog
 # url: "" # the base hostname & protocol for your site
-locale: en_US
+locale: en
 
 ### Personal info and site tools info:
 # twitter_username: peawinter
+
+social:
+   github: peawinter
+   twitter: peawinter
+   facebook: peawinter
+   email: peawinter@gmail.com
+
 linkedin_username: peawinter
 github_username: peawinter
 disqus_shortname: peawinter
@@ -32,31 +38,19 @@ locales:
       Categories: "Categories"
       Copyright_Notice: "Copyright Notice"
       Recent_Posts: "Recent Posts"
-      # Tags: "Tags"
+      Tags: "Tags"
       Previous: "Older"
       Next: "Newer"
       PostedInCategories: "Posted in"
       Taggedwith: "and tagged"
       PostDate: "on "
-    cn:
-      Aboutme: "关于我"
-      Archives: "存档"
-      Blogroll: "良师益友"
-      Categories: "分类目录"
-      Copyright_Notice: "版权声明"
-      Recent_Posts: "近期文章"
-      # Tags: "标签"
-      Previous: "前一页"
-      Next: "后一页"
-      PostedInCategories: "目录:"
-      Taggedwith: "| 标签:"
-      PostDate: "| 发表时间: "
 
 ### Build settings
+markdown: redcarpet
 redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+  extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 highlighter: pygments
-paginate: 8
+paginate: 5
 permalink: pretty
 
 gems:

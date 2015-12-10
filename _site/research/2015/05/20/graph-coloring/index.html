@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width initial-scale=1">
+
+<meta property="og:title" content="Discrete Optimization - Graph Coloring">
+<title>Discrete Optimization - Graph Coloring</title>
+<meta property="og:description" content="Problem">
+<meta property="og:url" content="/research/2015/05/20/graph-coloring/">
+<meta property="og:site_name" content="Apprantice">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@">
+<meta name="twitter:title" content="Discrete Optimization - Graph Coloring">
+<meta name="twitter:description" content="Problem">
+<meta name="twitter:url" content="/research/2015/05/20/graph-coloring/">
+
+<meta name="keywords" content="">
+
+<link rel="icon" href="/images/avatar.png">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="/research/2015/05/20/graph-coloring/">
+<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</head>
+
+
+
+
+<body>
+
+<div class="container">
+
+  <header class="site-header">
+
+  <div class="wrapper">
+
+    <h1 class="site-title"><a href="/">Apprantice</a></h1>
+    <h3 class="site-meta">Learn the hard way</h3>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        
+        <a class="page-link" href="/about/">About</a>
+        
+        
+        
+        <a class="page-link" href="/archives/">Archives</a>
+        
+        
+        
+        <a class="page-link" href="/categories/">Categories</a>
+        
+        
+        
+        <a class="page-link" href="/tags/">Tags</a>
+        
+        
+        
+        <a class="page-link" href="/feed.xml">Subscribe</a>
+        
+        
+        
+        
+        
+        <a class="page-link" href="/css/main.css"></a>
+        
+        
+        
+        
+        
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+  
+
+  <div class="page-content">
+    <div class="wrapper">
+      <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 itemprop="name" class="post-title">Discrete Optimization - Graph Coloring</h1>
+    <meta itemprop="keywords" content="optimization,discrete,heuristic" />
+    <p class="post-meta">
+    <!-- Posted in
+    
+    <a href="/categories/#research">research</a>&nbsp;
+    
+    
+    and tagged
+    
+    <a href="/tags/#optimization" title="optimization">optimization </a>, 
+    
+    <a href="/tags/#discrete" title="discrete">discrete </a>, 
+    
+    <a href="/tags/#heuristic" title="heuristic">heuristic </a>
+    
+     -->
+    <time itemprop="datePublished" datetime="2015-05-20">
+    <!-- on  -->
+    May 20, 2015
+    </time>
+    </p>
+  </header>
+
+  <article class="post-content" itemprop="articleBody">
+    <h2>Problem</h2>
+
+<p>Given an undirected graph, graph coloring or vertex color problem is to assign minimum number of different colors to nodes such that no adjacent nodes share the same color.</p>
+
+<p>The problem comes from coloring a map such that no two neighbor regions have the same color. Here is a map of the United States colored with only 4 colors:</p>
+
+<p><img src="http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png" alt="US map with four colors"></p>
+
+<h2>Application</h2>
+
+<p><strong>Scheduling</strong> schedule final exams. College offers multiple courses and each student may take multiple courses. To resolve conflict, if a student takes two courses, then these two courses cannot be scheduled at the same time.</p>
+
+<p><strong>Register Allocation</strong> when compiling a program, the computer needs to allocate registers to the most frequently used values of the program, while putting the other ones in memory. This can be modeled as a graph coloring problem: the compiler constructs an interference graph, where vertices are symbolic registers and an edge connects two nodes if they are needed at the same time. If the graph can be colored with k colors then the variables can be stored in k registers.</p>
+
+<ul>
+<li>time tabling and scheduling</li>
+<li>frequency assignment</li>
+<li>register allocation</li>
+<li>printed circuit testing</li>
+<li>parallel numerical computation and optimization</li>
+</ul>
+
+<h2>Properties</h2>
+
+<ul>
+<li><p>A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(|S| = k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.</p></li>
+<li><p>The <strong>chromatic number</strong> \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.</p></li>
+<li><p>A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.</p></li>
+<li><p>The <strong>clique number</strong> \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.</p></li>
+<li><p>A <em>planar</em> graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, &quot;Every map is four colorable&quot;, Bulletin of the American Mathematical Society 82 (1976), 711–12).</p></li>
+<li><p>Complexity</p>
+
+<ul>
+<li>For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning &quot;red&quot; to the first layer, &quot;blue&quot; to the second layer, &quot;red&quot; to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.</li>
+<li>For \(k \geq 3\), \(k-colorability\) is <strong>NP-complete</strong>. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.</li>
+</ul></li>
+<li><p>Approximation boundaries</p>
+
+<ul>
+<li>Lower bound: \(\chi(G) \geq \omega(G)\)</li>
+<li>Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2|E(G)| \geq \chi(G) (\chi(G) - 1)\)</li>
+</ul></li>
+</ul>
+
+<h2>Algorithms</h2>
+
+<h3>Dynamic Programming algorithm</h3>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Find and list all sets that are \(1-colorable\).</li>
+<li>Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
+
+<ul>
+<li>For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{|S|} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)</li>
+</ul></li>
+</ol>
+
+<p>Time complexity: \(O(3^n)\)</p>
+
+<p>Space complexity: \(O(2^n)\)</p>
+
+<ul>
+<li>Remark
+
+<ul>
+<li>By considering only maximal independent sets, the dynamic
+programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).</li>
+<li>Dynamic programming is a method that avoids redoing computations
+over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.</li>
+</ul></li>
+</ul>
+
+<h3>Backtrack algorithm</h3>
+
+<p>Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.</p>
+
+<ol>
+<li>When a node is colored, keep track of the index of when that node is colored.</li>
+<li>For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.</li>
+<li>Find the maximum of all the minimums calculated in step 2.</li>
+<li>Backtrack up to the index found in step 3.</li>
+</ol>
+
+<h3>Greedy algorithm</h3>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Number the vertices \(V\).</li>
+<li>For \(i = 1, ..., n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
+
+<ul>
+<li>In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.</li>
+<li>This algorithm finds a reasonable coloring in time \(O(|V|+|E|)\).</li>
+<li>The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.</li>
+</ul></li>
+</ol>
+
+<ul>
+<li>Remark:
+
+<ul>
+<li><strong>For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.</strong></li>
+<li>For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.</li>
+<li>If the vertices of a graph \(G\) can be numbered \(v<em>1, ..., v</em>n\) such that for every \(i\) , \(|N(v<em>i)  \cap {v</em>1 , . . . , v_{i-1} }| \leq k\) , then \(\chi(G)\leq k+1\).</li>
+</ul></li>
+</ul>
+
+<h3>Welsh-Powell algorithm</h3>
+
+<p>Algorithm:</p>
+
+<ol>
+<li>Find the degree of every vertex.</li>
+<li>Sort the vertices in order of descending degrees.</li>
+<li>Color the first vertex in the list with color 1.</li>
+<li>Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.</li>
+<li>Repeat the process on the uncolored vertices with a new color.</li>
+</ol>
+
+<ul>
+<li>Remark:
+
+<ul>
+<li>Usually performs better than just coloring the vertices without a plan will.</li>
+</ul></li>
+</ul>
+
+<h3>Iterated Greedy algorithm</h3>
+
+<p>Algorithm:
+1. Run simple greedy algorithm.
+2. Permutate the solution such that nodes with the same label are grouped together.
+3. Iterate until the color count reach the optimal value.</p>
+
+<ul>
+<li>The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.</li>
+<li>Reorder the color labels randomly.</li>
+</ul>
+
+<h3>Tabu searching algorithm</h3>
+
+<p>The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.</p>
+
+<ol>
+<li>Take a valid graph coloring solution as input.</li>
+<li>Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.</li>
+<li>Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.</li>
+<li>Select the neighbor that contains the least amount of conflicts.</li>
+<li>Use the neighbor selected in step 4 as the new coloring.</li>
+<li>If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.</li>
+<li><p>If no solution has been found, increase the number of colors to use and go to step 3.</p>
+
+<p>Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.</p></li>
+</ol>
+
+<h3>Mixed Strategy</h3>
+
+<ol>
+<li>Execute the Iterative Greedy algorithm for X amount of iterations.</li>
+<li>Execute the TABU search algorithm on the best solution found thus far.</li>
+<li>Use Y amount of iterations for the search. Goto step 1 until the time is up.</li>
+</ol>
+
+<h3>Simulated Annealing algorithm</h3>
+
+<ol>
+<li>Start from a greedy solution</li>
+<li>Run iterated greedy on current solution</li>
+<li>Run simulated annealing on current solution and track the best solution so far</li>
+<li>Go back to step 2</li>
+</ol>
+
+<ul>
+<li>Cost function
+$$\sum[Ci^2] + \sum[Ci * Ei]$$
+where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.</li>
+<li>Set the initial temperature at 10, the step size \(\alpha = 0.9999\).</li>
+</ul>
+
+<h2>Reference</h2>
+
+<ol>
+<li><a href="http://en.wikipedia.org/wiki/Graph_coloring">wikipedia</a></li>
+<li> <a href="http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf">http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf</a></li>
+<li><a href="http://www.csun.edu/%7Edanielk/teaching/graph-theory/notes02.pdf">http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf</a></li>
+</ol>
+
+  </article>
+  <hr />
+</div>
+
+
+<section class="pager">
+  <ul>
+    
+    <li class="previous"><a href="/travel/2015/05/19/template/" title="All I need is you">&larr; Older</a></li>
+    
+    
+    <li class="next"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">Newer &rarr;</a></li>
+    
+  </ul>
+</section>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+
+  var disqus_developer = 1;
+
+var disqus_shortname ='peawinter';
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+  </div>
+  <section class="pager">
+  
+  
+</section>
+
+
+  
+
+  <footer class="site-footer">
+
+
+  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  on
+  
+  <a href="https://github.com/">Github</a>
+  
+  | With 🍎 and ☕
+
+</footer>
+
+
+</div>
+
+</body>
+
+</html>
