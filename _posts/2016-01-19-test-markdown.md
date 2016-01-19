@@ -189,46 +189,6 @@ function fib(n) {
 document.write(fib(10));
 ```
 
-### 7. 流程图
-
-#### 示例
-
-```flow
-st=>start: Start:>https://www.zybuluo.com
-io=>inputoutput: verification
-op=>operation: Your Operation
-cond=>condition: Yes or No?
-sub=>subroutine: Your Subroutine
-e=>end
-
-st->io->op->cond
-cond(yes)->e
-cond(no)->sub->io
-```
-
-#### 更多语法参考：[流程图语法参考](http://adrai.github.io/flowchart.js/)
-
-### 8. 序列图
-
-#### 示例 1
-
-```seq
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-
-#### 示例 2
-
-```seq
-Title: Here is a title
-A->B: Normal line
-B-->C: Dashed line
-C->>D: Open arrow
-D-->>A: Dashed open arrow
-```
-
-#### 更多语法参考：[序列图语法参考](http://bramp.github.io/js-sequence-diagrams/)
 
 ### 9. 表格支持
 
