@@ -4,7 +4,7 @@ tagline: Learn the hard way
 author: Wenyu Wang
 email: peawinter@gmail.com
 description: > #
-  Hi, I'm an operational researcher and statistician.
+  Hi, I'm an operations researcher and statistician.
 # baseurl: "/blog" # the subpath of your site, e.g. /blog
 # url: "" # the base hostname & protocol for your site
 locale: en
