@@ -22,7 +22,7 @@ linkedin_username: peawinter
 github_username: peawinter
 disqus_shortname: peawinter
 favicon: "/images/avatar.png"
-aboutme: Hi, Im Wenyu Wang, an operational researcher and data scientist. # these are shown on aboutme-sidebar.
+aboutme: Hi, Im Wenyu Wang, an operations researcher and data scientist. # these are shown on aboutme-sidebar.
 aboutme_photo: "/images/avatar.png" # your photo.
 
 ### Site setting:
