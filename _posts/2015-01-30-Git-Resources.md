@@ -116,6 +116,14 @@ $ git push [alias] [branch]     # Uploads all local branch commits to GitHub
 $ git pull                      # Downloads bookmark history and incorporates changes
 ```
 
+### Useful snippet
+
+1. recover all deleted files [link](http://stackoverflow.com/questions/953481/find-and-restore-a-deleted-file-in-a-git-repository)
+
+```bash
+$ git ls-files -d | xargs git checkout --
+```
+
 ### Reference
 1. [Try Git](https://try.github.io/levels/1/challenges/1)
 2. [github-git-cheat-sheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf)
