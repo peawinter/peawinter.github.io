@@ -1,7 +1,7 @@
 ---
 published: false
 layout: post
-title: Optimization - Coordinate Descent
+title: Install R with OpenBlas on Mac
 category: Research
 tags: optimization gradient coordinate descent blackbox
 keywords:
