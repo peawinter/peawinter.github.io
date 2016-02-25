@@ -1,7 +1,6 @@
 ---
-published: true
 layout: post
-title: Interview Question: Expected length of the shortest stick  
+title: Quant Interview Question (Probability Part)
 category: Interview
 tags: Interview Probability
 keywords:
