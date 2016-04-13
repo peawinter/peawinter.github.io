@@ -29,7 +29,7 @@ Expected number of uniform random variables needed such that their sum is greate
 
 **Answer**:
 
-$$e$$!
+$$e$$
 
 Hint: $$E[N] = 1 + \sum_{n=1}^{\infty}P(N > n)$$ and then think about the cube.
 
