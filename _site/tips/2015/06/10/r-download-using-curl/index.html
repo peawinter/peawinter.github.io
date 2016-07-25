@@ -84,8 +84,6 @@
         
         
         
-        
-        
       </div>
     </nav>
 
@@ -127,32 +125,36 @@
 
   <article class="post-content" itemprop="articleBody">
     <p>When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kp">load</span><span class="p">(</span><span class="kp">url</span><span class="p">(</span><span class="s">&quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&quot;</span><span class="p">))</span>
-<span class="o">&gt;</span> <span class="kp">ls</span><span class="p">()</span>
-<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;mood.data&quot;</span>
-<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>mood.data<span class="p">)</span>
+
+<pre><code class="language-R">&gt; load(url("http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata"))
+&gt; ls()
+[1] "mood.data"
+&gt; head(mood.data)
      group mood
-<span class="m">1</span> pleasant    <span class="m">6</span>
-<span class="m">2</span> pleasant    <span class="m">5</span>
-<span class="m">3</span> pleasant    <span class="m">4</span>
-<span class="m">4</span> pleasant    <span class="m">7</span>
-<span class="m">5</span> pleasant    <span class="m">7</span>
-<span class="m">6</span> pleasant    <span class="m">5</span>
-</code></pre></div>
+1 pleasant    6
+2 pleasant    5
+3 pleasant    4
+4 pleasant    7
+5 pleasant    7
+6 pleasant    5
+</code></pre>
+
 <p>Another useful package is <code>RCurl</code>.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R"><span class="o">&gt;</span> <span class="kn">library</span><span class="p">(</span>RCurl<span class="p">)</span>
-<span class="o">&gt;</span> myURL <span class="o">&lt;-</span> <span class="s">&#39;some_url&#39;</span>
-<span class="o">&gt;</span> myData <span class="o">&lt;-</span> getURLContent<span class="p">(</span>URLencode<span class="p">(</span>myURL<span class="p">))</span>
-</code></pre></div>
+
+<pre><code class="language-R">&gt; library(RCurl)
+&gt; myURL &lt;- 'some_url'
+&gt; myData &lt;- getURLContent(URLencode(myURL))
+</code></pre>
+
 <p><code>getURL</code> may issue an error when the file is not text. <code>getURLContent</code> will determine the type of the content automatically.</p>
 
-<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &#39;URLencode&#39; to process the link at first.</p>
+<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use ‘URLencode’ to process the link at first.</p>
 
 <p>Reference</p>
 
 <ol>
-<li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a>
-2.
+  <li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a><br />
+2.<br />
 <a href="http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html">http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html</a></li>
 </ol>
 

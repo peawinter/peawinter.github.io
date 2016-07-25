@@ -84,8 +84,6 @@
         
         
         
-        
-        
       </div>
     </nav>
 
@@ -125,34 +123,40 @@
 
   <article class="post-content" itemprop="articleBody">
     <p>In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R">myTestFun1 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kc">...</span>
-<span class="p">}</span>
 
-myTestFun2 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kc">...</span>
-<span class="p">}</span>
+<pre><code class="language-R">myTestFun1 &lt;- function() {
+  ...
+}
 
-myMain <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFun<span class="p">)</span> <span class="p">{</span>
-  <span class="kc">...</span>
-<span class="p">}</span>
-</code></pre></div>
+myTestFun2 &lt;- function() {
+  ...
+}
+
+myMain &lt;- function(testFun) {
+  ...
+}
+</code></pre>
+
 <p>R works greatly since it passes function as variable (so-called functional programming?)</p>
 
 <p>In <code>myMain</code> function, I want to generate output looks like</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">test function: myTestFun1
+
+<pre><code>test function: myTestFun1
 
         value: ....
-</code></pre></div>
+</code></pre>
+
 <p>Here I got a problem, since R passes the function to <code>testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code>match.fun</code> to extract the desired function object.</p>
-<div class="highlight"><pre><code class="language-R" data-lang="R">myMainNew <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>testFunName<span class="p">)</span> <span class="p">{</span>
-  testFun <span class="o">&lt;-</span> <span class="kp">match.fun</span><span class="p">(</span>testFunName<span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3>Reference</h3>
+
+<pre><code class="language-R">myMainNew &lt;- function(testFunName) {
+  testFun &lt;- match.fun(testFunName)
+}
+</code></pre>
+
+<h3 id="reference">Reference</h3>
 
 <ol>
-<li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
+  <li><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html">http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html</a></li>
 </ol>
 
   </article>
@@ -163,7 +167,7 @@ myMain <span class="o">&lt;-</span> <span class="kr">function</span><span class=
 <section class="pager">
   <ul>
     
-    <li class="previous"><a href="/news/2015/06/05/Site-ABC/" title="Site-ABC">&larr; Older</a></li>
+    <li class="previous"><a href="/life/2015/05/22/four-line-motto/" title="Four Line Motto">&larr; Older</a></li>
     
     
     <li class="next"><a href="/tips/2015/06/05/run-r-on-cluster/" title="Running R on cluster">Newer &rarr;</a></li>

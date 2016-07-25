@@ -84,8 +84,6 @@
         
         
         
-        
-        
       </div>
     </nav>
 
@@ -124,39 +122,47 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&#39;&#39;ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
+    <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I’‘ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
 
 <p>The steps are straightforward,</p>
 
 <ol>
-<li><p>Make sure your can login without password. This can be done by following <a href="http://www.linuxproblem.org/art_9.html">reference 2</a>.</p></li>
-<li><p>Start ipython on Hathi.</p></li>
+  <li>
+    <p>Make sure your can login without password. This can be done by following <a href="http://www.linuxproblem.org/art_9.html">reference 2</a>.</p>
+  </li>
+  <li>
+    <p>Start ipython on Hathi.</p>
+  </li>
 </ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on server
+
+<pre><code class="language-bash">% on server
 module add anaconda
-ipython notebook --no-browser --port<span class="o">=</span>7777
-</code></pre></div>
+ipython notebook --no-browser --port=7777
+</code></pre>
+
 <ol>
-<li>Setup the ssh tunnel from the local machine to the remote machine.</li>
+  <li>Setup the ssh tunnel from the local machine to the remote machine.</li>
 </ol>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">% on <span class="nb">local </span>machine
+
+<pre><code class="language-bash">% on local machine
 ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
-</code></pre></div>
+</code></pre>
+
 <ol>
-<li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
+  <li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
 </ol>
 
 <p>As Joe Hamman said,</p>
 
 <blockquote>
-<p>the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.</p>
+  <p>the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.</p>
 </blockquote>
 
-<h2>Reference</h2>
+<h2 id="reference">Reference</h2>
 
 <ol>
-<li><a href="http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/">http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/</a></li>
-<li><a href="http://www.linuxproblem.org/art_9.html">http://www.linuxproblem.org/art_9.html</a></li>
+  <li><a href="http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/">http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/</a></li>
+  <li><a href="http://www.linuxproblem.org/art_9.html">http://www.linuxproblem.org/art_9.html</a></li>
 </ol>
 
   </article>
@@ -170,7 +176,7 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
     <li class="previous"><a href="/tips/2015/06/23/install-Rmpi/" title="Install Rmpi on Mac and Redhat server">&larr; Older</a></li>
     
     
-    <li class="disabled"><a>Newer &rarr;</a>
+    <li class="next"><a href="/notes/2016/01/20/STAT520-Notes/" title="STAT 520 Time Series Notes">Newer &rarr;</a></li>
     
   </ul>
 </section>

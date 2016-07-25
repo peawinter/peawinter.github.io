@@ -2,49 +2,462 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apprantice</title>
-    <description>Hi, I&#39;m an operational researcher and statistician.
+    <description>Hi, I&#39;m an operations researcher and statistician.
 </description>
     <link>/</link>
     <atom:link href="/zfeed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Dec 2015 14:24:30 -0500</pubDate>
-    <lastBuildDate>Thu, 10 Dec 2015 14:24:30 -0500</lastBuildDate>
+    <pubDate>Sun, 24 Jul 2016 02:40:11 -0400</pubDate>
+    <lastBuildDate>Sun, 24 Jul 2016 02:40:11 -0400</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
+        <title>STAT 520 Time Series Notes</title>
+        <description>&lt;h1 id=&quot;chapter-2-fundamental-concepts&quot;&gt;Chapter 2: Fundamental Concepts&lt;/h1&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Stochastic Process&lt;/dt&gt;
+  &lt;dd&gt;A sequence of r.v. indexed by time.&lt;/dd&gt;
+  &lt;dt&gt;For example&lt;/dt&gt;
+  &lt;dd&gt;${Y_t: t=1, 2, 3, …}$&lt;br /&gt;
+${Y_t: t=0, \pm 1, \pm 2, \pm 3, …}$&lt;br /&gt;
+${Y_t: t \in R}$&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;used to model time series as a data generating process
+    &lt;ul&gt;
+      &lt;li&gt;time series is a realization (sample) of S.P.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The complete probability structure is determined by the dist. of all finite sets of $Y$’s, e.g. ${t_1, …, t_n} \rightarrow {Y&lt;em&gt;{t_1}, … Y&lt;/em&gt;{t_n}}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Usually assume multivairate normal dist $\Rightarrow$ Gaussian Process, whose prob structure is completed specified by the first and second monents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Mean function of S.P.&lt;/dt&gt;
+  &lt;dd&gt;${Y_t, t = 1, 2, …}$ is $\mu_t = E[Y_t]$&lt;/dd&gt;
+  &lt;dt&gt;The autocovariance function of S.P. ${Y_t, t = 1, 2}$&lt;/dt&gt;
+  &lt;dd&gt;$\gamma_{r, s} = Cov(Y_t, Y_s)$&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Properties:&lt;br /&gt;
+$\begin{align&lt;em&gt;}&lt;br /&gt;
+\gamma_{t, t} &amp;amp; = Var(Y_t) \&lt;br /&gt;
+\gamma_{s, t} &amp;amp; = \gamma_{t, s} \&lt;br /&gt;
+|\gamma_{t, s}| &amp;amp; \le \sqrt{\gamma_{t, t} \gamma_{s, s}}&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;The autocorrelation function of ${Y_t, t = 1, 2, …}$&lt;/dt&gt;
+  &lt;dd&gt;$\rho = Corr(Y_t, Y_s) = {\gamma&lt;em&gt;{t, s} \over \sqrt{\gamma&lt;/em&gt;{t, t} \gamma_{s, s}}}$&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: With constant $c_1, …, c_m$ and $d_1, …, d_n$, we have&lt;br /&gt;
+$Cov(\sum_i^m{c_i Y&lt;em&gt;{t_i}}, \sum_j^n{d_j Y&lt;/em&gt;{s_j}})&lt;br /&gt;
+=\sum_i^m \sum_j^n c_i d_j cov(Y&lt;em&gt;{t_i}, Y&lt;/em&gt;{s_j})$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Properites:&lt;br /&gt;
+$\begin{align&lt;em&gt;}&lt;br /&gt;
+\rho_{t, t} &amp;amp; = 1 \&lt;br /&gt;
+\rho_{t, s} &amp;amp; = \rho_{s, t} \&lt;br /&gt;
+|\rho_{t, s}| &amp;amp; \le 1&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;random-walk&quot;&gt;Random Walk&lt;/h2&gt;
+
+&lt;p&gt;Suppose $e_i \sim N(0, \sigma_e^2)$&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y_1 = e_1, Y_t = Y_{t-1} + e_t&lt;/script&gt;
+
+&lt;p&gt;$e_t$: stepsize at time $t$&lt;br /&gt;
+$Y_t$: position at tiem $t$&lt;/p&gt;
+
+&lt;p&gt;$\Rightarrow$ ${y_t, t=1, 2, …}$ is a random walk.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: $Y_t = Y_{t-1} + e_t = \sum_i e_i$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mean function&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\mu_t = E[Y_t] = 0&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Autocovariance function&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\gamma_{t, s} = Cov(Y_t, Y_s) = \min(t, s) \cdot \sigma_e^2&lt;/script&gt;&lt;br /&gt;
+$\Rightarrow$ $\gamma_{t, t} = t \sigma_e^2$&lt;/li&gt;
+  &lt;li&gt;Autocorrelation function&lt;br /&gt;
+$\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)}{\max(t, s)}}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;moving-average&quot;&gt;Moving Average&lt;/h2&gt;
+
+&lt;p&gt;Suppose $e_i \sim N(0, \sigma_e^2), i = 0, 1, 2, …$&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;Y_t = \frac{e_t + e_{t-1}}{2}&lt;/script&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mean:&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\mu_t = E[Y_t] = 0&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Autovariance:&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\gamma_{s, t} = Cov(Y_t, Y_s) =
+\begin{cases}
+{\sigma^2 \over 2}, &amp; \textbf{if } |t-s| = 0 \\
+{\sigma^2 \over 4}, &amp; \textbf{if } |t-s|=1 \\
+0, &amp; \textbf{otherwise}
+\end{cases} %]]&gt;&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;Autocorrelation:&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\rho_{t, s} = \begin{cases}
+1, &amp; \textbf{if } |t-s| = 0 \\
+0.5, &amp; \textbf{if } |t-s|=1 \\
+0, &amp; \textbf{otherwise}
+\end{cases} %]]&gt;&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;stationarity&quot;&gt;Stationarity&lt;/h2&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Strictly stationary&lt;/dt&gt;
+  &lt;dd&gt;A S.P. ${Y_t}$ is strictly stationary if for any choice of time point, ${t_1, … ,t_n}$ and $k \ge 0$, the joint dist of ${Y&lt;em&gt;{t_1}, …, Y&lt;/em&gt;{t_n}}$ is the same as the joint dist of ${Y&lt;em&gt;{t_1 + k}, …, Y&lt;/em&gt;{t_n + k}}$&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;[Y_{t_1}, ..., Y_{t_n}] = [Y_{t_1 + k}, ..., Y_{t_n + k}]&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Special case when $n=1$:&lt;/p&gt;
+
+    &lt;p&gt;Both mean and variance are the same for $Y_t$ and $Y_s$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Special case when $n=2$:&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;[Y_t, Y_s] = [Y_{t+k}, Y_{s+k}] = [Y_0, Y_{s-t}]&lt;/script&gt;
+
+    &lt;p&gt;$\Rightarrow$ $ \gamma&lt;em&gt;{t, s} = \gamma&lt;/em&gt;{0, s - t}$&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;In general, $\forall s, t &amp;gt; 0, \gamma&lt;em&gt;{t, s} = \gamma&lt;/em&gt;{0,&lt;/td&gt;
+          &lt;td&gt;t-s&lt;/td&gt;
+          &lt;td&gt;}$&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;$\Rightarrow \gamma_k = Cov(y_t, y_{t+k})$ and $\rho_k = \frac{\gamma_k}{\gamma_0}$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thm. If ${Y_t}$ is strickly stationary, then&lt;br /&gt;
+(1). $\mu_t$ is constant&lt;br /&gt;
+(2). variance function ${Var(Y_t)}$ is also constant.&lt;br /&gt;
+(3). $\gamma&lt;em&gt;{t, s} = \gamma&lt;/em&gt;{0, |t-s|} = \gamma&lt;em&gt;{|t-s|}$&lt;br /&gt;
+(4). $\rho&lt;/em&gt;{t, s} = \rho&lt;em&gt;{0, |t-s|}=\frac{\gamma&lt;/em&gt;{|t-s|}}{\gamma_0}$&lt;/p&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Weakly Stationary&lt;/dt&gt;
+  &lt;dd&gt;A S.P. ${Y_t}$ is weakly or second-order stationary if&lt;br /&gt;
+1. The mean function is constant over time&lt;br /&gt;
+2. The autocovariance function $\gamma&lt;em&gt;{t+k, k}=\gamma&lt;/em&gt;{0, k}$, $\forall t$ and $k\ge 0$.&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In general, strictly stationary $\Rightarrow$ weakly statioanry&lt;br /&gt;
+For Gaussian process, strictly stationary $\Leftrightarrow$ weakly stationary.&lt;br /&gt;
+Note: From now on “stationary” is “weakly stationary”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;review&quot;&gt;Review&lt;/h3&gt;
+
+&lt;p&gt;Time sequence ${Y_t}$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mean function: $\mu_t$&lt;/li&gt;
+  &lt;li&gt;Autocovariance function: $\gamma_{t, s}$&lt;/li&gt;
+  &lt;li&gt;Autocorrelation function: $\rho_{t,s}$&lt;/li&gt;
+  &lt;li&gt;Strickly Stationary&lt;/li&gt;
+  &lt;li&gt;(Weakly) Stationary
+    &lt;ul&gt;
+      &lt;li&gt;$\mu_t = \mu$&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;$\gamma&lt;em&gt;{t,s} = \gamma&lt;/em&gt;{&lt;/td&gt;
+              &lt;td&gt;t-s&lt;/td&gt;
+              &lt;td&gt;}$ $\Rightarrow$ $\gamma&lt;em&gt;{t,s} = \gamma&lt;/em&gt;{&lt;/td&gt;
+              &lt;td&gt;t-s&lt;/td&gt;
+              &lt;td&gt;}$&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;white-noise-process&quot;&gt;White Noise Process&lt;/h2&gt;
+
+&lt;p&gt;White noise ${e_t}$ with $e_t$ iid&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Strictly stationary&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;$\forall t_1, …, t_n,  \&amp;amp; \ k$&lt;/p&gt;
+
+&lt;p&gt;$\begin{align&lt;em&gt;}&lt;br /&gt;
+&amp;amp; P(e_{t_1}\le x_1, …, e_{t_n} \le x_n) \&lt;br /&gt;
+= &amp;amp; \prod P(e_{t_i} \le x_i) \&lt;br /&gt;
+= &amp;amp; \prod P(e_{t_i +k} \le x_i) \&lt;br /&gt;
+= &amp;amp; P(e_{t_1 + k} \le x_1, …, e_{t_n + k} \le x_n)&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\mu_t = E[e_t] = const$&lt;/li&gt;
+  &lt;li&gt;$\gamma_k = \begin{cases} Var(e_t), &amp;amp; k = 0 \ 0, &amp;amp; k \neq 0 \end{cases}$&lt;/li&gt;
+  &lt;li&gt;$\rho_k = {\gamma_k \over \gamma_0 }= \begin{cases}&lt;br /&gt;
+1 &amp;amp; k=0 \&lt;br /&gt;
+0 &amp;amp; otherwise&lt;br /&gt;
+\end{cases}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Its spectrum is analogous to that of white light $\Rightarrow$ “White Noise”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Usually assume $\mu_t = 0, Var(e_t) = \sigma_e ^ 2$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;moving-average-1&quot;&gt;Moving average&lt;/h2&gt;
+
+&lt;p&gt;$Y_t = \frac{e_t + e_{t - 1}}{2}$&lt;/p&gt;
+
+&lt;p&gt;Recall $\mu_t = 0$&lt;/p&gt;
+
+&lt;p&gt;$\gamma_{t, s} =&lt;br /&gt;
+    \begin{cases}&lt;br /&gt;
+       \frac{\sigma^2}{2}, &amp;amp; |t-s| = 0 \&lt;br /&gt;
+       \frac{\sigma^2}{4}, &amp;amp; |t-s| = 1\&lt;br /&gt;
+       0, &amp;amp; |t-s| &amp;gt; 1&lt;br /&gt;
+    \end{cases}&lt;br /&gt;
+$&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$\Rightarrow$ Stationary&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;random-cosine-wave&quot;&gt;Random Cosine Wave&lt;/h2&gt;
+
+&lt;p&gt;$Y_t = cos[2 \pi (\frac{t}{12} + \phi)]$, where $\phi \sim Unif[0, 1]$.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Expectation function:&lt;br /&gt;
+$\begin{align&lt;em&gt;}&lt;br /&gt;
+\mu_t &amp;amp; = E[cos[2 \pi (\frac{t}{12} + \phi)]] \&lt;br /&gt;
+&amp;amp; = \int_0^1 cos[2 \pi (\frac{t}{12} + \phi)] d\phi \&lt;br /&gt;
+&amp;amp; = \frac{1}{2\pi} sin[2 \pi (\frac{t}{12} + \phi) ] \&lt;br /&gt;
+&amp;amp; = 0&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Covariance function:&lt;br /&gt;
+$\begin{align&lt;em&gt;}&lt;br /&gt;
+\gamma_{t, s} &amp;amp; = E[Y_t, Y_s] \&lt;br /&gt;
+&amp;amp; = \int_0^1 cos[2\pi(\frac{t}{12} + \phi)] cos[2\pi(\frac{s}{12} + \phi)] d\phi \&lt;br /&gt;
+&amp;amp; = \frac{1}{2} \int_0^1 cos[2\pi\frac{t-s}{12}] + cos[2\pi (\frac{t+s}{12} + 2\phi)] d\phi \&lt;br /&gt;
+&amp;amp; = \frac{1}{2} cos[2\pi \frac{t-s}{12}] \&lt;br /&gt;
+&amp;amp; = \gamma_{|t-s|}&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$\Rightarrow$ Stationary&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Note: Difficult to check stationarity.&lt;/p&gt;
+
+&lt;h2 id=&quot;random-walk-1&quot;&gt;Random Walk&lt;/h2&gt;
+
+&lt;p&gt;$Y_t = \sum_{i = 1}^t e_i$ with&lt;/p&gt;
+
+&lt;p&gt;$\begin{cases}&lt;br /&gt;
+\mu_t &amp;amp; = 0 \&lt;br /&gt;
+Var(Y_t) &amp;amp; = t \sigma_e^2 \&lt;br /&gt;
+\gamma_{t, s} &amp;amp; = \min{t, s} \cdot \sigma_e^2&lt;br /&gt;
+\end{cases}&lt;br /&gt;
+$&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Not stationary.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;However, $DY_t =Y_t - Y_{t-1} = e_t \Rightarrow$ Difference Series is staionary&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Differencing &amp;amp; other transformations may be conducted on non-stationary series $\Rightarrow$ Stationary series&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;chapter-3-trends&quot;&gt;Chapter 3: Trends&lt;/h1&gt;
+
+&lt;p&gt;A time series is a sample of a stochastic process.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\mu_t$&lt;/li&gt;
+  &lt;li&gt;$\gamma_{t, s}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Consider $Y_t = \mu_t + X_t$, where $\mu_t$ is the trend and $x$ is stationary. Assume $\mu_t = \mu$ (const mean).&lt;/p&gt;
+
+&lt;p&gt;$\begin{cases}&lt;br /&gt;
+\mu_t^Y &amp;amp; = \mu_t + \mu_t^X \&lt;br /&gt;
+\gamma&lt;em&gt;{t, s} ^ Y &amp;amp; = \gamma&lt;/em&gt;{t, s} ^ X \&lt;br /&gt;
+\rho&lt;em&gt;{t, s}^Y &amp;amp; = \rho&lt;/em&gt;{t, s}^X&lt;br /&gt;
+\end{cases}$&lt;/p&gt;
+
+&lt;h2 id=&quot;estimate-of-constant-mean&quot;&gt;Estimate of constant mean&lt;/h2&gt;
+
+&lt;p&gt;Assume $Y_t = \mu + X_t$ and ${X_t}$ is stationary with $\mu_t^X = 0$.&lt;/p&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Question&lt;/dt&gt;
+  &lt;dd&gt;Given observed time series, $Y_1, …, Y_n$, how to estimate $\mu$?&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: without further assumptions on ${\gamma_k^x}$, we’d better NOT to seek the optimal est of $\mu$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;Answer&lt;/dt&gt;
+  &lt;dd&gt;Least squares est $\min{\sum(y_t - \mu)^2} \Rightarrow \hat{\mu} = \bar{y}$&lt;br /&gt;
+    $E[\hat{\mu}] = E[\bar{Y}] = \mu$ unbiased&lt;br /&gt;
+    $\begin{align&lt;em&gt;}&lt;br /&gt;
+Var(\hat{\mu}) &amp;amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) \&lt;br /&gt;
+&amp;amp; = \frac{1}{n^2} { n Var(Y_t) + 2\sum_{t=1}^n \sum_{s=1}^{t-1} Cov(Y_t, Y_s) } \&lt;br /&gt;
+&amp;amp; = \frac{1}{n^2} { n\gamma_0 + 2 \sum_{t=1}^{n} \sum_{k=1}^{t-1} \gamma_k} \&lt;br /&gt;
+&amp;amp; = \frac{1}{n^2} { n \gamma_0 + 2 \sum_{k=1}^{n-1}(n-k)\gamma_k} \&lt;br /&gt;
+&amp;amp; = \frac{\gamma_0}{n} { 1 + 2 \sum_{k=1}^{n-1} (1 -\frac{k}{n} ) \rho_k }&lt;br /&gt;
+\end{align&lt;/em&gt;}$&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;Example, ${x_t}$ is a white noise process $\Rightarrow$ $Var(\hat{\mu}) = \frac{\gamma_0}{n}$&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: If $\rho_k \ge 0, \forall k \ge 1$, then $Var(\hat{\mu}) \ge \frac{\gamma_0}{n}$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;In many stationary process, we have $\sum_{k=0}^\infty&lt;/td&gt;
+      &lt;td&gt;\rho_k&lt;/td&gt;
+      &lt;td&gt;&amp;lt; \infty$ (a.c. function decays sufficiently with increasing lags)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;When n is sufficiently large, we can approximate $Var(\hat{\mu}) \approx \frac{\gamma_0}{n} \sum_{k=-\infty}^{\infty} \rho_k$&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;example: $\rho_k = \phi^{&lt;/td&gt;
+      &lt;td&gt;k&lt;/td&gt;
+      &lt;td&gt;}$ with $&lt;/td&gt;
+      &lt;td&gt;\phi&lt;/td&gt;
+      &lt;td&gt;&amp;lt; 1$, then $Var(\hat{\mu}) \approx \frac{\gamma_0}{n}\frac{1+\phi}{1-\phi}$&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;reviewed&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;polynomial-trend&quot;&gt;Polynomial trend&lt;/h2&gt;
+
+&lt;p&gt;$\mu_t = \sum_{k=0} ^ {P} \beta_k t^k, P\ge1$&lt;/p&gt;
+
+&lt;p&gt;Model: $y_t = \mu_t + x_t$, ${x_t}$ is stationary with $\mu_t^x = 0$&lt;/p&gt;
+
+&lt;p&gt;Data (time series): $y_1, …, y_n$ $n»p$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Least square est&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$\min&lt;em&gt;{\beta_k} { \sum&lt;/em&gt;{t=1}^n (y_t - \sum_{k = 0}^P \beta_k t^k)^2}$&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 Jan 2016 00:00:00 -0500</pubDate>
+        <link>/notes/2016/01/20/STAT520-Notes/</link>
+        <guid isPermaLink="true">/notes/2016/01/20/STAT520-Notes/</guid>
+        
+        <category>Notes</category>
+        
+        
+        <category>notes</category>
+        
+      </item>
+    
+      <item>
         <title>Access remote ipython notebook</title>
-        <description>&lt;p&gt;Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I&amp;#39;&amp;#39;ve had the access to the Purdue server &lt;code&gt;Hathi&lt;/code&gt;, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the &lt;code&gt;Rmpi&lt;/code&gt; package.) The inspiration to use ipython hosted by Hathi hits me immediately.&lt;/p&gt;
+        <description>&lt;p&gt;Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I’‘ve had the access to the Purdue server &lt;code&gt;Hathi&lt;/code&gt;, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the &lt;code&gt;Rmpi&lt;/code&gt; package.) The inspiration to use ipython hosted by Hathi hits me immediately.&lt;/p&gt;
 
 &lt;p&gt;The steps are straightforward,&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Make sure your can login without password. This can be done by following &lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;reference 2&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Start ipython on Hathi.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Make sure your can login without password. This can be done by following &lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;reference 2&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start ipython on Hathi.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;% on server
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;% on server
 module add anaconda
-ipython notebook --no-browser --port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;7777
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ipython notebook --no-browser --port=7777
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;ol&gt;
-&lt;li&gt;Setup the ssh tunnel from the local machine to the remote machine.&lt;/li&gt;
+  &lt;li&gt;Setup the ssh tunnel from the local machine to the remote machine.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;% on &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;machine
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;% on local machine
 ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;ol&gt;
-&lt;li&gt;Access remotely hosted ipython notebook through your favorite brower at &lt;a href=&quot;localhost:7777&quot;&gt;localhost:7777&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Access remotely hosted ipython notebook through your favorite brower at &lt;a href=&quot;localhost:7777&quot;&gt;localhost:7777&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;As Joe Hamman said,&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.&lt;/p&gt;
+  &lt;p&gt;the beauty of this is that I interact only with the browser on my local machine, while having access to the computing power and file system of the remote machine.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2&gt;Reference&lt;/h2&gt;
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.hydro.washington.edu/%7Ejhamman/hydro-logic/blog/2013/10/04/pybook-remote/&quot;&gt;http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;http://www.linuxproblem.org/art_9.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/&quot;&gt;http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.linuxproblem.org/art_9.html&quot;&gt;http://www.linuxproblem.org/art_9.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Thu, 25 Jun 2015 00:00:00 -0400</pubDate>
@@ -64,37 +477,49 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
         <title>Install Rmpi on Mac and Redhat server</title>
         <description>&lt;p&gt;To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed &lt;code&gt;Rmpi&lt;/code&gt; for the first time.&lt;/p&gt;
 
-&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
 
 &lt;p&gt;It turns out &lt;code&gt;Rmpi&lt;/code&gt; depends on &lt;code&gt;open MPI&lt;/code&gt;, which should be installed by&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew install open-mpi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ brew install open-mpi
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Then in &lt;code&gt;R&lt;/code&gt;, install the package from source.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rmpi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; type&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;source&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;install.packages(&quot;Rmpi&quot;, type=&quot;source&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;As to install &lt;code&gt;Rmpi&lt;/code&gt; on server, we need some specification. This line works on &lt;code&gt;radon&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;--with-mpi&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Although this line can do the job, but it is not straight forward to get here.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Download Rmpi_version.gz&lt;/li&gt;
-&lt;li&gt;Add module&lt;/li&gt;
+  &lt;li&gt;Download Rmpi_version.gz&lt;/li&gt;
+  &lt;li&gt;Add module&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  module add r
+
+&lt;p&gt;&lt;code&gt;bash
+  module add r
   module add openmpi
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ &lt;/code&gt;&lt;br /&gt;
+3. Check the directory of the openmpi via&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bash
+  ompi_info
+ &lt;/code&gt;&lt;/p&gt;
+
 &lt;ol&gt;
-&lt;li&gt;Check the directory of the openmpi via&lt;/li&gt;
+  &lt;li&gt;Final step to install &lt;code&gt;Rmpi&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  ompi_info
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;ol&gt;
-&lt;li&gt;Final step to install &lt;code&gt;Rmpi&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;--with-mpi&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;bash
+  R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+ &lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
 </description>
         <pubDate>Tue, 23 Jun 2015 00:00:00 -0400</pubDate>
         <link>/tips/2015/06/23/install-Rmpi/</link>
@@ -112,27 +537,33 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
       <item>
         <title>Python punctuation</title>
         <description>&lt;p&gt;Here is a regex to match a string of characters that are not a letters or numbers:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Za&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;[^A-Za-z0-9]+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Here is the Python command to do a regex substitution:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;[^A-Za-z0-9]+&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mystring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;hello world! how are you? 0&amp;quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# Short version&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isalpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;re.sub(&#39;[^A-Za-z0-9]+&#39;, &#39;&#39;, mystring)
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;span class=&quot;c&quot;&gt;# Faster version for long ASCII strings:&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;tostrip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isalpha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;translate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id_tab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tostrip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;s = &quot;hello world! how are you? 0&quot;
 
-&lt;span class=&quot;c&quot;&gt;# Using regular expressions&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;[^A-Za-z]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+# Short version
+print filter(lambda c: c.isalpha(), s)
+
+# Faster version for long ASCII strings:
+id_tab = &quot;&quot;.join(map(chr, xrange(256)))
+tostrip = &quot;&quot;.join(c for c in id_tab if c.isalpha())
+print s.translate(id_tab, tostrip)
+
+# Using regular expressions
+print re.sub(&quot;[^A-Za-z]&quot;, &quot;&quot;, s)
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Reference&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&quot;&gt;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&quot;&gt;http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Thu, 11 Jun 2015 00:00:00 -0400</pubDate>
@@ -153,32 +584,36 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
       <item>
         <title>R download file from web</title>
         <description>&lt;p&gt;When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;ls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;mood.data&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;mood.data&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-R&quot;&gt;&amp;gt; load(url(&quot;http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata&quot;))
+&amp;gt; ls()
+[1] &quot;mood.data&quot;
+&amp;gt; head(mood.data)
      group mood
-&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;
-&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
-&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
-&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;
-&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;
-&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; pleasant    &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+1 pleasant    6
+2 pleasant    5
+3 pleasant    4
+4 pleasant    7
+5 pleasant    7
+6 pleasant    5
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Another useful package is &lt;code&gt;RCurl&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;RCurl&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; myURL &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;some_url&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; myData &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; getURLContent&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;URLencode&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;myURL&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-R&quot;&gt;&amp;gt; library(RCurl)
+&amp;gt; myURL &amp;lt;- &#39;some_url&#39;
+&amp;gt; myData &amp;lt;- getURLContent(URLencode(myURL))
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;&lt;code&gt;getURL&lt;/code&gt; may issue an error when the file is not text. &lt;code&gt;getURLContent&lt;/code&gt; will determine the type of the content automatically.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;URLencode&lt;/code&gt; is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use &amp;#39;URLencode&amp;#39; to process the link at first.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;URLencode&lt;/code&gt; is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use ‘URLencode’ to process the link at first.&lt;/p&gt;
 
 &lt;p&gt;Reference&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&quot;&gt;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&lt;/a&gt;
-2.
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&quot;&gt;http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url&lt;/a&gt;&lt;br /&gt;
+2.&lt;br /&gt;
 &lt;a href=&quot;http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html&quot;&gt;http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -199,13 +634,13 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
     
       <item>
         <title>Running R on cluster</title>
-        <description>&lt;p&gt;I&amp;#39;ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the &amp;#39;Radon&amp;#39; and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.&lt;/p&gt;
+        <description>&lt;p&gt;I’ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and layback manner. My old Mac just cannot take this job alone. Luckily, I have the ‘Radon’ and several other clusters to save my ass. Play R on my Mac is easy. But it is another thing on cluster.&lt;/p&gt;
 
-&lt;p&gt;I mainly follow the &lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;instruction&lt;/a&gt; by Doug.&lt;/p&gt;
+&lt;p&gt;I mainly follow the &lt;a href=&quot;http://www.stat.purdue.edu/~dgc/cluster.pdf&quot;&gt;instruction&lt;/a&gt; by Doug.&lt;/p&gt;
 
-&lt;h2&gt;Load R&lt;/h2&gt;
+&lt;h2 id=&quot;load-r&quot;&gt;Load R&lt;/h2&gt;
 
-&lt;p&gt;Radon doesn&amp;#39;t come up with R for granted. To load R, we need to type &lt;code&gt;model load r&lt;/code&gt;. The &lt;code&gt;module&lt;/code&gt; command is used to “load” software
+&lt;p&gt;Radon doesn’t come up with R for granted. To load R, we need to type &lt;code&gt;model load r&lt;/code&gt;. The &lt;code&gt;module&lt;/code&gt; command is used to “load” software&lt;br /&gt;
 packages for use by the current login session.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R --version
@@ -224,82 +659,88 @@ packages for use by the current login session.&lt;/p&gt;
 
 &lt;p&gt;Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.&lt;/p&gt;
 
-&lt;h2&gt;BATCH mode&lt;/h2&gt;
+&lt;h2 id=&quot;batch-mode&quot;&gt;BATCH mode&lt;/h2&gt;
 
 &lt;p&gt;R script vs R batch&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;R CMD BATCH&lt;/code&gt; (see &lt;code&gt;help(BATCH)&lt;/code&gt;) has default options &lt;code&gt;--restore --save --no-readline&lt;/code&gt;, while &lt;code&gt;Rscript&lt;/code&gt; (see &lt;code&gt;help(Rscript)&lt;/code&gt;) has &lt;code&gt;--slave --no-restore&lt;/code&gt;. Furthermore, the output of &lt;code&gt;R CMD BATCH&lt;/code&gt; always goes to a file, taken from the command line if given, or else built from the input filename by appending &amp;quot;out&amp;quot;, whereas the output of &lt;code&gt;Rscript&lt;/code&gt; goes to stdout. Finally, &lt;code&gt;Rscript&lt;/code&gt; accepts user level command-line arguments, after the script name &amp;quot;as usual&amp;quot; (&lt;code&gt;Rscript foo.R 1 2&lt;/code&gt;), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by &lt;code&gt;--args&lt;/code&gt; (&lt;code&gt;R CMD BATCH &amp;quot;--args 1 2&amp;quot; foo.R&lt;/code&gt;). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). &lt;a href=&quot;http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;code&gt;R CMD BATCH&lt;/code&gt; (see &lt;code&gt;help(BATCH)&lt;/code&gt;) has default options &lt;code&gt;--restore --save --no-readline&lt;/code&gt;, while &lt;code&gt;Rscript&lt;/code&gt; (see &lt;code&gt;help(Rscript)&lt;/code&gt;) has &lt;code&gt;--slave --no-restore&lt;/code&gt;. Furthermore, the output of &lt;code&gt;R CMD BATCH&lt;/code&gt; always goes to a file, taken from the command line if given, or else built from the input filename by appending “out”, whereas the output of &lt;code&gt;Rscript&lt;/code&gt; goes to stdout. Finally, &lt;code&gt;Rscript&lt;/code&gt; accepts user level command-line arguments, after the script name “as usual” (&lt;code&gt;Rscript foo.R 1 2&lt;/code&gt;), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by &lt;code&gt;--args&lt;/code&gt; (&lt;code&gt;R CMD BATCH &quot;--args 1 2&quot; foo.R&lt;/code&gt;). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). &lt;a href=&quot;http://biostat.jhsph.edu/~hjaffee/R_tasks.html&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; executes quietly in the background and generates output to &amp;#39;stdout&amp;#39;.&lt;/p&gt;
+&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; executes quietly in the background and generates output to ‘stdout’.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; R CMD BATCH t.R &amp;gt; t.out
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; Rscript t.R &amp;gt; t.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run in background&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; nohup Rscript t.R &amp;gt; t.out &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run in background, even if logout&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Although we can launch several jobs simultaneously (by concatenating with &amp;#39;&amp;amp;&amp;#39;), but invoking manually doesn&amp;#39;t scale well. To run tasks seriesly, we can create a file like &amp;quot;run.sh&amp;quot; that contains several &amp;#39;Rscript&amp;#39; invocations. It will run the jobs one at a time.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# run.sh&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;003&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;004&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;005&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;006&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;007&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Rscript&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;00&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Although we can launch several jobs simultaneously (by concatenating with ‘&amp;amp;’), but invoking manually doesn’t scale well. To run tasks seriesly, we can create a file like “run.sh” that contains several ‘Rscript’ invocations. It will run the jobs one at a time.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;# run.sh
+Rscript t.R &amp;gt; tout.001
+Rscript t.R &amp;gt; tout.002
+Rscript t.R &amp;gt; tout.003
+Rscript t.R &amp;gt; tout.004
+Rscript t.R &amp;gt; tout.005
+Rscript t.R &amp;gt; tout.006
+Rscript t.R &amp;gt; tout.007
+Rscript t.R &amp;gt; tout.008
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;A life-saving tips for creating the “run.sh” script using R&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;sprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.%03d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.001&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.002&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.003&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.004&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.005&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.006&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.007&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.008&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;sprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Rscript t.R &amp;gt; tout.%03d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;run.sh&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Then we can run &amp;quot;run.sh&amp;quot; in command line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;&amp;gt; sprintf(&quot;Rscript t.R &amp;gt; tout.%03d&quot;, 1:8)
+[1] &quot;Rscript t.R &amp;gt; tout.001&quot; &quot;Rscript t.R &amp;gt; tout.002&quot; &quot;Rscript t.R &amp;gt; tout.003&quot;
+[4] &quot;Rscript t.R &amp;gt; tout.004&quot; &quot;Rscript t.R &amp;gt; tout.005&quot; &quot;Rscript t.R &amp;gt; tout.006&quot;
+[7] &quot;Rscript t.R &amp;gt; tout.007&quot; &quot;Rscript t.R &amp;gt; tout.008&quot;
+&amp;gt; write(sprintf(&quot;Rscript t.R &amp;gt; tout.%03d&quot;, 1:8), &quot;run.sh&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we can run “run.sh” in command line.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh run.sh &lt;span class=&quot;c&quot;&gt;# run every job in run.sh one at a time&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup sh run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh one at a time, and keep running even if logout&lt;/span&gt;
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nohup xargs -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt; -n1 -P4 sh -c &amp;lt; run.sh &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;Submit jobs through qsub&lt;/h2&gt;
+&lt;h2 id=&quot;submit-jobs-through-qsub&quot;&gt;Submit jobs through qsub&lt;/h2&gt;
 
 &lt;p&gt;On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through &lt;code&gt;qsub&lt;/code&gt;. A typical job description will look like this one.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;## Give your job a name&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -N ovs&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;## Needed if you want to use environmental variables&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -V&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/bash
 
-&lt;span class=&quot;c&quot;&gt;## Specify running time and memory&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -l walltime=00:15:00,vmem=4GB&lt;/span&gt;
+## Give your job a name
+#PBS -N ovs
+## Needed if you want to use environmental variables
+#PBS -V
 
-&lt;span class=&quot;c&quot;&gt;## Specify number of nodes and cores&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -l nodes=1:ppn=8&lt;/span&gt;
+## Specify running time and memory
+#PBS -l walltime=00:15:00,vmem=4GB
 
-&lt;span class=&quot;c&quot;&gt;## Specify output and error (no need to include these two lines)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -o &amp;#39;qsub.out&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -e &amp;#39;qsub.err&amp;#39;&lt;/span&gt;
+## Specify number of nodes and cores
+#PBS -l nodes=1:ppn=8
 
-&lt;span class=&quot;c&quot;&gt;# set the temporary file location&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TMPDIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$WORKDIR&lt;/span&gt;
+## Specify output and error (no need to include these two lines)
+#PBS -o &#39;qsub.out&#39;
+#PBS -e &#39;qsub.err&#39;
 
-&lt;span class=&quot;c&quot;&gt;# go to the job submission directory; you can change this to your project directory&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_O_WORKDIR&lt;/span&gt;
+# set the temporary file location
+export TMPDIR=$WORKDIR
 
-&lt;span class=&quot;c&quot;&gt;# load the R module; change the version if needed&lt;/span&gt;
+# go to the job submission directory; you can change this to your project directory
+cd $PBS_O_WORKDIR
+
+# load the R module; change the version if needed
 module load r
 
 
-&lt;span class=&quot;c&quot;&gt;## Export the job number. This is unique to a job and can be used to set the seed&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;## and as an identifier for the output file&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;job_number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_JOBID&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F. &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+## Export the job number. This is unique to a job and can be used to set the seed
+## and as an identifier for the output file
+export job_number=`echo $PBS_JOBID | awk -F. &#39;{print $1}&#39;`
 
-&lt;span class=&quot;c&quot;&gt;# run R in batch mode&lt;/span&gt;
+# run R in batch mode
 R CMD BATCH foo.R &amp;gt; foo.Rout
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Note that &lt;code&gt;#!/bin/bash&lt;/code&gt; should be put in the first line. Also, I use &amp;#39;BATCH&amp;#39; here since it is compatible with the following section &amp;#39;pass arguments&amp;#39;. I haven&amp;#39;t tested the otherwise.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that &lt;code&gt;#!/bin/bash&lt;/code&gt; should be put in the first line. Also, I use ‘BATCH’ here since it is compatible with the following section ‘pass arguments’. I haven’t tested the otherwise.&lt;/p&gt;
 
 &lt;p&gt;Then the file is ready to submit.&lt;/p&gt;
 
@@ -312,60 +753,64 @@ R CMD BATCH foo.R &amp;gt; foo.Rout
 &lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; -bash-4.1&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;qdel JOBID   &lt;span class=&quot;c&quot;&gt;# delete a previously submitted job from the queue&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh -l&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -l nodes=1:ppn=8&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#PBS -l walltime=00:30:00&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PBS_O_WORKDIR&lt;/span&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/sh -l
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=00:30:00
+cd $PBS_O_WORKDIR
 module add r
-Rscript t3.R &amp;gt;out1 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out2 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out3 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out4 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out5 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out6 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out7 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Pass arguments&lt;/h2&gt;
+Rscript t3.R &amp;gt;out1 &amp;amp;
+Rscript t3.R &amp;gt;out2 &amp;amp;
+Rscript t3.R &amp;gt;out3 &amp;amp;
+Rscript t3.R &amp;gt;out4 &amp;amp;
+Rscript t3.R &amp;gt;out5 &amp;amp;
+Rscript t3.R &amp;gt;out6 &amp;amp;
+Rscript t3.R &amp;gt;out7 &amp;amp;
+Rscript t3.R &amp;gt;out8 &amp;amp;
+wait
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from &lt;a href=&quot;http://www.stat.purdue.edu/%7Ebhadra/&quot;&gt;Dr. Anindya Bhadra&lt;/a&gt;.)&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;## HOWTO: chmod ugo+rx cluster; ./cluster&lt;/span&gt;
+&lt;h2 id=&quot;pass-arguments&quot;&gt;Pass arguments&lt;/h2&gt;
 
-&lt;span class=&quot;c&quot;&gt;## Make sure you are using the bash shell&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;p&gt;Like said, &lt;code&gt;Rscript&lt;/code&gt; takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from &lt;a href=&quot;http://www.stat.purdue.edu/~bhadra/&quot;&gt;Dr. Anindya Bhadra&lt;/a&gt;.)&lt;/p&gt;
 
-&lt;span class=&quot;c&quot;&gt;## Grid of starting values for parameters&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;19&lt;/span&gt; 20&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt; 150&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;## HOWTO: chmod ugo+rx cluster; ./cluster
 
-&lt;span class=&quot;c&quot;&gt;## To be read in inside of R as environmental variables&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;LENA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;LENB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;LENL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${#&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[*]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+## Make sure you are using the bash shell
+#!/bin/bash
 
-&lt;span class=&quot;c&quot;&gt;## Submit jobs via qsub with each starting value of &amp;quot;a&amp;quot; exported to the environment.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;## Sleep 1 second between submitting two jobs&lt;/span&gt;
+## Grid of starting values for parameters
+STARTAs=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+STARTBs=(0 1 4)
+STARTLs=(50 100 150)
 
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; k in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENL&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENA&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; j in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LENB&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTBs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;STARTLs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$k&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-            qsub -V NumExp.pbs
-            sleep 1
-        &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+## To be read in inside of R as environmental variables
+LENA=${#STARTAs[*]}
+LENB=${#STARTBs[*]}
+LENL=${#STARTLs[*]}
+
+## Submit jobs via qsub with each starting value of &quot;a&quot; exported to the environment.
+## Sleep 1 second between submitting two jobs
+
+for k in `seq 1 $LENL`
+do
+	for i in `seq 1 $LENA`
+	do
+	    for j in `seq 1 $LENB`
+	    do
+	        export STARTA=${STARTAs[`expr $i - 1`]}
+	        export STARTB=${STARTBs[`expr $j - 1`]}
+	        export STARTL=${STARTLs[`expr $k - 1`]}
+	        qsub -V NumExp.pbs
+	        sleep 1
+	    done
+	done
+done
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Read this &lt;a href=&quot;http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch&quot;&gt;post&lt;/a&gt; for passing argument for Rscript command.&lt;/p&gt;
 
-&lt;h2&gt;Download packages&lt;/h2&gt;
+&lt;h2 id=&quot;download-packages&quot;&gt;Download packages&lt;/h2&gt;
 
 &lt;p&gt;An annoying thing is that R may not import and load packages properly.&lt;/p&gt;
 
@@ -378,18 +823,28 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
 &lt;p&gt;A remedy is found on &lt;a href=&quot;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&quot;&gt;stackoverflow&lt;/a&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;For example, if you want to use RStudio&amp;#39;s package repository, set repos=&amp;quot;http://cran.rstudio.com/&amp;quot; inside the install.packages call.&lt;/p&gt;
+  &lt;p&gt;For example, if you want to use RStudio’s package repository, set repos=”http://cran.rstudio.com/” inside the install.packages call.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;install.packages&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;yaml&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; repos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://cran.rstudio.com/&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;***&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Reference&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;install.packages(&quot;yaml&quot;, repos=&quot;http://cran.rstudio.com/&quot;)
+library(&quot;***&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.stat.purdue.edu/%7Edgc/cluster.pdf&quot;&gt;http://www.stat.purdue.edu/~dgc/cluster.pdf&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://biostat.jhsph.edu/%7Ehjaffee/R_tasks.html&quot;&gt;http://biostat.jhsph.edu/~hjaffee/R_tasks.html&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&quot;&gt;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&quot;&gt;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.stat.purdue.edu/~dgc/cluster.pdf&quot;&gt;http://www.stat.purdue.edu/~dgc/cluster.pdf&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://biostat.jhsph.edu/~hjaffee/R_tasks.html&quot;&gt;http://biostat.jhsph.edu/~hjaffee/R_tasks.html&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&quot;&gt;https://wiki.csiro.au/display/ASC/Run+R+script+as+a+batch+job+on+a+Linux+cluster&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&quot;&gt;http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
@@ -414,34 +869,40 @@ Rscript t3.R &amp;gt;out8 &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
       <item>
         <title>R from function to its name</title>
         <description>&lt;p&gt;In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;myTestFun1 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-myTestFun2 &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-R&quot;&gt;myTestFun1 &amp;lt;- function() {
+  ...
+}
 
-myMain &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFun&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kc&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+myTestFun2 &amp;lt;- function() {
+  ...
+}
+
+myMain &amp;lt;- function(testFun) {
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;R works greatly since it passes function as variable (so-called functional programming?)&lt;/p&gt;
 
 &lt;p&gt;In &lt;code&gt;myMain&lt;/code&gt; function, I want to generate output looks like&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;test function: myTestFun1
+
+&lt;pre&gt;&lt;code&gt;test function: myTestFun1
 
         value: ....
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;Here I got a problem, since R passes the function to &lt;code&gt;testFun&lt;/code&gt;, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use &lt;code&gt;match.fun&lt;/code&gt; to extract the desired function object.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-R&quot; data-lang=&quot;R&quot;&gt;myMainNew &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFunName&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  testFun &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;match.fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;testFunName&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Reference&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-R&quot;&gt;myMainNew &amp;lt;- function(testFunName) {
+  testFun &amp;lt;- match.fun(testFunName)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&quot;&gt;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&quot;&gt;http://stat.ethz.ch/R-manual/R-devel/library/base/html/match.fun.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
@@ -458,153 +919,21 @@ myMain &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&qu
       </item>
     
       <item>
-        <title>Site-ABC</title>
-        <description>&lt;p&gt;All of following are from Lijia&amp;#39;s &lt;a href=&quot;http://yulijia.net/freshman21/&quot;&gt;posts&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Install&lt;/h2&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# please make sure you have already installed git tools and ruby tools(gem)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install sass
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install jekyll
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/yulijia/freshman21.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Structure of freshman21 theme&lt;/h2&gt;
-
-&lt;p&gt;You can see the simplest way of adding a page is just to add an HTML ( or markdown ) file in the root directory with a suitable name for the page you want to create. For example, aahome.md is the homepage link, about.md is the about page.&lt;/p&gt;
-
-&lt;p&gt;All sidebar boxes html files are in the &lt;code&gt;&lt;em&gt;include&lt;/code&gt; directory, their name begin with upper case. You can chose which sidebar boxes appears in the main page on the &lt;q&gt;sidebar.html&lt;/q&gt; in the &lt;code&gt;&lt;/em&gt;includes&lt;/code&gt; directory.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;.
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- a_home.md                 &lt;span class=&quot;c&quot;&gt;# home page link at navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- b_about.md                &lt;span class=&quot;c&quot;&gt;# about link at navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- c_archives.md             &lt;span class=&quot;c&quot;&gt;# archives link at navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _config.yml
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- css
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- main.scss
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- d_categories.md           &lt;span class=&quot;c&quot;&gt;# categories link at navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- e_tags.md                 &lt;span class=&quot;c&quot;&gt;# tags at main navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- feed.xml                  &lt;span class=&quot;c&quot;&gt;# RSS at main navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- f_guestbook.md            &lt;span class=&quot;c&quot;&gt;# guest book like at navigation bar&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- images
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- favicon.ico           &lt;span class=&quot;c&quot;&gt;# here is your website favicon&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _includes
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Aboutme.html          &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Archives.html         &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Blogroll.html         &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Categories.html       &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- comments.html         &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Copyright_Notice.html &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- footer.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- header.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- head.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- page_pagination.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- post_pagination.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- Recent_Posts.html     &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- sidebar.html          &lt;span class=&quot;c&quot;&gt;# you can set you own sidebar content in here&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- Tags.html             &lt;span class=&quot;c&quot;&gt;# right column sidebar content&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- index.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _layouts
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- default.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- page.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- post.html
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- LICENSE
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _posts
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- 2013-10-10-milu.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- 2014-12-13-simple-post.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- 2014-12-18-how-to-install.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- 2014-12-19-freshman21-structure.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- 2014-12-19-how-to-set-the-config-file.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- 2015-03-31-readme.md
-&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- README.md
-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- _sass
-    &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _base.scss
-    &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _layout.scss
-    &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;-- _syntax-highlighting-native.scss
-    &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;-- _syntax-highlighting.scss&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Configuration&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://github.com/yulijia/freshman21/blob/master/_config.yml&quot;&gt;config.yml file&lt;/a&gt; in the Freshman21 theme includes five parts.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;First part&lt;/strong&gt; is the site info.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman21&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog title&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;tagline&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll theme, Freshman twenty-first&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sub-titile&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia YU&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author name&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;yu@lijiayu.net&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# author email&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Freshman21&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme.&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# You can edit this line in _config.yml. It will appear in your document head meta and in&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;your feed.xml site description&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;keywords&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Jekyll,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;theme,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# html meta keywords&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;baseurl&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the subpath of your site, e.g. /blog&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;http://yulijia.net/freshman21&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# the base hostname &amp;amp; protocol for your site&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can &lt;q&gt;Hide&lt;/q&gt; in two ways &lt;sup&gt;&lt;a href=&quot;#%5B1%5D&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;twitter_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#your twitter handle  &lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;github_username&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#your github account&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;disqus_shortname&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#disqus shortname&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;favicon&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&amp;quot;images/favicon.ico&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it.&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# these are shown on aboutme-box(sidebar).&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;aboutme_photo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;https://i.imgur.com/15BT1.jpg&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# your personal photo.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part3&lt;/strong&gt;, Site setting:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;ShowContactInfo&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;True&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_column&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;two&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog style: two columns, if default_column != &amp;quot;two&amp;quot;, you will see a one column blog.&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;default_locale&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;en&amp;quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# blog sidebar language set, only include: English(en) and Chinese (cn)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part4&lt;/strong&gt;, Blogroll info, only &lt;em&gt;name&lt;/em&gt; tags can shown on the page.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;Blogroll&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Freshman&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/freshman&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Another Jekyll blog theme&lt;/span&gt;
-      &lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;author&amp;#39;s website&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;http://yulijia.net/&lt;/span&gt;
-        &lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Lijia Yu&amp;#39;s website&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Part5&lt;/strong&gt;, Build settings&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;kramdown&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;highlighter&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;pygments&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# highlight&lt;/span&gt;
-&lt;span class=&quot;l-Scalar-Plain&quot;&gt;paginate&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;5&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# how many post can seen in the main page&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;Highlight style&lt;/h2&gt;
-
-&lt;p&gt;This theme&amp;#39;s default highlighter is pygments.&lt;/p&gt;
-
-&lt;p&gt;To change the highlight style, you should install &lt;strong&gt;pygments&lt;/strong&gt;, and generate the css style which you wanted with code&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;pygmentize -S default -f html &amp;gt; freshman/&lt;em&gt;sass/&lt;/em&gt;syntax-highlighting.scss&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Please make sure, add &lt;code&gt;.highlight {&lt;/code&gt; at the head  and &lt;code&gt;}&lt;/code&gt; at the end of file &lt;q&gt;_syntax-highlighting.scss&lt;/q&gt;.&lt;/p&gt;
-
-&lt;p&gt;See more,&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://pygments.org/languages/&quot;&gt;Pygments Supported languages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/9652490/do-i-need-to-generate-a-css-file-from-pygments-for-my-jekyll-blog-to-enable-col&quot;&gt;Pygments online deme&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 05 Jun 2015 00:00:00 -0400</pubDate>
-        <link>/news/2015/06/05/Site-ABC/</link>
-        <guid isPermaLink="true">/news/2015/06/05/Site-ABC/</guid>
-        
-        
-        <category>news</category>
-        
-      </item>
-    
-      <item>
         <title>Four Line Motto</title>
         <description>&lt;blockquote&gt;
-&lt;p&gt;Learn from Everyone&lt;/p&gt;
+  &lt;p&gt;Learn from Everyone&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Follow No One&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Follow No One&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Watch for Patterns (a.k.a. Think)&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Work Like Hell&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Work Like Hell&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://rodrigobenenson.blogspot.com/2010/07/4-lines-motto.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
@@ -624,63 +953,101 @@ myMain &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&qu
     
       <item>
         <title>Discrete Optimization - Graph Coloring</title>
-        <description>&lt;h2&gt;Problem&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
 
 &lt;p&gt;Given an undirected graph, graph coloring or vertex color problem is to assign minimum number of different colors to nodes such that no adjacent nodes share the same color.&lt;/p&gt;
 
 &lt;p&gt;The problem comes from coloring a map such that no two neighbor regions have the same color. Here is a map of the United States colored with only 4 colors:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png&quot; alt=&quot;US map with four colors&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.cs.cornell.edu/courses/cs3110/2011sp/recitations/rec21-graphs/images/USA.png&quot; alt=&quot;US map with four colors&quot; /&gt;&lt;/p&gt;
 
-&lt;h2&gt;Application&lt;/h2&gt;
+&lt;h2 id=&quot;application&quot;&gt;Application&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;Scheduling&lt;/strong&gt; schedule final exams. College offers multiple courses and each student may take multiple courses. To resolve conflict, if a student takes two courses, then these two courses cannot be scheduled at the same time.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Register Allocation&lt;/strong&gt; when compiling a program, the computer needs to allocate registers to the most frequently used values of the program, while putting the other ones in memory. This can be modeled as a graph coloring problem: the compiler constructs an interference graph, where vertices are symbolic registers and an edge connects two nodes if they are needed at the same time. If the graph can be colored with k colors then the variables can be stored in k registers.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;time tabling and scheduling&lt;/li&gt;
-&lt;li&gt;frequency assignment&lt;/li&gt;
-&lt;li&gt;register allocation&lt;/li&gt;
-&lt;li&gt;printed circuit testing&lt;/li&gt;
-&lt;li&gt;parallel numerical computation and optimization&lt;/li&gt;
+  &lt;li&gt;time tabling and scheduling&lt;/li&gt;
+  &lt;li&gt;frequency assignment&lt;/li&gt;
+  &lt;li&gt;register allocation&lt;/li&gt;
+  &lt;li&gt;printed circuit testing&lt;/li&gt;
+  &lt;li&gt;parallel numerical computation and optimization&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Properties&lt;/h2&gt;
+&lt;h2 id=&quot;properties&quot;&gt;Properties&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(|S| = k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;strong&gt;chromatic number&lt;/strong&gt; \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The &lt;strong&gt;clique number&lt;/strong&gt; \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A &lt;em&gt;planar&lt;/em&gt; graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, &amp;quot;Every map is four colorable&amp;quot;, Bulletin of the American Mathematical Society 82 (1976), 711–12).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Complexity&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning &amp;quot;red&amp;quot; to the first layer, &amp;quot;blue&amp;quot; to the second layer, &amp;quot;red&amp;quot; to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.&lt;/li&gt;
-&lt;li&gt;For \(k \geq 3\), \(k-colorability\) is &lt;strong&gt;NP-complete&lt;/strong&gt;. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Approximation boundaries&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Lower bound: \(\chi(G) \geq \omega(G)\)&lt;/li&gt;
-&lt;li&gt;Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2|E(G)| \geq \chi(G) (\chi(G) - 1)\)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;A color of a graph \(G\) is a mapping \(c:V(G) \rightarrow S\). If the graph \(G\) has a coloring such that \(&lt;/td&gt;
+          &lt;td&gt;S&lt;/td&gt;
+          &lt;td&gt;= k\) and all adjacent vertices have different colors, then we say that \(G\) is \(k\)-colorable.&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;chromatic number&lt;/strong&gt; \(\chi(G)\) is the least \(k\) such that the graph \(G\) is \(k\)-colorable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A \(k\)-coloring can be seen as a partition of the vertex set of \(G\) into \(k\) groups.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;clique number&lt;/strong&gt; \(\omega(G)\) is the largest \(k\) such that \(G\) contains a \(K_k\) subgraph.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;em&gt;planar&lt;/em&gt; graph is a graph which can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints. The conjecture that any planar graph was 4-colorable was proposed in 1852, and finally proven in 1976 by Kenneth Appel and Wolfgang Haken using a proof by computer (K. Appel and W. Haken, “Every map is four colorable”, Bulletin of the American Mathematical Society 82 (1976), 711–12).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Complexity
+    &lt;ul&gt;
+      &lt;li&gt;For \(k \leq 2\), \(k-colorability\) is polynomial-time solvable. Do a breadth-first search, assigning “red” to the first layer, “blue” to the second layer, “red” to the third layer, etc. Then go over all the edges and check whether the two endpoints of this edge have different colors.&lt;/li&gt;
+      &lt;li&gt;For \(k \geq 3\), \(k-colorability\) is &lt;strong&gt;NP-complete&lt;/strong&gt;. The direct approach is brute-force search: consider every possible assignment of k colors to the vertices, and check whether any of them are correct. This of course is very expensive, on the order of O((n+1)!), and impractical.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Approximation boundaries
+    &lt;ul&gt;
+      &lt;li&gt;Lower bound: \(\chi(G) \geq \omega(G)\)&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;Upper bound: \(\chi(G) \leq \Delta(G) + 1\), \(2&lt;/td&gt;
+              &lt;td&gt;E(G)&lt;/td&gt;
+              &lt;td&gt;\geq \chi(G) (\chi(G) - 1)\)&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Algorithms&lt;/h2&gt;
+&lt;h2 id=&quot;algorithms&quot;&gt;Algorithms&lt;/h2&gt;
 
-&lt;h3&gt;Dynamic Programming algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;dynamic-programming-algorithm&quot;&gt;Dynamic Programming algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Find and list all sets that are \(1-colorable\).&lt;/li&gt;
-&lt;li&gt;Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
-
-&lt;ul&gt;
-&lt;li&gt;For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{|S|} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Find and list all sets that are \(1-colorable\).&lt;/li&gt;
+  &lt;li&gt;Proceed in an inductive manner. Given all sets that are \(1-colorable\) and all sets that are \((j-1)-colorable\), find all sets that are \(j-colorable\).
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;For each candidate set, try all ways of partitioning it in two and checking whether one part is \(1-colorable\) and other is \((j-1)-colorable\). The total number of checks is \(\sum_{S \in V} 2^{&lt;/td&gt;
+              &lt;td&gt;S&lt;/td&gt;
+              &lt;td&gt;} = 3^n\). (A ternary vector can represent a check. The 0 entries are those vertices not in S. the 1 entries are those vertices in the independent set. The 2 entries are those in the \((j − 1)-colorable\) set.)&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Time complexity: \(O(3^n)\)&lt;/p&gt;
@@ -688,130 +1055,153 @@ myMain &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&qu
 &lt;p&gt;Space complexity: \(O(2^n)\)&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark
-
-&lt;ul&gt;
-&lt;li&gt;By considering only maximal independent sets, the dynamic
+  &lt;li&gt;Remark
+    &lt;ul&gt;
+      &lt;li&gt;By considering only maximal independent sets, the dynamic&lt;br /&gt;
 programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).&lt;/li&gt;
-&lt;li&gt;Dynamic programming is a method that avoids redoing computations
+      &lt;li&gt;Dynamic programming is a method that avoids redoing computations&lt;br /&gt;
 over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Backtrack algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;backtrack-algorithm&quot;&gt;Backtrack algorithm&lt;/h3&gt;
 
 &lt;p&gt;Suppose we have an upper bound for our graph coloring. During the brute force algorithm we can then determine that we need to backtrack when we can’t color a node with a color less than our upper bound.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;When a node is colored, keep track of the index of when that node is colored.&lt;/li&gt;
-&lt;li&gt;For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.&lt;/li&gt;
-&lt;li&gt;Find the maximum of all the minimums calculated in step 2.&lt;/li&gt;
-&lt;li&gt;Backtrack up to the index found in step 3.&lt;/li&gt;
+  &lt;li&gt;When a node is colored, keep track of the index of when that node is colored.&lt;/li&gt;
+  &lt;li&gt;For each unique color that is adjacent to the current node that needs backtracking, determine the minimum index calculated in step 1.&lt;/li&gt;
+  &lt;li&gt;Find the maximum of all the minimums calculated in step 2.&lt;/li&gt;
+  &lt;li&gt;Backtrack up to the index found in step 3.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3&gt;Greedy algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;greedy-algorithm&quot;&gt;Greedy algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Number the vertices \(V\).&lt;/li&gt;
-&lt;li&gt;For \(i = 1, ..., n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
-
-&lt;ul&gt;
-&lt;li&gt;In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.&lt;/li&gt;
-&lt;li&gt;This algorithm finds a reasonable coloring in time \(O(|V|+|E|)\).&lt;/li&gt;
-&lt;li&gt;The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Number the vertices \(V\).&lt;/li&gt;
+  &lt;li&gt;For \(i = 1, …, n\), color \(v_i\) with the lowest color that is not yet used for its neighbors.
+    &lt;ul&gt;
+      &lt;li&gt;In general, the greedy algorithm is not optimal, but it provides a reasonable coloring while still being reasonably expensive.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;This algorithm finds a reasonable coloring in time \(O(&lt;/td&gt;
+              &lt;td&gt;V&lt;/td&gt;
+              &lt;td&gt;+&lt;/td&gt;
+              &lt;td&gt;E&lt;/td&gt;
+              &lt;td&gt;)\).&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+      &lt;li&gt;The number of colors used depends strongly on the chosen vertex order. But any order with give a color using at most \(\Delta(G) + 1\) colors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark:
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.&lt;/li&gt;
-&lt;li&gt;If the vertices of a graph \(G\) can be numbered \(v&lt;em&gt;1, ..., v&lt;/em&gt;n\) such that for every \(i\) , \(|N(v&lt;em&gt;i)  \cap {v&lt;/em&gt;1 , . . . , v_{i-1} }| \leq k\) , then \(\chi(G)\leq k+1\).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Remark:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For every graph \(G\), there exists an order for \(V\) such that the greedy coloring algorithm uses exactly \(\chi(G)\) colors.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;For a good heuristic, one may also choose a dynamic order: at any point, color the uncolored vertex that currently has the highest number of different colors in its neighborhood.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;table&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;If the vertices of a graph \(G\) can be numbered \(v_1, …, v_n\) such that for every \(i\) , \(&lt;/td&gt;
+              &lt;td&gt;N(v_i)  \cap {v_1 , . . . , v_{i-1} }&lt;/td&gt;
+              &lt;td&gt;\leq k\) , then \(\chi(G)\leq k+1\).&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Welsh-Powell algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;welsh-powell-algorithm&quot;&gt;Welsh-Powell algorithm&lt;/h3&gt;
 
 &lt;p&gt;Algorithm:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Find the degree of every vertex.&lt;/li&gt;
-&lt;li&gt;Sort the vertices in order of descending degrees.&lt;/li&gt;
-&lt;li&gt;Color the first vertex in the list with color 1.&lt;/li&gt;
-&lt;li&gt;Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.&lt;/li&gt;
-&lt;li&gt;Repeat the process on the uncolored vertices with a new color.&lt;/li&gt;
+  &lt;li&gt;Find the degree of every vertex.&lt;/li&gt;
+  &lt;li&gt;Sort the vertices in order of descending degrees.&lt;/li&gt;
+  &lt;li&gt;Color the first vertex in the list with color 1.&lt;/li&gt;
+  &lt;li&gt;Go down the list and color every vertex not connected to the colored vertices above the same color. Then cross out all colored vertices in the list.&lt;/li&gt;
+  &lt;li&gt;Repeat the process on the uncolored vertices with a new color.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Remark:
-
-&lt;ul&gt;
-&lt;li&gt;Usually performs better than just coloring the vertices without a plan will.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Remark:
+    &lt;ul&gt;
+      &lt;li&gt;Usually performs better than just coloring the vertices without a plan will.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Iterated Greedy algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;iterated-greedy-algorithm&quot;&gt;Iterated Greedy algorithm&lt;/h3&gt;
 
-&lt;p&gt;Algorithm:
-1. Run simple greedy algorithm.
-2. Permutate the solution such that nodes with the same label are grouped together.
+&lt;p&gt;Algorithm:&lt;br /&gt;
+1. Run simple greedy algorithm.&lt;br /&gt;
+2. Permutate the solution such that nodes with the same label are grouped together.&lt;br /&gt;
 3. Iterate until the color count reach the optimal value.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.&lt;/li&gt;
-&lt;li&gt;Reorder the color labels randomly.&lt;/li&gt;
+  &lt;li&gt;The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.&lt;/li&gt;
+  &lt;li&gt;Reorder the color labels randomly.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Tabu searching algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;tabu-searching-algorithm&quot;&gt;Tabu searching algorithm&lt;/h3&gt;
 
 &lt;p&gt;The basic idea behind TABU search is to take a graph coloring that contains conflicts, and then try to repair the conflicts to produce a valid graph coloring. When a graph coloring contains conflicts, it means that there are some nodes in the graph whose color is the same as an adjacent node.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Take a valid graph coloring solution as input.&lt;/li&gt;
-&lt;li&gt;Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.&lt;/li&gt;
-&lt;li&gt;Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.&lt;/li&gt;
-&lt;li&gt;Select the neighbor that contains the least amount of conflicts.&lt;/li&gt;
-&lt;li&gt;Use the neighbor selected in step 4 as the new coloring.&lt;/li&gt;
-&lt;li&gt;If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If no solution has been found, increase the number of colors to use and go to step 3.&lt;/p&gt;
+  &lt;li&gt;Take a valid graph coloring solution as input.&lt;/li&gt;
+  &lt;li&gt;Reduce the amount of colors used by assigning a random color to the nodes that are colored with the maximum color.&lt;/li&gt;
+  &lt;li&gt;Generate (number of nodes)/4 neighbors for the current coloring by selecting a random node which is in conflict and assign a random color to that node.&lt;/li&gt;
+  &lt;li&gt;Select the neighbor that contains the least amount of conflicts.&lt;/li&gt;
+  &lt;li&gt;Use the neighbor selected in step 4 as the new coloring.&lt;/li&gt;
+  &lt;li&gt;If no conflicts exist, exit the search, otherwise goto step 3 until the maximum number of iterations are reached.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If no solution has been found, increase the number of colors to use and go to step 3.&lt;/p&gt;
 
-&lt;p&gt;Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.&lt;/p&gt;&lt;/li&gt;
+    &lt;p&gt;Tabu list: during the TABU search, keep a list which contains the reverse move that was done, and don’t allow moves in the list during the following iterations. A list in a FIFO manner of size 15 is proper.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3&gt;Mixed Strategy&lt;/h3&gt;
+&lt;h3 id=&quot;mixed-strategy&quot;&gt;Mixed Strategy&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Execute the Iterative Greedy algorithm for X amount of iterations.&lt;/li&gt;
-&lt;li&gt;Execute the TABU search algorithm on the best solution found thus far.&lt;/li&gt;
-&lt;li&gt;Use Y amount of iterations for the search. Goto step 1 until the time is up.&lt;/li&gt;
+  &lt;li&gt;Execute the Iterative Greedy algorithm for X amount of iterations.&lt;/li&gt;
+  &lt;li&gt;Execute the TABU search algorithm on the best solution found thus far.&lt;/li&gt;
+  &lt;li&gt;Use Y amount of iterations for the search. Goto step 1 until the time is up.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3&gt;Simulated Annealing algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;simulated-annealing-algorithm&quot;&gt;Simulated Annealing algorithm&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Start from a greedy solution&lt;/li&gt;
-&lt;li&gt;Run iterated greedy on current solution&lt;/li&gt;
-&lt;li&gt;Run simulated annealing on current solution and track the best solution so far&lt;/li&gt;
-&lt;li&gt;Go back to step 2&lt;/li&gt;
+  &lt;li&gt;Start from a greedy solution&lt;/li&gt;
+  &lt;li&gt;Run iterated greedy on current solution&lt;/li&gt;
+  &lt;li&gt;Run simulated annealing on current solution and track the best solution so far&lt;/li&gt;
+  &lt;li&gt;Go back to step 2&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Cost function
-$$\sum[Ci^2] + \sum[Ci * Ei]$$
-where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.&lt;/li&gt;
-&lt;li&gt;Set the initial temperature at 10, the step size \(\alpha = 0.9999\).&lt;/li&gt;
+  &lt;li&gt;Cost function&lt;br /&gt;
+  &lt;script type=&quot;math/tex&quot;&gt;\sum[Ci^2] + \sum[Ci * Ei]&lt;/script&gt;&lt;br /&gt;
+  where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.&lt;/li&gt;
+  &lt;li&gt;Set the initial temperature at 10, the step size \(\alpha = 0.9999\).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Reference&lt;/h2&gt;
-
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Graph_coloring&quot;&gt;wikipedia&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt; &lt;a href=&quot;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&quot;&gt;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.csun.edu/%7Edanielk/teaching/graph-theory/notes02.pdf&quot;&gt;http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Graph_coloring&quot;&gt;wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&quot;&gt;http://www-sop.inria.fr/members/Frederic.Havet/Cours/coloration.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf&quot;&gt;http://www.csun.edu/~danielk/teaching/graph-theory/notes02.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 20 May 2015 00:00:00 -0400</pubDate>
@@ -830,19 +1220,133 @@ where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of co
       </item>
     
       <item>
-        <title>All I need is you</title>
-        <description>&lt;p&gt;&lt;img class=&#39;emoji&#39; title=&#39;:smile:&#39; alt=&#39;:smile:&#39; src=&#39;https://assets.github.com/images/icons/emoji/unicode/1f604.png&#39; height=&#39;20&#39; width=&#39;20&#39; align=&#39;absmiddle&#39; /&gt;&lt;/p&gt;
+        <title>Git Cheat Sheet</title>
+        <description>&lt;h3 id=&quot;configure-tooling&quot;&gt;Configure tooling&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/sweet_penguin.jpg&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Configure user information for all local repositories&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git config --global user.name &quot;[name]&quot;           # Sets the name you want atached to your commit transactions
+$ git config --global user.email &quot;[email address]&quot; # Sets the email you want atached to your commit transactions
+$ git config --global color.ui auto                # Enables helpful colorization of command line output
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;create-repositories&quot;&gt;Create repositories&lt;/h3&gt;
+
+&lt;p&gt;Start a new repository or obtain one from an existing URL&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git init [project-name] # Creates a new local repository with the specified name
+$ git clone [url]         # Downloads a project and its entire version history
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;make-changes&quot;&gt;Make changes&lt;/h3&gt;
+
+&lt;p&gt;Review edits and craf a commit transaction&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git status                            # Lists all new or modified files to be commited
+$ git add [file]                        # Snapshots the file in preparation for versioning
+$ git reset [file]                      # Unstages the file, but preserve its contents
+$ git diff                              # Shows file differences not yet staged
+$ git diff --staged                     # Shows file differences between staging and the last file version
+$ git commit -m &quot;[descriptive message]&quot; # Records file snapshots permanently in version history
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;group-changes&quot;&gt;Group changes&lt;/h3&gt;
+
+&lt;p&gt;Name a series of commits and combine completed efforts&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git branch                  # Lists all local branches in the current repository
+$ git branch [branch-name]    # Creates a new branch
+$ git checkout [branch-name]  # Switches to the specified branch and updates the working directory
+$ git merge [branch]          # Combines the specified branch’s history into the current branch
+$ git branch -d [branch-name] # Deletes the specified branch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;refactor-filenames&quot;&gt;Refactor filenames&lt;/h3&gt;
+
+&lt;p&gt;Relocate and remove versioned files&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git rm [file]                         # Deletes the file from the working directory and stages the deletion
+$ git rm --cached [file]                # Removes the file from version control but preserves the file locally
+$ git mv [file-original] [file-renamed] # Changes the file name and prepares it for commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;suppress-tracking&quot;&gt;Suppress tracking&lt;/h3&gt;
+
+&lt;p&gt;Exclude temporary files and paths&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt; *.log
+ build/
+ temp-*
+# A text file named .gitignore suppresses accidental versioning of files and paths matching the specified patterns
+$ git ls-files --other --ignored --exclude-standard
+# Lists all ignored files in this project
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;save-fragments&quot;&gt;Save fragments&lt;/h3&gt;
+
+&lt;p&gt;Shelve and restore incomplete changes&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git stash      # Temporarily stores all modified tracked files
+$ git stash pop  # Restores the most recently stashed files
+$ git stash list # Lists all stashed changesets
+$ git stash drop # Discards the most recently stashed changeset
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;review-history&quot;&gt;Review history&lt;/h3&gt;
+
+&lt;p&gt;Browse and inspect the evolution of project files&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git log                                   # Lists version history for the current branch
+$ git log --follow [file]                   # Lists version history for a file, including renames
+$ git diff [first-branch]...[second-branch] # Shows content differences between two branches
+$ git show [commit]                         # Outputs metadata and content changes of the specified commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;redo-commits&quot;&gt;Redo commits&lt;/h3&gt;
+
+&lt;p&gt;Erase mistakes and craft replacement history&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git reset [commit]        # Undoes all commits after [commit], preserving changes locally
+$ git reset --hard [commit] # Discards all history and changes back to the specified commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;synchronize-changes&quot;&gt;Synchronize changes&lt;/h3&gt;
+
+&lt;p&gt;Register a repository bookmark and exchange version history&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git fetch [bookmark]          # Downloads all history from the repository bookmark
+$ git merge [bookmark]/[branch] # Combines bookmark’s branch into current local branch
+$ git push [alias] [branch]     # Uploads all local branch commits to GitHub
+$ git pull                      # Downloads bookmark history and incorporates changes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;useful-snippet&quot;&gt;Useful snippet&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;recover all deleted files &lt;a href=&quot;http://stackoverflow.com/questions/953481/find-and-restore-a-deleted-file-in-a-git-repository&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ git ls-files -d | xargs git checkout --
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://try.github.io/levels/1/challenges/1&quot;&gt;Try Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf&quot;&gt;github-git-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
-        <pubDate>Tue, 19 May 2015 00:00:00 -0400</pubDate>
-        <link>/travel/2015/05/19/template/</link>
-        <guid isPermaLink="true">/travel/2015/05/19/template/</guid>
+        <pubDate>Fri, 30 Jan 2015 00:00:00 -0500</pubDate>
+        <link>/tips/2015/01/30/Git-Resources/</link>
+        <guid isPermaLink="true">/tips/2015/01/30/Git-Resources/</guid>
         
-        <category>Travel</category>
+        <category>tips</category>
+        
+        <category>git</category>
+        
+        <category>cheatsheet</category>
         
         
-        <category>travel</category>
+        <category>tips</category>
         
       </item>
     

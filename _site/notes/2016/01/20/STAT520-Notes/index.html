@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width initial-scale=1">
+
+<meta property="og:title" content="STAT 520 Time Series Notes">
+<title>STAT 520 Time Series Notes</title>
+<meta property="og:description" content="Chapter 2: Fundamental Concepts">
+<meta property="og:url" content="/notes/2016/01/20/STAT520-Notes/">
+<meta property="og:site_name" content="Apprantice">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@">
+<meta name="twitter:title" content="STAT 520 Time Series Notes">
+<meta name="twitter:description" content="Chapter 2: Fundamental Concepts">
+<meta name="twitter:url" content="/notes/2016/01/20/STAT520-Notes/">
+
+<meta name="keywords" content="">
+
+<link rel="icon" href="/images/avatar.png">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="/notes/2016/01/20/STAT520-Notes/">
+<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</head>
+
+
+
+
+<body>
+
+<div class="container">
+
+  <header class="site-header">
+
+  <div class="wrapper">
+
+    <h1 class="site-title"><a href="/">Apprantice</a></h1>
+    <h3 class="site-meta">Learn the hard way</h3>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        
+        <a class="page-link" href="/about/">About</a>
+        
+        
+        
+        <a class="page-link" href="/archives/">Archives</a>
+        
+        
+        
+        <a class="page-link" href="/categories/">Categories</a>
+        
+        
+        
+        <a class="page-link" href="/tags/">Tags</a>
+        
+        
+        
+        <a class="page-link" href="/feed.xml">Subscribe</a>
+        
+        
+        
+        
+        
+        <a class="page-link" href="/css/main.css"></a>
+        
+        
+        
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+  
+
+  <div class="page-content">
+    <div class="wrapper">
+      <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 itemprop="name" class="post-title">STAT 520 Time Series Notes</h1>
+    <meta itemprop="keywords" content="Notes" />
+    <p class="post-meta">
+    <!-- Posted in
+    
+    <a href="/categories/#notes">notes</a>&nbsp;
+    
+    
+    and tagged
+    
+    <a href="/tags/#Notes" title="Notes">Notes </a>
+    
+     -->
+    <time itemprop="datePublished" datetime="2016-01-20">
+    <!-- on  -->
+    Jan 20, 2016
+    </time>
+    </p>
+  </header>
+
+  <article class="post-content" itemprop="articleBody">
+    <h1 id="chapter-2-fundamental-concepts">Chapter 2: Fundamental Concepts</h1>
+
+<dl>
+  <dt>Stochastic Process</dt>
+  <dd>A sequence of r.v. indexed by time.</dd>
+  <dt>For example</dt>
+  <dd>${Y_t: t=1, 2, 3, …}$<br />
+${Y_t: t=0, \pm 1, \pm 2, \pm 3, …}$<br />
+${Y_t: t \in R}$</dd>
+</dl>
+
+<ul>
+  <li>used to model time series as a data generating process
+    <ul>
+      <li>time series is a realization (sample) of S.P.</li>
+    </ul>
+  </li>
+  <li>
+    <p>The complete probability structure is determined by the dist. of all finite sets of $Y$’s, e.g. ${t_1, …, t_n} \rightarrow {Y<em>{t_1}, … Y</em>{t_n}}$</p>
+  </li>
+  <li>Usually assume multivairate normal dist $\Rightarrow$ Gaussian Process, whose prob structure is completed specified by the first and second monents.</li>
+</ul>
+
+<dl>
+  <dt>Mean function of S.P.</dt>
+  <dd>${Y_t, t = 1, 2, …}$ is $\mu_t = E[Y_t]$</dd>
+  <dt>The autocovariance function of S.P. ${Y_t, t = 1, 2}$</dt>
+  <dd>$\gamma_{r, s} = Cov(Y_t, Y_s)$</dd>
+</dl>
+
+<blockquote>
+  <p>Properties:<br />
+$\begin{align<em>}<br />
+\gamma_{t, t} &amp; = Var(Y_t) \<br />
+\gamma_{s, t} &amp; = \gamma_{t, s} \<br />
+|\gamma_{t, s}| &amp; \le \sqrt{\gamma_{t, t} \gamma_{s, s}}<br />
+\end{align</em>}$</p>
+</blockquote>
+
+<dl>
+  <dt>The autocorrelation function of ${Y_t, t = 1, 2, …}$</dt>
+  <dd>$\rho = Corr(Y_t, Y_s) = {\gamma<em>{t, s} \over \sqrt{\gamma</em>{t, t} \gamma_{s, s}}}$</dd>
+</dl>
+
+<blockquote>
+  <p>Note: With constant $c_1, …, c_m$ and $d_1, …, d_n$, we have<br />
+$Cov(\sum_i^m{c_i Y<em>{t_i}}, \sum_j^n{d_j Y</em>{s_j}})<br />
+=\sum_i^m \sum_j^n c_i d_j cov(Y<em>{t_i}, Y</em>{s_j})$</p>
+</blockquote>
+
+<blockquote>
+  <p>Properites:<br />
+$\begin{align<em>}<br />
+\rho_{t, t} &amp; = 1 \<br />
+\rho_{t, s} &amp; = \rho_{s, t} \<br />
+|\rho_{t, s}| &amp; \le 1<br />
+\end{align</em>}$</p>
+</blockquote>
+
+<h2 id="random-walk">Random Walk</h2>
+
+<p>Suppose $e_i \sim N(0, \sigma_e^2)$</p>
+
+<script type="math/tex; mode=display">Y_1 = e_1, Y_t = Y_{t-1} + e_t</script>
+
+<p>$e_t$: stepsize at time $t$<br />
+$Y_t$: position at tiem $t$</p>
+
+<p>$\Rightarrow$ ${y_t, t=1, 2, …}$ is a random walk.</p>
+
+<blockquote>
+  <p>Note: $Y_t = Y_{t-1} + e_t = \sum_i e_i$</p>
+</blockquote>
+
+<ul>
+  <li>Mean function<br />
+<script type="math/tex">\mu_t = E[Y_t] = 0</script></li>
+  <li>Autocovariance function<br />
+<script type="math/tex">\gamma_{t, s} = Cov(Y_t, Y_s) = \min(t, s) \cdot \sigma_e^2</script><br />
+$\Rightarrow$ $\gamma_{t, t} = t \sigma_e^2$</li>
+  <li>Autocorrelation function<br />
+$\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)}{\max(t, s)}}$</li>
+</ul>
+
+<h2 id="moving-average">Moving Average</h2>
+
+<p>Suppose $e_i \sim N(0, \sigma_e^2), i = 0, 1, 2, …$<br />
+<script type="math/tex">Y_t = \frac{e_t + e_{t-1}}{2}</script></p>
+
+<ul>
+  <li>Mean:<br />
+<script type="math/tex">\mu_t = E[Y_t] = 0</script></li>
+  <li>Autovariance:<br />
+<script type="math/tex">% <![CDATA[
+\gamma_{s, t} = Cov(Y_t, Y_s) =
+\begin{cases}
+{\sigma^2 \over 2}, & \textbf{if } |t-s| = 0 \\
+{\sigma^2 \over 4}, & \textbf{if } |t-s|=1 \\
+0, & \textbf{otherwise}
+\end{cases} %]]></script></li>
+  <li>Autocorrelation:<br />
+<script type="math/tex">% <![CDATA[
+\rho_{t, s} = \begin{cases}
+1, & \textbf{if } |t-s| = 0 \\
+0.5, & \textbf{if } |t-s|=1 \\
+0, & \textbf{otherwise}
+\end{cases} %]]></script></li>
+</ul>
+
+<h2 id="stationarity">Stationarity</h2>
+<dl>
+  <dt>Strictly stationary</dt>
+  <dd>A S.P. ${Y_t}$ is strictly stationary if for any choice of time point, ${t_1, … ,t_n}$ and $k \ge 0$, the joint dist of ${Y<em>{t_1}, …, Y</em>{t_n}}$ is the same as the joint dist of ${Y<em>{t_1 + k}, …, Y</em>{t_n + k}}$</dd>
+</dl>
+
+<script type="math/tex; mode=display">[Y_{t_1}, ..., Y_{t_n}] = [Y_{t_1 + k}, ..., Y_{t_n + k}]</script>
+
+<ul>
+  <li>
+    <p>Special case when $n=1$:</p>
+
+    <p>Both mean and variance are the same for $Y_t$ and $Y_s$</p>
+  </li>
+  <li>
+    <p>Special case when $n=2$:</p>
+
+    <script type="math/tex; mode=display">[Y_t, Y_s] = [Y_{t+k}, Y_{s+k}] = [Y_0, Y_{s-t}]</script>
+
+    <p>$\Rightarrow$ $ \gamma<em>{t, s} = \gamma</em>{0, s - t}$</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>In general, $\forall s, t &gt; 0, \gamma<em>{t, s} = \gamma</em>{0,</td>
+          <td>t-s</td>
+          <td>}$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>$\Rightarrow \gamma_k = Cov(y_t, y_{t+k})$ and $\rho_k = \frac{\gamma_k}{\gamma_0}$</p>
+  </li>
+</ul>
+
+<p>Thm. If ${Y_t}$ is strickly stationary, then<br />
+(1). $\mu_t$ is constant<br />
+(2). variance function ${Var(Y_t)}$ is also constant.<br />
+(3). $\gamma<em>{t, s} = \gamma</em>{0, |t-s|} = \gamma<em>{|t-s|}$<br />
+(4). $\rho</em>{t, s} = \rho<em>{0, |t-s|}=\frac{\gamma</em>{|t-s|}}{\gamma_0}$</p>
+
+<dl>
+  <dt>Weakly Stationary</dt>
+  <dd>A S.P. ${Y_t}$ is weakly or second-order stationary if<br />
+1. The mean function is constant over time<br />
+2. The autocovariance function $\gamma<em>{t+k, k}=\gamma</em>{0, k}$, $\forall t$ and $k\ge 0$.</dd>
+</dl>
+
+<blockquote>
+  <p>In general, strictly stationary $\Rightarrow$ weakly statioanry<br />
+For Gaussian process, strictly stationary $\Leftrightarrow$ weakly stationary.<br />
+Note: From now on “stationary” is “weakly stationary”</p>
+</blockquote>
+
+<h3 id="review">Review</h3>
+
+<p>Time sequence ${Y_t}$</p>
+
+<ul>
+  <li>Mean function: $\mu_t$</li>
+  <li>Autocovariance function: $\gamma_{t, s}$</li>
+  <li>Autocorrelation function: $\rho_{t,s}$</li>
+  <li>Strickly Stationary</li>
+  <li>(Weakly) Stationary
+    <ul>
+      <li>$\mu_t = \mu$</li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>$\gamma<em>{t,s} = \gamma</em>{</td>
+              <td>t-s</td>
+              <td>}$ $\Rightarrow$ $\gamma<em>{t,s} = \gamma</em>{</td>
+              <td>t-s</td>
+              <td>}$</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="white-noise-process">White Noise Process</h2>
+
+<p>White noise ${e_t}$ with $e_t$ iid</p>
+
+<blockquote>
+  <p>Strictly stationary</p>
+</blockquote>
+
+<p>$\forall t_1, …, t_n,  \&amp; \ k$</p>
+
+<p>$\begin{align<em>}<br />
+&amp; P(e_{t_1}\le x_1, …, e_{t_n} \le x_n) \<br />
+= &amp; \prod P(e_{t_i} \le x_i) \<br />
+= &amp; \prod P(e_{t_i +k} \le x_i) \<br />
+= &amp; P(e_{t_1 + k} \le x_1, …, e_{t_n + k} \le x_n)<br />
+\end{align</em>}$</p>
+
+<ul>
+  <li>$\mu_t = E[e_t] = const$</li>
+  <li>$\gamma_k = \begin{cases} Var(e_t), &amp; k = 0 \ 0, &amp; k \neq 0 \end{cases}$</li>
+  <li>$\rho_k = {\gamma_k \over \gamma_0 }= \begin{cases}<br />
+1 &amp; k=0 \<br />
+0 &amp; otherwise<br />
+\end{cases}$</li>
+</ul>
+
+<blockquote>
+  <p>Its spectrum is analogous to that of white light $\Rightarrow$ “White Noise”</p>
+</blockquote>
+
+<ul>
+  <li>Usually assume $\mu_t = 0, Var(e_t) = \sigma_e ^ 2$</li>
+</ul>
+
+<h2 id="moving-average-1">Moving average</h2>
+
+<p>$Y_t = \frac{e_t + e_{t - 1}}{2}$</p>
+
+<p>Recall $\mu_t = 0$</p>
+
+<p>$\gamma_{t, s} =<br />
+    \begin{cases}<br />
+       \frac{\sigma^2}{2}, &amp; |t-s| = 0 \<br />
+       \frac{\sigma^2}{4}, &amp; |t-s| = 1\<br />
+       0, &amp; |t-s| &gt; 1<br />
+    \end{cases}<br />
+$</p>
+
+<blockquote>
+  <p>$\Rightarrow$ Stationary</p>
+</blockquote>
+
+<h2 id="random-cosine-wave">Random Cosine Wave</h2>
+
+<p>$Y_t = cos[2 \pi (\frac{t}{12} + \phi)]$, where $\phi \sim Unif[0, 1]$.</p>
+
+<ul>
+  <li>
+    <p>Expectation function:<br />
+$\begin{align<em>}<br />
+\mu_t &amp; = E[cos[2 \pi (\frac{t}{12} + \phi)]] \<br />
+&amp; = \int_0^1 cos[2 \pi (\frac{t}{12} + \phi)] d\phi \<br />
+&amp; = \frac{1}{2\pi} sin[2 \pi (\frac{t}{12} + \phi) ] \<br />
+&amp; = 0<br />
+\end{align</em>}$</p>
+  </li>
+  <li>
+    <p>Covariance function:<br />
+$\begin{align<em>}<br />
+\gamma_{t, s} &amp; = E[Y_t, Y_s] \<br />
+&amp; = \int_0^1 cos[2\pi(\frac{t}{12} + \phi)] cos[2\pi(\frac{s}{12} + \phi)] d\phi \<br />
+&amp; = \frac{1}{2} \int_0^1 cos[2\pi\frac{t-s}{12}] + cos[2\pi (\frac{t+s}{12} + 2\phi)] d\phi \<br />
+&amp; = \frac{1}{2} cos[2\pi \frac{t-s}{12}] \<br />
+&amp; = \gamma_{|t-s|}<br />
+\end{align</em>}$</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>$\Rightarrow$ Stationary</p>
+</blockquote>
+
+<p>Note: Difficult to check stationarity.</p>
+
+<h2 id="random-walk-1">Random Walk</h2>
+
+<p>$Y_t = \sum_{i = 1}^t e_i$ with</p>
+
+<p>$\begin{cases}<br />
+\mu_t &amp; = 0 \<br />
+Var(Y_t) &amp; = t \sigma_e^2 \<br />
+\gamma_{t, s} &amp; = \min{t, s} \cdot \sigma_e^2<br />
+\end{cases}<br />
+$</p>
+
+<blockquote>
+  <p>Not stationary.</p>
+</blockquote>
+
+<p>However, $DY_t =Y_t - Y_{t-1} = e_t \Rightarrow$ Difference Series is staionary</p>
+
+<ul>
+  <li>Differencing &amp; other transformations may be conducted on non-stationary series $\Rightarrow$ Stationary series</li>
+</ul>
+
+<h1 id="chapter-3-trends">Chapter 3: Trends</h1>
+
+<p>A time series is a sample of a stochastic process.</p>
+
+<ul>
+  <li>$\mu_t$</li>
+  <li>$\gamma_{t, s}$</li>
+</ul>
+
+<p>Consider $Y_t = \mu_t + X_t$, where $\mu_t$ is the trend and $x$ is stationary. Assume $\mu_t = \mu$ (const mean).</p>
+
+<p>$\begin{cases}<br />
+\mu_t^Y &amp; = \mu_t + \mu_t^X \<br />
+\gamma<em>{t, s} ^ Y &amp; = \gamma</em>{t, s} ^ X \<br />
+\rho<em>{t, s}^Y &amp; = \rho</em>{t, s}^X<br />
+\end{cases}$</p>
+
+<h2 id="estimate-of-constant-mean">Estimate of constant mean</h2>
+
+<p>Assume $Y_t = \mu + X_t$ and ${X_t}$ is stationary with $\mu_t^X = 0$.</p>
+
+<dl>
+  <dt>Question</dt>
+  <dd>Given observed time series, $Y_1, …, Y_n$, how to estimate $\mu$?</dd>
+</dl>
+
+<blockquote>
+  <p>Note: without further assumptions on ${\gamma_k^x}$, we’d better NOT to seek the optimal est of $\mu$</p>
+</blockquote>
+
+<dl>
+  <dt>Answer</dt>
+  <dd>Least squares est $\min{\sum(y_t - \mu)^2} \Rightarrow \hat{\mu} = \bar{y}$<br />
+    $E[\hat{\mu}] = E[\bar{Y}] = \mu$ unbiased<br />
+    $\begin{align<em>}<br />
+Var(\hat{\mu}) &amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) \<br />
+&amp; = \frac{1}{n^2} { n Var(Y_t) + 2\sum_{t=1}^n \sum_{s=1}^{t-1} Cov(Y_t, Y_s) } \<br />
+&amp; = \frac{1}{n^2} { n\gamma_0 + 2 \sum_{t=1}^{n} \sum_{k=1}^{t-1} \gamma_k} \<br />
+&amp; = \frac{1}{n^2} { n \gamma_0 + 2 \sum_{k=1}^{n-1}(n-k)\gamma_k} \<br />
+&amp; = \frac{\gamma_0}{n} { 1 + 2 \sum_{k=1}^{n-1} (1 -\frac{k}{n} ) \rho_k }<br />
+\end{align</em>}$</dd>
+</dl>
+
+<p>Example, ${x_t}$ is a white noise process $\Rightarrow$ $Var(\hat{\mu}) = \frac{\gamma_0}{n}$</p>
+
+<blockquote>
+  <p>Note: If $\rho_k \ge 0, \forall k \ge 1$, then $Var(\hat{\mu}) \ge \frac{\gamma_0}{n}$</p>
+</blockquote>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In many stationary process, we have $\sum_{k=0}^\infty</td>
+      <td>\rho_k</td>
+      <td>&lt; \infty$ (a.c. function decays sufficiently with increasing lags)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>When n is sufficiently large, we can approximate $Var(\hat{\mu}) \approx \frac{\gamma_0}{n} \sum_{k=-\infty}^{\infty} \rho_k$</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>example: $\rho_k = \phi^{</td>
+      <td>k</td>
+      <td>}$ with $</td>
+      <td>\phi</td>
+      <td>&lt; 1$, then $Var(\hat{\mu}) \approx \frac{\gamma_0}{n}\frac{1+\phi}{1-\phi}$</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>reviewed</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="polynomial-trend">Polynomial trend</h2>
+
+<p>$\mu_t = \sum_{k=0} ^ {P} \beta_k t^k, P\ge1$</p>
+
+<p>Model: $y_t = \mu_t + x_t$, ${x_t}$ is stationary with $\mu_t^x = 0$</p>
+
+<p>Data (time series): $y_1, …, y_n$ $n»p$</p>
+
+<ul>
+  <li>Least square est</li>
+</ul>
+
+<p>$\min<em>{\beta_k} { \sum</em>{t=1}^n (y_t - \sum_{k = 0}^P \beta_k t^k)^2}$</p>
+
+  </article>
+  <hr />
+</div>
+
+
+<section class="pager">
+  <ul>
+    
+    <li class="previous"><a href="/tips/2015/06/25/ipython-notebook-from-hathi/" title="Access remote ipython notebook">&larr; Older</a></li>
+    
+    
+    <li class="disabled"><a>Newer &rarr;</a>
+    
+  </ul>
+</section>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+
+  var disqus_developer = 1;
+
+var disqus_shortname ='peawinter';
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+  </div>
+  <section class="pager">
+  
+  
+</section>
+
+
+  
+
+  <footer class="site-footer">
+
+
+  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  on
+  
+  <a href="https://github.com/">Github</a>
+  
+  | With 🍎 and ☕
+
+</footer>
+
+
+</div>
+
+</body>
+
+</html>

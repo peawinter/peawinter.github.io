@@ -84,8 +84,6 @@
         
         
         
-        
-        
       </div>
     </nav>
 
@@ -127,27 +125,33 @@
 
   <article class="post-content" itemprop="articleBody">
     <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
-</code></pre></div>
+
+<pre><code class="language-python">[^A-Za-z0-9]+
+</code></pre>
+
 <p>Here is the Python command to do a regex substitution:</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;[^A-Za-z0-9]+&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;hello world! how are you? 0&quot;</span>
 
-<span class="c"># Short version</span>
-<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
+<pre><code class="language-python">re.sub('[^A-Za-z0-9]+', '', mystring)
+</code></pre>
 
-<span class="c"># Faster version for long ASCII strings:</span>
-<span class="n">id_tab</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
-<span class="n">tostrip</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
-<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
+<pre><code class="language-python">s = "hello world! how are you? 0"
 
-<span class="c"># Using regular expressions</span>
-<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-</code></pre></div>
+# Short version
+print filter(lambda c: c.isalpha(), s)
+
+# Faster version for long ASCII strings:
+id_tab = "".join(map(chr, xrange(256)))
+tostrip = "".join(c for c in id_tab if c.isalpha())
+print s.translate(id_tab, tostrip)
+
+# Using regular expressions
+print re.sub("[^A-Za-z]", "", s)
+</code></pre>
+
 <p>Reference</p>
 
 <ol>
-<li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
+  <li><a href="http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string">http://stackoverflow.com/questions/5843518/remove-all-special-characters-punctuation-and-spaces-from-string</a></li>
 </ol>
 
   </article>
