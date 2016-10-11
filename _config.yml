@@ -1,8 +1,8 @@
 ### Site info:
-title: Apprantice
-tagline: Learn the hard way
-author: Wenyu Wang
-email: peawinter@gmail.com
+title: Play Ground
+tagline: Old dog can learn new tricks
+author: Wenyu
+email: wenyu.purdue@gmail.com
 description: > #
   Hi, I'm an operations researcher and statistician.
 # baseurl: "/blog" # the subpath of your site, e.g. /blog
@@ -10,19 +10,18 @@ description: > #
 locale: en
 
 ### Personal info and site tools info:
-# twitter_username: peawinter
 
 social:
-   github: peawinter
-   twitter: peawinter
-   facebook: peawinter
-   email: peawinter@gmail.com
+   github: wypd
+   twitter: wypd
+   facebook: wypd
+   email: wenyu.purdue@gmail.com
 
-linkedin_username: peawinter
-github_username: peawinter
-disqus_shortname: peawinter
+linkedin_username: wenyupurdue
+github_username: wypd
+disqus_shortname: wenyupurdue
 favicon: "/images/avatar.png"
-aboutme: Hi, Im Wenyu Wang, an operations researcher and data scientist. # these are shown on aboutme-sidebar.
+aboutme:  # these are shown on aboutme-sidebar.
 aboutme_photo: "/images/avatar.png" # your photo.
 
 ### Site setting:
