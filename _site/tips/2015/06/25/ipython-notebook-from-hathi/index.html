@@ -10,22 +10,22 @@
 <meta property="og:title" content="Access remote ipython notebook">
 <title>Access remote ipython notebook</title>
 <meta property="og:description" content="Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due t...">
-<meta property="og:url" content="/tips/2015/06/25/ipython-notebook-from-hathi/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/25/ipython-notebook-from-hathi/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Access remote ipython notebook">
 <meta name="twitter:description" content="Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due t...">
-<meta name="twitter:url" content="/tips/2015/06/25/ipython-notebook-from-hathi/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/25/ipython-notebook-from-hathi/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/25/ipython-notebook-from-hathi/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/25/ipython-notebook-from-hathi/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -122,7 +122,7 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I’‘ve had the access to the Purdue server <code>Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code>Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
+    <p>Ipython notebook provides a interactive and intuitive way to manipulate with data. As I am thinking to playing with larger size data, my hands are tied due to the limitation of my laptop. Then I realize I’‘ve had the access to the Purdue server <code class="highlighter-rouge">Hathi</code>, which is mainly for Hadoop job. More excitingly, it contains all packages from Python (including anaconda distribution), MPICH2, and R. (I found this when I am trying to install the <code class="highlighter-rouge">Rmpi</code> package.) The inspiration to use ipython hosted by Hathi hits me immediately.</p>
 
 <p>The steps are straightforward,</p>
 
@@ -135,18 +135,20 @@
   </li>
 </ol>
 
-<pre><code class="language-bash">% on server
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">% </span>on server
 module add anaconda
-ipython notebook --no-browser --port=7777
+ipython notebook --no-browser --port<span class="o">=</span>7777
 </code></pre>
+</div>
 
 <ol>
   <li>Setup the ssh tunnel from the local machine to the remote machine.</li>
 </ol>
 
-<pre><code class="language-bash">% on local machine
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">% </span>on <span class="nb">local </span>machine
 ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
 </code></pre>
+</div>
 
 <ol>
   <li>Access remotely hosted ipython notebook through your favorite brower at <a href="localhost:7777">localhost:7777</a></li>
@@ -185,9 +187,7 @@ ssh -L 7777:localhost:7777 user@hathi.rcac.purdue.edu
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -212,7 +212,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

@@ -10,22 +10,22 @@
 <meta property="og:title" content="R from function to its name">
 <title>R from function to its name</title>
 <meta property="og:description" content="In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as...">
-<meta property="og:url" content="/tips/2015/06/05/from-function-to-name/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/05/from-function-to-name/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="R from function to its name">
 <meta name="twitter:description" content="In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as...">
-<meta name="twitter:url" content="/tips/2015/06/05/from-function-to-name/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/05/from-function-to-name/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/05/from-function-to-name/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/05/from-function-to-name/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -104,7 +104,7 @@
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#tips">tips</a>&nbsp;
+    <a href="/categories/#Tips">Tips</a>&nbsp;
     
     
     and tagged
@@ -124,34 +124,37 @@
   <article class="post-content" itemprop="articleBody">
     <p>In my research, I design an algorithm for various testing problems. In the R implementation of the algorithm, I take the function name of testing problems as an argument.</p>
 
-<pre><code class="language-R">myTestFun1 &lt;- function() {
-  ...
-}
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">myTestFun1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-myTestFun2 &lt;- function() {
-  ...
-}
+</span><span class="n">myTestFun2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-myMain &lt;- function(testFun) {
-  ...
-}
-</code></pre>
+</span><span class="n">myMain</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">testFun</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <p>R works greatly since it passes function as variable (so-called functional programming?)</p>
 
-<p>In <code>myMain</code> function, I want to generate output looks like</p>
+<p>In <code class="highlighter-rouge">myMain</code> function, I want to generate output looks like</p>
 
-<pre><code>test function: myTestFun1
+<div class="highlighter-rouge"><pre class="highlight"><code>test function: myTestFun1
 
         value: ....
 </code></pre>
+</div>
 
-<p>Here I got a problem, since R passes the function to <code>testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code>match.fun</code> to extract the desired function object.</p>
+<p>Here I got a problem, since R passes the function to <code class="highlighter-rouge">testFun</code>, the names of those testing functions (myTestFun1 and myTestFun2) are not retrievable. To walk around it, instead of passing the function, I pass the name of test function and use <code class="highlighter-rouge">match.fun</code> to extract the desired function object.</p>
 
-<pre><code class="language-R">myMainNew &lt;- function(testFunName) {
-  testFun &lt;- match.fun(testFunName)
-}
-</code></pre>
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="n">myMainNew</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">testFunName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">testFun</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match.fun</span><span class="p">(</span><span class="n">testFunName</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="reference">Reference</h3>
 
@@ -179,9 +182,7 @@ myMain &lt;- function(testFun) {
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -206,7 +207,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

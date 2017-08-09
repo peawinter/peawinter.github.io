@@ -10,22 +10,22 @@
 <meta property="og:title" content="Python punctuation">
 <title>Python punctuation</title>
 <meta property="og:description" content="Here is a regex to match a string of characters that are not a letters or numbers:">
-<meta property="og:url" content="/tips/2015/06/11/python-punctuation/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/11/python-punctuation/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Python punctuation">
 <meta name="twitter:description" content="Here is a regex to match a string of characters that are not a letters or numbers:">
-<meta name="twitter:url" content="/tips/2015/06/11/python-punctuation/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/11/python-punctuation/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/11/python-punctuation/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/11/python-punctuation/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -126,27 +126,30 @@
   <article class="post-content" itemprop="articleBody">
     <p>Here is a regex to match a string of characters that are not a letters or numbers:</p>
 
-<pre><code class="language-python">[^A-Za-z0-9]+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="o">^</span><span class="n">A</span><span class="o">-</span><span class="n">Za</span><span class="o">-</span><span class="n">z0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+</span>
 </code></pre>
+</div>
 
 <p>Here is the Python command to do a regex substitution:</p>
 
-<pre><code class="language-python">re.sub('[^A-Za-z0-9]+', '', mystring)
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'[^A-Za-z0-9]+'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">mystring</span><span class="p">)</span>
 </code></pre>
+</div>
 
-<pre><code class="language-python">s = "hello world! how are you? 0"
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">"hello world! how are you? 0"</span>
 
-# Short version
-print filter(lambda c: c.isalpha(), s)
+<span class="c"># Short version</span>
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">(),</span> <span class="n">s</span><span class="p">)</span>
 
-# Faster version for long ASCII strings:
-id_tab = "".join(map(chr, xrange(256)))
-tostrip = "".join(c for c in id_tab if c.isalpha())
-print s.translate(id_tab, tostrip)
+<span class="c"># Faster version for long ASCII strings:</span>
+<span class="n">id_tab</span> <span class="o">=</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">256</span><span class="p">)))</span>
+<span class="n">tostrip</span> <span class="o">=</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">id_tab</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">id_tab</span><span class="p">,</span> <span class="n">tostrip</span><span class="p">)</span>
 
-# Using regular expressions
-print re.sub("[^A-Za-z]", "", s)
+<span class="c"># Using regular expressions</span>
+<span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">"[^A-Za-z]"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 </code></pre>
+</div>
 
 <p>Reference</p>
 
@@ -174,9 +177,7 @@ print re.sub("[^A-Za-z]", "", s)
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -201,7 +202,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

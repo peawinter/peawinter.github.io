@@ -10,22 +10,22 @@
 <meta property="og:title" content="Install Rmpi on Mac and Redhat server">
 <title>Install Rmpi on Mac and Redhat server</title>
 <meta property="og:description" content="To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed Rmpi for the first time.">
-<meta property="og:url" content="/tips/2015/06/23/install-Rmpi/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/23/install-Rmpi/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Install Rmpi on Mac and Redhat server">
 <meta name="twitter:description" content="To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed Rmpi for the first time.">
-<meta name="twitter:url" content="/tips/2015/06/23/install-Rmpi/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/23/install-Rmpi/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/23/install-Rmpi/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/23/install-Rmpi/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -122,24 +122,27 @@
   </header>
 
   <article class="post-content" itemprop="articleBody">
-    <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code>Rmpi</code> for the first time.</p>
+    <p>To me, learning something new always starts from stucking in some troubles. This time is the compiling error issued when I installed <code class="highlighter-rouge">Rmpi</code> for the first time.</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>It turns out <code>Rmpi</code> depends on <code>open MPI</code>, which should be installed by</p>
+<p>It turns out <code class="highlighter-rouge">Rmpi</code> depends on <code class="highlighter-rouge">open MPI</code>, which should be installed by</p>
 
-<pre><code class="language-bash">$ brew install open-mpi
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew install open-mpi
 </code></pre>
+</div>
 
-<p>Then in <code>R</code>, install the package from source.</p>
+<p>Then in <code class="highlighter-rouge">R</code>, install the package from source.</p>
 
-<pre><code class="language-r">install.packages("Rmpi", type="source")
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"Rmpi"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s2">"source"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>As to install <code class="highlighter-rouge">Rmpi</code> on server, we need some specification. This line works on <code class="highlighter-rouge">radon</code>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
 </code></pre>
-
-<p>As to install <code>Rmpi</code> on server, we need some specification. This line works on <code>radon</code>.</p>
-
-<pre><code class="language-bash">R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
-</code></pre>
+</div>
 
 <p>Although this line can do the job, but it is not straight forward to get here.</p>
 
@@ -148,23 +151,25 @@
   <li>Add module</li>
 </ol>
 
-<p><code>bash
-  module add r
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>  module add r
   module add openmpi
- </code><br />
-3. Check the directory of the openmpi via</p>
-
-<p><code>bash
-  ompi_info
- </code></p>
-
+</code></pre>
+</div>
 <ol>
-  <li>Final step to install <code>Rmpi</code></li>
+  <li>Check the directory of the openmpi via</li>
 </ol>
 
-<p><code>bash
-  R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args=--with-mpi=/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
- </code></p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>  ompi_info
+</code></pre>
+</div>
+
+<ol>
+  <li>Final step to install <code class="highlighter-rouge">Rmpi</code></li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>  R CMD INSTALL Rmpi_0.6-5.tar.gz --configure-args<span class="o">=</span>--with-mpi<span class="o">=</span>/apps/rhel6/openmpi/1.6.3/intel-13.1.1.163
+</code></pre>
+</div>
 
 <h2 id="examples">Examples</h2>
 
@@ -188,9 +193,7 @@
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -215,7 +218,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

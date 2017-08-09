@@ -10,22 +10,22 @@
 <meta property="og:title" content="Discrete Optimization - Graph Coloring">
 <title>Discrete Optimization - Graph Coloring</title>
 <meta property="og:description" content="Problem">
-<meta property="og:url" content="/research/2015/05/20/graph-coloring/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/research/2015/05/20/graph-coloring/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Discrete Optimization - Graph Coloring">
 <meta name="twitter:description" content="Problem">
-<meta name="twitter:url" content="/research/2015/05/20/graph-coloring/">
+<meta name="twitter:url" content="http://localhost:4000/research/2015/05/20/graph-coloring/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/research/2015/05/20/graph-coloring/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/research/2015/05/20/graph-coloring/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -104,7 +104,7 @@
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#research">research</a>&nbsp;
+    <a href="/categories/#Research">Research</a>&nbsp;
     
     
     and tagged
@@ -228,9 +228,9 @@
 <ul>
   <li>Remark
     <ul>
-      <li>By considering only maximal independent sets, the dynamic<br />
+      <li>By considering only maximal independent sets, the dynamic
 programming based algorithm can be modified to have an improved running time of \(O(2.45^n)\).</li>
-      <li>Dynamic programming is a method that avoids redoing computations<br />
+      <li>Dynamic programming is a method that avoids redoing computations
 over and over again in exhaustive search. This leads to significant savings in running times, typically at the expense of requiring more space to store previously computed values.</li>
     </ul>
   </li>
@@ -316,10 +316,12 @@ over and over again in exhaustive search. This leads to significant savings in r
 
 <h3 id="iterated-greedy-algorithm">Iterated Greedy algorithm</h3>
 
-<p>Algorithm:<br />
-1. Run simple greedy algorithm.<br />
-2. Permutate the solution such that nodes with the same label are grouped together.<br />
-3. Iterate until the color count reach the optimal value.</p>
+<p>Algorithm:</p>
+<ol>
+  <li>Run simple greedy algorithm.</li>
+  <li>Permutate the solution such that nodes with the same label are grouped together.</li>
+  <li>Iterate until the color count reach the optimal value.</li>
+</ol>
 
 <ul>
   <li>The idea is to use previous information obtained in previous coloring to produce an improved coloring. If we take any permutation in which the vertices of each color class are adjacent in the permutation, then applying the greedy algorithm will produce a coloring at least as good.</li>
@@ -362,8 +364,8 @@ over and over again in exhaustive search. This leads to significant savings in r
 </ol>
 
 <ul>
-  <li>Cost function<br />
-  <script type="math/tex">\sum[Ci^2] + \sum[Ci * Ei]</script><br />
+  <li>Cost function
+  <script type="math/tex">\sum[Ci^2] + \sum[Ci * Ei]</script>
   where \(Ci\) is the number of nodes with color \(i\) and \(Ei\) the number of conflict pairs for each color.</li>
   <li>Set the initial temperature at 10, the step size \(\alpha = 0.9999\).</li>
 </ul>
@@ -395,9 +397,7 @@ over and over again in exhaustive search. This leads to significant savings in r
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -422,7 +422,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

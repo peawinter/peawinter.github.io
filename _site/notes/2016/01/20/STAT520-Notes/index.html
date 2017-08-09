@@ -10,22 +10,22 @@
 <meta property="og:title" content="STAT 520 Time Series Notes">
 <title>STAT 520 Time Series Notes</title>
 <meta property="og:description" content="Chapter 2: Fundamental Concepts">
-<meta property="og:url" content="/notes/2016/01/20/STAT520-Notes/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/notes/2016/01/20/STAT520-Notes/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="STAT 520 Time Series Notes">
 <meta name="twitter:description" content="Chapter 2: Fundamental Concepts">
-<meta name="twitter:url" content="/notes/2016/01/20/STAT520-Notes/">
+<meta name="twitter:url" content="http://localhost:4000/notes/2016/01/20/STAT520-Notes/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/notes/2016/01/20/STAT520-Notes/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/notes/2016/01/20/STAT520-Notes/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -104,7 +104,7 @@
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#notes">notes</a>&nbsp;
+    <a href="/categories/#Notes">Notes</a>&nbsp;
     
     
     and tagged
@@ -126,8 +126,8 @@
   <dt>Stochastic Process</dt>
   <dd>A sequence of r.v. indexed by time.</dd>
   <dt>For example</dt>
-  <dd>${Y_t: t=1, 2, 3, …}$<br />
-${Y_t: t=0, \pm 1, \pm 2, \pm 3, …}$<br />
+  <dd>${Y_t: t=1, 2, 3, …}$
+${Y_t: t=0, \pm 1, \pm 2, \pm 3, …}$
 ${Y_t: t \in R}$</dd>
 </dl>
 
@@ -138,7 +138,7 @@ ${Y_t: t \in R}$</dd>
     </ul>
   </li>
   <li>
-    <p>The complete probability structure is determined by the dist. of all finite sets of $Y$’s, e.g. ${t_1, …, t_n} \rightarrow {Y<em>{t_1}, … Y</em>{t_n}}$</p>
+    <p>The complete probability structure is determined by the dist. of all finite sets of $Y$’s, e.g. ${t_1, …, t_n} \rightarrow {Y_{t_1}, … Y_{t_n}}$</p>
   </li>
   <li>Usually assume multivairate normal dist $\Rightarrow$ Gaussian Process, whose prob structure is completed specified by the first and second monents.</li>
 </ul>
@@ -151,31 +151,31 @@ ${Y_t: t \in R}$</dd>
 </dl>
 
 <blockquote>
-  <p>Properties:<br />
-$\begin{align<em>}<br />
-\gamma_{t, t} &amp; = Var(Y_t) \<br />
-\gamma_{s, t} &amp; = \gamma_{t, s} \<br />
-|\gamma_{t, s}| &amp; \le \sqrt{\gamma_{t, t} \gamma_{s, s}}<br />
+  <p>Properties:
+$\begin{align<em>}
+\gamma_{t, t} &amp; = Var(Y_t) <br />
+\gamma_{s, t} &amp; = \gamma_{t, s} <br />
+|\gamma_{t, s}| &amp; \le \sqrt{\gamma_{t, t} \gamma_{s, s}}
 \end{align</em>}$</p>
 </blockquote>
 
 <dl>
   <dt>The autocorrelation function of ${Y_t, t = 1, 2, …}$</dt>
-  <dd>$\rho = Corr(Y_t, Y_s) = {\gamma<em>{t, s} \over \sqrt{\gamma</em>{t, t} \gamma_{s, s}}}$</dd>
+  <dd>$\rho = Corr(Y_t, Y_s) = {\gamma_{t, s} \over \sqrt{\gamma_{t, t} \gamma_{s, s}}}$</dd>
 </dl>
 
 <blockquote>
-  <p>Note: With constant $c_1, …, c_m$ and $d_1, …, d_n$, we have<br />
-$Cov(\sum_i^m{c_i Y<em>{t_i}}, \sum_j^n{d_j Y</em>{s_j}})<br />
-=\sum_i^m \sum_j^n c_i d_j cov(Y<em>{t_i}, Y</em>{s_j})$</p>
+  <p>Note: With constant $c_1, …, c_m$ and $d_1, …, d_n$, we have
+$Cov(\sum_i^m{c_i Y_{t_i}}, \sum_j^n{d_j Y_{s_j}})
+=\sum_i^m \sum_j^n c_i d_j cov(Y_{t_i}, Y_{s_j})$</p>
 </blockquote>
 
 <blockquote>
-  <p>Properites:<br />
-$\begin{align<em>}<br />
-\rho_{t, t} &amp; = 1 \<br />
-\rho_{t, s} &amp; = \rho_{s, t} \<br />
-|\rho_{t, s}| &amp; \le 1<br />
+  <p>Properites:
+$\begin{align<em>}
+\rho_{t, t} &amp; = 1 <br />
+\rho_{t, s} &amp; = \rho_{s, t} <br />
+|\rho_{t, s}| &amp; \le 1
 \end{align</em>}$</p>
 </blockquote>
 
@@ -185,7 +185,7 @@ $\begin{align<em>}<br />
 
 <script type="math/tex; mode=display">Y_1 = e_1, Y_t = Y_{t-1} + e_t</script>
 
-<p>$e_t$: stepsize at time $t$<br />
+<p>$e_t$: stepsize at time $t$
 $Y_t$: position at tiem $t$</p>
 
 <p>$\Rightarrow$ ${y_t, t=1, 2, …}$ is a random walk.</p>
@@ -195,24 +195,24 @@ $Y_t$: position at tiem $t$</p>
 </blockquote>
 
 <ul>
-  <li>Mean function<br />
+  <li>Mean function
 <script type="math/tex">\mu_t = E[Y_t] = 0</script></li>
-  <li>Autocovariance function<br />
-<script type="math/tex">\gamma_{t, s} = Cov(Y_t, Y_s) = \min(t, s) \cdot \sigma_e^2</script><br />
+  <li>Autocovariance function
+<script type="math/tex">\gamma_{t, s} = Cov(Y_t, Y_s) = \min(t, s) \cdot \sigma_e^2</script>
 $\Rightarrow$ $\gamma_{t, t} = t \sigma_e^2$</li>
-  <li>Autocorrelation function<br />
+  <li>Autocorrelation function
 $\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)}{\max(t, s)}}$</li>
 </ul>
 
 <h2 id="moving-average">Moving Average</h2>
 
-<p>Suppose $e_i \sim N(0, \sigma_e^2), i = 0, 1, 2, …$<br />
+<p>Suppose $e_i \sim N(0, \sigma_e^2), i = 0, 1, 2, …$
 <script type="math/tex">Y_t = \frac{e_t + e_{t-1}}{2}</script></p>
 
 <ul>
-  <li>Mean:<br />
+  <li>Mean:
 <script type="math/tex">\mu_t = E[Y_t] = 0</script></li>
-  <li>Autovariance:<br />
+  <li>Autovariance:
 <script type="math/tex">% <![CDATA[
 \gamma_{s, t} = Cov(Y_t, Y_s) =
 \begin{cases}
@@ -220,7 +220,7 @@ $\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)
 {\sigma^2 \over 4}, & \textbf{if } |t-s|=1 \\
 0, & \textbf{otherwise}
 \end{cases} %]]></script></li>
-  <li>Autocorrelation:<br />
+  <li>Autocorrelation:
 <script type="math/tex">% <![CDATA[
 \rho_{t, s} = \begin{cases}
 1, & \textbf{if } |t-s| = 0 \\
@@ -232,7 +232,7 @@ $\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)
 <h2 id="stationarity">Stationarity</h2>
 <dl>
   <dt>Strictly stationary</dt>
-  <dd>A S.P. ${Y_t}$ is strictly stationary if for any choice of time point, ${t_1, … ,t_n}$ and $k \ge 0$, the joint dist of ${Y<em>{t_1}, …, Y</em>{t_n}}$ is the same as the joint dist of ${Y<em>{t_1 + k}, …, Y</em>{t_n + k}}$</dd>
+  <dd>A S.P. ${Y_t}$ is strictly stationary if for any choice of time point, ${t_1, … ,t_n}$ and $k \ge 0$, the joint dist of ${Y_{t_1}, …, Y_{t_n}}$ is the same as the joint dist of ${Y_{t_1 + k}, …, Y_{t_n + k}}$</dd>
 </dl>
 
 <script type="math/tex; mode=display">[Y_{t_1}, ..., Y_{t_n}] = [Y_{t_1 + k}, ..., Y_{t_n + k}]</script>
@@ -248,12 +248,12 @@ $\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)
 
     <script type="math/tex; mode=display">[Y_t, Y_s] = [Y_{t+k}, Y_{s+k}] = [Y_0, Y_{s-t}]</script>
 
-    <p>$\Rightarrow$ $ \gamma<em>{t, s} = \gamma</em>{0, s - t}$</p>
+    <p>$\Rightarrow$ $ \gamma_{t, s} = \gamma_{0, s - t}$</p>
 
     <table>
       <tbody>
         <tr>
-          <td>In general, $\forall s, t &gt; 0, \gamma<em>{t, s} = \gamma</em>{0,</td>
+          <td>In general, $\forall s, t &gt; 0, \gamma_{t, s} = \gamma_{0,</td>
           <td>t-s</td>
           <td>}$</td>
         </tr>
@@ -264,22 +264,25 @@ $\Rightarrow$ $\rho_{t, s} = \frac{\min(t, s)}{\sqrt{ts}}=\sqrt{\frac{\min(t, s)
   </li>
 </ul>
 
-<p>Thm. If ${Y_t}$ is strickly stationary, then<br />
-(1). $\mu_t$ is constant<br />
-(2). variance function ${Var(Y_t)}$ is also constant.<br />
-(3). $\gamma<em>{t, s} = \gamma</em>{0, |t-s|} = \gamma<em>{|t-s|}$<br />
-(4). $\rho</em>{t, s} = \rho<em>{0, |t-s|}=\frac{\gamma</em>{|t-s|}}{\gamma_0}$</p>
+<p>Thm. If ${Y_t}$ is strickly stationary, then
+(1). $\mu_t$ is constant
+(2). variance function ${Var(Y_t)}$ is also constant.
+(3). $\gamma_{t, s} = \gamma_{0, |t-s|} = \gamma_{|t-s|}$
+(4). $\rho_{t, s} = \rho_{0, |t-s|}=\frac{\gamma_{|t-s|}}{\gamma_0}$</p>
 
 <dl>
   <dt>Weakly Stationary</dt>
-  <dd>A S.P. ${Y_t}$ is weakly or second-order stationary if<br />
-1. The mean function is constant over time<br />
-2. The autocovariance function $\gamma<em>{t+k, k}=\gamma</em>{0, k}$, $\forall t$ and $k\ge 0$.</dd>
+  <dd>A S.P. ${Y_t}$ is weakly or second-order stationary if
+    <ol>
+      <li>The mean function is constant over time</li>
+      <li>The autocovariance function $\gamma_{t+k, k}=\gamma_{0, k}$, $\forall t$ and $k\ge 0$.</li>
+    </ol>
+  </dd>
 </dl>
 
 <blockquote>
-  <p>In general, strictly stationary $\Rightarrow$ weakly statioanry<br />
-For Gaussian process, strictly stationary $\Leftrightarrow$ weakly stationary.<br />
+  <p>In general, strictly stationary $\Rightarrow$ weakly statioanry
+For Gaussian process, strictly stationary $\Leftrightarrow$ weakly stationary.
 Note: From now on “stationary” is “weakly stationary”</p>
 </blockquote>
 
@@ -299,9 +302,9 @@ Note: From now on “stationary” is “weakly stationary”</p>
         <table>
           <tbody>
             <tr>
-              <td>$\gamma<em>{t,s} = \gamma</em>{</td>
+              <td>$\gamma_{t,s} = \gamma_{</td>
               <td>t-s</td>
-              <td>}$ $\Rightarrow$ $\gamma<em>{t,s} = \gamma</em>{</td>
+              <td>}$ $\Rightarrow$ $\gamma_{t,s} = \gamma_{</td>
               <td>t-s</td>
               <td>}$</td>
             </tr>
@@ -322,19 +325,19 @@ Note: From now on “stationary” is “weakly stationary”</p>
 
 <p>$\forall t_1, …, t_n,  \&amp; \ k$</p>
 
-<p>$\begin{align<em>}<br />
-&amp; P(e_{t_1}\le x_1, …, e_{t_n} \le x_n) \<br />
-= &amp; \prod P(e_{t_i} \le x_i) \<br />
-= &amp; \prod P(e_{t_i +k} \le x_i) \<br />
-= &amp; P(e_{t_1 + k} \le x_1, …, e_{t_n + k} \le x_n)<br />
+<p>$\begin{align<em>}
+&amp; P(e_{t_1}\le x_1, …, e_{t_n} \le x_n) <br />
+= &amp; \prod P(e_{t_i} \le x_i) <br />
+= &amp; \prod P(e_{t_i +k} \le x_i) <br />
+= &amp; P(e_{t_1 + k} \le x_1, …, e_{t_n + k} \le x_n)
 \end{align</em>}$</p>
 
 <ul>
   <li>$\mu_t = E[e_t] = const$</li>
   <li>$\gamma_k = \begin{cases} Var(e_t), &amp; k = 0 \ 0, &amp; k \neq 0 \end{cases}$</li>
-  <li>$\rho_k = {\gamma_k \over \gamma_0 }= \begin{cases}<br />
-1 &amp; k=0 \<br />
-0 &amp; otherwise<br />
+  <li>$\rho_k = {\gamma_k \over \gamma_0 }= \begin{cases}
+1 &amp; k=0 <br />
+0 &amp; otherwise
 \end{cases}$</li>
 </ul>
 
@@ -352,12 +355,12 @@ Note: From now on “stationary” is “weakly stationary”</p>
 
 <p>Recall $\mu_t = 0$</p>
 
-<p>$\gamma_{t, s} =<br />
-    \begin{cases}<br />
-       \frac{\sigma^2}{2}, &amp; |t-s| = 0 \<br />
-       \frac{\sigma^2}{4}, &amp; |t-s| = 1\<br />
-       0, &amp; |t-s| &gt; 1<br />
-    \end{cases}<br />
+<p>$\gamma_{t, s} =
+    \begin{cases}
+       \frac{\sigma^2}{2}, &amp; |t-s| = 0 <br />
+       \frac{\sigma^2}{4}, &amp; |t-s| = 1<br />
+       0, &amp; |t-s| &gt; 1
+    \end{cases}
 $</p>
 
 <blockquote>
@@ -370,22 +373,22 @@ $</p>
 
 <ul>
   <li>
-    <p>Expectation function:<br />
-$\begin{align<em>}<br />
-\mu_t &amp; = E[cos[2 \pi (\frac{t}{12} + \phi)]] \<br />
-&amp; = \int_0^1 cos[2 \pi (\frac{t}{12} + \phi)] d\phi \<br />
-&amp; = \frac{1}{2\pi} sin[2 \pi (\frac{t}{12} + \phi) ] \<br />
-&amp; = 0<br />
+    <p>Expectation function:
+$\begin{align<em>}
+\mu_t &amp; = E[cos[2 \pi (\frac{t}{12} + \phi)]] <br />
+&amp; = \int_0^1 cos[2 \pi (\frac{t}{12} + \phi)] d\phi <br />
+&amp; = \frac{1}{2\pi} sin[2 \pi (\frac{t}{12} + \phi) ] <br />
+&amp; = 0
 \end{align</em>}$</p>
   </li>
   <li>
-    <p>Covariance function:<br />
-$\begin{align<em>}<br />
-\gamma_{t, s} &amp; = E[Y_t, Y_s] \<br />
-&amp; = \int_0^1 cos[2\pi(\frac{t}{12} + \phi)] cos[2\pi(\frac{s}{12} + \phi)] d\phi \<br />
-&amp; = \frac{1}{2} \int_0^1 cos[2\pi\frac{t-s}{12}] + cos[2\pi (\frac{t+s}{12} + 2\phi)] d\phi \<br />
-&amp; = \frac{1}{2} cos[2\pi \frac{t-s}{12}] \<br />
-&amp; = \gamma_{|t-s|}<br />
+    <p>Covariance function:
+$\begin{align<em>}
+\gamma_{t, s} &amp; = E[Y_t, Y_s] <br />
+&amp; = \int_0^1 cos[2\pi(\frac{t}{12} + \phi)] cos[2\pi(\frac{s}{12} + \phi)] d\phi <br />
+&amp; = \frac{1}{2} \int_0^1 cos[2\pi\frac{t-s}{12}] + cos[2\pi (\frac{t+s}{12} + 2\phi)] d\phi <br />
+&amp; = \frac{1}{2} cos[2\pi \frac{t-s}{12}] <br />
+&amp; = \gamma_{|t-s|}
 \end{align</em>}$</p>
   </li>
 </ul>
@@ -400,11 +403,11 @@ $\begin{align<em>}<br />
 
 <p>$Y_t = \sum_{i = 1}^t e_i$ with</p>
 
-<p>$\begin{cases}<br />
-\mu_t &amp; = 0 \<br />
-Var(Y_t) &amp; = t \sigma_e^2 \<br />
-\gamma_{t, s} &amp; = \min{t, s} \cdot \sigma_e^2<br />
-\end{cases}<br />
+<p>$\begin{cases}
+\mu_t &amp; = 0 <br />
+Var(Y_t) &amp; = t \sigma_e^2 <br />
+\gamma_{t, s} &amp; = \min{t, s} \cdot \sigma_e^2
+\end{cases}
 $</p>
 
 <blockquote>
@@ -428,10 +431,10 @@ $</p>
 
 <p>Consider $Y_t = \mu_t + X_t$, where $\mu_t$ is the trend and $x$ is stationary. Assume $\mu_t = \mu$ (const mean).</p>
 
-<p>$\begin{cases}<br />
-\mu_t^Y &amp; = \mu_t + \mu_t^X \<br />
-\gamma<em>{t, s} ^ Y &amp; = \gamma</em>{t, s} ^ X \<br />
-\rho<em>{t, s}^Y &amp; = \rho</em>{t, s}^X<br />
+<p>$\begin{cases}
+\mu_t^Y &amp; = \mu_t + \mu_t^X <br />
+\gamma_{t, s} ^ Y &amp; = \gamma_{t, s} ^ X <br />
+\rho_{t, s}^Y &amp; = \rho_{t, s}^X
 \end{cases}$</p>
 
 <h2 id="estimate-of-constant-mean">Estimate of constant mean</h2>
@@ -449,14 +452,14 @@ $</p>
 
 <dl>
   <dt>Answer</dt>
-  <dd>Least squares est $\min{\sum(y_t - \mu)^2} \Rightarrow \hat{\mu} = \bar{y}$<br />
-    $E[\hat{\mu}] = E[\bar{Y}] = \mu$ unbiased<br />
-    $\begin{align<em>}<br />
-Var(\hat{\mu}) &amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) \<br />
-&amp; = \frac{1}{n^2} { n Var(Y_t) + 2\sum_{t=1}^n \sum_{s=1}^{t-1} Cov(Y_t, Y_s) } \<br />
-&amp; = \frac{1}{n^2} { n\gamma_0 + 2 \sum_{t=1}^{n} \sum_{k=1}^{t-1} \gamma_k} \<br />
-&amp; = \frac{1}{n^2} { n \gamma_0 + 2 \sum_{k=1}^{n-1}(n-k)\gamma_k} \<br />
-&amp; = \frac{\gamma_0}{n} { 1 + 2 \sum_{k=1}^{n-1} (1 -\frac{k}{n} ) \rho_k }<br />
+  <dd>Least squares est $\min{\sum(y_t - \mu)^2} \Rightarrow \hat{\mu} = \bar{y}$
+    $E[\hat{\mu}] = E[\bar{Y}] = \mu$ unbiased
+    $\begin{align<em>}
+Var(\hat{\mu}) &amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) <br />
+&amp; = \frac{1}{n^2} { n Var(Y_t) + 2\sum_{t=1}^n \sum_{s=1}^{t-1} Cov(Y_t, Y_s) } <br />
+&amp; = \frac{1}{n^2} { n\gamma_0 + 2 \sum_{t=1}^{n} \sum_{k=1}^{t-1} \gamma_k} <br />
+&amp; = \frac{1}{n^2} { n \gamma_0 + 2 \sum_{k=1}^{n-1}(n-k)\gamma_k} <br />
+&amp; = \frac{\gamma_0}{n} { 1 + 2 \sum_{k=1}^{n-1} (1 -\frac{k}{n} ) \rho_k }
 \end{align</em>}$</dd>
 </dl>
 
@@ -510,7 +513,7 @@ Var(\hat{\mu}) &amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) \<
   <li>Least square est</li>
 </ul>
 
-<p>$\min<em>{\beta_k} { \sum</em>{t=1}^n (y_t - \sum_{k = 0}^P \beta_k t^k)^2}$</p>
+<p>$\min_{\beta_k} { \sum_{t=1}^n (y_t - \sum_{k = 0}^P \beta_k t^k)^2}$</p>
 
   </article>
   <hr />
@@ -532,9 +535,7 @@ Var(\hat{\mu}) &amp; = Var(\frac{1}{n}\sum Y_t) = \frac{1}{n^2} Var(\sum Y_t) \<
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -559,7 +560,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

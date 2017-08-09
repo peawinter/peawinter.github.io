@@ -10,22 +10,22 @@
 <meta property="og:title" content="R download file from web">
 <title>R download file from web</title>
 <meta property="og:description" content="When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and u...">
-<meta property="og:url" content="/tips/2015/06/10/r-download-using-curl/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/10/r-download-using-curl/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="R download file from web">
 <meta name="twitter:description" content="When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and u...">
-<meta name="twitter:url" content="/tips/2015/06/10/r-download-using-curl/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/10/r-download-using-curl/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/10/r-download-using-curl/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/10/r-download-using-curl/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -126,35 +126,37 @@
   <article class="post-content" itemprop="articleBody">
     <p>When I need to import data that are not on my computer, unless I will use the same data more than twice, I would rather not to save the file on my disk and use R function to download.</p>
 
-<pre><code class="language-R">&gt; load(url("http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata"))
-&gt; ls()
-[1] "mood.data"
-&gt; head(mood.data)
-     group mood
-1 pleasant    6
-2 pleasant    5
-3 pleasant    4
-4 pleasant    7
-5 pleasant    7
-6 pleasant    5
-</code></pre>
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">(</span><span class="s2">"http://www.psychology.mcmaster.ca/bennett/psy710/datasets/mood_data.Rdata"</span><span class="p">))</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ls</span><span class="p">()</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"mood.data"</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">head</span><span class="p">(</span><span class="n">mood.data</span><span class="p">)</span><span class="w">
+     </span><span class="n">group</span><span class="w"> </span><span class="n">mood</span><span class="w">
+</span><span class="m">1</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">6</span><span class="w">
+</span><span class="m">2</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">5</span><span class="w">
+</span><span class="m">3</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">4</span><span class="w">
+</span><span class="m">4</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">7</span><span class="w">
+</span><span class="m">5</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">7</span><span class="w">
+</span><span class="m">6</span><span class="w"> </span><span class="n">pleasant</span><span class="w">    </span><span class="m">5</span><span class="w">
+</span></code></pre>
+</div>
 
-<p>Another useful package is <code>RCurl</code>.</p>
+<p>Another useful package is <code class="highlighter-rouge">RCurl</code>.</p>
 
-<pre><code class="language-R">&gt; library(RCurl)
-&gt; myURL &lt;- 'some_url'
-&gt; myData &lt;- getURLContent(URLencode(myURL))
-</code></pre>
+<div class="language-R highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">library</span><span class="p">(</span><span class="n">RCurl</span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myURL</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'some_url'</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myData</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getURLContent</span><span class="p">(</span><span class="n">URLencode</span><span class="p">(</span><span class="n">myURL</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
 
-<p><code>getURL</code> may issue an error when the file is not text. <code>getURLContent</code> will determine the type of the content automatically.</p>
+<p><code class="highlighter-rouge">getURL</code> may issue an error when the file is not text. <code class="highlighter-rouge">getURLContent</code> will determine the type of the content automatically.</p>
 
-<p><code>URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use ‘URLencode’ to process the link at first.</p>
+<p><code class="highlighter-rouge">URLencode</code> is to encode the link. In this case, it is unnecessary, but for link contains quotes, we have to use ‘URLencode’ to process the link at first.</p>
 
 <p>Reference</p>
 
 <ol>
-  <li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a><br />
-2.<br />
+  <li><a href="http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url">http://stackoverflow.com/questions/26108575/loading-rdata-files-from-url</a>
+2.
 <a href="http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html">http://www.omegahat.org/RCurl/installed/RCurl/html/getURL.html</a></li>
 </ol>
 
@@ -178,9 +180,7 @@
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -205,7 +205,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>

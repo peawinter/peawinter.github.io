@@ -10,22 +10,22 @@
 <meta property="og:title" content="Running R on cluster">
 <title>Running R on cluster</title>
 <meta property="og:description" content="I’ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and ...">
-<meta property="og:url" content="/tips/2015/06/05/run-r-on-cluster/">
-<meta property="og:site_name" content="Apprantice">
+<meta property="og:url" content="http://localhost:4000/tips/2015/06/05/run-r-on-cluster/">
+<meta property="og:site_name" content="Play Ground">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@">
 <meta name="twitter:creator" content="@">
 <meta name="twitter:title" content="Running R on cluster">
 <meta name="twitter:description" content="I’ve now started a new research on high dimension black box optimization. That means much larger computations and a need to program in a much more smart and ...">
-<meta name="twitter:url" content="/tips/2015/06/05/run-r-on-cluster/">
+<meta name="twitter:url" content="http://localhost:4000/tips/2015/06/05/run-r-on-cluster/">
 
 <meta name="keywords" content="">
 
 <link rel="icon" href="/images/avatar.png">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="canonical" href="/tips/2015/06/05/run-r-on-cluster/">
-<link rel="alternate" type="application/atom+xml" title="Apprantice" href="/feed.xml" />
+<link rel="canonical" href="http://localhost:4000/tips/2015/06/05/run-r-on-cluster/">
+<link rel="alternate" type="application/atom+xml" title="Play Ground" href="http://localhost:4000/feed.xml" />
 
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
@@ -43,8 +43,8 @@
 
   <div class="wrapper">
 
-    <h1 class="site-title"><a href="/">Apprantice</a></h1>
-    <h3 class="site-meta">Learn the hard way</h3>
+    <h1 class="site-title"><a href="/">Play Ground</a></h1>
+    <h3 class="site-meta">Old dog can learn new tricks</h3>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -104,7 +104,7 @@
     <p class="post-meta">
     <!-- Posted in
     
-    <a href="/categories/#tips">tips</a>&nbsp;
+    <a href="/categories/#Tips">Tips</a>&nbsp;
     
     
     and tagged
@@ -134,22 +134,35 @@
 
 <h2 id="load-r">Load R</h2>
 
-<p>Radon doesn’t come up with R for granted. To load R, we need to type <code>model load r</code>. The <code>module</code> command is used to “load” software<br />
+<p>Radon doesn’t come up with R for granted. To load R, we need to type <code class="highlighter-rouge">model load r</code>. The <code class="highlighter-rouge">module</code> command is used to “load” software
 packages for use by the current login session.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> -bash-4.1<span class="nv">$ </span>R --version
-<span class="lineno"> 2</span> -bash: r: <span class="nb">command </span>not found
-<span class="lineno"> 3</span> -bash-4.1<span class="nv">$ </span>module load r
-<span class="lineno"> 4</span> -bash-4.1<span class="nv">$ </span>R --version
-<span class="lineno"> 5</span> R version 3.1.0 <span class="o">(</span>2014-04-10<span class="o">)</span> -- <span class="s2">&quot;Spring Dance&quot;</span>
-<span class="lineno"> 6</span> Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">2014</span> The R Foundation <span class="k">for</span> Statistical Computing
-<span class="lineno"> 7</span> Platform: x86_64-unknown-linux-gnu <span class="o">(</span>64-bit<span class="o">)</span>
-<span class="lineno"> 8</span> 
-<span class="lineno"> 9</span> R is free software and comes with ABSOLUTELY NO WARRANTY.
-<span class="lineno">10</span> You are welcome to redistribute it under the terms of the
-<span class="lineno">11</span> GNU General Public License versions <span class="m">2</span> or 3.
-<span class="lineno">12</span> For more information about these matters see
-<span class="lineno">13</span> http://www.gnu.org/licenses/.</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td><td class="code"><pre><span class="gp">-bash-4.1$ </span>R --version
+-bash: r: <span class="nb">command </span>not found
+<span class="gp">-bash-4.1$ </span>module load r
+<span class="gp">-bash-4.1$ </span>R --version
+R version 3.1.0 <span class="o">(</span>2014-04-10<span class="o">)</span> -- <span class="s2">"Spring Dance"</span>
+Copyright <span class="o">(</span>C<span class="o">)</span> 2014 The R Foundation <span class="k">for </span>Statistical Computing
+Platform: x86_64-unknown-linux-gnu <span class="o">(</span>64-bit<span class="o">)</span>
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+http://www.gnu.org/licenses/.<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Still, I want to run R script in background (leave it running even if logoff). One way is to run the R script in a screen session. Another way is to use the batch mode. The former one is no different from running the code on my Laptop. The later one needs some care.</p>
 
@@ -158,100 +171,113 @@ packages for use by the current login session.</p>
 <p>R script vs R batch</p>
 
 <blockquote>
-  <p><code>R CMD BATCH</code> (see <code>help(BATCH)</code>) has default options <code>--restore --save --no-readline</code>, while <code>Rscript</code> (see <code>help(Rscript)</code>) has <code>--slave --no-restore</code>. Furthermore, the output of <code>R CMD BATCH</code> always goes to a file, taken from the command line if given, or else built from the input filename by appending “out”, whereas the output of <code>Rscript</code> goes to stdout. Finally, <code>Rscript</code> accepts user level command-line arguments, after the script name “as usual” (<code>Rscript foo.R 1 2</code>), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by <code>--args</code> (<code>R CMD BATCH "--args 1 2" foo.R</code>). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). <a href="http://biostat.jhsph.edu/~hjaffee/R_tasks.html">link</a></p>
+  <p><code class="highlighter-rouge">R CMD BATCH</code> (see <code class="highlighter-rouge">help(BATCH)</code>) has default options <code class="highlighter-rouge">--restore --save --no-readline</code>, while <code class="highlighter-rouge">Rscript</code> (see <code class="highlighter-rouge">help(Rscript)</code>) has <code class="highlighter-rouge">--slave --no-restore</code>. Furthermore, the output of <code class="highlighter-rouge">R CMD BATCH</code> always goes to a file, taken from the command line if given, or else built from the input filename by appending “out”, whereas the output of <code class="highlighter-rouge">Rscript</code> goes to stdout. Finally, <code class="highlighter-rouge">Rscript</code> accepts user level command-line arguments, after the script name “as usual” (<code class="highlighter-rouge">Rscript foo.R 1 2</code>), whereas CMD BATCH accepts them at the end of the options but before the script name, and prefaced by <code class="highlighter-rouge">--args</code> (<code class="highlighter-rouge">R CMD BATCH "--args 1 2" foo.R</code>). In either case, such arguments are available in the R program as the character vector commandArgs(trailingOnly = TRUE). <a href="http://biostat.jhsph.edu/~hjaffee/R_tasks.html">link</a></p>
 </blockquote>
 
-<p>Like said, <code>Rscript</code> executes quietly in the background and generates output to ‘stdout’.</p>
+<p>Like said, <code class="highlighter-rouge">Rscript</code> executes quietly in the background and generates output to ‘stdout’.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> R CMD BATCH t.R &gt; t.out
-<span class="lineno">2</span> Rscript t.R &gt; t.out <span class="p">&amp;</span> <span class="c"># run in background</span>
-<span class="lineno">3</span> nohup Rscript t.R &gt; t.out <span class="p">&amp;</span> <span class="c"># run in background, even if logout</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>R CMD BATCH t.R &gt; t.out
+Rscript t.R &gt; t.out &amp; <span class="c"># run in background</span>
+nohup Rscript t.R &gt; t.out &amp; <span class="c"># run in background, even if logout</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Although we can launch several jobs simultaneously (by concatenating with ‘&amp;’), but invoking manually doesn’t scale well. To run tasks seriesly, we can create a file like “run.sh” that contains several ‘Rscript’ invocations. It will run the jobs one at a time.</p>
 
-<pre><code class="language-ruby"># run.sh
-Rscript t.R &gt; tout.001
-Rscript t.R &gt; tout.002
-Rscript t.R &gt; tout.003
-Rscript t.R &gt; tout.004
-Rscript t.R &gt; tout.005
-Rscript t.R &gt; tout.006
-Rscript t.R &gt; tout.007
-Rscript t.R &gt; tout.008
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># run.sh</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">001</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">002</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">003</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">004</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">005</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">006</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">007</span>
+<span class="no">Rscript</span> <span class="n">t</span><span class="o">.</span><span class="no">R</span> <span class="o">&gt;</span> <span class="n">tout</span><span class="o">.</span><span class="mo">00</span><span class="mi">8</span>
 </code></pre>
+</div>
 
 <p>A life-saving tips for creating the “run.sh” script using R</p>
 
-<pre><code class="language-r">&gt; sprintf("Rscript t.R &gt; tout.%03d", 1:8)
-[1] "Rscript t.R &gt; tout.001" "Rscript t.R &gt; tout.002" "Rscript t.R &gt; tout.003"
-[4] "Rscript t.R &gt; tout.004" "Rscript t.R &gt; tout.005" "Rscript t.R &gt; tout.006"
-[7] "Rscript t.R &gt; tout.007" "Rscript t.R &gt; tout.008"
-&gt; write(sprintf("Rscript t.R &gt; tout.%03d", 1:8), "run.sh")
-</code></pre>
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"Rscript t.R &gt; tout.%03d"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span><span class="w">
+</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.001"</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.002"</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.003"</span><span class="w">
+</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.004"</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.005"</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.006"</span><span class="w">
+</span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.007"</span><span class="w"> </span><span class="s2">"Rscript t.R &gt; tout.008"</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">write</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s2">"Rscript t.R &gt; tout.%03d"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">),</span><span class="w"> </span><span class="s2">"run.sh"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
 
 <p>Then we can run “run.sh” in command line.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>sh run.sh <span class="c"># run every job in run.sh one at a time</span>
-<span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>nohup sh run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh one at a time, and keep running even if logout</span>
-<span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>nohup xargs -d <span class="s1">&#39;\n&#39;</span> -n1 -P4 sh -c &lt; run.sh <span class="p">&amp;</span> <span class="c"># run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="gp">-bash-4.1$ </span>sh run.sh <span class="c"># run every job in run.sh one at a time</span>
+<span class="gp">-bash-4.1$ </span>nohup sh run.sh &amp; <span class="c"># run every job in run.sh one at a time, and keep running even if logout</span>
+<span class="gp">-bash-4.1$ </span>nohup xargs -d <span class="s1">'\n'</span> -n1 -P4 sh -c &lt; run.sh &amp; <span class="c"># run every job in run.sh keeping 4 jobs running simultaneously keep running even if logout</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="submit-jobs-through-qsub">Submit jobs through qsub</h2>
 
-<p>On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through <code>qsub</code>. A typical job description will look like this one.</p>
+<p>On a cluster, it is not recommended (allowed) to run big jobs on the front ends. A more proper way is to submit jobs through qsub. The punchline is to submit a job description through <code class="highlighter-rouge">qsub</code>. A typical job description will look like this one.</p>
 
-<pre><code class="language-bash">#!/bin/bash
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-## Give your job a name
-#PBS -N ovs
-## Needed if you want to use environmental variables
-#PBS -V
+<span class="c">## Give your job a name</span>
+<span class="c">#PBS -N ovs</span>
+<span class="c">## Needed if you want to use environmental variables</span>
+<span class="c">#PBS -V</span>
 
-## Specify running time and memory
-#PBS -l walltime=00:15:00,vmem=4GB
+<span class="c">## Specify running time and memory</span>
+<span class="c">#PBS -l walltime=00:15:00,vmem=4GB</span>
 
-## Specify number of nodes and cores
-#PBS -l nodes=1:ppn=8
+<span class="c">## Specify number of nodes and cores</span>
+<span class="c">#PBS -l nodes=1:ppn=8</span>
 
-## Specify output and error (no need to include these two lines)
-#PBS -o 'qsub.out'
-#PBS -e 'qsub.err'
+<span class="c">## Specify output and error (no need to include these two lines)</span>
+<span class="c">#PBS -o 'qsub.out'</span>
+<span class="c">#PBS -e 'qsub.err'</span>
 
-# set the temporary file location
-export TMPDIR=$WORKDIR
+<span class="c"># set the temporary file location</span>
+<span class="nb">export </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="nv">$WORKDIR</span>
 
-# go to the job submission directory; you can change this to your project directory
-cd $PBS_O_WORKDIR
+<span class="c"># go to the job submission directory; you can change this to your project directory</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
 
-# load the R module; change the version if needed
+<span class="c"># load the R module; change the version if needed</span>
 module load r
 
 
-## Export the job number. This is unique to a job and can be used to set the seed
-## and as an identifier for the output file
-export job_number=`echo $PBS_JOBID | awk -F. '{print $1}'`
+<span class="c">## Export the job number. This is unique to a job and can be used to set the seed</span>
+<span class="c">## and as an identifier for the output file</span>
+<span class="nb">export </span><span class="nv">job_number</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$PBS_JOBID</span> | awk -F. <span class="s1">'{print $1}'</span><span class="sb">`</span>
 
-# run R in batch mode
+<span class="c"># run R in batch mode</span>
 R CMD BATCH foo.R &gt; foo.Rout
 </code></pre>
+</div>
 
-<p>Note that <code>#!/bin/bash</code> should be put in the first line. Also, I use ‘BATCH’ here since it is compatible with the following section ‘pass arguments’. I haven’t tested the otherwise.</p>
+<p>Note that <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code> should be put in the first line. Also, I use ‘BATCH’ here since it is compatible with the following section ‘pass arguments’. I haven’t tested the otherwise.</p>
 
 <p>Then the file is ready to submit.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qsub foo.pbs</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="gp">-bash-4.1$ </span>qsub foo.pbs<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Other useful command includes</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> -bash-4.1<span class="nv">$ </span>qstat        <span class="c"># See list of jobs in the queue</span>
-<span class="lineno">2</span> -bash-4.1<span class="nv">$ </span>qstat –u usr <span class="c"># See list of jobs in the queue submitted by usr</span>
-<span class="lineno">3</span> -bash-4.1<span class="nv">$ </span>qdel JOBID   <span class="c"># delete a previously submitted job from the queue</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="gp">-bash-4.1$ </span>qstat        <span class="c"># See list of jobs in the queue</span>
+<span class="gp">-bash-4.1$ </span>qstat –u usr <span class="c"># See list of jobs in the queue submitted by usr</span>
+<span class="gp">-bash-4.1$ </span>qdel JOBID   <span class="c"># delete a previously submitted job from the queue</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Another trick from Doug is to force PBS to schedule a node exclusively to prevent misbehave users messing with the shared memory and node.</p>
 
-<pre><code class="language-bash">#!/bin/sh -l
-#PBS -l nodes=1:ppn=8
-#PBS -l walltime=00:30:00
-cd $PBS_O_WORKDIR
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/sh -l</span>
+<span class="c">#PBS -l nodes=1:ppn=8</span>
+<span class="c">#PBS -l walltime=00:30:00</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
 module add r
 Rscript t3.R &gt;out1 &amp;
 Rscript t3.R &gt;out2 &amp;
@@ -261,46 +287,48 @@ Rscript t3.R &gt;out5 &amp;
 Rscript t3.R &gt;out6 &amp;
 Rscript t3.R &gt;out7 &amp;
 Rscript t3.R &gt;out8 &amp;
-wait
+<span class="nb">wait</span>
 </code></pre>
+</div>
 
 <h2 id="pass-arguments">Pass arguments</h2>
 
-<p>Like said, <code>Rscript</code> takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from <a href="http://www.stat.purdue.edu/~bhadra/">Dr. Anindya Bhadra</a>.)</p>
+<p>Like said, <code class="highlighter-rouge">Rscript</code> takes system arguments. In my numerical study, I need to test my algorithms under different parameter settings. A convenient way to create a script and execute it in terminal. (Learn this trick from <a href="http://www.stat.purdue.edu/~bhadra/">Dr. Anindya Bhadra</a>.)</p>
 
-<pre><code class="language-bash">## HOWTO: chmod ugo+rx cluster; ./cluster
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">## HOWTO: chmod ugo+rx cluster; ./cluster</span>
 
-## Make sure you are using the bash shell
-#!/bin/bash
+<span class="c">## Make sure you are using the bash shell</span>
+<span class="c">#!/bin/bash</span>
 
-## Grid of starting values for parameters
-STARTAs=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
-STARTBs=(0 1 4)
-STARTLs=(50 100 150)
+<span class="c">## Grid of starting values for parameters</span>
+<span class="nv">STARTAs</span><span class="o">=(</span>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20<span class="o">)</span>
+<span class="nv">STARTBs</span><span class="o">=(</span>0 1 4<span class="o">)</span>
+<span class="nv">STARTLs</span><span class="o">=(</span>50 100 150<span class="o">)</span>
 
-## To be read in inside of R as environmental variables
-LENA=${#STARTAs[*]}
-LENB=${#STARTBs[*]}
-LENL=${#STARTLs[*]}
+<span class="c">## To be read in inside of R as environmental variables</span>
+<span class="nv">LENA</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTAs</span><span class="p">[*]</span><span class="k">}</span>
+<span class="nv">LENB</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTBs</span><span class="p">[*]</span><span class="k">}</span>
+<span class="nv">LENL</span><span class="o">=</span><span class="k">${#</span><span class="nv">STARTLs</span><span class="p">[*]</span><span class="k">}</span>
 
-## Submit jobs via qsub with each starting value of "a" exported to the environment.
-## Sleep 1 second between submitting two jobs
+<span class="c">## Submit jobs via qsub with each starting value of "a" exported to the environment.</span>
+<span class="c">## Sleep 1 second between submitting two jobs</span>
 
-for k in `seq 1 $LENL`
-do
-	for i in `seq 1 $LENA`
-	do
-	    for j in `seq 1 $LENB`
-	    do
-	        export STARTA=${STARTAs[`expr $i - 1`]}
-	        export STARTB=${STARTBs[`expr $j - 1`]}
-	        export STARTL=${STARTLs[`expr $k - 1`]}
+<span class="k">for </span>k <span class="k">in</span> <span class="sb">`</span>seq 1 <span class="nv">$LENL</span><span class="sb">`</span>
+<span class="k">do
+	for </span>i <span class="k">in</span> <span class="sb">`</span>seq 1 <span class="nv">$LENA</span><span class="sb">`</span>
+	<span class="k">do
+	    for </span>j <span class="k">in</span> <span class="sb">`</span>seq 1 <span class="nv">$LENB</span><span class="sb">`</span>
+	    <span class="k">do
+	        </span><span class="nb">export </span><span class="nv">STARTA</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTAs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$i</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
+	        <span class="nb">export </span><span class="nv">STARTB</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTBs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$j</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
+	        <span class="nb">export </span><span class="nv">STARTL</span><span class="o">=</span><span class="k">${</span><span class="nv">STARTLs</span><span class="p">[</span><span class="sb">`</span>expr <span class="nv">$k</span> - 1<span class="sb">`</span><span class="p">]</span><span class="k">}</span>
 	        qsub -V NumExp.pbs
 	        sleep 1
-	    done
+	    <span class="k">done
 	done
-done
+done</span>
 </code></pre>
+</div>
 
 <p>Read this <a href="http://stackoverflow.com/questions/14167178/passing-command-line-arguments-to-r-cmd-batch">post</a> for passing argument for Rscript command.</p>
 
@@ -308,11 +336,16 @@ done
 
 <p>An annoying thing is that R may not import and load packages properly.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> Calls: install.packages -&gt; grep -&gt; contrib.url
-<span class="lineno">2</span> In addition: Warning message:
-<span class="lineno">3</span> In library<span class="o">(</span>package, lib.loc <span class="o">=</span> lib.loc, character.only <span class="o">=</span> TRUE, logical.return <span class="o">=</span> TRUE,  :
-<span class="lineno">4</span>   there is no package called ‘***’
-<span class="lineno">5</span> Execution halted</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre>Calls: install.packages -&gt; grep -&gt; contrib.url
+In addition: Warning message:
+In library<span class="o">(</span>package, lib.loc <span class="o">=</span> lib.loc, character.only <span class="o">=</span> TRUE, logical.return <span class="o">=</span> TRUE,  :
+  there is no package called ‘<span class="k">***</span>’
+Execution halted<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>A remedy is found on <a href="http://stackoverflow.com/questions/17705133/package-error-when-running-r-code-on-command-line">stackoverflow</a>.</p>
 
@@ -320,9 +353,10 @@ done
   <p>For example, if you want to use RStudio’s package repository, set repos=”http://cran.rstudio.com/” inside the install.packages call.</p>
 </blockquote>
 
-<pre><code class="language-r">install.packages("yaml", repos="http://cran.rstudio.com/")
-library("***")
-</code></pre>
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"yaml"</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="o">=</span><span class="s2">"http://cran.rstudio.com/"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="s2">"***"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
 
 <h2 id="reference">Reference</h2>
 
@@ -361,9 +395,7 @@ library("***")
 
 <script type="text/javascript">
 
-  var disqus_developer = 1;
-
-var disqus_shortname ='peawinter';
+var disqus_shortname ='wenyupurdue';
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -388,7 +420,7 @@ var disqus_shortname ='peawinter';
   <footer class="site-footer">
 
 
-  <p>&copy; <a href="/">Apprantice</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
+  <p>&copy; <a href="/">Play Ground</a> Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a>
   on
   
   <a href="https://github.com/">Github</a>
